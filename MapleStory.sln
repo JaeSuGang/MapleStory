@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapleStoryGame", "MapleStoryGame\MapleStoryGame.vcxproj", "{994988EC-D8DC-4A17-8AA6-D0724826955F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapleStoryEngine", "MapleStoryEngine\MapleStoryEngine.vcxproj", "{B8A6C036-4561-448C-BF00-1320537619DD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapleStoryBase", "MapleStoryBase\MapleStoryBase.vcxproj", "{20C04061-DA05-4E02-B29E-3661900876A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,22 @@ Global
 		{994988EC-D8DC-4A17-8AA6-D0724826955F}.Release|x64.Build.0 = Release|x64
 		{994988EC-D8DC-4A17-8AA6-D0724826955F}.Release|x86.ActiveCfg = Release|Win32
 		{994988EC-D8DC-4A17-8AA6-D0724826955F}.Release|x86.Build.0 = Release|Win32
+		{B8A6C036-4561-448C-BF00-1320537619DD}.Debug|x64.ActiveCfg = Debug|x64
+		{B8A6C036-4561-448C-BF00-1320537619DD}.Debug|x64.Build.0 = Debug|x64
+		{B8A6C036-4561-448C-BF00-1320537619DD}.Debug|x86.ActiveCfg = Debug|Win32
+		{B8A6C036-4561-448C-BF00-1320537619DD}.Debug|x86.Build.0 = Debug|Win32
+		{B8A6C036-4561-448C-BF00-1320537619DD}.Release|x64.ActiveCfg = Release|x64
+		{B8A6C036-4561-448C-BF00-1320537619DD}.Release|x64.Build.0 = Release|x64
+		{B8A6C036-4561-448C-BF00-1320537619DD}.Release|x86.ActiveCfg = Release|Win32
+		{B8A6C036-4561-448C-BF00-1320537619DD}.Release|x86.Build.0 = Release|Win32
+		{20C04061-DA05-4E02-B29E-3661900876A6}.Debug|x64.ActiveCfg = Debug|x64
+		{20C04061-DA05-4E02-B29E-3661900876A6}.Debug|x64.Build.0 = Debug|x64
+		{20C04061-DA05-4E02-B29E-3661900876A6}.Debug|x86.ActiveCfg = Debug|Win32
+		{20C04061-DA05-4E02-B29E-3661900876A6}.Debug|x86.Build.0 = Debug|Win32
+		{20C04061-DA05-4E02-B29E-3661900876A6}.Release|x64.ActiveCfg = Release|x64
+		{20C04061-DA05-4E02-B29E-3661900876A6}.Release|x64.Build.0 = Release|x64
+		{20C04061-DA05-4E02-B29E-3661900876A6}.Release|x86.ActiveCfg = Release|Win32
+		{20C04061-DA05-4E02-B29E-3661900876A6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

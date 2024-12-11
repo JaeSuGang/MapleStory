@@ -15,8 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Resources\ThunderCold_Ultimate.gif">
-      <Filter>리소스 파일</Filter>
-    </Image>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
