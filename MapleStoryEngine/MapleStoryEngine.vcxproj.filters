@@ -30,6 +30,12 @@
     <ClInclude Include="Public\UObject\Object.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Public\Engine\EngineSubsystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Engine\WindowSubsystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\pch.cpp">
@@ -39,6 +45,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\UObject\Object.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Engine\EngineSubsystem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Engine\WindowSubsystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

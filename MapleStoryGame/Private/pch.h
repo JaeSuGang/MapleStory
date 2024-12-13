@@ -4,4 +4,5 @@
 
 #include <crtdbg.h>
 #include <iostream>
+#include <memory>
 #include <Windows.h>

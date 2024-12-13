@@ -1,29 +1,54 @@
 #include "pch.h"
 #include "Engine/Engine.h"
+#include "Engine/WindowSubsystem.h"
+
+UEngine::UEngine()
+{
+	bIsLoop = true;
+
+	Subsystems.reserve(100);
+
+	WindowSubsystem = CreateDefaultSubobject<UWindowSubsystem>();
+}
 
 UEngine::~UEngine()
 {
-	Instance = nullptr;
+	GEngine = nullptr;
 }
 
-shared_ptr<UEngine> UEngine::GetInstance()
+shared_ptr<UEngine> UEngine::GetShared()
 {
-	if (Instance == nullptr)
+	if (GEngine == nullptr)
 	{
-		Instance = new UEngine{};
-		shared_ptr<UEngine> Engine{ Instance };
-	}
-	else
-	{
-		shared_ptr<UEngine> Engine = shared_from_this();
+		GEngine = new UEngine{};
 	}
 
-	return ;
+	shared_ptr<UEngine> Engine{ GEngine };
+	return Engine;
+}
+
+void UEngine::RunForever()
+{
+	while (bIsLoop)
+	{
+		Tick();
+	}
 }
 
 void UEngine::Tick()
 {
-
+	for (auto& EngineSubsystemPair : Subsystems)
+	{
+		if (UEngineSubsystem* EngineSubsystem = EngineSubsystemPair.second.get())
+		{
+			EngineSubsystem->Tick(0.0f);
+		}
+	}
 }
 
-UEngine* UEngine::Instance = nullptr;
+void UEngine::Terminate()
+{
+	bIsLoop = false;
+}
+
+UEngine* GEngine = nullptr;

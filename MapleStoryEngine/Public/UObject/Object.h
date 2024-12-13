@@ -1,12 +1,25 @@
 #pragma once
-#include "EngineAPI.h"
 #include <memory>
+
+using std::shared_ptr;
+using std::weak_ptr;
 
 class UObject : std::enable_shared_from_this<UObject>
 {
 public:
 	UObject() = default;
 	virtual ~UObject() = default;
+
+	template <typename T>
+	shared_ptr<T> GetShared()
+	{
+		return std::dynamic_pointer_cast<T>(shared_from_this());
+	}
+	template <typename T>
+	weak_ptr<T> GetWeak()
+	{
+		return weak_ptr<T>(GetShared());
+	}
 
 	UObject(const UObject& Other) = delete;
 	UObject(UObject&& Other) noexcept = delete;
