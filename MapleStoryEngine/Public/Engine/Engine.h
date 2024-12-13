@@ -27,6 +27,10 @@ public:
 
 	ENGINE_API void Terminate();
 
+	void AssignDeltaTime();
+
+	void CalculateDeltaTime();
+
 	void Tick();
 
 	template<typename T>
