@@ -1,6 +1,7 @@
 #pragma once
 #include "UObject/Object.h"
 #include "EnginePch.h"
+#include "GameInstance/GameInstanceSubsystem.h"
 
 class UGameInstanceSubsystem;
 
@@ -10,6 +11,8 @@ public:
 	template <typename T>
 	T* GetSubsystem()
 	{
+		static_assert(std::is_base_of<UGameInstanceSubsystem, T>::value);
+
 		auto FindIter = Subsystems.find(typeid(T).name);
 		if (FindIter == Subsystems.end())
 			return nullptr;
@@ -20,9 +23,11 @@ public:
 	template <typename T>
 	T* CreateSubsystem()
 	{
-		shared_ptr<T> NewSubsystem{ new T{} };
-		Subsystems.insert(NewSubsystem);
-		return NewSubsystem;
+		static_assert(std::is_base_of<UGameInstanceSubsystem, T>::value);
+
+		shared_ptr<UGameInstanceSubsystem> NewSubsystem{ (UGameInstanceSubsystem*)new T{} };
+		Subsystems.insert(std::pair<string, shared_ptr<UGameInstanceSubsystem>>{typeid(T).name(), NewSubsystem});
+		return (T*)NewSubsystem.get();
 	}
 
 protected:

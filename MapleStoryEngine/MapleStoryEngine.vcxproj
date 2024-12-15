@@ -113,7 +113,7 @@
       <PreprocessorDefinitions>ENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>EnginePch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>.\Private;.\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -131,7 +131,7 @@
       <PreprocessorDefinitions>ENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>EnginePch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>.\Private;.\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\GameplayTags\GameplayTagContainer.h" />
     <ClInclude Include="Public\GameInstance\GameInstanceSubsystem.h" />
     <ClInclude Include="Public\GameInstance\GameInstance.h" />
     <ClInclude Include="Public\GameplayTags\GameplayTagsManager.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Public\World\WorldSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\GameplayTags\GameplayTagContainer.cpp" />
     <ClCompile Include="Private\GameInstance\GameInstanceSubsystem.cpp" />
     <ClCompile Include="Private\GameInstance\GameInstance.cpp" />
     <ClCompile Include="Private\GameplayTags\GameplayTagsManager.cpp" />

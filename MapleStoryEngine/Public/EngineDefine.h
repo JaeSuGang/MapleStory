@@ -12,3 +12,4 @@
 
 #define CRITICAL_ERROR(text) { MessageBoxA(0, text, "Error", MB_OK); assert(false); };
 
+#define TAG_CONTAINER_RESERVE_COUNT 100

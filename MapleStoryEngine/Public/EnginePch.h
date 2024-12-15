@@ -13,3 +13,4 @@ using std::shared_ptr;
 using std::string;
 using std::unordered_map;
 using std::vector;
+using std::weak_ptr;

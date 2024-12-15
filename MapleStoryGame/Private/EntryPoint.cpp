@@ -1,5 +1,6 @@
 #include "GamePch.h"
 #include "Engine/Engine.h"
+#include "MainGameInstance/MainGameInstance.h"
 
 extern "C"
 {
