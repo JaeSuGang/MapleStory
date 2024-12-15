@@ -1,17 +1,10 @@
 #pragma once
-#include <Windows.h>
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include "EngineAPI.h"
 #include "UObject/Object.h"
-
-using std::shared_ptr;
-using std::unordered_map;
-using std::string;
+#include "EnginePch.h"
 
 class UEngineSubsystem;
 class UWindowSubsystem;
+class UWorld;
 
 class UEngine : public UObject
 {
@@ -47,6 +40,8 @@ private:
 	unordered_map<string, shared_ptr<UEngineSubsystem>> Subsystems;
 
 	UWindowSubsystem* WindowSubsystem;
+
+	UWorld* ActiveWorld;
 
 	bool bIsLoop;
 };

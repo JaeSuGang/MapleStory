@@ -1,6 +1,6 @@
 #pragma once
 
-#include "define.h"
+#include "GameDefine.h"
 
 #include <crtdbg.h>
 #include <iostream>

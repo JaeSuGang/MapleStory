@@ -18,15 +18,21 @@
     <ClCompile Include="Private\EntryPoint.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Private\pch.cpp">
+    <ClCompile Include="Private\GamePch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\MainGameInstance\MainGameInstance.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Private\pch.h">
+    <ClInclude Include="Public\GamePch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Private\define.h">
+    <ClInclude Include="Public\MainGameInstance\MainGameInstance.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\GameDefine.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

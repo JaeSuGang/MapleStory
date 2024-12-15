@@ -1,5 +1,5 @@
 #pragma once
-#include "EngineAPI.h"
+#include "EngineDefine.h"
 #include "UObject/Object.h"
 
 class UEngineSubsystem : public UObject

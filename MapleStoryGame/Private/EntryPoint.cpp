@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "GamePch.h"
 #include "Engine/Engine.h"
 
 extern "C"
@@ -9,6 +9,6 @@ extern "C"
 
 		auto Engine = UEngine::GetShared();
 
-		GEngine->RunForever();
+		Engine->RunForever();
 	}
 }

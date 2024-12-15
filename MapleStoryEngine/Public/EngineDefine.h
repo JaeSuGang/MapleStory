@@ -1,4 +1,6 @@
 #pragma once
+#include <assert.h>
+#include <Windows.h>
 
 #ifdef  _WIN32
 #ifdef ENGINE_EXPORTS
@@ -7,3 +9,6 @@
 #define ENGINE_API __declspec(dllimport)
 #endif //  _WIN32
 #endif // 
+
+#define CRITICAL_ERROR(text) { MessageBoxA(0, text, "Error", MB_OK); assert(false); };
+

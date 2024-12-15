@@ -143,23 +143,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\GameInstance\GameInstanceSubsystem.h" />
+    <ClInclude Include="Public\GameInstance\GameInstance.h" />
+    <ClInclude Include="Public\GameplayTags\GameplayTagsManager.h" />
+    <ClInclude Include="Public\GameplayTags\GameplayTag.h" />
+    <ClInclude Include="Public\ActorComponent\ActorComponent.h" />
+    <ClInclude Include="Public\Level\Level.h" />
+    <ClInclude Include="Public\Actor\Actor.h" />
     <ClInclude Include="Public\Engine\EngineSubsystem.h" />
     <ClInclude Include="Public\UObject\Object.h" />
     <ClInclude Include="Public\Engine\Engine.h" />
-    <ClInclude Include="Private\define.h" />
-    <ClInclude Include="Private\pch.h" />
-    <ClInclude Include="Public\EngineAPI.h" />
+    <ClInclude Include="Public\EnginePch.h" />
+    <ClInclude Include="Public\EngineDefine.h" />
     <ClInclude Include="Public\Engine\WindowSubsystem.h" />
+    <ClInclude Include="Public\World\World.h" />
+    <ClInclude Include="Public\World\WorldSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\GameInstance\GameInstanceSubsystem.cpp" />
+    <ClCompile Include="Private\GameInstance\GameInstance.cpp" />
+    <ClCompile Include="Private\GameplayTags\GameplayTagsManager.cpp" />
+    <ClCompile Include="Private\GameplayTags\GameplayTag.cpp" />
+    <ClCompile Include="Private\ActorComponent\ActorComponent.cpp" />
+    <ClCompile Include="Private\Level\Level.cpp" />
+    <ClCompile Include="Private\Actor\Actor.cpp" />
     <ClCompile Include="Private\Engine\EngineSubsystem.cpp" />
     <ClCompile Include="Private\UObject\Object.cpp" />
     <ClCompile Include="Private\Engine\Engine.cpp" />
-    <ClCompile Include="Private\pch.cpp">
+    <ClCompile Include="Private\EnginePch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EnginePch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">EnginePch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Private\Engine\WindowSubsystem.cpp" />
+    <ClCompile Include="Private\World\World.cpp" />
+    <ClCompile Include="Private\World\WorldSubsystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
