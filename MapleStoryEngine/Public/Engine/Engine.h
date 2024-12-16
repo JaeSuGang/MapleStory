@@ -4,7 +4,9 @@
 
 class UEngineSubsystem;
 class UWindowSubsystem;
+class UDebugSubsystem;
 class UWorld;
+class UGameInstance;
 
 class UEngine : public UObject
 {
@@ -27,6 +29,12 @@ public:
 	void Tick();
 
 	template<typename T>
+	void SetGameInstance()
+	{
+		ActiveGameInstance = std::make_shared<T>();
+	}
+
+	template<typename T>
 	T* CreateDefaultSubobject()
 	{
 		T* NewSubsystem = new T{};
@@ -37,11 +45,15 @@ public:
 	}
 
 private:
-	unordered_map<string, shared_ptr<UEngineSubsystem>> Subsystems;
-
 	UWindowSubsystem* WindowSubsystem;
 
-	UWorld* ActiveWorld;
+	UDebugSubsystem* DebugSubsystem;
+
+	shared_ptr<UGameInstance> ActiveGameInstance;
+
+	shared_ptr<UWorld> ActiveWorld;
+
+	unordered_map<string, shared_ptr<UEngineSubsystem>> Subsystems;
 
 	bool bIsLoop;
 };

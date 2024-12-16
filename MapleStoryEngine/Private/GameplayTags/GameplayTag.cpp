@@ -3,5 +3,5 @@
 
 FGameplayTag::FGameplayTag()
 {
-	ParentIDs.reserve(10);
+
 }

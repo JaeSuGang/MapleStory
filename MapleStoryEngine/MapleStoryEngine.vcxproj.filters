@@ -63,6 +63,12 @@
     <ClInclude Include="Public\GameplayTags\GameplayTagContainer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Public\Engine\DebugSubsystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Utils.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\EnginePch.cpp">
@@ -108,6 +114,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\GameplayTags\GameplayTagContainer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Engine\DebugSubsystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

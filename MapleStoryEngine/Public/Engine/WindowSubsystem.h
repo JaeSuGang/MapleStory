@@ -5,8 +5,8 @@
 class UWindowSubsystem : public UEngineSubsystem
 {
 public:
+	/* Constructors and Overrides */
 	UWindowSubsystem();
-
 	void Tick(float fDeltaTime) override;
 
 	void InitializeWCEX();

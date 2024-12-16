@@ -10,6 +10,8 @@ extern "C"
 
 		auto Engine = UEngine::GetShared();
 
+		Engine->SetGameInstance<UMainGameInstance>();
+
 		Engine->RunForever();
 	}
 }

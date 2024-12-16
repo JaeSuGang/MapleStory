@@ -1,6 +1,7 @@
 #include "EnginePch.h"
 #include "Engine/Engine.h"
 #include "Engine/WindowSubsystem.h"
+#include "Engine/DebugSubsystem.h"
 
 UEngine::UEngine()
 {
@@ -9,6 +10,8 @@ UEngine::UEngine()
 	Subsystems.reserve(100);
 
 	WindowSubsystem = CreateDefaultSubobject<UWindowSubsystem>();
+
+	DebugSubsystem = CreateDefaultSubobject<UDebugSubsystem>();
 }
 
 UEngine::~UEngine()

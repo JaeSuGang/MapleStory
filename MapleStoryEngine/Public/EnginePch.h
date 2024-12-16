@@ -4,8 +4,10 @@
 
 #include <assert.h>
 #include <memory>
+#include <ranges>
 #include <string>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 #include <Windows.h>
 
