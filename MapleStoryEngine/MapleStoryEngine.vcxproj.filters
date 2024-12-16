@@ -69,6 +69,18 @@
     <ClInclude Include="Public\Utils.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Public\Actions\GameplayAction.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actions\ActionComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Attributes\AttributeComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Attributes\GameplayAttribute.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\EnginePch.cpp">
@@ -117,6 +129,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\Engine\DebugSubsystem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actions\GameplayAction.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actions\ActionComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Attributes\GameplayAttribute.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Attributes\AttributeComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

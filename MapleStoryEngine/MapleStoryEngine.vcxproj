@@ -143,6 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actions\ActionComponent.h" />
+    <ClInclude Include="Public\Actions\GameplayAction.h" />
+    <ClInclude Include="Public\Attributes\AttributeComponent.h" />
+    <ClInclude Include="Public\Attributes\GameplayAttribute.h" />
     <ClInclude Include="Public\Engine\DebugSubsystem.h" />
     <ClInclude Include="Public\GameplayTags\GameplayTagContainer.h" />
     <ClInclude Include="Public\GameInstance\GameInstanceSubsystem.h" />
@@ -163,6 +167,10 @@
     <ClInclude Include="Public\World\WorldSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actions\ActionComponent.cpp" />
+    <ClCompile Include="Private\Actions\GameplayAction.cpp" />
+    <ClCompile Include="Private\Attributes\AttributeComponent.cpp" />
+    <ClCompile Include="Private\Attributes\GameplayAttribute.cpp" />
     <ClCompile Include="Private\Engine\DebugSubsystem.cpp" />
     <ClCompile Include="Private\GameplayTags\GameplayTagContainer.cpp" />
     <ClCompile Include="Private\GameInstance\GameInstanceSubsystem.cpp" />

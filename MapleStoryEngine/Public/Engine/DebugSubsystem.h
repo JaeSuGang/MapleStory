@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine/Engine.h"
 #include "EngineSubsystem.h"
 
 class UDebugSubsystem : public UEngineSubsystem

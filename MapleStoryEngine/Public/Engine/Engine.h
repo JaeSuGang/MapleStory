@@ -44,10 +44,12 @@ public:
 		return NewSubsystem;
 	}
 
-private:
+public:
 	UWindowSubsystem* WindowSubsystem;
 
 	UDebugSubsystem* DebugSubsystem;
+
+private:
 
 	shared_ptr<UGameInstance> ActiveGameInstance;
 
