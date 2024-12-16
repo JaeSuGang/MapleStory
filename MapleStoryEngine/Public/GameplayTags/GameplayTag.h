@@ -4,8 +4,10 @@
 struct FGameplayTag
 {
 public:
+	FGameplayTag();
 	
-protected:
+public:
+	vector<int> ParentIDs;
 	string TagName;
 	int ID;
 };

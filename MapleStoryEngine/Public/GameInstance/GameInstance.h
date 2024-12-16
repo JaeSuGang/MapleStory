@@ -13,7 +13,7 @@ public:
 	{
 		static_assert(std::is_base_of<UGameInstanceSubsystem, T>::value);
 
-		auto FindIter = Subsystems.find(typeid(T).name);
+		auto FindIter = Subsystems.find(typeid(T).name());
 		if (FindIter == Subsystems.end())
 			return nullptr;
 
@@ -27,7 +27,7 @@ public:
 
 		shared_ptr<UGameInstanceSubsystem> NewSubsystem{ (UGameInstanceSubsystem*)new T{} };
 		Subsystems.insert(std::pair<string, shared_ptr<UGameInstanceSubsystem>>{typeid(T).name(), NewSubsystem});
-		return (T*)NewSubsystem.get();
+		return static_cast<T*>(NewSubsystem.get());
 	}
 
 protected:
