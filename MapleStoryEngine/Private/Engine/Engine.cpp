@@ -19,15 +19,17 @@ UEngine::~UEngine()
 	GEngine = nullptr;
 }
 
-shared_ptr<UEngine> UEngine::GetShared()
+ENGINE_API shared_ptr<UEngine> UEngine::Instantiate()
 {
+	shared_ptr<UEngine> SharedEngine;
+
 	if (GEngine == nullptr)
 	{
-		GEngine = new UEngine{};
+		SharedEngine = std::make_shared<UEngine>();
+		GEngine = SharedEngine.get();
 	}
 
-	shared_ptr<UEngine> Engine{ GEngine };
-	return Engine;
+	return SharedEngine;
 }
 
 void UEngine::RunForever()

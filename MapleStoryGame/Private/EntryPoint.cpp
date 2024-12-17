@@ -8,7 +8,7 @@ extern "C"
 	{
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-		auto Engine = UEngine::GetShared();
+		auto Engine = UEngine::Instantiate();
 
 		Engine->SetGameInstance<UMainGameInstance>();
 

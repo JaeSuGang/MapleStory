@@ -13,8 +13,9 @@ public:
 	template <typename T>
 	shared_ptr<T> GetShared()
 	{
-		return std::dynamic_pointer_cast<T>(shared_from_this());
+		return std::static_pointer_cast<T>(shared_from_this());
 	}
+
 	template <typename T>
 	weak_ptr<T> GetWeak()
 	{

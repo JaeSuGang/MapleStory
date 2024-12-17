@@ -10,13 +10,11 @@ class UGameInstance;
 
 class UEngine : public UObject
 {
-private:
-	UEngine();
-
 public:
+	UEngine();
 	~UEngine();
 
-	ENGINE_API static shared_ptr<UEngine> GetShared();
+	ENGINE_API static shared_ptr<UEngine> Instantiate();
 
 	ENGINE_API void RunForever();
 
