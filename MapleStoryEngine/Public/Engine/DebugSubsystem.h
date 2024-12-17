@@ -1,4 +1,5 @@
 #pragma once
+#include "EnginePch.h"
 #include "Engine/Engine.h"
 #include "EngineSubsystem.h"
 
@@ -12,7 +13,7 @@ public:
 	/* Warning Level 0 : Normal White Log */
 	/* Warning Level 1 : Orange Log */
 	/* Warning Level 2 : Red Log */
-	void Log(string Text, int WarningLevel);
+	ENGINE_API void Log(string Text, int WarningLevel);
 
 };
 

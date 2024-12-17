@@ -1,12 +1,29 @@
 #pragma once
 #include "EnginePch.h"
 #include "UObject/Object.h"
+#include "Engine/DebugSubsystem.h"
 
 class UActorComponent;
 
 class AActor : public UObject
 {
 public:
+	template <typename T>
+	T* CreateDefaultSubobject()
+	{
+		static_assert(std::is_base_of<UActorComponent, T>::value);
+
+		if (T* ExistedComponent = GetComponentByClass<T>())
+		{
+			GEngine->DebugSubsystem->Log("이미 존재하는 컴포넌트를 다시 추가하려함", 1);
+			return ExistedComponent;
+		}
+
+		shared_ptr<UActorComponent> NewComponent{ new T{} };
+		OwnedComponents.insert(std::make_pair(typeid(T).name(), NewComponent));
+		return static_cast<T*>(NewComponent.get());
+	}
+
 	template <typename T>
 	T* GetComponentByClass()
 	{

@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\BP_TestActor.cpp" />
     <ClCompile Include="Private\MainGameInstance\MainGameInstance.cpp" />
     <ClCompile Include="Private\EntryPoint.cpp" />
     <ClCompile Include="Private\GamePch.cpp">
@@ -155,6 +156,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\BP_TestActor.h" />
     <ClInclude Include="Public\GameDefine.h" />
     <ClInclude Include="Public\MainGameInstance\MainGameInstance.h" />
     <ClInclude Include="Public\GamePch.h" />
