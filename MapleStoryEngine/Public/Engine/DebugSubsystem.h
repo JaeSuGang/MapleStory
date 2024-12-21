@@ -9,11 +9,16 @@ public:
 	/* Contructors and Overrides */
 	void Tick(float fDeltaTime) override;
 
+	void LateInit() override;
+
+public:
 
 	/* Warning Level 0 : Normal White Log */
 	/* Warning Level 1 : Orange Log */
 	/* Warning Level 2 : Red Log */
 	ENGINE_API void Log(string Text, int WarningLevel);
+
+
 
 };
 

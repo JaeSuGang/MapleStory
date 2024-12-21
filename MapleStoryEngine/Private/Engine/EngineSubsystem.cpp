@@ -5,3 +5,8 @@ void UEngineSubsystem::Tick(float fDeltaTime)
 {
 
 }
+
+void UEngineSubsystem::SetEngine(UEngine* pEngine)
+{
+	Engine = pEngine;
+}

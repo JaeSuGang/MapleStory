@@ -34,6 +34,11 @@ void UWindowSubsystem::Tick(float fDeltaTime)
     }
 }
 
+HWND UWindowSubsystem::GetWindowHandle() const
+{
+    return hGameWindow;
+}
+
 void UWindowSubsystem::InitializeWCEX()
 {
     WCEX.cbSize = sizeof(WNDCLASSEX);
@@ -64,5 +69,9 @@ LRESULT UWindowSubsystem::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
+}
+
+void UWindowSubsystem::LateInit()
+{
 }
 

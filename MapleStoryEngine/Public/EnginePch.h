@@ -2,6 +2,7 @@
 
 #include "EngineDefine.h"
 
+// std & stl
 #include <assert.h>
 #include <memory>
 #include <ranges>
@@ -16,3 +17,9 @@ using std::string;
 using std::unordered_map;
 using std::vector;
 using std::weak_ptr;
+
+// DirectX & Direct3D & Microsoft
+#include <wrl.h>
+#include <d3d11_4.h>
+
+using Microsoft::WRL::ComPtr;

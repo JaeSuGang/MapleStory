@@ -2,16 +2,24 @@
 #include "Engine/Engine.h"
 #include "Engine/WindowSubsystem.h"
 #include "Engine/DebugSubsystem.h"
+#include "Engine/RenderSubsystem.h"
 
 UEngine::UEngine()
 {
 	bIsLoop = true;
 
-	Subsystems.reserve(100);
+	if (S_OK != CoInitializeEx(nullptr, COINIT_MULTITHREADED))
+	{
+		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
+	}
 
 	WindowSubsystem = CreateDefaultSubobject<UWindowSubsystem>();
 
 	DebugSubsystem = CreateDefaultSubobject<UDebugSubsystem>();
+
+	RenderSubsystem = CreateDefaultSubobject<URenderSubsystem>();
+
+	RenderSubsystem->LateInit();
 }
 
 UEngine::~UEngine()
@@ -34,6 +42,8 @@ ENGINE_API shared_ptr<UEngine> UEngine::Instantiate()
 
 void UEngine::RunForever()
 {
+
+
 	while (bIsLoop)
 	{
 		Tick();

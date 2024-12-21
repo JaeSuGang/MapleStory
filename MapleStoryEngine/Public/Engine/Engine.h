@@ -4,6 +4,7 @@
 
 class UEngineSubsystem;
 class UWindowSubsystem;
+class URenderSubsystem;
 class UDebugSubsystem;
 class UWorld;
 class UGameInstance;
@@ -36,6 +37,7 @@ public:
 	T* CreateDefaultSubobject()
 	{
 		T* NewSubsystem = new T{};
+		NewSubsystem->SetEngine(this);
 		shared_ptr<UEngineSubsystem> NewSharedSubsystem{ NewSubsystem };
 		std::pair<string, shared_ptr<UEngineSubsystem>> NewPair{ typeid(T).name(), NewSharedSubsystem };
 		Subsystems.insert(NewPair);
@@ -43,6 +45,8 @@ public:
 	}
 
 public:
+	URenderSubsystem* RenderSubsystem;
+
 	UWindowSubsystem* WindowSubsystem;
 
 	UDebugSubsystem* DebugSubsystem;

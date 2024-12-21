@@ -81,6 +81,9 @@
     <ClInclude Include="Public\Attributes\GameplayAttribute.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Public\Engine\RenderSubsystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\EnginePch.cpp">
@@ -141,6 +144,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\Attributes\AttributeComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Engine\RenderSubsystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

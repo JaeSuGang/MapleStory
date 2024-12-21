@@ -120,6 +120,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,6 +141,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -165,6 +167,7 @@
     <ClInclude Include="Public\Utils.h" />
     <ClInclude Include="Public\World\World.h" />
     <ClInclude Include="Public\World\WorldSubsystem.h" />
+    <ClInclude Include="Public\Engine\RenderSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\Actions\ActionComponent.cpp" />
@@ -192,6 +195,7 @@
     <ClCompile Include="Private\Engine\WindowSubsystem.cpp" />
     <ClCompile Include="Private\World\World.cpp" />
     <ClCompile Include="Private\World\WorldSubsystem.cpp" />
+    <ClCompile Include="Private\Engine\RenderSubsystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

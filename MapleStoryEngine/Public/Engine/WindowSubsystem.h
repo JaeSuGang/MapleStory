@@ -7,7 +7,13 @@ class UWindowSubsystem : public UEngineSubsystem
 public:
 	/* Constructors and Overrides */
 	UWindowSubsystem();
+
 	void Tick(float fDeltaTime) override;
+
+	void LateInit() override;
+
+public:
+	HWND GetWindowHandle() const;
 
 	void InitializeWCEX();
 
@@ -17,5 +23,6 @@ private:
 	HWND hGameWindow;
 
 	WNDCLASSEXA WCEX;
+
 };
 
