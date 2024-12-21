@@ -52,13 +52,11 @@ void UEngine::RunForever()
 
 void UEngine::Tick()
 {
-	for (auto& EngineSubsystemPair : Subsystems)
-	{
-		if (UEngineSubsystem* EngineSubsystem = EngineSubsystemPair.second.get())
-		{
-			EngineSubsystem->Tick(0.0f);
-		}
-	}
+	float fDeltaTime{};
+
+	WindowSubsystem->Tick(fDeltaTime);
+
+	RenderSubsystem->Tick(fDeltaTime);
 }
 
 void UEngine::Terminate()

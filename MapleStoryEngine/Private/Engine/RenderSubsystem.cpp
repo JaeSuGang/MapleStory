@@ -5,10 +5,15 @@
 
 URenderSubsystem::URenderSubsystem()
 {
+	RenderTargetViewColor[0] = 0.0f;
+	RenderTargetViewColor[1] = 0.0f;
+	RenderTargetViewColor[2] = 1.0f;
+	RenderTargetViewColor[3] = 1.0f;
 }
 
 void URenderSubsystem::Tick(float fDeltaTime)
 {
+	Render(fDeltaTime);
 }
 
 DXGI_SWAP_CHAIN_DESC URenderSubsystem::MakeSwapChainDesc()
@@ -54,7 +59,7 @@ void URenderSubsystem::CreateDeviceAndContext()
 
 	D3D_FEATURE_LEVEL FeatureLevel{};
 
-	D3D11CreateDeviceAndSwapChain(
+	HRESULT HR = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
@@ -68,6 +73,33 @@ void URenderSubsystem::CreateDeviceAndContext()
 		&FeatureLevel,
 		Context.GetAddressOf()
 		);
+
+	if (HR != S_OK)
+	{
+		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
+	}
+}
+
+void URenderSubsystem::InitSwapChain()
+{
+	if (S_OK != SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(BackBuffer.GetAddressOf())))
+	{
+		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
+	}
+
+	if (S_OK != Device->CreateRenderTargetView(BackBuffer.Get(), nullptr, &RTV))
+	{
+		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
+	}
+
+
+}
+
+void URenderSubsystem::Render(float fDeltaTime)
+{
+	Context->ClearRenderTargetView(RTV.Get(), RenderTargetViewColor);
+
+	SwapChain->Present(0, 0);
 }
 
 void URenderSubsystem::LateInit()
@@ -75,6 +107,8 @@ void URenderSubsystem::LateInit()
 	WindowSubsystem = Engine->WindowSubsystem;
 
 	CreateDeviceAndContext();
+
+	InitSwapChain();
 
 
 }

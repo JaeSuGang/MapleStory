@@ -20,13 +20,19 @@ public:
 
 	void CreateDeviceAndContext();
 
+	void InitSwapChain();
+
+	void Render(float fDeltaTime);
+
 private:
 	UWindowSubsystem* WindowSubsystem;
 
 	ComPtr<ID3D11Device> Device;
 	ComPtr<ID3D11DeviceContext> Context;
 	ComPtr<IDXGISwapChain> SwapChain;
+	ComPtr<ID3D11Texture2D> BackBuffer;
+	ComPtr<ID3D11RenderTargetView> RTV;
 
-
+	float RenderTargetViewColor[4];
 };
 
