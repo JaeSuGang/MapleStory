@@ -4,5 +4,5 @@
 
 BP_TestActor::BP_TestActor()
 {
-	CreateDefaultSubobject<UActionComponent>();
+
 }

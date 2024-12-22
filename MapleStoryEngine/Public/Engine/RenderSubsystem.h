@@ -1,10 +1,12 @@
 #pragma once
 #include "EnginePch.h"
 #include "EngineSubsystem.h"
+#include "Math/Transform.h"
 
 class UWindowSubsystem;
 
 /* UWindowSubsystem에 의존 */
+/* UWorld, ULevel, AActor에 의존 */
 class URenderSubsystem : public UEngineSubsystem
 {
 public:
@@ -33,6 +35,7 @@ private:
 	ComPtr<ID3D11Texture2D> BackBuffer;
 	ComPtr<ID3D11RenderTargetView> RTV;
 
+	FTransform CameraTransform;
 	float RenderTargetViewColor[4];
 };
 

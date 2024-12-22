@@ -64,4 +64,9 @@ void UEngine::Terminate()
 	bIsLoop = false;
 }
 
+UWorld* UEngine::GetWorld() const
+{
+	return ActiveWorld.get();
+}
+
 UEngine* GEngine = nullptr;

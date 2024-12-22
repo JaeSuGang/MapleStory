@@ -2,6 +2,10 @@
 #include "Engine/Engine.h"
 #include "Engine/RenderSubsystem.h"
 #include "Engine/WindowSubsystem.h"
+#include "World/World.h"
+#include "Level/Level.h"
+#include "Actor/Actor.h"
+#include "ActorComponent/RenderComponent.h"
 
 URenderSubsystem::URenderSubsystem()
 {
@@ -91,13 +95,23 @@ void URenderSubsystem::InitSwapChain()
 	{
 		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
 	}
-
-
 }
 
 void URenderSubsystem::Render(float fDeltaTime)
 {
 	Context->ClearRenderTargetView(RTV.Get(), RenderTargetViewColor);
+
+	/*
+	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActorContainer();
+
+	for (shared_ptr<AActor>& Actor : Actors)
+	{
+		if (URenderComponent* Renderer = Actor->GetComponentByClass<URenderComponent>())
+		{
+
+		}
+	}
+	*/
 
 	SwapChain->Present(0, 0);
 }

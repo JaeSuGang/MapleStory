@@ -16,6 +16,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Launcher", "Launcher\Launch
 		{B8A6C036-4561-448C-BF00-1320537619DD} = {B8A6C036-4561-448C-BF00-1320537619DD}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{9DFA0276-CCFB-490F-92D6-C16143DB56A1}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Shaders\test.hlsl = Resources\Shaders\test.hlsl
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

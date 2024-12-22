@@ -1,7 +1,7 @@
 #pragma once
 #include "ActorComponent/ActorComponent.h"
 
-class UAttributeComponent :public UActorComponent
+class UAttributeComponent : public UActorComponent
 {
 
 };

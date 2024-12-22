@@ -21,9 +21,7 @@ public:
 
 	ENGINE_API void Terminate();
 
-	void AssignDeltaTime();
-
-	void CalculateDeltaTime();
+	UWorld* GetWorld() const;
 
 	void Tick();
 

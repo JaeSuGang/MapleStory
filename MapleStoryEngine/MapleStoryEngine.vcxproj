@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\World\ActorComponentManager.h" />
+    <ClInclude Include="Public\Math\Transform.h" />
     <ClInclude Include="Public\Actions\ActionComponent.h" />
     <ClInclude Include="Public\Actions\GameplayAction.h" />
     <ClInclude Include="Public\Attributes\AttributeComponent.h" />
@@ -168,8 +170,14 @@
     <ClInclude Include="Public\World\World.h" />
     <ClInclude Include="Public\World\WorldSubsystem.h" />
     <ClInclude Include="Public\Engine\RenderSubsystem.h" />
+    <ClInclude Include="Public\Math\Vector3.h" />
+    <ClInclude Include="Public\Math\Vector4.h" />
+    <ClInclude Include="Public\ActorComponent\RenderComponent.h" />
+    <ClInclude Include="Public\Engine\ResourceSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\World\ActorComponentManager.cpp" />
+    <ClCompile Include="Private\Math\Transform.cpp" />
     <ClCompile Include="Private\Actions\ActionComponent.cpp" />
     <ClCompile Include="Private\Actions\GameplayAction.cpp" />
     <ClCompile Include="Private\Attributes\AttributeComponent.cpp" />
@@ -196,6 +204,10 @@
     <ClCompile Include="Private\World\World.cpp" />
     <ClCompile Include="Private\World\WorldSubsystem.cpp" />
     <ClCompile Include="Private\Engine\RenderSubsystem.cpp" />
+    <ClCompile Include="Private\Math\Vector3.cpp" />
+    <ClCompile Include="Private\Math\Vector4.cpp" />
+    <ClCompile Include="Private\ActorComponent\RenderComponent.cpp" />
+    <ClCompile Include="Private\Engine\ResourceSubsystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
