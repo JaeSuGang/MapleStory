@@ -145,6 +145,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\IMGUI\imconfig.h" />
+    <ClInclude Include="Public\IMGUI\imgui.h" />
+    <ClInclude Include="Public\IMGUI\imgui_internal.h" />
+    <ClInclude Include="Public\IMGUI\imstb_rectpack.h" />
+    <ClInclude Include="Public\IMGUI\imstb_textedit.h" />
+    <ClInclude Include="Public\IMGUI\imstb_truetype.h" />
     <ClInclude Include="Public\World\ActorComponentManager.h" />
     <ClInclude Include="Public\Math\Transform.h" />
     <ClInclude Include="Public\Actions\ActionComponent.h" />
@@ -176,6 +182,11 @@
     <ClInclude Include="Public\Engine\ResourceSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\IMGUI\imgui.cpp" />
+    <ClCompile Include="Private\IMGUI\imgui_demo.cpp" />
+    <ClCompile Include="Private\IMGUI\imgui_draw.cpp" />
+    <ClCompile Include="Private\IMGUI\imgui_tables.cpp" />
+    <ClCompile Include="Private\IMGUI\imgui_widgets.cpp" />
     <ClCompile Include="Private\World\ActorComponentManager.cpp" />
     <ClCompile Include="Private\Math\Transform.cpp" />
     <ClCompile Include="Private\Actions\ActionComponent.cpp" />
