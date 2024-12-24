@@ -10,14 +10,14 @@ UWindowSubsystem::UWindowSubsystem()
 
     if (!RegisterClassExA(&WCEX))
     {
-        CRITICAL_ERROR("오류");
+        CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
     }
 
 	hGameWindow = CreateWindowA(lpszTitle.data(), lpszTitle.data(), WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX, 0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, nullptr, nullptr);
 
     if (!hGameWindow)
     {
-        CRITICAL_ERROR("오류");
+        CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
     }
 
     ShowWindow(hGameWindow, SW_SHOW);
