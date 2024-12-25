@@ -1,14 +1,29 @@
 #pragma once
 #include "EnginePch.h"
 #include "UObject/Object.h"
+#include "Level/Level.h"
+#include "Actor/Actor.h"
 
 class ULevel;
-class AActor;
 class UWorldSubsystem;
 
 class UWorld : public UObject
 {
+	friend class UEngine;
+
 public:
+	template <typename T>
+	T* SpawnActor()
+	{
+		static_assert(std::is_base_of<AActor, T>::value);
+
+		shared_ptr<AActor> NewActor{ static_cast<AActor*>(new T{}) };
+
+		PersistentLevel->Actors.push_back(NewActor);
+
+		return static_cast<T*>(NewActor.get());
+	}
+
 	vector<shared_ptr<AActor>>& GetActorContainer();
 
 	template <typename T>

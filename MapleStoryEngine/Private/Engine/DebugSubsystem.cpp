@@ -6,6 +6,8 @@
 #include "Engine/DebugSubsystem.h"
 #include "Engine/WindowSubsystem.h"
 #include "Engine/RenderSubsystem.h"
+#include "World/World.h"
+#include "Actor/Actor.h"
 
 void UDebugSubsystem::Log(string Text, int WarningLevel)
 {
@@ -29,12 +31,11 @@ void UDebugSubsystem::Render()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::ShowDemoWindow();
-
-	ImGui::Begin("Test");
-	ImGui::Text("Hello from another window!");
-	ImGui::Text("x: %f", io.DisplaySize.x);
-	ImGui::Text("y: %f", io.DisplaySize.y);
+	ImGui::Begin("DebugSystem");
+	if (ImGui::Button("Spawn Test Actor"))
+	{
+		GEngine->GetWorld()->SpawnActor<AActor>();
+	}
 	ImGui::End();
 
 	ImGui::Render();
