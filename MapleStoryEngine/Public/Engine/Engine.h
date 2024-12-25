@@ -8,7 +8,6 @@ class UEngineSubsystem;
 class UWindowSubsystem;
 class URenderSubsystem;
 class UDebugSubsystem;
-class UWorld;
 
 class UEngine : public UObject
 {

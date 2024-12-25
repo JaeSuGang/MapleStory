@@ -17,7 +17,6 @@ public:
 
 		if (T* ExistedComponent = GetComponentByClass<T>())
 		{
-			GEngine->DebugSubsystem->Log("이미 존재하는 컴포넌트를 다시 추가하려함", 1);
 			return ExistedComponent;
 		}
 
