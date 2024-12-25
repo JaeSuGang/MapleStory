@@ -99,6 +99,20 @@ void URenderSubsystem::InitSwapChain()
 	}
 }
 
+void URenderSubsystem::InitViewport()
+{
+	D3D11_VIEWPORT ViewPortInfo;
+
+	ViewPortInfo.Width = 1920.0f;
+	ViewPortInfo.Height = 1080.0f;
+	ViewPortInfo.TopLeftX = 0.0f;
+	ViewPortInfo.TopLeftY = 0.0f;
+	ViewPortInfo.MinDepth = 0.0f;
+	ViewPortInfo.MaxDepth = 1.0f;
+
+	DeviceContext->RSSetViewports(1, &ViewPortInfo);
+}
+
 void URenderSubsystem::Render(float fDeltaTime)
 {
 	DeviceContext->ClearRenderTargetView(RTV.Get(), RenderTargetViewColor);
@@ -153,4 +167,6 @@ void URenderSubsystem::LateInit()
 	CreateDeviceAndContext();
 
 	InitSwapChain();
+
+	InitViewport();
 }

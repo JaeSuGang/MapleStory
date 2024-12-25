@@ -67,6 +67,9 @@ void UEngine::Tick()
 
 	WindowSubsystem->Tick(fDeltaTime);
 
+	if (!bIsLoop)
+		return;
+
 	RenderSubsystem->Tick(fDeltaTime);
 }
 

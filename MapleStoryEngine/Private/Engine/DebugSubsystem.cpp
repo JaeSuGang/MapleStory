@@ -23,6 +23,8 @@ void UDebugSubsystem::LateInit()
 
 void UDebugSubsystem::Render()
 {
+	ImGuiIO& io = ImGui::GetIO();
+
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
@@ -31,10 +33,18 @@ void UDebugSubsystem::Render()
 
 	ImGui::Begin("Test");
 	ImGui::Text("Hello from another window!");
+	ImGui::Text("x: %f", io.DisplaySize.x);
+	ImGui::Text("y: %f", io.DisplaySize.y);
 	ImGui::End();
 
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+	{
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+	}
 }
 
 LRESULT UDebugSubsystem::IMGUIWndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -49,9 +59,27 @@ void UDebugSubsystem::InitIMGUI()
 {
 	ImGui::CreateContext();
 
+	ImGuiIO& io = ImGui::GetIO();
+
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+
+	ImGui::StyleColorsDark();
+
+	ImGuiStyle& style = ImGui::GetStyle();
+	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+	{
+		style.WindowRounding = 0.0f;
+		style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+
+	}
+
 	ImGui_ImplWin32_Init(WindowSubsystem->GetWindowHandle());
 
 	ImGui_ImplDX11_Init(RenderSubsystem->GetDevice(), RenderSubsystem->GetDeviceContext());
+
+	// ImGui_ImplWin32_EnableDpiAwareness();
 }
 
 UDebugSubsystem::~UDebugSubsystem()

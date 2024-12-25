@@ -5,7 +5,7 @@
 
 class URenderSubsystem;
 class UWindowSubsystem;
-class ImGuiIO;
+struct ImGuiIO;
 
 /* WindowSystem과 RenderSystem에 종속적 */
 class UDebugSubsystem : public UEngineSubsystem

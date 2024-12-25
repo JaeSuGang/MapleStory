@@ -33,6 +33,8 @@ public:
 
 	void InitSwapChain();
 
+	void InitViewport();
+
 
 private:
 	UWindowSubsystem* WindowSubsystem;

@@ -14,7 +14,13 @@ UWindowSubsystem::UWindowSubsystem()
         CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
     }
 
-	hGameWindow = CreateWindowA(lpszTitle.data(), lpszTitle.data(), WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX, 0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, nullptr, nullptr);
+	RECT rc = { 0, 0, 1920, 1080 };
+    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+
+    int nWidth = rc.right - rc.left;
+    int nHeight = rc.bottom - rc.top;
+
+	hGameWindow = CreateWindowA(lpszTitle.data(), lpszTitle.data(), WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX, 0, 0, nWidth, nHeight, nullptr, nullptr, nullptr, nullptr);
 
     if (!hGameWindow)
     {
@@ -58,6 +64,7 @@ void UWindowSubsystem::InitializeWCEX()
 
 LRESULT UWindowSubsystem::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+
 #ifdef _DEBUG
 
     if (GEngine)
@@ -66,7 +73,6 @@ LRESULT UWindowSubsystem::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM
                 return true;
 
 #endif // _DEBUG
-
 
     switch (message)
     {
