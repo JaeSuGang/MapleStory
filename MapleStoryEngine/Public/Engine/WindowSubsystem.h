@@ -23,6 +23,5 @@ private:
 	HWND hGameWindow;
 
 	WNDCLASSEXA WCEX;
-
 };
 

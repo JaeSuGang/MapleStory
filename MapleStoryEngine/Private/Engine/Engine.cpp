@@ -15,11 +15,22 @@ UEngine::UEngine()
 
 	WindowSubsystem = CreateDefaultSubobject<UWindowSubsystem>();
 
-	DebugSubsystem = CreateDefaultSubobject<UDebugSubsystem>();
-
 	RenderSubsystem = CreateDefaultSubobject<URenderSubsystem>();
 
+#ifdef _DEBUG
+
+	DebugSubsystem = CreateDefaultSubobject<UDebugSubsystem>();
+
+#endif // _DEBUG
+
+	WindowSubsystem->LateInit();
 	RenderSubsystem->LateInit();
+
+#ifdef _DEBUG
+
+	DebugSubsystem->LateInit();
+
+#endif // _DEBUG
 }
 
 UEngine::~UEngine()

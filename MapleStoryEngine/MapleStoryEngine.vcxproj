@@ -147,6 +147,8 @@
   <ItemGroup>
     <ClInclude Include="Public\IMGUI\imconfig.h" />
     <ClInclude Include="Public\IMGUI\imgui.h" />
+    <ClInclude Include="Public\IMGUI\imgui_impl_dx11.h" />
+    <ClInclude Include="Public\IMGUI\imgui_impl_win32.h" />
     <ClInclude Include="Public\IMGUI\imgui_internal.h" />
     <ClInclude Include="Public\IMGUI\imstb_rectpack.h" />
     <ClInclude Include="Public\IMGUI\imstb_textedit.h" />
@@ -185,6 +187,8 @@
     <ClCompile Include="Private\IMGUI\imgui.cpp" />
     <ClCompile Include="Private\IMGUI\imgui_demo.cpp" />
     <ClCompile Include="Private\IMGUI\imgui_draw.cpp" />
+    <ClCompile Include="Private\IMGUI\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Private\IMGUI\imgui_impl_win32.cpp" />
     <ClCompile Include="Private\IMGUI\imgui_tables.cpp" />
     <ClCompile Include="Private\IMGUI\imgui_widgets.cpp" />
     <ClCompile Include="Private\World\ActorComponentManager.cpp" />

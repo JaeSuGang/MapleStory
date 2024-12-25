@@ -1,11 +1,13 @@
 #include "EnginePch.h"
 #include "Engine/Engine.h"
 #include "Engine/RenderSubsystem.h"
+#include "Engine/DebugSubsystem.h"
 #include "Engine/WindowSubsystem.h"
 #include "World/World.h"
 #include "Level/Level.h"
 #include "Actor/Actor.h"
 #include "ActorComponent/RenderComponent.h"
+#include "IMGUI/imgui.h"
 
 URenderSubsystem::URenderSubsystem()
 {
@@ -75,7 +77,7 @@ void URenderSubsystem::CreateDeviceAndContext()
 		SwapChain.GetAddressOf(),
 		Device.GetAddressOf(),
 		&FeatureLevel,
-		Context.GetAddressOf()
+		DeviceContext.GetAddressOf()
 		);
 
 	if (HR != S_OK)
@@ -99,8 +101,10 @@ void URenderSubsystem::InitSwapChain()
 
 void URenderSubsystem::Render(float fDeltaTime)
 {
-	Context->ClearRenderTargetView(RTV.Get(), RenderTargetViewColor);
+	DeviceContext->ClearRenderTargetView(RTV.Get(), RenderTargetViewColor);
 
+	ID3D11RenderTargetView* _RTV = RTV.Get();
+	DeviceContext->OMSetRenderTargets(1, &_RTV, nullptr);
 	/*
 	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActorContainer();
 
@@ -112,17 +116,41 @@ void URenderSubsystem::Render(float fDeltaTime)
 		}
 	}
 	*/
+#ifdef _DEBUG
+
+	DebugRender(fDeltaTime);
+
+#endif // _DEBUG
 
 	SwapChain->Present(0, 0);
+}
+
+void URenderSubsystem::DebugRender(float fDeltaTime)
+{
+#ifdef _DEBUG
+
+	DebugSubsystem->Render();
+
+#endif // _DEBUG
+}
+
+ID3D11Device* URenderSubsystem::GetDevice() const
+{
+	return Device.Get();
+}
+
+ID3D11DeviceContext* URenderSubsystem::GetDeviceContext() const
+{
+	return DeviceContext.Get();
 }
 
 void URenderSubsystem::LateInit()
 {
 	WindowSubsystem = Engine->WindowSubsystem;
 
+	DebugSubsystem = Engine->DebugSubsystem;
+
 	CreateDeviceAndContext();
 
 	InitSwapChain();
-
-
 }

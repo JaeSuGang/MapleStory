@@ -1,6 +1,7 @@
 #include "EnginePch.h"
 #include "Engine/Engine.h"
 #include "Engine/WindowSubsystem.h"
+#include "Engine/DebugSubsystem.h"
 
 UWindowSubsystem::UWindowSubsystem()
 {
@@ -57,6 +58,16 @@ void UWindowSubsystem::InitializeWCEX()
 
 LRESULT UWindowSubsystem::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+#ifdef _DEBUG
+
+    if (GEngine)
+        if (UDebugSubsystem* DebugSubsystem = GEngine->DebugSubsystem)
+            if (DebugSubsystem->IMGUIWndProcHandler(hWnd, message, wParam, lParam))
+                return true;
+
+#endif // _DEBUG
+
+
     switch (message)
     {
     case WM_QUIT:
@@ -73,5 +84,6 @@ LRESULT UWindowSubsystem::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM
 
 void UWindowSubsystem::LateInit()
 {
+
 }
 

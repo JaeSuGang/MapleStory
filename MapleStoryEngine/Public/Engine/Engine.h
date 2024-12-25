@@ -32,6 +32,19 @@ public:
 	}
 
 	template<typename T>
+	T* GetSubsystem()
+	{
+		auto FindIter = Subsystems.find(typeid(T).name());
+
+		if (FindIter == Subsystems.end())
+		{
+			CRITICAL_ERROR(INVALID_COMPONENT_ERROR_TEXT);
+		}
+
+		return static_cast<T*>(FindIter->second().get());
+	}
+
+	template<typename T>
 	T* CreateDefaultSubobject()
 	{
 		T* NewSubsystem = new T{};
