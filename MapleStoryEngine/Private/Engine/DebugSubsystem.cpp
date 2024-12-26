@@ -23,21 +23,22 @@ void UDebugSubsystem::LateInit()
 	InitIMGUI();
 }
 
+void UDebugSubsystem::Tick(float fDeltaTime)
+{
+
+}
+
 void UDebugSubsystem::Render()
 {
 	ImGuiIO& io = ImGui::GetIO();
+	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActors();
 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::Begin("DebugSystem");
-	ImGui::Text("x: %f, y: %f", io.DisplaySize.x, io.DisplaySize.y);
-	if (ImGui::Button("Spawn Test Actor"))
-	{
-		GEngine->GetWorld()->SpawnActor<AActor>();
-	}
-	ImGui::End();
+	/* 실질적인 IMGUI창 구성 */
+	this->CustomCode();
 
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
@@ -93,6 +94,3 @@ UDebugSubsystem::~UDebugSubsystem()
 	ImGui::DestroyContext();
 }
 
-void UDebugSubsystem::Tick(float fDeltaTime)
-{
-}

@@ -5,3 +5,8 @@ void URenderComponent::TickComponent(float fDeltaTime)
 {
 	Super::TickComponent(fDeltaTime);
 }
+
+void URenderComponent::SetMeshName(string NewMeshName)
+{
+	MeshName = NewMeshName;
+}

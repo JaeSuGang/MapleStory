@@ -11,9 +11,9 @@
 
 URenderSubsystem::URenderSubsystem()
 {
-	RenderTargetViewColor[0] = 0.0f;
-	RenderTargetViewColor[1] = 0.0f;
-	RenderTargetViewColor[2] = 1.0f;
+	RenderTargetViewColor[0] = 0.25f;
+	RenderTargetViewColor[1] = 0.25f;
+	RenderTargetViewColor[2] = 0.25f;
 	RenderTargetViewColor[3] = 1.0f;
 }
 
@@ -101,12 +101,13 @@ void URenderSubsystem::InitSwapChain()
 	}
 }
 
-void URenderSubsystem::InitViewport()
+void URenderSubsystem::SetViewport()
 {
 	D3D11_VIEWPORT ViewPortInfo;
+	RECT WindowSize = WindowSubsystem->GetWindowSize();
 
-	ViewPortInfo.Width = 1920.0f;
-	ViewPortInfo.Height = 1080.0f;
+	ViewPortInfo.Width = (float)WindowSize.right;
+	ViewPortInfo.Height = (float)WindowSize.bottom;
 	ViewPortInfo.TopLeftX = 0.0f;
 	ViewPortInfo.TopLeftY = 0.0f;
 	ViewPortInfo.MinDepth = 0.0f;
@@ -132,22 +133,10 @@ void URenderSubsystem::Render(float fDeltaTime)
 		}
 	}
 	*/
-#ifdef _DEBUG
 
-	DebugRender(fDeltaTime);
-
-#endif // _DEBUG
+	Engine->DebugSubsystem->Render();
 
 	SwapChain->Present(0, 0);
-}
-
-void URenderSubsystem::DebugRender(float fDeltaTime)
-{
-#ifdef _DEBUG
-
-	DebugSubsystem->Render();
-
-#endif // _DEBUG
 }
 
 ID3D11Device* URenderSubsystem::GetDevice() const
@@ -164,11 +153,9 @@ void URenderSubsystem::LateInit()
 {
 	WindowSubsystem = Engine->WindowSubsystem;
 
-	DebugSubsystem = Engine->DebugSubsystem;
+	this->CreateDeviceAndContext();
 
-	CreateDeviceAndContext();
+	this->InitSwapChain();
 
-	InitSwapChain();
-
-	InitViewport();
+	this->SetViewport();
 }

@@ -12,7 +12,7 @@ public:
 	virtual void LateInit() = 0;
 
 public:
-	void SetEngine(UEngine* pEngine);
+	ENGINE_API void SetEngine(UEngine* pEngine);
 
 protected:
 	UEngine* Engine;

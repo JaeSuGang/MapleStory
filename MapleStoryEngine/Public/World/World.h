@@ -12,6 +12,8 @@ class UWorld : public UObject
 	friend class UGameplaySubsystem;
 
 public:
+	ENGINE_API vector<shared_ptr<AActor>>& GetActors();
+
 	template <typename T>
 	T* SpawnActor()
 	{
@@ -23,8 +25,6 @@ public:
 
 		return static_cast<T*>(NewActor.get());
 	}
-
-	vector<shared_ptr<AActor>>& GetActorContainer();
 
 	template <typename T>
 	T* CreateDefaultSubobject()

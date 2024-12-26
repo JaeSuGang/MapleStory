@@ -23,7 +23,7 @@ public:
 
 	ENGINE_API void Terminate();
 
-	UWorld* GetWorld() const;
+	ENGINE_API UWorld* GetWorld() const;
 
 	void Tick();
 
@@ -49,7 +49,7 @@ public:
 	}
 
 	template<typename T>
-	T* CreateDefaultSubobject()
+	T* CreateSubsystem()
 	{
 		T* NewSubsystem = new T{};
 		NewSubsystem->SetEngine(this);

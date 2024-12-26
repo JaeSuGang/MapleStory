@@ -6,9 +6,11 @@ class AActor;
 class UActorComponent : public UObject
 {
 public:
-	virtual void TickComponent(float fDeltaTime) = 0;
+	/* 생성자와 오버라이드 */
+	ENGINE_API virtual void TickComponent(float fDeltaTime) = 0;
 
-	void SetOwner(AActor* pOwner);
+public:
+	ENGINE_API void SetOwner(AActor* pOwner);
 
 protected:
 	AActor* Owner;

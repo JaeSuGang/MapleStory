@@ -8,8 +8,12 @@ class URenderComponent : public UActorComponent
 
 public:
 	/* 생성자와 오버라이드 */
+	ENGINE_API URenderComponent() = default;
 	void TickComponent(float fDeltaTime) override;
 
-private:
+public:
+	ENGINE_API void SetMeshName(string NewMeshName);
 
+private:
+	string MeshName;
 };

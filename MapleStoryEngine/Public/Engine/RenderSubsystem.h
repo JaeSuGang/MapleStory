@@ -21,8 +21,6 @@ public:
 public:
 	void Render(float fDeltaTime);
 
-	void DebugRender(float fDeltaTime);
-
 	ID3D11Device* GetDevice() const;
 
 	ID3D11DeviceContext* GetDeviceContext() const;
@@ -33,13 +31,11 @@ public:
 
 	void InitSwapChain();
 
-	void InitViewport();
+	void SetViewport();
 
 
 private:
 	UWindowSubsystem* WindowSubsystem;
-
-	UDebugSubsystem* DebugSubsystem;
 
 	ComPtr<ID3D11Device> Device;
 	ComPtr<ID3D11DeviceContext> DeviceContext;

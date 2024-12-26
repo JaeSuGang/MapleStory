@@ -12,9 +12,10 @@ class UDebugSubsystem : public UEngineSubsystem
 {
 public:
 	/* Contructors and Overrides */
-	~UDebugSubsystem();
-	void Tick(float fDeltaTime) override;
-	void LateInit() override;
+	ENGINE_API ~UDebugSubsystem();
+	ENGINE_API void LateInit() override;
+	ENGINE_API void Tick(float fDeltaTime);
+	ENGINE_API virtual void CustomCode() = 0;
 
 public:
 	void Render();
@@ -29,7 +30,7 @@ public:
 	ENGINE_API void Log(string Text, int WarningLevel);
 
 
-private:
+protected:
 	UWindowSubsystem* WindowSubsystem;
 
 	URenderSubsystem* RenderSubsystem;

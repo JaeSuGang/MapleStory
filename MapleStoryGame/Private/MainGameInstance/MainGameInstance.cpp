@@ -4,6 +4,7 @@
 #include "MainGameInstance/MainGameInstance.h"
 #include "GameplayTags/GameplayTagsManager.h"
 #include "GameInstance/GameplaySubsystem.h"
+#include "DebugSubsystem/MapleStoryDebugSubsystem.h"
 
 UMainGameInstance::UMainGameInstance()
 {
@@ -23,6 +24,10 @@ UMainGameInstance::UMainGameInstance()
 void UMainGameInstance::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GEngine->DebugSubsystem = GEngine->CreateSubsystem<UMapleStoryDebugSubsystem>();
+
+	GEngine->DebugSubsystem->LateInit();
 
 	GameplaySubsystem->OpenLevel<UTestLevel>();
 }

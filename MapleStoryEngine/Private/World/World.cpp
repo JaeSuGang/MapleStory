@@ -2,7 +2,7 @@
 #include "Level/Level.h"
 #include "World/World.h"
 
-vector<shared_ptr<AActor>>& UWorld::GetActorContainer()
+vector<shared_ptr<AActor>>& UWorld::GetActors()
 {
-	return PersistentLevel->GetActorContainer();
+	return PersistentLevel->Actors;
 }

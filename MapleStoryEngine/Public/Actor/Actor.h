@@ -9,6 +9,8 @@ class UActorComponent;
 class AActor : public UObject
 {
 public:
+	ENGINE_API AActor() = default;
+
 	template <typename T>
 	T* CreateDefaultSubobject()
 	{

@@ -13,24 +13,13 @@ UEngine::UEngine()
 		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
 	}
 
-	WindowSubsystem = CreateDefaultSubobject<UWindowSubsystem>();
+	WindowSubsystem = CreateSubsystem<UWindowSubsystem>();
 
-	RenderSubsystem = CreateDefaultSubobject<URenderSubsystem>();
-
-#ifdef _DEBUG
-
-	DebugSubsystem = CreateDefaultSubobject<UDebugSubsystem>();
-
-#endif // _DEBUG
+	RenderSubsystem = CreateSubsystem<URenderSubsystem>();
 
 	WindowSubsystem->LateInit();
 	RenderSubsystem->LateInit();
 
-#ifdef _DEBUG
-
-	DebugSubsystem->LateInit();
-
-#endif // _DEBUG
 }
 
 UEngine::~UEngine()
@@ -71,6 +60,14 @@ void UEngine::Tick()
 		return;
 
 	RenderSubsystem->Tick(fDeltaTime);
+
+#ifdef _DEBUG
+
+	if (DebugSubsystem)
+		DebugSubsystem->Tick(fDeltaTime);
+
+#endif // _DEBUG
+
 }
 
 void UEngine::Terminate()
