@@ -1,6 +1,7 @@
 #include "EnginePch.h"
 #include "Engine/Engine.h"
 #include "Engine/RenderSubsystem.h"
+#include "Engine/ResourceSubsystem.h"
 #include "Engine/DebugSubsystem.h"
 #include "Engine/WindowSubsystem.h"
 #include "World/World.h"
@@ -125,11 +126,22 @@ void URenderSubsystem::Render(float fDeltaTime)
 
 	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActors();
 
+	/* 월드 렌더 컴포넌트 루프 */
 	for (shared_ptr<AActor>& LoopActor : Actors)
 	{
 		if (URenderComponent* RenderComponent = LoopActor->GetComponentByClass<URenderComponent>())
 		{
+			auto Meshes = Engine->ResourceSubsystem->GetMeshes();
+			string Name = RenderComponent->GetMeshName();
+			auto FindIter = Meshes.find(Name);
 
+			if (FindIter == Meshes.end())
+			{
+				Engine->DebugSubsystem->Log("존재하지 않는 메쉬 Key를 참조했습니다 : " + Name, 1);
+				continue;
+			}
+
+			FindIter->second;
 		}
 	}
 

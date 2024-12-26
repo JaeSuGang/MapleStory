@@ -4,6 +4,7 @@
 #include "GameInstance/GameInstance.h"
 
 class UEngineSubsystem;
+class UResourceSubsystem;
 class UWindowSubsystem;
 class URenderSubsystem;
 class UDebugSubsystem;
@@ -60,6 +61,8 @@ public:
 	}
 
 public:
+	UResourceSubsystem* ResourceSubsystem;
+
 	URenderSubsystem* RenderSubsystem;
 
 	UWindowSubsystem* WindowSubsystem;

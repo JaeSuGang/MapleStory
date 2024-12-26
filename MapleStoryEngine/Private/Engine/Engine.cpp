@@ -3,6 +3,7 @@
 #include "Engine/WindowSubsystem.h"
 #include "Engine/DebugSubsystem.h"
 #include "Engine/RenderSubsystem.h"
+#include "Engine/ResourceSubsystem.h"
 
 UEngine::UEngine()
 {
@@ -17,7 +18,10 @@ UEngine::UEngine()
 
 	RenderSubsystem = CreateSubsystem<URenderSubsystem>();
 
+	ResourceSubsystem = CreateSubsystem<UResourceSubsystem>();
+
 	WindowSubsystem->LateInit();
+
 	RenderSubsystem->LateInit();
 
 }

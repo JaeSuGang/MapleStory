@@ -10,3 +10,8 @@ void URenderComponent::SetMeshName(string NewMeshName)
 {
 	MeshName = NewMeshName;
 }
+
+string URenderComponent::GetMeshName() const
+{
+	return MeshName;
+}

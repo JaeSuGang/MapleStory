@@ -4,6 +4,7 @@
 #include "Engine/Engine.h"
 #include "Actor/Actor.h"
 #include "World/World.h"
+#include "Actors/BP_TestActor.h"
 
 void UMapleStoryDebugSubsystem::CustomCode()
 {
@@ -14,7 +15,7 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	ImGui::Text("Screen Size x: %f, y: %f", io.DisplaySize.x, io.DisplaySize.y);
 	if (ImGui::Button("Spawn Test Actor"))
 	{
-		GEngine->GetWorld()->SpawnActor<AActor>();
+		GEngine->GetWorld()->SpawnActor<BP_TestActor>();
 	}
 	ImGui::Text("Actors In World :");
 	for (shared_ptr<AActor>& Actor : Actors)

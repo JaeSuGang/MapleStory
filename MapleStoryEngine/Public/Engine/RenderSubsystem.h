@@ -6,7 +6,7 @@
 class UWindowSubsystem;
 class UDebugSubsystem;
 
-/* UWindowSubsystem, UDebugSubsystem에 의존 */
+/* UWindowSubsystem, UDebugSubsystem, UResourceSubsystem에 의존 */
 /* UWorld, ULevel, AActor에 의존 */
 class URenderSubsystem : public UEngineSubsystem
 {

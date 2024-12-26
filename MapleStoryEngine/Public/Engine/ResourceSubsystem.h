@@ -19,6 +19,7 @@ public:
 	void LateInit() override;
 
 public:
+	unordered_map<string, FMesh>& GetMeshes();
 
 private:
 	unordered_map<string, FMesh> Meshes;

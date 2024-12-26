@@ -13,6 +13,7 @@ public:
 
 public:
 	ENGINE_API void SetMeshName(string NewMeshName);
+	ENGINE_API string GetMeshName() const;
 
 private:
 	string MeshName;
