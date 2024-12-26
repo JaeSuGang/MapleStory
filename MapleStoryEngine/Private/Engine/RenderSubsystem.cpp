@@ -122,17 +122,16 @@ void URenderSubsystem::Render(float fDeltaTime)
 
 	ID3D11RenderTargetView* _RTV = RTV.Get();
 	DeviceContext->OMSetRenderTargets(1, &_RTV, nullptr);
-	/*
-	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActorContainer();
 
-	for (shared_ptr<AActor>& Actor : Actors)
+	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActors();
+
+	for (shared_ptr<AActor>& LoopActor : Actors)
 	{
-		if (URenderComponent* Renderer = Actor->GetComponentByClass<URenderComponent>())
+		if (URenderComponent* RenderComponent = LoopActor->GetComponentByClass<URenderComponent>())
 		{
 
 		}
 	}
-	*/
 
 	Engine->DebugSubsystem->Render();
 
