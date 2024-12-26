@@ -14,11 +14,12 @@ UWindowSubsystem::UWindowSubsystem()
         CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
     }
 
-	RECT rc = { 0, 0, 1920, 1080 };
-    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+	RECT WindowSize = { 0, 0, 1280, 960 };
 
-    int nWidth = rc.right - rc.left;
-    int nHeight = rc.bottom - rc.top;
+    AdjustWindowRect(&WindowSize, WS_OVERLAPPEDWINDOW, FALSE);
+
+    int nWidth = WindowSize.right;
+    int nHeight = WindowSize.bottom;
 
 	hGameWindow = CreateWindowA(lpszTitle.data(), lpszTitle.data(), WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX, 0, 0, nWidth, nHeight, nullptr, nullptr, nullptr, nullptr);
 
@@ -44,6 +45,13 @@ void UWindowSubsystem::Tick(float fDeltaTime)
 HWND UWindowSubsystem::GetWindowHandle() const
 {
     return hGameWindow;
+}
+
+RECT UWindowSubsystem::GetWindowSize() const
+{
+    RECT Size;
+    GetClientRect(hGameWindow, &Size);
+    return Size;
 }
 
 void UWindowSubsystem::InitializeWCEX()

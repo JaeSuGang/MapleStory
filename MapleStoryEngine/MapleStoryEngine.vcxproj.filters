@@ -126,6 +126,9 @@
     <ClInclude Include="Public\IMGUI\imgui_impl_win32.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Public\GameInstance\GameplaySubsystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\EnginePch.cpp">
@@ -228,6 +231,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\IMGUI\imgui_impl_win32.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\GameInstance\GameplaySubsystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

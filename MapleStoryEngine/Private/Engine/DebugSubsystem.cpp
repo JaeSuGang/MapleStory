@@ -32,6 +32,7 @@ void UDebugSubsystem::Render()
 	ImGui::NewFrame();
 
 	ImGui::Begin("DebugSystem");
+	ImGui::Text("x: %f, y: %f", io.DisplaySize.x, io.DisplaySize.y);
 	if (ImGui::Button("Spawn Test Actor"))
 	{
 		GEngine->GetWorld()->SpawnActor<AActor>();

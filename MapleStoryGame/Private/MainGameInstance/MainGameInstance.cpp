@@ -3,6 +3,7 @@
 #include "Levels/TestLevel.h"
 #include "MainGameInstance/MainGameInstance.h"
 #include "GameplayTags/GameplayTagsManager.h"
+#include "GameInstance/GameplaySubsystem.h"
 
 UMainGameInstance::UMainGameInstance()
 {
@@ -23,6 +24,6 @@ void UMainGameInstance::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GEngine->OpenLevel<UTestLevel>();
+	GameplaySubsystem->OpenLevel<UTestLevel>();
 }
 

@@ -4,12 +4,14 @@
 #include "GameInstance/GameInstanceSubsystem.h"
 
 class UGameInstanceSubsystem;
+class UGameplaySubsystem;
 class ULevel;
 
 class UGameInstance : public UObject
 {
 public:
 	/* 생성자와 오버라이드 */
+	ENGINE_API UGameInstance();
 	ENGINE_API virtual void BeginPlay() = 0;
 
 public:
@@ -34,6 +36,9 @@ public:
 		Subsystems.insert(std::pair<string, shared_ptr<UGameInstanceSubsystem>>{typeid(T).name(), NewSubsystem});
 		return static_cast<T*>(NewSubsystem.get());
 	}
+
+public:
+	UGameplaySubsystem* GameplaySubsystem;
 
 protected:
 	unordered_map<string, shared_ptr<UGameInstanceSubsystem>> Subsystems;

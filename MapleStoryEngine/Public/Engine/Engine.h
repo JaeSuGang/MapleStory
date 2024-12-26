@@ -1,16 +1,18 @@
 #pragma once
 #include "UObject/Object.h"
 #include "EnginePch.h"
-#include "World/World.h"
 #include "GameInstance/GameInstance.h"
 
 class UEngineSubsystem;
 class UWindowSubsystem;
 class URenderSubsystem;
 class UDebugSubsystem;
+class UWorld;
 
 class UEngine : public UObject
 {
+	friend class UGameplaySubsystem;
+
 public:
 	UEngine();
 	~UEngine();
@@ -24,18 +26,6 @@ public:
 	UWorld* GetWorld() const;
 
 	void Tick();
-
-	template<typename T>
-	T* OpenLevel()
-	{
-		static_assert(std::is_base_of<ULevel, T>::value);
-
-		ActiveWorld = std::make_shared<UWorld>();
-
-		ActiveWorld->PersistentLevel = std::static_pointer_cast<ULevel>(std::make_shared<T>());
-
-		return std::static_pointer_cast<T>(ActiveWorld->PersistentLevel).get();
-	}
 
 	template<typename T>
 	void SetGameInstance()

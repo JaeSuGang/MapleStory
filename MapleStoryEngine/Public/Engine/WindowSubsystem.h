@@ -15,6 +15,8 @@ public:
 public:
 	HWND GetWindowHandle() const;
 
+	RECT GetWindowSize() const;
+
 	void InitializeWCEX();
 
 	static LRESULT WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

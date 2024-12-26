@@ -24,13 +24,15 @@ void URenderSubsystem::Tick(float fDeltaTime)
 
 DXGI_SWAP_CHAIN_DESC URenderSubsystem::MakeSwapChainDesc()
 {
+	RECT WindowSize = WindowSubsystem->GetWindowSize();
+
 	DXGI_SWAP_CHAIN_DESC ScInfo{};
 
 	ScInfo.BufferCount = 2;
 
-	ScInfo.BufferDesc.Width = 1920;
+	ScInfo.BufferDesc.Width = WindowSize.right;
 
-	ScInfo.BufferDesc.Height = 1080;
+	ScInfo.BufferDesc.Height = WindowSize.bottom;
 
 	ScInfo.OutputWindow = WindowSubsystem->GetWindowHandle();
 

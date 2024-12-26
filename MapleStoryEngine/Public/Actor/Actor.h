@@ -1,7 +1,6 @@
 #pragma once
 #include "EnginePch.h"
 #include "UObject/Object.h"
-#include "Engine/Engine.h"
 #include "Engine/DebugSubsystem.h"
 #include "Math/Transform.h"
 

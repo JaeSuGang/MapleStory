@@ -3,13 +3,13 @@
 #include "UObject/Object.h"
 #include "Level/Level.h"
 #include "Actor/Actor.h"
+#include "World/WorldSubsystem.h"
 
 class ULevel;
-class UWorldSubsystem;
 
 class UWorld : public UObject
 {
-	friend class UEngine;
+	friend class UGameplaySubsystem;
 
 public:
 	template <typename T>
