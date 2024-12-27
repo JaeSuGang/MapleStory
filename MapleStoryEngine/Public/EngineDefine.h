@@ -12,9 +12,10 @@
 
 #define CRITICAL_ERROR(text) { MessageBoxA(0, text, "Error", MB_OK); assert(false); };
 
+#define DEFAULT_ERROR_TEXT "Error Occured"
 #define ENGINE_INIT_ERROR_TEXT "Engine Init Failed"
-
 #define INVALID_COMPONENT_ERROR_TEXT "Engine Init Failed"
+#define BUFFER_CREATE_FAILED_TEXT "Buffer Creation Failed"
 
 #define TAG_CONTAINER_RESERVE_COUNT 100
 #define REGISTERED_TAGS_RESERVE_COUNT 200

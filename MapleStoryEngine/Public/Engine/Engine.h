@@ -24,6 +24,8 @@ public:
 
 	ENGINE_API void Terminate();
 
+	ENGINE_API void DebugLog(string Text, int WarningLevel);
+
 	ENGINE_API UWorld* GetWorld() const;
 
 	void Tick();

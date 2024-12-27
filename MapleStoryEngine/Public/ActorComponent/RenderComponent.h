@@ -2,18 +2,20 @@
 #include "ActorComponent.h"
 #include "Math/Transform.h"
 
+struct FMesh;
+
 class URenderComponent : public UActorComponent
 {
 	typedef UActorComponent Super;
 
 public:
 	/* 생성자와 오버라이드 */
-	ENGINE_API URenderComponent() = default;
+	ENGINE_API URenderComponent();
 	void TickComponent(float fDeltaTime) override;
 
 public:
-	ENGINE_API void SetMeshName(string NewMeshName);
-	ENGINE_API string GetMeshName() const;
+	ENGINE_API void SetMeshName(const char* lpszNewName);
+	ENGINE_API const char* GetMeshName();
 
 private:
 	string MeshName;

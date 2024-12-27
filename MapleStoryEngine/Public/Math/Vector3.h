@@ -3,8 +3,8 @@
 struct FVector3
 {
 public:
-	float X;
-	float Y;
-	float Z;
+	float x;
+	float y;
+	float z;
 };
 

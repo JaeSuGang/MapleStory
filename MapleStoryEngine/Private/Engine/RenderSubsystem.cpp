@@ -124,30 +124,34 @@ void URenderSubsystem::Render(float fDeltaTime)
 	ID3D11RenderTargetView* _RTV = RTV.Get();
 	DeviceContext->OMSetRenderTargets(1, &_RTV, nullptr);
 
-	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActors();
-
-	/* 월드 렌더 컴포넌트 루프 */
-	for (shared_ptr<AActor>& LoopActor : Actors)
-	{
-		if (URenderComponent* RenderComponent = LoopActor->GetComponentByClass<URenderComponent>())
-		{
-			auto Meshes = Engine->ResourceSubsystem->GetMeshes();
-			string Name = RenderComponent->GetMeshName();
-			auto FindIter = Meshes.find(Name);
-
-			if (FindIter == Meshes.end())
-			{
-				Engine->DebugSubsystem->Log("존재하지 않는 메쉬 Key를 참조했습니다 : " + Name, 1);
-				continue;
-			}
-
-			FindIter->second;
-		}
-	}
+	this->RenderActors(fDeltaTime);
 
 	Engine->DebugSubsystem->Render();
 
 	SwapChain->Present(0, 0);
+}
+
+void URenderSubsystem::RenderActors(float fDeltaTime)
+{
+	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActors();
+
+	for (shared_ptr<AActor>& LoopActor : Actors)
+	{
+		if (URenderComponent* RenderComponent = LoopActor->GetComponentByClass<URenderComponent>())
+		{
+			const char* MeshName = RenderComponent->GetMeshName();
+
+			FMesh& Mesh = GEngine->ResourceSubsystem->GetMesh(MeshName);
+
+			ComPtr<ID3D11Buffer>& VertexBuffer = GEngine->ResourceSubsystem->GetD3DVertexBuffer(MeshName);
+
+			ID3D11Buffer* pBuffer = VertexBuffer.Get();
+			UINT nStride = sizeof(FVertex);
+			DeviceContext->IASetVertexBuffers(0, 1, &pBuffer, &nStride, 0);
+			DeviceContext->IASetInputLayout();
+
+		}
+	}
 }
 
 ID3D11Device* URenderSubsystem::GetDevice() const

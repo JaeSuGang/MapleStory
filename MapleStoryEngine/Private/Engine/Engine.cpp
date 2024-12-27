@@ -9,6 +9,8 @@ UEngine::UEngine()
 {
 	bIsLoop = true;
 
+	GEngine = this;
+
 	if (S_OK != CoInitializeEx(nullptr, COINIT_MULTITHREADED))
 	{
 		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
@@ -23,6 +25,8 @@ UEngine::UEngine()
 	WindowSubsystem->LateInit();
 
 	RenderSubsystem->LateInit();
+
+	ResourceSubsystem->LateInit();
 
 }
 
@@ -77,6 +81,11 @@ void UEngine::Tick()
 void UEngine::Terminate()
 {
 	bIsLoop = false;
+}
+
+ENGINE_API void UEngine::DebugLog(string Text, int WarningLevel)
+{
+	DebugSubsystem->Log(Text, WarningLevel);
 }
 
 UWorld* UEngine::GetWorld() const

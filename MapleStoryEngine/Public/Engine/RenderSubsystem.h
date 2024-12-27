@@ -21,6 +21,8 @@ public:
 public:
 	void Render(float fDeltaTime);
 
+	void RenderActors(float fDeltaTime);
+
 	ID3D11Device* GetDevice() const;
 
 	ID3D11DeviceContext* GetDeviceContext() const;

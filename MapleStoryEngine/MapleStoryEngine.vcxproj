@@ -154,6 +154,8 @@
     <ClInclude Include="Public\IMGUI\imstb_rectpack.h" />
     <ClInclude Include="Public\IMGUI\imstb_textedit.h" />
     <ClInclude Include="Public\IMGUI\imstb_truetype.h" />
+    <ClInclude Include="Public\Math\Mesh.h" />
+    <ClInclude Include="Public\Math\Vertex.h" />
     <ClInclude Include="Public\World\ActorComponentManager.h" />
     <ClInclude Include="Public\Math\Transform.h" />
     <ClInclude Include="Public\Actions\ActionComponent.h" />
