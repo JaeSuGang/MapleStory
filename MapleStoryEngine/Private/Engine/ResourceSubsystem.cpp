@@ -13,8 +13,6 @@ void UResourceSubsystem::LateInit()
 {
 	this->SetWorkingDirectory();
 
-	this->CompileD3DVSShader();
-
 	this->GenerateDefaultMeshes();
 }
 
@@ -25,18 +23,6 @@ FMesh& UResourceSubsystem::GetMesh(string strKey)
 
 	if (FindIter == Meshes.end())
 		GEngine->DebugLog("존재하지 않는 메쉬 이름을 참조", 1);
-
-	return FindIter->second;
-}
-
-ComPtr<ID3D11Buffer>& UResourceSubsystem::GetD3DVertexBuffer(string strKey)
-{
-	auto FindIter = D3DVertexBuffers.find(strKey);
-
-	if (FindIter == D3DVertexBuffers.end())
-	{
-		CRITICAL_ERROR(DEFAULT_ERROR_TEXT);
-	}
 
 	return FindIter->second;
 }
@@ -58,16 +44,6 @@ void UResourceSubsystem::SetWorkingDirectory()
 	}
 
 	CRITICAL_ERROR(RESOURCE_FOLDER_FIND_FAILED_TEXT);
-}
-
-void UResourceSubsystem::CompileD3DVSShader()
-{
-	D3DCompileFromFile(StringToWString("Resources\\Shaders\\test.hlsl").data(), nullptr, nullptr, "DefaultVertexShader", "vs_5_0", 0, 0, &D3DVSShaderCodeBlob, &D3DVSErrorCodeBlob);
-}
-
-void UResourceSubsystem::CreateD3DInputLayout()
-{
-	GEngine->RenderSubsystem->GetDevice()->CreateInputLayout();
 }
 
 void UResourceSubsystem::GenerateDefaultMeshes()
@@ -115,6 +91,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 
 	/* ID3D11Buffer 생성 */
 	ComPtr<ID3D11Buffer> VertexBuffer{};
+
 	D3D11_BUFFER_DESC BufferDesc{};
 	BufferDesc.ByteWidth = (UINT)(sizeof(Plane.Vertices[0]) * Plane.Vertices.size());
 	BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
@@ -132,7 +109,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 	Pair2.first = "Plane";
 	Pair2.second = VertexBuffer;
 
-	D3DVertexBuffers.insert(Pair2);
+	GEngine->RenderSubsystem->D3DVertexBuffers.insert(Pair2);
 
 	/* ID3D11InputLayout 생성 */
 	vector<D3D11_INPUT_ELEMENT_DESC> InputLayouts;
@@ -164,7 +141,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 	InputDesc3.InstanceDataStepRate = 0;
 	InputLayouts.push_back(InputDesc3);
 
-	// GEngine->RenderSubsystem->GetDevice()->CreateInputLayout(&InputLayouts[0], (UINT)InputLayouts.size(), );
+	GEngine->RenderSubsystem->GetDevice()->CreateInputLayout(&InputLayouts[0], (UINT)InputLayouts.size(), );
 
 }
 

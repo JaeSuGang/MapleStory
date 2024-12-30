@@ -15,14 +15,8 @@ public:
 
 	FMesh& GetMesh(string strKey);
 
-	ComPtr<ID3D11Buffer>& GetD3DVertexBuffer(string strKey);
-
 private:
 	void SetWorkingDirectory();
-
-	void CompileD3DVSShader();
-
-	void CreateD3DInputLayout();
 
 	void GenerateDefaultMeshes();
 

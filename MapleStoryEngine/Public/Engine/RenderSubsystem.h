@@ -19,6 +19,8 @@ public:
 	void LateInit() override;
 
 public:
+	ID3D11Buffer* GetD3DVertexBuffer(string strName);
+
 	void Render(float fDeltaTime);
 
 	void RenderActors(float fDeltaTime);
@@ -27,8 +29,6 @@ public:
 
 	ID3D11DeviceContext* GetDeviceContext() const;
 
-	DXGI_SWAP_CHAIN_DESC MakeSwapChainDesc();
-
 	void CreateDeviceAndContext();
 
 	void InitSwapChain();
@@ -36,14 +36,20 @@ public:
 	void SetViewport();
 
 private:
+	void CompileD3DVSShader();
+
+	DXGI_SWAP_CHAIN_DESC MakeSwapChainDesc();
+
+public:
+	unordered_map<string, ComPtr<ID3D11Buffer>> D3DVertexBuffers;
+	unordered_map<string, ComPtr<ID3D11InputLayout>> D3DInputLayouts;
+
+private:
 	FTransform CameraTransform;
 	UWindowSubsystem* WindowSubsystem;
 	float RenderTargetViewColor[4];
 
 private:
-	unordered_map<string, ComPtr<ID3D11Buffer>> D3DVertexBuffers;
-	unordered_map<string, ComPtr<ID3D11InputLayout>> D3DInputLayouts;
-
 	ComPtr<ID3D11Device> Device;
 	ComPtr<ID3D11DeviceContext> DeviceContext;
 	ComPtr<IDXGISwapChain> SwapChain;

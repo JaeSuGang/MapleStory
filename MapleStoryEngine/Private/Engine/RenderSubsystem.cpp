@@ -4,6 +4,7 @@
 #include "Engine/ResourceSubsystem.h"
 #include "Engine/DebugSubsystem.h"
 #include "Engine/WindowSubsystem.h"
+#include "Utils/Encoding.h"
 #include "World/World.h"
 #include "Level/Level.h"
 #include "Actor/Actor.h"
@@ -117,6 +118,19 @@ void URenderSubsystem::SetViewport()
 	DeviceContext->RSSetViewports(1, &ViewPortInfo);
 }
 
+ID3D11Buffer* URenderSubsystem::GetD3DVertexBuffer(string strName)
+{
+	auto FindIter = D3DVertexBuffers.find(strName);
+
+	if (FindIter == D3DVertexBuffers.end())
+	{
+		GEngine->DebugLog("GetD3DVertexBuffer()로 유효한 키를 찾지 못함", 1);
+		return nullptr;
+	}
+
+	return FindIter->second.Get();
+}
+
 void URenderSubsystem::Render(float fDeltaTime)
 {
 	DeviceContext->ClearRenderTargetView(RTV.Get(), RenderTargetViewColor);
@@ -143,10 +157,10 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 
 			FMesh& Mesh = GEngine->ResourceSubsystem->GetMesh(MeshName);
 
-			ComPtr<ID3D11Buffer>& VertexBuffer = GEngine->ResourceSubsystem->GetD3DVertexBuffer(MeshName);
+			ID3D11Buffer* VertexBuffer = GetD3DVertexBuffer(MeshName);
 
 			ID3D11Buffer* pBuffer[1];
-			pBuffer[0] = VertexBuffer.Get();
+			pBuffer[0] = VertexBuffer;
 			UINT nStride = sizeof(FVertex);
 			UINT nSize = 0;
 			DeviceContext->IASetVertexBuffers(0, 1, pBuffer, &nStride, &nSize);
@@ -175,4 +189,9 @@ void URenderSubsystem::LateInit()
 	this->InitSwapChain();
 
 	this->SetViewport();
+}
+
+void URenderSubsystem::CompileD3DVSShader()
+{
+	D3DCompileFromFile(StringToWString("Resources\\Shaders\\test.hlsl").data(), nullptr, nullptr, "DefaultVertexShader", "vs_5_0", 0, 0, &D3DVSShaderCodeBlob, &D3DVSErrorCodeBlob);
 }
