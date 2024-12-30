@@ -4,6 +4,7 @@
 
 // std & stl
 #include <assert.h>
+#include <filesystem>
 #include <memory>
 #include <ranges>
 #include <string>
@@ -21,5 +22,6 @@ using std::weak_ptr;
 // DirectX & Direct3D & Microsoft
 #include <wrl.h>
 #include <d3d11_4.h>
+#include <d3dcompiler.h>
 
 using Microsoft::WRL::ComPtr;

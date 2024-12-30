@@ -1,4 +1,5 @@
 #include "EnginePch.h"
+#include "Utils/Encoding.h"
 #include "Engine/ResourceSubsystem.h"
 #include "Engine/RenderSubsystem.h"
 #include "Math/Mesh.h"
@@ -10,8 +11,13 @@ void UResourceSubsystem::Tick(float fDeltaTime)
 
 void UResourceSubsystem::LateInit()
 {
+	this->SetWorkingDirectory();
+
+	this->CompileD3DVSShader();
+
 	this->GenerateDefaultMeshes();
 }
+
 
 FMesh& UResourceSubsystem::GetMesh(string strKey)
 {
@@ -33,6 +39,35 @@ ComPtr<ID3D11Buffer>& UResourceSubsystem::GetD3DVertexBuffer(string strKey)
 	}
 
 	return FindIter->second;
+}
+
+void UResourceSubsystem::SetWorkingDirectory()
+{
+	if (std::filesystem::exists(RESOURCES_FOLDER_NAME))
+	{
+		// this->ResourcePath = std::filesystem::current_path() / RESOURCES_FOLDER_NAME;
+		return;
+	}
+
+	std::filesystem::current_path(std::filesystem::current_path().parent_path());
+
+	if (std::filesystem::exists(RESOURCES_FOLDER_NAME))
+	{
+		// this->ResourcePath = std::filesystem::current_path() / RESOURCES_FOLDER_NAME;
+		return;
+	}
+
+	CRITICAL_ERROR(RESOURCE_FOLDER_FIND_FAILED_TEXT);
+}
+
+void UResourceSubsystem::CompileD3DVSShader()
+{
+	D3DCompileFromFile(StringToWString("Resources\\Shaders\\test.hlsl").data(), nullptr, nullptr, "DefaultVertexShader", "vs_5_0", 0, 0, &D3DVSShaderCodeBlob, &D3DVSErrorCodeBlob);
+}
+
+void UResourceSubsystem::CreateD3DInputLayout()
+{
+	GEngine->RenderSubsystem->GetDevice()->CreateInputLayout();
 }
 
 void UResourceSubsystem::GenerateDefaultMeshes()
@@ -129,7 +164,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 	InputDesc3.InstanceDataStepRate = 0;
 	InputLayouts.push_back(InputDesc3);
 
-	GEngine->RenderSubsystem->GetDevice()->CreateInputLayout(&InputLayouts[0], (UINT)InputLayouts.size(), );
+	// GEngine->RenderSubsystem->GetDevice()->CreateInputLayout(&InputLayouts[0], (UINT)InputLayouts.size(), );
 
 }
 

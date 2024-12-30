@@ -145,10 +145,12 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 
 			ComPtr<ID3D11Buffer>& VertexBuffer = GEngine->ResourceSubsystem->GetD3DVertexBuffer(MeshName);
 
-			ID3D11Buffer* pBuffer = VertexBuffer.Get();
+			ID3D11Buffer* pBuffer[1];
+			pBuffer[0] = VertexBuffer.Get();
 			UINT nStride = sizeof(FVertex);
-			DeviceContext->IASetVertexBuffers(0, 1, &pBuffer, &nStride, 0);
-			DeviceContext->IASetInputLayout();
+			UINT nSize = 0;
+			DeviceContext->IASetVertexBuffers(0, 1, pBuffer, &nStride, &nSize);
+			//DeviceContext->IASetInputLayout();
 
 		}
 	}

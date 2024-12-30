@@ -35,17 +35,22 @@ public:
 
 	void SetViewport();
 
+private:
+	FTransform CameraTransform;
+	UWindowSubsystem* WindowSubsystem;
+	float RenderTargetViewColor[4];
 
 private:
-	UWindowSubsystem* WindowSubsystem;
+	unordered_map<string, ComPtr<ID3D11Buffer>> D3DVertexBuffers;
+	unordered_map<string, ComPtr<ID3D11InputLayout>> D3DInputLayouts;
 
 	ComPtr<ID3D11Device> Device;
 	ComPtr<ID3D11DeviceContext> DeviceContext;
 	ComPtr<IDXGISwapChain> SwapChain;
 	ComPtr<ID3D11Texture2D> BackBuffer;
 	ComPtr<ID3D11RenderTargetView> RTV;
+	ComPtr<ID3DBlob> D3DVSErrorCodeBlob;
+	ComPtr<ID3DBlob> D3DVSShaderCodeBlob;
 
-	FTransform CameraTransform;
-	float RenderTargetViewColor[4];
 };
 
