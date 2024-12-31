@@ -111,7 +111,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 	std::pair<string, ComPtr<ID3D11Buffer>> VertexBufferPair{};
 	VertexBufferPair.first = "Plane";
 	VertexBufferPair.second = VertexBuffer;
-	GEngine->RenderSubsystem->D3DVertexBuffers.insert(VertexBufferPair);
+	GEngine->RenderSubsystem->VertexBuffers.insert(VertexBufferPair);
 
 
 	/* IndexBuffer »ý¼º */
@@ -134,7 +134,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 	std::pair<string, ComPtr<ID3D11Buffer>> IndexBufferPair{};
 	IndexBufferPair.first = "Plane";
 	IndexBufferPair.second = IndexBuffer;
-	GEngine->RenderSubsystem->D3DIndexBuffers.insert(IndexBufferPair);
+	GEngine->RenderSubsystem->IndexBuffers.insert(IndexBufferPair);
 }
 
 unordered_map<string, FMesh>& UResourceSubsystem::GetMeshes()

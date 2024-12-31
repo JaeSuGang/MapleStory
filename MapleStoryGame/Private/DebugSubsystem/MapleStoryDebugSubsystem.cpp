@@ -15,7 +15,9 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	ImGui::Text("Screen Size x: %f, y: %f", io.DisplaySize.x, io.DisplaySize.y);
 	if (ImGui::Button("Spawn Test Actor"))
 	{
-		GEngine->GetWorld()->SpawnActor<BP_TestActor>();
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
+
+		Actor->GetTransform().Position = {0.0f, 0.0f, 10.0f};
 	}
 	ImGui::Text("Actors In World :");
 	for (shared_ptr<AActor>& Actor : Actors)

@@ -234,16 +234,16 @@ void URenderSubsystem::CreateInputLayout()
 
 	GEngine->RenderSubsystem->GetDevice()->CreateInputLayout(&InputLayouts[0],
 		(UINT)InputLayouts.size(),
-		D3DVSShaderCodeBlob->GetBufferPointer(),
-		D3DVSShaderCodeBlob->GetBufferSize(),
-		D3DInputLayout.GetAddressOf());
+		VSCodeBlob->GetBufferPointer(),
+		VSCodeBlob->GetBufferSize(),
+		InputLayout.GetAddressOf());
 }
 
 ID3D11Buffer* URenderSubsystem::GetD3DVertexBuffer(string strName)
 {
-	auto FindIter = D3DVertexBuffers.find(strName);
+	auto FindIter = VertexBuffers.find(strName);
 
-	if (FindIter == D3DVertexBuffers.end())
+	if (FindIter == VertexBuffers.end())
 	{
 		GEngine->DebugLog("GetD3DVertexBuffer()로 유효한 키를 찾지 못함", 1);
 		return nullptr;
@@ -254,9 +254,9 @@ ID3D11Buffer* URenderSubsystem::GetD3DVertexBuffer(string strName)
 
 ID3D11Buffer* URenderSubsystem::GetD3DIndexBuffer(string strName)
 {
-	auto FindIter = D3DIndexBuffers.find(strName);
+	auto FindIter = IndexBuffers.find(strName);
 
-	if (FindIter == D3DIndexBuffers.end())
+	if (FindIter == IndexBuffers.end())
 	{
 		GEngine->DebugLog("GetD3DIndexBuffer()로 유효한 키를 찾지 못함", 1);
 		return nullptr;
@@ -267,10 +267,14 @@ ID3D11Buffer* URenderSubsystem::GetD3DIndexBuffer(string strName)
 
 void URenderSubsystem::Render(float fDeltaTime)
 {
+	/* 오류날시 omsetrendertargets의 RTV.GetAddressOf()를 지역변수로 치환해서 넘기는것으로 변경 */
 	DeviceContext->ClearRenderTargetView(RTV.Get(), RenderTargetViewColor);
-
-	ID3D11RenderTargetView* _RTV = RTV.Get();
-	DeviceContext->OMSetRenderTargets(1, &_RTV, nullptr);
+	DeviceContext->IASetInputLayout(InputLayout.Get());
+	DeviceContext->VSSetShader(VertexShader.Get(), nullptr, 0);
+	DeviceContext->RSSetViewports(1, &ViewPortInfo);
+	DeviceContext->RSSetState(RasterizerState.Get());
+	DeviceContext->PSSetShader(PixelShader.Get(), nullptr, 0);
+	DeviceContext->OMSetRenderTargets(1, RTV.GetAddressOf(), nullptr);
 
 	this->RenderActors(fDeltaTime);
 
@@ -304,13 +308,17 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 
 			ID3D11Buffer* IndexBuffer = GetD3DIndexBuffer(MeshName);
 
+			/* WVP 변환 */
+			this->SetTransformConstantBuffer(LoopActor->GetTransform());
+
+			/* 메쉬별 렌더링 파이프라인 설정 */
 			DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
-			DeviceContext->IASetInputLayout(D3DInputLayout.Get());
 			DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 			DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
-			DeviceContext->VSSetShader(D3DVertexShader.Get(), nullptr, 0);
+			DeviceContext->VSSetConstantBuffers(0, 1, TransformConstantBuffer.GetAddressOf());
+			// DeviceContext->PSSetShaderResources();
+			// DeviceContext->PSSetSamplers();
 
-			this->SetTransformConstantBuffer(LoopActor->GetTransform());
 
 			/* 드로우 콜 */
 			DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
@@ -336,26 +344,69 @@ void URenderSubsystem::LateInit()
 
 	this->InitSwapChain();
 
-	this->CreateD3DVertexShader();
+	this->CreateVertexShader();
 
 	this->CreateInputLayout();
 
 	this->CreateViewport();
 
 	this->CreateTransformConstantBuffer();
+
+	this->CreateRasterizer();
+
+	this->CreatePixelShader();
+
 }
 
-void URenderSubsystem::CreateD3DVertexShader()
+void URenderSubsystem::CreateVertexShader()
 {
-	HRESULT hr = D3DCompileFromFile(L"Resources\\Shaders\\test.hlsl", nullptr, nullptr, "DefaultVertexShader", "vs_5_0", 0, 0, D3DVSShaderCodeBlob.GetAddressOf(), D3DVSErrorCodeBlob.GetAddressOf());
+	HRESULT hr = D3DCompileFromFile(L"Resources\\Shaders\\test.hlsl", nullptr, nullptr, "DefaultVertexShader", "vs_5_0", 0, 0, VSCodeBlob.GetAddressOf(), VSErrorCodeBlob.GetAddressOf());
 	if (hr != S_OK)
 	{
-		CRITICAL_ERROR(static_cast<const char *>(D3DVSErrorCodeBlob->GetBufferPointer()));
+		CRITICAL_ERROR(static_cast<const char *>(VSErrorCodeBlob->GetBufferPointer()));
 	}
 
-	hr = Device->CreateVertexShader(D3DVSShaderCodeBlob->GetBufferPointer(), D3DVSShaderCodeBlob->GetBufferSize(), nullptr, D3DVertexShader.GetAddressOf());
+	hr = Device->CreateVertexShader(VSCodeBlob->GetBufferPointer(), VSCodeBlob->GetBufferSize(), nullptr, VertexShader.GetAddressOf());
 	if (hr != S_OK)
 	{
-		CRITICAL_ERROR(static_cast<const char*>(D3DVSErrorCodeBlob->GetBufferPointer()));
+		CRITICAL_ERROR(static_cast<const char*>(VSErrorCodeBlob->GetBufferPointer()));
+	}
+}
+
+void URenderSubsystem::CreateRasterizer()
+{
+	D3D11_RASTERIZER_DESC RasterizerDesc = {};
+	RasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	RasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
+
+	Device->CreateRasterizerState(&RasterizerDesc, RasterizerState.GetAddressOf());
+
+	/* 뷰포트 설정 */
+	ViewPortInfo.Width = (float)WindowSubsystem->GetWindowSize().right;
+	ViewPortInfo.Height = (float)WindowSubsystem->GetWindowSize().bottom;
+	ViewPortInfo.TopLeftX = 0.0f;
+	ViewPortInfo.TopLeftY = 0.0f;
+	ViewPortInfo.MinDepth = 0.0f;
+	ViewPortInfo.MaxDepth = 1.0f;
+}
+
+void URenderSubsystem::CreatePixelShader()
+{
+	int Flag0{};
+#ifdef _DEBUG
+	Flag0 = D3D10_SHADER_DEBUG;
+#endif
+	Flag0 |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
+
+	HRESULT hr = D3DCompileFromFile(L"Resources\\Shaders\\test.hlsl", nullptr, nullptr, "DefaultPixelShader", "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+	}
+
+	hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, PixelShader.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
 	}
 }

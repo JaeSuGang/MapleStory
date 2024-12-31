@@ -54,15 +54,20 @@ public:
 
 private:
 	/* 렌더링 파이프라인 초기화 */
+	DXGI_SWAP_CHAIN_DESC MakeSwapChainDesc();
+
 	void CreateTransformConstantBuffer();
 	
 	void CreateViewport();
 
 	void CreateInputLayout();
 
-	void CreateD3DVertexShader();
+	void CreateVertexShader();
 
-	DXGI_SWAP_CHAIN_DESC MakeSwapChainDesc();
+	void CreateRasterizer();
+
+	void CreatePixelShader();
+
 
 private:
 	/* 개별 렌더링 파이프라인 설정 */
@@ -70,19 +75,27 @@ private:
 
 
 public:
+	/* 메쉬 데이터 */
+	unordered_map<string, ComPtr<ID3D11Buffer>> VertexBuffers;
+	unordered_map<string, ComPtr<ID3D11Buffer>> IndexBuffers;
+	unordered_map<string, ComPtr<ID3D11Texture2D>> Textures;
+	unordered_map<string, ComPtr<ID3D11ShaderResourceView>> ShaderResourceViews;
+
 	/* 렌더링 파이프라인 개별 설정 변수 */
 	ComPtr<ID3D11Buffer> TransformConstantBuffer;
 	FCamera Camera;
 
 public:
-
 	/* 렌더링 파이프라인 초기화 변수 */
-	ComPtr<ID3D11VertexShader> D3DVertexShader;
-	ComPtr<ID3DBlob> D3DVSShaderCodeBlob;
-	ComPtr<ID3DBlob> D3DVSErrorCodeBlob;
-	unordered_map<string, ComPtr<ID3D11Buffer>> D3DVertexBuffers;
-	unordered_map<string, ComPtr<ID3D11Buffer>> D3DIndexBuffers;
-	ComPtr<ID3D11InputLayout> D3DInputLayout;
+	D3D11_VIEWPORT ViewPortInfo;
+	ComPtr<ID3D11RasterizerState> RasterizerState;
+	ComPtr<ID3D11VertexShader> VertexShader;
+	ComPtr<ID3D11PixelShader> PixelShader;
+	ComPtr<ID3DBlob> VSCodeBlob;
+	ComPtr<ID3DBlob> VSErrorCodeBlob;
+	ComPtr<ID3DBlob> PSCodeBlob;
+	ComPtr<ID3DBlob> PSErrorCodeBlob;
+	ComPtr<ID3D11InputLayout> InputLayout;
 	ComPtr<ID3D11Device> Device;
 	ComPtr<ID3D11DeviceContext> DeviceContext;
 	ComPtr<IDXGISwapChain> SwapChain;
