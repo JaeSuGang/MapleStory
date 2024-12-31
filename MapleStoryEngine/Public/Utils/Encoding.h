@@ -1,7 +1,7 @@
 #pragma once
 #include "EnginePch.h"
 
-std::wstring StringToWString(string strInput)
+static std::wstring StringToWString(string strInput)
 {
 	if (strInput.size() == 0)
 		return std::wstring();

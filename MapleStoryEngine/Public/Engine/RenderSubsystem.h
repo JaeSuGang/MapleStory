@@ -6,6 +6,22 @@
 class UWindowSubsystem;
 class UDebugSubsystem;
 
+struct FTransformConstants
+{
+public:
+	DirectX::XMMATRIX WVP;
+};
+
+struct FCamera
+{
+public:
+	FTransform Transform;
+	float Width;
+	float Height;
+	float NearZ;
+	float FarZ;
+};
+
 /* UWindowSubsystem, UDebugSubsystem, UResourceSubsystem에 의존 */
 /* UWorld, ULevel, AActor에 의존 */
 class URenderSubsystem : public UEngineSubsystem
@@ -21,6 +37,8 @@ public:
 public:
 	ID3D11Buffer* GetD3DVertexBuffer(string strName);
 
+	ID3D11Buffer* GetD3DIndexBuffer(string strName);
+
 	void Render(float fDeltaTime);
 
 	void RenderActors(float fDeltaTime);
@@ -33,30 +51,47 @@ public:
 
 	void InitSwapChain();
 
-	void SetViewport();
 
 private:
-	void CompileD3DVSShader();
+	/* 렌더링 파이프라인 초기화 */
+	void CreateTransformConstantBuffer();
+	
+	void CreateViewport();
+
+	void CreateInputLayout();
+
+	void CreateD3DVertexShader();
 
 	DXGI_SWAP_CHAIN_DESC MakeSwapChainDesc();
 
+private:
+	/* 개별 렌더링 파이프라인 설정 */
+	void SetTransformConstantBuffer(FTransform Transform);
+
+
 public:
+	/* 렌더링 파이프라인 개별 설정 변수 */
+	ComPtr<ID3D11Buffer> TransformConstantBuffer;
+	FCamera Camera;
+
+public:
+
+	/* 렌더링 파이프라인 초기화 변수 */
+	ComPtr<ID3D11VertexShader> D3DVertexShader;
+	ComPtr<ID3DBlob> D3DVSShaderCodeBlob;
+	ComPtr<ID3DBlob> D3DVSErrorCodeBlob;
 	unordered_map<string, ComPtr<ID3D11Buffer>> D3DVertexBuffers;
-	unordered_map<string, ComPtr<ID3D11InputLayout>> D3DInputLayouts;
-
-private:
-	FTransform CameraTransform;
-	UWindowSubsystem* WindowSubsystem;
-	float RenderTargetViewColor[4];
-
-private:
+	unordered_map<string, ComPtr<ID3D11Buffer>> D3DIndexBuffers;
+	ComPtr<ID3D11InputLayout> D3DInputLayout;
 	ComPtr<ID3D11Device> Device;
 	ComPtr<ID3D11DeviceContext> DeviceContext;
 	ComPtr<IDXGISwapChain> SwapChain;
 	ComPtr<ID3D11Texture2D> BackBuffer;
 	ComPtr<ID3D11RenderTargetView> RTV;
-	ComPtr<ID3DBlob> D3DVSErrorCodeBlob;
-	ComPtr<ID3DBlob> D3DVSShaderCodeBlob;
 
+private:
+	/* 서브시스템 변수들 */
+	UWindowSubsystem* WindowSubsystem;
+	float RenderTargetViewColor[4];
 };
 

@@ -12,7 +12,14 @@
 #include "IMGUI/imgui.h"
 
 URenderSubsystem::URenderSubsystem()
+	:
+	Camera{}
 {
+	Camera.Width = 1920.0f;
+	Camera.Height = 1080.0f;
+	Camera.NearZ = 0.1f;
+	Camera.FarZ = 5000.0f;
+
 	RenderTargetViewColor[0] = 0.25f;
 	RenderTargetViewColor[1] = 0.25f;
 	RenderTargetViewColor[2] = 0.25f;
@@ -63,17 +70,77 @@ DXGI_SWAP_CHAIN_DESC URenderSubsystem::MakeSwapChainDesc()
 	return ScInfo;
 }
 
+void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
+{
+	/* 월드 행렬 연산 */
+	DirectX::XMMATRIX ScaleMatrix = DirectX::XMMatrixScalingFromVector(DirectX::XMVECTOR{Transform.Scale.x, Transform.Scale.y , Transform.Scale.z });
+
+	DirectX::XMMATRIX RotationMatrix = DirectX::XMMatrixRotationRollPitchYawFromVector(DirectX::XMVECTOR{ Transform.Rotation.x, Transform.Rotation.y , Transform.Rotation.z });
+
+	DirectX::XMMATRIX TranslationMatrix = DirectX::XMMatrixTranslationFromVector(DirectX::XMVECTOR{ Transform.Position.x, Transform.Position.y , Transform.Position.z });
+
+	DirectX::XMMATRIX WorldMatrix = ScaleMatrix * RotationMatrix * TranslationMatrix;
+
+	/* 뷰 행렬 연산 */
+	DirectX::XMVECTOR CameraPos{ Camera.Transform.Position.x, Camera.Transform.Position.y , Camera.Transform.Position.z , 1.0f };
+
+	DirectX::XMVECTOR CameraRot{ Camera.Transform.Rotation.x, Camera.Transform.Rotation.y , Camera.Transform.Rotation.z };
+
+	DirectX::XMMATRIX RotMatrix = DirectX::XMMatrixRotationRollPitchYaw(
+		DirectX::XMConvertToRadians(Transform.Rotation.x),
+		DirectX::XMConvertToRadians(Transform.Rotation.y),
+		DirectX::XMConvertToRadians(Transform.Rotation.z)
+	);
+
+	DirectX::XMVECTOR DefaultForward = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
+	DirectX::XMVECTOR DefaultUp = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	DirectX::XMVECTOR EyeDir = DirectX::XMVector3TransformNormal(DefaultForward, RotMatrix);
+	DirectX::XMVECTOR UpDir = DirectX::XMVector3TransformNormal(DefaultUp, RotMatrix);
+
+	DirectX::XMMATRIX ViewMatrix = DirectX::XMMatrixLookToLH(CameraPos, EyeDir, UpDir);
+
+	/* 투영 행렬 연산 */
+	DirectX::XMMATRIX ProjectionMatrix = DirectX::XMMatrixOrthographicLH(Camera.Width, Camera.Height, Camera.NearZ, Camera.FarZ);
+
+	/* WVP 산출 */
+
+	FTransformConstants TransformConstants{};
+
+	TransformConstants.WVP = WorldMatrix * ViewMatrix * ProjectionMatrix;
+
+	/* WVP 상수 버퍼 그래픽 메모리 Set */
+
+	D3D11_MAPPED_SUBRESOURCE TransformSubresource{};
+
+	DeviceContext->Map(TransformConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &TransformSubresource);
+
+	if (TransformSubresource.pData == nullptr)
+	{
+		CRITICAL_ERROR(DEFAULT_ERROR_TEXT);
+	}
+
+	memcpy_s(TransformSubresource.pData, sizeof(FTransformConstants), &TransformConstants, sizeof(FTransformConstants));
+
+	DeviceContext->Unmap(TransformConstantBuffer.Get(), 0);
+}
+
 void URenderSubsystem::CreateDeviceAndContext()
 {
 	DXGI_SWAP_CHAIN_DESC SwapChainDesc = MakeSwapChainDesc();
 
 	D3D_FEATURE_LEVEL FeatureLevel{};
 
+	UINT Flag{};
+
+#ifdef _DEBUG
+	Flag = D3D11_CREATE_DEVICE_DEBUG;
+#endif 
+
 	HRESULT HR = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
-		0,
+		Flag,
 		nullptr,
 		0,
 		D3D11_SDK_VERSION,
@@ -103,7 +170,22 @@ void URenderSubsystem::InitSwapChain()
 	}
 }
 
-void URenderSubsystem::SetViewport()
+void URenderSubsystem::CreateTransformConstantBuffer()
+{
+	D3D11_BUFFER_DESC BufferInfo = { 0 };
+	BufferInfo.ByteWidth = sizeof(FTransformConstants);
+	BufferInfo.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	BufferInfo.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
+	BufferInfo.Usage = D3D11_USAGE_DYNAMIC;
+
+	HRESULT hr = Device->CreateBuffer(&BufferInfo, nullptr, TransformConstantBuffer.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(DEFAULT_ERROR_TEXT);
+	}
+}
+
+void URenderSubsystem::CreateViewport()
 {
 	D3D11_VIEWPORT ViewPortInfo;
 	RECT WindowSize = WindowSubsystem->GetWindowSize();
@@ -118,6 +200,45 @@ void URenderSubsystem::SetViewport()
 	DeviceContext->RSSetViewports(1, &ViewPortInfo);
 }
 
+void URenderSubsystem::CreateInputLayout()
+{
+	/* ID3D11InputLayout 생성 */
+	vector<D3D11_INPUT_ELEMENT_DESC> InputLayouts;
+	D3D11_INPUT_ELEMENT_DESC InputDesc1;
+	InputDesc1.SemanticName = "POSITION";
+	InputDesc1.InputSlot = 0;
+	InputDesc1.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	InputDesc1.AlignedByteOffset = 0;
+	InputDesc1.InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
+	InputDesc1.SemanticIndex = 0;
+	InputDesc1.InstanceDataStepRate = 0;
+	InputLayouts.push_back(InputDesc1);
+	D3D11_INPUT_ELEMENT_DESC InputDesc2;
+	InputDesc2.SemanticName = "TEXCOORD";
+	InputDesc2.InputSlot = 0;
+	InputDesc2.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	InputDesc2.AlignedByteOffset = sizeof(FVertex::POSITION);
+	InputDesc2.InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
+	InputDesc2.SemanticIndex = 0;
+	InputDesc2.InstanceDataStepRate = 0;
+	InputLayouts.push_back(InputDesc2);
+	D3D11_INPUT_ELEMENT_DESC InputDesc3;
+	InputDesc3.SemanticName = "COLOR";
+	InputDesc3.InputSlot = 0;
+	InputDesc3.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	InputDesc3.AlignedByteOffset = sizeof(FVertex::POSITION) + sizeof(FVertex::TEXCOORD);
+	InputDesc3.InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
+	InputDesc3.SemanticIndex = 0;
+	InputDesc3.InstanceDataStepRate = 0;
+	InputLayouts.push_back(InputDesc3);
+
+	GEngine->RenderSubsystem->GetDevice()->CreateInputLayout(&InputLayouts[0],
+		(UINT)InputLayouts.size(),
+		D3DVSShaderCodeBlob->GetBufferPointer(),
+		D3DVSShaderCodeBlob->GetBufferSize(),
+		D3DInputLayout.GetAddressOf());
+}
+
 ID3D11Buffer* URenderSubsystem::GetD3DVertexBuffer(string strName)
 {
 	auto FindIter = D3DVertexBuffers.find(strName);
@@ -125,6 +246,19 @@ ID3D11Buffer* URenderSubsystem::GetD3DVertexBuffer(string strName)
 	if (FindIter == D3DVertexBuffers.end())
 	{
 		GEngine->DebugLog("GetD3DVertexBuffer()로 유효한 키를 찾지 못함", 1);
+		return nullptr;
+	}
+
+	return FindIter->second.Get();
+}
+
+ID3D11Buffer* URenderSubsystem::GetD3DIndexBuffer(string strName)
+{
+	auto FindIter = D3DIndexBuffers.find(strName);
+
+	if (FindIter == D3DIndexBuffers.end())
+	{
+		GEngine->DebugLog("GetD3DIndexBuffer()로 유효한 키를 찾지 못함", 1);
 		return nullptr;
 	}
 
@@ -142,7 +276,13 @@ void URenderSubsystem::Render(float fDeltaTime)
 
 	Engine->DebugSubsystem->Render();
 
-	SwapChain->Present(0, 0);
+	HRESULT hr = SwapChain->Present(0, 0);
+
+	if (hr == DXGI_ERROR_DEVICE_REMOVED || hr == DXGI_ERROR_DEVICE_RESET)
+	{
+		CRITICAL_ERROR("해상도 변경이나 디바이스 관련 설정이 런타임 도중 수정되었습니다");
+		return;
+	}
 }
 
 void URenderSubsystem::RenderActors(float fDeltaTime)
@@ -153,19 +293,27 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 	{
 		if (URenderComponent* RenderComponent = LoopActor->GetComponentByClass<URenderComponent>())
 		{
+			/* 정보 불러오기 및 지역 변수 설정 */
 			const char* MeshName = RenderComponent->GetMeshName();
-
 			FMesh& Mesh = GEngine->ResourceSubsystem->GetMesh(MeshName);
-
 			ID3D11Buffer* VertexBuffer = GetD3DVertexBuffer(MeshName);
+			ID3D11Buffer* pVertexBuffer[1];
+			pVertexBuffer[0] = VertexBuffer;
+			UINT nVertexBufferStride = sizeof(FVertex);
+			UINT nVertexBufferOffset = 0;
 
-			ID3D11Buffer* pBuffer[1];
-			pBuffer[0] = VertexBuffer;
-			UINT nStride = sizeof(FVertex);
-			UINT nSize = 0;
-			DeviceContext->IASetVertexBuffers(0, 1, pBuffer, &nStride, &nSize);
-			//DeviceContext->IASetInputLayout();
+			ID3D11Buffer* IndexBuffer = GetD3DIndexBuffer(MeshName);
 
+			DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
+			DeviceContext->IASetInputLayout(D3DInputLayout.Get());
+			DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
+			DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
+			DeviceContext->VSSetShader(D3DVertexShader.Get(), nullptr, 0);
+
+			this->SetTransformConstantBuffer(LoopActor->GetTransform());
+
+			/* 드로우 콜 */
+			DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
 		}
 	}
 }
@@ -188,10 +336,26 @@ void URenderSubsystem::LateInit()
 
 	this->InitSwapChain();
 
-	this->SetViewport();
+	this->CreateD3DVertexShader();
+
+	this->CreateInputLayout();
+
+	this->CreateViewport();
+
+	this->CreateTransformConstantBuffer();
 }
 
-void URenderSubsystem::CompileD3DVSShader()
+void URenderSubsystem::CreateD3DVertexShader()
 {
-	D3DCompileFromFile(StringToWString("Resources\\Shaders\\test.hlsl").data(), nullptr, nullptr, "DefaultVertexShader", "vs_5_0", 0, 0, &D3DVSShaderCodeBlob, &D3DVSErrorCodeBlob);
+	HRESULT hr = D3DCompileFromFile(L"Resources\\Shaders\\test.hlsl", nullptr, nullptr, "DefaultVertexShader", "vs_5_0", 0, 0, D3DVSShaderCodeBlob.GetAddressOf(), D3DVSErrorCodeBlob.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char *>(D3DVSErrorCodeBlob->GetBufferPointer()));
+	}
+
+	hr = Device->CreateVertexShader(D3DVSShaderCodeBlob->GetBufferPointer(), D3DVSShaderCodeBlob->GetBufferSize(), nullptr, D3DVertexShader.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char*>(D3DVSErrorCodeBlob->GetBufferPointer()));
+	}
 }

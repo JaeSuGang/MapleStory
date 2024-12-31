@@ -9,7 +9,9 @@ class UActorComponent;
 class AActor : public UObject
 {
 public:
-	ENGINE_API AActor() = default;
+	ENGINE_API AActor();
+
+	ENGINE_API FTransform& GetTransform();
 
 	template <typename T>
 	T* CreateDefaultSubobject()

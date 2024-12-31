@@ -5,14 +5,17 @@
 #include "Math/Mesh.h"
 #include "Engine/Engine.h"
 
+UResourceSubsystem::UResourceSubsystem()
+{
+	this->SetWorkingDirectory();
+}
+
 void UResourceSubsystem::Tick(float fDeltaTime)
 {
 }
 
 void UResourceSubsystem::LateInit()
 {
-	this->SetWorkingDirectory();
-
 	this->GenerateDefaultMeshes();
 }
 
@@ -92,57 +95,46 @@ void UResourceSubsystem::GeneratePlaneMesh()
 	/* ID3D11Buffer 持失 */
 	ComPtr<ID3D11Buffer> VertexBuffer{};
 
-	D3D11_BUFFER_DESC BufferDesc{};
-	BufferDesc.ByteWidth = (UINT)(sizeof(Plane.Vertices[0]) * Plane.Vertices.size());
-	BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	BufferDesc.CPUAccessFlags = 0;
-	BufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	D3D11_SUBRESOURCE_DATA SubresourceData;
-	SubresourceData.pSysMem = &Plane.Vertices[0];
+	D3D11_BUFFER_DESC VertexBufferDesc{};
+	VertexBufferDesc.ByteWidth = (UINT)(sizeof(Plane.Vertices[0]) * Plane.Vertices.size());
+	VertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	VertexBufferDesc.CPUAccessFlags = 0;
+	VertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	D3D11_SUBRESOURCE_DATA VertexBufferSubresourceData;
+	VertexBufferSubresourceData.pSysMem = &Plane.Vertices[0];
 
-	if (S_OK != GEngine->RenderSubsystem->GetDevice()->CreateBuffer(&BufferDesc, &SubresourceData, VertexBuffer.GetAddressOf()))
+	if (S_OK != GEngine->RenderSubsystem->GetDevice()->CreateBuffer(&VertexBufferDesc, &VertexBufferSubresourceData, VertexBuffer.GetAddressOf()))
 	{
 		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
 	}
 
-	std::pair<string, ComPtr<ID3D11Buffer>> Pair2{};
-	Pair2.first = "Plane";
-	Pair2.second = VertexBuffer;
+	std::pair<string, ComPtr<ID3D11Buffer>> VertexBufferPair{};
+	VertexBufferPair.first = "Plane";
+	VertexBufferPair.second = VertexBuffer;
+	GEngine->RenderSubsystem->D3DVertexBuffers.insert(VertexBufferPair);
 
-	GEngine->RenderSubsystem->D3DVertexBuffers.insert(Pair2);
 
-	/* ID3D11InputLayout 持失 */
-	vector<D3D11_INPUT_ELEMENT_DESC> InputLayouts;
-	D3D11_INPUT_ELEMENT_DESC InputDesc1;
-	InputDesc1.SemanticName = "POSITION";
-	InputDesc1.InputSlot = 0;
-	InputDesc1.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	InputDesc1.AlignedByteOffset = 0;
-	InputDesc1.InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
-	InputDesc1.SemanticIndex = 0;
-	InputDesc1.InstanceDataStepRate = 0;
-	InputLayouts.push_back(InputDesc1);
-	D3D11_INPUT_ELEMENT_DESC InputDesc2;
-	InputDesc2.SemanticName = "TEXCOORD";
-	InputDesc2.InputSlot = 0;
-	InputDesc2.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	InputDesc2.AlignedByteOffset = sizeof(FVertex::POSITION);
-	InputDesc2.InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
-	InputDesc2.SemanticIndex = 0;
-	InputDesc2.InstanceDataStepRate = 0;
-	InputLayouts.push_back(InputDesc2);
-	D3D11_INPUT_ELEMENT_DESC InputDesc3;
-	InputDesc3.SemanticName = "COLOR";
-	InputDesc3.InputSlot = 0;
-	InputDesc3.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	InputDesc3.AlignedByteOffset = sizeof(FVertex::POSITION) + sizeof(FVertex::TEXCOORD);
-	InputDesc3.InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
-	InputDesc3.SemanticIndex = 0;
-	InputDesc3.InstanceDataStepRate = 0;
-	InputLayouts.push_back(InputDesc3);
+	/* IndexBuffer 持失 */
+	ComPtr<ID3D11Buffer> IndexBuffer{};
 
-	GEngine->RenderSubsystem->GetDevice()->CreateInputLayout(&InputLayouts[0], (UINT)InputLayouts.size(), );
+	D3D11_BUFFER_DESC IndexBufferInfo{};
+	IndexBufferInfo.ByteWidth = (UINT)(sizeof(Plane.Indexes[0]) * Plane.Indexes.size());
+	IndexBufferInfo.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	IndexBufferInfo.CPUAccessFlags = 0;
+	IndexBufferInfo.Usage = D3D11_USAGE_DEFAULT;
 
+	D3D11_SUBRESOURCE_DATA IndexBufferSubresourceData{};
+	IndexBufferSubresourceData.pSysMem = &Plane.Indexes[0];
+
+	if (S_OK != GEngine->RenderSubsystem->GetDevice()->CreateBuffer(&IndexBufferInfo, &VertexBufferSubresourceData, IndexBuffer.GetAddressOf()))
+	{
+		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
+	}
+
+	std::pair<string, ComPtr<ID3D11Buffer>> IndexBufferPair{};
+	IndexBufferPair.first = "Plane";
+	IndexBufferPair.second = IndexBuffer;
+	GEngine->RenderSubsystem->D3DIndexBuffers.insert(IndexBufferPair);
 }
 
 unordered_map<string, FMesh>& UResourceSubsystem::GetMeshes()

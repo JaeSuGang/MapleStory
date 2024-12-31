@@ -7,6 +7,8 @@ class UResourceSubsystem : public UEngineSubsystem
 {
 public:
 	/* 생성자와 오버라이드 */
+	UResourceSubsystem();
+
 	void Tick(float fDeltaTime) override;
 
 	void LateInit() override;

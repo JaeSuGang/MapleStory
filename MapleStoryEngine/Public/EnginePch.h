@@ -23,5 +23,6 @@ using std::weak_ptr;
 #include <wrl.h>
 #include <d3d11_4.h>
 #include <d3dcompiler.h>
+#include <DirectXMath.h>
 
 using Microsoft::WRL::ComPtr;
