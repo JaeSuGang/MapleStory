@@ -16,16 +16,21 @@ struct FCamera
 {
 public:
 	FTransform Transform;
+	float FOV;
 	float Width;
 	float Height;
 	float NearZ;
 	float FarZ;
+	bool IsPerspectiveProjection;
+	bool IsWireFrame;
 };
 
 /* UWindowSubsystem, UDebugSubsystem, UResourceSubsystem에 의존 */
 /* UWorld, ULevel, AActor에 의존 */
 class URenderSubsystem : public UEngineSubsystem
 {
+	friend class UResourceSubsystem;
+
 public:
 	/* Constructors and Overrides */
 	URenderSubsystem();
@@ -35,6 +40,8 @@ public:
 	void LateInit() override;
 
 public:
+	ENGINE_API FCamera& GetCamera();
+
 	ID3D11Buffer* GetD3DVertexBuffer(string strName);
 
 	ID3D11Buffer* GetD3DIndexBuffer(string strName);
@@ -70,11 +77,12 @@ private:
 
 
 private:
+	/* 카메라 설정 */
+	FCamera Camera;
+
 	/* 개별 렌더링 파이프라인 설정 */
 	void SetTransformConstantBuffer(FTransform Transform);
 
-
-public:
 	/* 메쉬 데이터 */
 	unordered_map<string, ComPtr<ID3D11Buffer>> VertexBuffers;
 	unordered_map<string, ComPtr<ID3D11Buffer>> IndexBuffers;
@@ -83,12 +91,11 @@ public:
 
 	/* 렌더링 파이프라인 개별 설정 변수 */
 	ComPtr<ID3D11Buffer> TransformConstantBuffer;
-	FCamera Camera;
 
-public:
 	/* 렌더링 파이프라인 초기화 변수 */
 	D3D11_VIEWPORT ViewPortInfo;
-	ComPtr<ID3D11RasterizerState> RasterizerState;
+	ComPtr<ID3D11RasterizerState> RasterizerDefaultState;
+	ComPtr<ID3D11RasterizerState> RasterizerWireframeState;
 	ComPtr<ID3D11VertexShader> VertexShader;
 	ComPtr<ID3D11PixelShader> PixelShader;
 	ComPtr<ID3DBlob> VSCodeBlob;

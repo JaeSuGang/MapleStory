@@ -24,6 +24,8 @@ private:
 
 	void GeneratePlaneMesh();
 
+	void GenerateCubeMesh();
+
 public:
 	unordered_map<string, FMesh>& GetMeshes();
 

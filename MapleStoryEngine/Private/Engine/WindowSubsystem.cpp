@@ -14,14 +14,14 @@ UWindowSubsystem::UWindowSubsystem()
         CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
     }
 
-	RECT WindowSize = { 0, 0, 1280, 960 };
+    DWORD dwStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_THICKFRAME;
+	RECT WindowSize = { 0, 0, (int)DEFAULT_WINDOW_SIZE_X, (int)DEFAULT_WINDOW_SIZE_Y};
+    AdjustWindowRect(&WindowSize, dwStyle, FALSE);
 
-    AdjustWindowRect(&WindowSize, WS_OVERLAPPEDWINDOW, FALSE);
+    int nWidth = WindowSize.right - WindowSize.left;
+    int nHeight = WindowSize.bottom - WindowSize.top;
 
-    int nWidth = WindowSize.right;
-    int nHeight = WindowSize.bottom;
-
-	hGameWindow = CreateWindowA(lpszTitle.data(), lpszTitle.data(), WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX, 0, 0, nWidth, nHeight, nullptr, nullptr, nullptr, nullptr);
+	hGameWindow = CreateWindowA(lpszTitle.data(), lpszTitle.data(), dwStyle, 0, 0, nWidth, nHeight, nullptr, nullptr, nullptr, nullptr);
 
     if (!hGameWindow)
     {

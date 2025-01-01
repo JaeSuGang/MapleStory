@@ -5,6 +5,8 @@
 #include "Actor/Actor.h"
 #include "World/World.h"
 #include "Actors/BP_TestActor.h"
+#include "Engine/RenderSubsystem.h"
+#include "ActorComponent/RenderComponent.h"
 
 void UMapleStoryDebugSubsystem::CustomCode()
 {
@@ -15,15 +17,26 @@ void UMapleStoryDebugSubsystem::CustomCode()
 
 	ImGui::Begin("DebugSystem");
 	ImGui::Text("Screen Size x: %f, y: %f", io.DisplaySize.x, io.DisplaySize.y);
-	if (ImGui::Button("Spawn Test Actor"))
+
+	ImGui::SeparatorText("Camera");
+	ImGui::Checkbox("Perspective View", &GEngine->RenderSubsystem->GetCamera().IsPerspectiveProjection);
+	ImGui::Checkbox("Wireframe", &GEngine->RenderSubsystem->GetCamera().IsWireFrame);
+	ImGui::DragFloat("FOV", &GEngine->RenderSubsystem->GetCamera().FOV, 1);
+
+	ImGui::SeparatorText("Actor");
+	if (ImGui::Button("Spawn Plane"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
-
-		Actor->GetTransform().Scale = {0.3f, 0.3f, 0.3f};
-		Actor->GetTransform().Position = {10000.0f, 10000.0f, 10000.0f};
+		Actor->GetTransform().Scale = { 10.0f, 10.0f, 10.0f };
+		Actor->GetTransform().Position = {0.0f, 0.0f, 50.0f};
 	}
-
-	ImGui::SeparatorText("Actors In World");
+	if (ImGui::Button("Spawn Cube"))
+	{
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
+		Actor->GetComponentByClass<URenderComponent>()->SetMeshName("Cube");
+		Actor->GetTransform().Scale = { 10.0f, 10.0f, 10.0f };
+		Actor->GetTransform().Position = { 0.0f, 0.0f, 50.0f };
+	}
 	for (shared_ptr<AActor>& Actor : Actors)
 	{
 		ImGui::Text("<%s> : %p", typeid(*Actor.get()).name(), Actor.get());

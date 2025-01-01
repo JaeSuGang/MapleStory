@@ -15,10 +15,11 @@ URenderSubsystem::URenderSubsystem()
 	:
 	Camera{}
 {
-	Camera.Width = 1920.0f;
-	Camera.Height = 1080.0f;
+	Camera.FOV = 80.0f;
+	Camera.Width = DEFAULT_WINDOW_SIZE_X;
+	Camera.Height = DEFAULT_WINDOW_SIZE_Y;
 	Camera.NearZ = 1.0f;
-	Camera.FarZ = 5000.0f;
+	Camera.FarZ = 10000.0f;
 
 	RenderTargetViewColor[0] = 0.25f;
 	RenderTargetViewColor[1] = 0.25f;
@@ -75,7 +76,7 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 	/* 월드 행렬 연산 */
 	DirectX::XMMATRIX ScaleMatrix = DirectX::XMMatrixScalingFromVector(DirectX::XMVECTOR{Transform.Scale.x, Transform.Scale.y , Transform.Scale.z });
 
-	DirectX::XMMATRIX RotationMatrix = DirectX::XMMatrixRotationRollPitchYawFromVector(DirectX::XMVECTOR{ Transform.Rotation.x, Transform.Rotation.y , Transform.Rotation.z });
+	DirectX::XMMATRIX RotationMatrix = DirectX::XMMatrixRotationRollPitchYawFromVector(DirectX::XMVECTOR{ DirectX::XMConvertToRadians(Transform.Rotation.x), DirectX::XMConvertToRadians(Transform.Rotation.y) , DirectX::XMConvertToRadians(Transform.Rotation.z) });
 
 	DirectX::XMMATRIX TranslationMatrix = DirectX::XMMatrixTranslationFromVector(DirectX::XMVECTOR{ Transform.Position.x, Transform.Position.y , Transform.Position.z});
 
@@ -100,8 +101,11 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 	DirectX::XMMATRIX ViewMatrix = DirectX::XMMatrixLookToLH(CameraPos, EyeDir, UpDir);
 
 	/* 투영 행렬 연산 */
-	DirectX::XMMATRIX ProjectionMatrix = DirectX::XMMatrixOrthographicLH(Camera.Width, Camera.Height, Camera.NearZ, Camera.FarZ);
-	//DirectX::XMMATRIX ProjectionMatrix = DirectX::XMMatrixPerspectiveFovLH(60.0f, 16.0f/9.0f, Camera.NearZ, Camera.FarZ);
+	DirectX::XMMATRIX ProjectionMatrix{};
+	if (Camera.IsPerspectiveProjection)
+		ProjectionMatrix = DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(Camera.FOV), DEFAULT_WINDOW_SIZE_X / DEFAULT_WINDOW_SIZE_Y, Camera.NearZ, Camera.FarZ);
+	else
+		ProjectionMatrix = DirectX::XMMatrixOrthographicLH(Camera.Width, Camera.Height, Camera.NearZ, Camera.FarZ);
 
 	/* WVP 산출 */
 
@@ -244,6 +248,11 @@ void URenderSubsystem::CreateInputLayout()
 		InputLayout.GetAddressOf());
 }
 
+ENGINE_API FCamera& URenderSubsystem::GetCamera()
+{
+	return Camera;
+}
+
 ID3D11Buffer* URenderSubsystem::GetD3DVertexBuffer(string strName)
 {
 	auto FindIter = VertexBuffers.find(strName);
@@ -279,7 +288,7 @@ void URenderSubsystem::Render(float fDeltaTime)
 	DeviceContext->IASetInputLayout(InputLayout.Get());
 	DeviceContext->VSSetShader(VertexShader.Get(), nullptr, 0);
 	DeviceContext->RSSetViewports(1, &ViewPortInfo);
-	DeviceContext->RSSetState(RasterizerState.Get());
+	DeviceContext->RSSetState(Camera.IsWireFrame ? RasterizerWireframeState.Get() : RasterizerDefaultState.Get());
 	DeviceContext->PSSetShader(PixelShader.Get(), nullptr, 0);
 	DeviceContext->OMSetRenderTargets(1, RTV.GetAddressOf(), nullptr);
 
@@ -386,15 +395,18 @@ void URenderSubsystem::CreateVertexShader()
 
 void URenderSubsystem::CreateRasterizer()
 {
-	D3D11_RASTERIZER_DESC RasterizerDesc = {};
-	RasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
-	RasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
+	D3D11_RASTERIZER_DESC DefaultRasterizerDesc = {};
+	DefaultRasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	DefaultRasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
+	Device->CreateRasterizerState(&DefaultRasterizerDesc, RasterizerDefaultState.GetAddressOf());
 
-	Device->CreateRasterizerState(&RasterizerDesc, RasterizerState.GetAddressOf());
+	D3D11_RASTERIZER_DESC WireframeRasterizerDesc = {};
+	WireframeRasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	WireframeRasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
+	Device->CreateRasterizerState(&WireframeRasterizerDesc, RasterizerWireframeState.GetAddressOf());
+
 
 	/* 뷰포트 설정 */
-	//ViewPortInfo.Width = 300.0f;
-	//ViewPortInfo.Height = 200.0f;
 	ViewPortInfo.Width = (float)WindowSubsystem->GetWindowSize().right;
 	ViewPortInfo.Height = (float)WindowSubsystem->GetWindowSize().bottom;
 	ViewPortInfo.TopLeftX = 0.0f;

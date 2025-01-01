@@ -45,29 +45,31 @@ void UResourceSubsystem::SetWorkingDirectory()
 		// this->ResourcePath = std::filesystem::current_path() / RESOURCES_FOLDER_NAME;
 		return;
 	}
-
+	 
 	CRITICAL_ERROR(RESOURCE_FOLDER_FIND_FAILED_TEXT);
 }
 
 void UResourceSubsystem::GenerateDefaultMeshes()
 {
 	this->GeneratePlaneMesh();
+
+	this->GenerateCubeMesh();
 }
 
 void UResourceSubsystem::GeneratePlaneMesh()
 {
 	/* FMesh 积己 */
 	FVertex v1{};
-	v1.POSITION = { -0.5f, 0.5f, 0.0f, 1.0f };
+	v1.POSITION = { -1.0f, 1.0f, 0.0f, 1.0f };
 	v1.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v2{};
-	v2.POSITION = { 0.5f, 0.5f, 0.0f, 1.0f };
+	v2.POSITION = { 1.0f, 1.0f, 0.0f, 1.0f };
 	v2.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v3{};
-	v3.POSITION = { -0.5f, -0.5f, 0.0f, 1.0f };
+	v3.POSITION = { -1.0f, -1.0f, 0.0f, 1.0f };
 	v3.TEXCOORD = { 0.0f, 1.0f };
 	FVertex v4{};
-	v4.POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
+	v4.POSITION = { 1.0f, -1.0f, 0.0f, 1.0f };
 	v4.TEXCOORD = { 1.0f, 1.0f };
 
 	FMesh Plane;
@@ -133,6 +135,145 @@ void UResourceSubsystem::GeneratePlaneMesh()
 
 	std::pair<string, ComPtr<ID3D11Buffer>> IndexBufferPair{};
 	IndexBufferPair.first = "Plane";
+	IndexBufferPair.second = IndexBuffer;
+	GEngine->RenderSubsystem->IndexBuffers.insert(IndexBufferPair);
+}
+
+void UResourceSubsystem::GenerateCubeMesh()
+{
+	/* FMesh 积己 */
+	FVertex v1{};
+	v1.POSITION = { -1.0f, 1.0f, -1.0f, 1.0f };
+	v1.TEXCOORD = { 0.0f, 0.0f };
+	FVertex v2{};
+	v2.POSITION = { 1.0f, 1.0f, -1.0f, 1.0f };
+	v2.TEXCOORD = { 1.0f, 0.0f };
+	FVertex v3{};
+	v3.POSITION = { -1.0f, -1.0f, -1.0f, 1.0f };
+	v3.TEXCOORD = { 0.0f, 1.0f };
+	FVertex v4{};
+	v4.POSITION = { 1.0f, -1.0f, -1.0f, 1.0f };
+	v4.TEXCOORD = { 1.0f, 1.0f };
+	FVertex v5{};
+	v5.POSITION = { -1.0f, 1.0f, 1.0f, 1.0f };
+	v5.TEXCOORD = { 1.0f, 1.0f };
+	FVertex v6{};
+	v6.POSITION = { 1.0f, 1.0f, 1.0f, 1.0f };
+	v6.TEXCOORD = { 0.0f, 1.0f };
+	FVertex v7{};
+	v7.POSITION = { -1.0f, -1.0f, 1.0f, 1.0f };
+	v7.TEXCOORD = { 1.0f, 0.0f };
+	FVertex v8{};
+	v8.POSITION = { 1.0f, -1.0f, 1.0f, 1.0f };
+	v8.TEXCOORD = { 0.0f, 0.0f };
+
+	FMesh Cube;
+	Cube.Vertices.push_back(v1);
+	Cube.Vertices.push_back(v2);
+	Cube.Vertices.push_back(v3);
+	Cube.Vertices.push_back(v4);	
+	Cube.Vertices.push_back(v5);
+	Cube.Vertices.push_back(v6);
+	Cube.Vertices.push_back(v7);
+	Cube.Vertices.push_back(v8);
+
+	// 菊
+	Cube.Indexes.push_back(0);
+	Cube.Indexes.push_back(1);
+	Cube.Indexes.push_back(2);
+	Cube.Indexes.push_back(1);
+	Cube.Indexes.push_back(3);
+	Cube.Indexes.push_back(2);
+
+	// 哭
+	Cube.Indexes.push_back(5);
+	Cube.Indexes.push_back(0);
+	Cube.Indexes.push_back(7);
+	Cube.Indexes.push_back(0);
+	Cube.Indexes.push_back(2);
+	Cube.Indexes.push_back(7);
+
+	// 坷
+	Cube.Indexes.push_back(1);
+	Cube.Indexes.push_back(5);
+	Cube.Indexes.push_back(3);
+	Cube.Indexes.push_back(5);
+	Cube.Indexes.push_back(7);
+	Cube.Indexes.push_back(3);
+
+	// 困
+	Cube.Indexes.push_back(4);
+	Cube.Indexes.push_back(5);
+	Cube.Indexes.push_back(0);
+	Cube.Indexes.push_back(5);
+	Cube.Indexes.push_back(1);
+	Cube.Indexes.push_back(0);
+
+	// 酒贰
+	Cube.Indexes.push_back(2);
+	Cube.Indexes.push_back(3);
+	Cube.Indexes.push_back(6);
+	Cube.Indexes.push_back(3);
+	Cube.Indexes.push_back(7);
+	Cube.Indexes.push_back(6);
+
+	// 第
+	Cube.Indexes.push_back(5);
+	Cube.Indexes.push_back(4);
+	Cube.Indexes.push_back(7);
+	Cube.Indexes.push_back(4);
+	Cube.Indexes.push_back(6);
+	Cube.Indexes.push_back(7);
+
+	Cube.PrimitiveTopology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+
+	std::pair<string, FMesh> Pair{};
+	Pair.first = "Cube";
+	Pair.second = Cube;
+
+	Meshes.insert(Pair);
+
+	/* ID3D11Buffer 积己 */
+	ComPtr<ID3D11Buffer> VertexBuffer{};
+
+	D3D11_BUFFER_DESC VertexBufferDesc{};
+	VertexBufferDesc.ByteWidth = (UINT)(sizeof(Cube.Vertices[0]) * Cube.Vertices.size());
+	VertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	VertexBufferDesc.CPUAccessFlags = 0;
+	VertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	D3D11_SUBRESOURCE_DATA VertexBufferSubresourceData;
+	VertexBufferSubresourceData.pSysMem = &Cube.Vertices[0];
+
+	if (S_OK != GEngine->RenderSubsystem->GetDevice()->CreateBuffer(&VertexBufferDesc, &VertexBufferSubresourceData, VertexBuffer.GetAddressOf()))
+	{
+		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
+	}
+
+	std::pair<string, ComPtr<ID3D11Buffer>> VertexBufferPair{};
+	VertexBufferPair.first = "Cube";
+	VertexBufferPair.second = VertexBuffer;
+	GEngine->RenderSubsystem->VertexBuffers.insert(VertexBufferPair);
+
+
+	/* IndexBuffer 积己 */
+	ComPtr<ID3D11Buffer> IndexBuffer{};
+
+	D3D11_BUFFER_DESC IndexBufferInfo{};
+	IndexBufferInfo.ByteWidth = (UINT)(sizeof(Cube.Indexes[0]) * Cube.Indexes.size());
+	IndexBufferInfo.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	IndexBufferInfo.CPUAccessFlags = 0;
+	IndexBufferInfo.Usage = D3D11_USAGE_DEFAULT;
+
+	D3D11_SUBRESOURCE_DATA IndexBufferSubresourceData{};
+	IndexBufferSubresourceData.pSysMem = &Cube.Indexes[0];
+
+	if (S_OK != GEngine->RenderSubsystem->GetDevice()->CreateBuffer(&IndexBufferInfo, &IndexBufferSubresourceData, IndexBuffer.GetAddressOf()))
+	{
+		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
+	}
+
+	std::pair<string, ComPtr<ID3D11Buffer>> IndexBufferPair{};
+	IndexBufferPair.first = "Cube";
 	IndexBufferPair.second = IndexBuffer;
 	GEngine->RenderSubsystem->IndexBuffers.insert(IndexBufferPair);
 }
