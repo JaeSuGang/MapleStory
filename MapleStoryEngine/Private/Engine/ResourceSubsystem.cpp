@@ -1,5 +1,4 @@
 #include "EnginePch.h"
-#include "DirectX/DirectXTex.h"
 #include "Utils/Utils.h"
 #include "Engine/ResourceSubsystem.h"
 #include "Engine/RenderSubsystem.h"
@@ -50,10 +49,16 @@ void UResourceSubsystem::SetWorkingDirectory()
 	CRITICAL_ERROR(RESOURCE_FOLDER_FIND_FAILED_TEXT);
 }
 
+void UResourceSubsystem::LoadFolder()
+{
+	filesystem을 이용한 하위 디렉터리 반복자 구현하기
+}
+
 void UResourceSubsystem::LoadTextureFile(string strPath)
 {
 	std::wstring wstrPath = Utils::StringToWString(strPath);
 
+	ComPtr<ID3D11ShaderResourceView> NewSRV;
 	DirectX::ScratchImage NewScratchImage;
 	DirectX::TexMetadata NewTexMetadata;
 
@@ -61,6 +66,14 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 	{
 		GEngine->DebugLog("Texture Load Failed" + strPath, 1);
 	}
+
+	if (S_OK != DirectX::CreateShaderResourceView(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), NewSRV.GetAddressOf()))
+	{
+		GEngine->DebugLog("Shader Resource Creation Failed" + strPath, 1);
+	}
+
+	std::pair<string, ComPtr<ID3D11ShaderResourceView>> NewPair{strPath, NewSRV};
+	GEngine->RenderSubsystem->ShaderResourceViews.insert(NewPair);
 }
 
 void UResourceSubsystem::GenerateDefaultMeshes()

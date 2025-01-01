@@ -86,6 +86,7 @@ private:
 	/* 메쉬 데이터 */
 	unordered_map<string, ComPtr<ID3D11Buffer>> VertexBuffers;
 	unordered_map<string, ComPtr<ID3D11Buffer>> IndexBuffers;
+
 	unordered_map<string, ComPtr<ID3D11Texture2D>> Textures;
 	unordered_map<string, ComPtr<ID3D11ShaderResourceView>> ShaderResourceViews;
 
