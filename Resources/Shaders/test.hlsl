@@ -31,7 +31,7 @@ VertexShaderOutPut DefaultVertexShader(Vertex _Vertex)
     VertexShaderOutPut OutPut;
 	
     OutPut.SVPOSITION = mul(_Vertex.POSITION, WVP);
-	
+    OutPut.UV = _Vertex.UV;
     OutPut.COLOR = _Vertex.COLOR;
     return OutPut;
 };
@@ -39,7 +39,7 @@ VertexShaderOutPut DefaultVertexShader(Vertex _Vertex)
 float4 DefaultPixelShader(VertexShaderOutPut _Vertex) : SV_Target0
 {
     // float4 Color = ImageTexture.Sample(ImageSampler, _Vertex.UV.xy);
-    float4 Color = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float4 Color = { 0.05f, 0.8f, 0.05f, 0.3f };
     
     return Color;
 };

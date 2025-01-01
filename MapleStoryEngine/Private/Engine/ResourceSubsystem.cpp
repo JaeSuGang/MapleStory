@@ -58,16 +58,16 @@ void UResourceSubsystem::GeneratePlaneMesh()
 {
 	/* FMesh »ý¼º */
 	FVertex v1{};
-	v1.POSITION = { -1.0f, 1.0f, 0.0f };
+	v1.POSITION = { -0.5f, 0.5f, 0.0f, 1.0f };
 	v1.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v2{};
-	v2.POSITION = { 1.0f, 1.0f, 0.0f };
+	v2.POSITION = { 0.5f, 0.5f, 0.0f, 1.0f };
 	v2.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v3{};
-	v3.POSITION = { -1.0f, -1.0f, 0.0f };
+	v3.POSITION = { -0.5f, -0.5f, 0.0f, 1.0f };
 	v3.TEXCOORD = { 0.0f, 1.0f };
 	FVertex v4{};
-	v4.POSITION = { 1.0f, -1.0f, 0.0f };
+	v4.POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
 	v4.TEXCOORD = { 1.0f, 1.0f };
 
 	FMesh Plane;
@@ -77,8 +77,8 @@ void UResourceSubsystem::GeneratePlaneMesh()
 	Plane.Vertices.push_back(v4);
 
 	Plane.Indexes.push_back(0);
-	Plane.Indexes.push_back(2);
 	Plane.Indexes.push_back(1);
+	Plane.Indexes.push_back(2);
 
 	Plane.Indexes.push_back(1);
 	Plane.Indexes.push_back(3);
@@ -126,7 +126,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 	D3D11_SUBRESOURCE_DATA IndexBufferSubresourceData{};
 	IndexBufferSubresourceData.pSysMem = &Plane.Indexes[0];
 
-	if (S_OK != GEngine->RenderSubsystem->GetDevice()->CreateBuffer(&IndexBufferInfo, &VertexBufferSubresourceData, IndexBuffer.GetAddressOf()))
+	if (S_OK != GEngine->RenderSubsystem->GetDevice()->CreateBuffer(&IndexBufferInfo, &IndexBufferSubresourceData, IndexBuffer.GetAddressOf()))
 	{
 		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
 	}

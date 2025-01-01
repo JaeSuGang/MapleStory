@@ -17,7 +17,7 @@ URenderSubsystem::URenderSubsystem()
 {
 	Camera.Width = 1920.0f;
 	Camera.Height = 1080.0f;
-	Camera.NearZ = 0.1f;
+	Camera.NearZ = 1.0f;
 	Camera.FarZ = 5000.0f;
 
 	RenderTargetViewColor[0] = 0.25f;
@@ -77,7 +77,7 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 
 	DirectX::XMMATRIX RotationMatrix = DirectX::XMMatrixRotationRollPitchYawFromVector(DirectX::XMVECTOR{ Transform.Rotation.x, Transform.Rotation.y , Transform.Rotation.z });
 
-	DirectX::XMMATRIX TranslationMatrix = DirectX::XMMatrixTranslationFromVector(DirectX::XMVECTOR{ Transform.Position.x, Transform.Position.y , Transform.Position.z });
+	DirectX::XMMATRIX TranslationMatrix = DirectX::XMMatrixTranslationFromVector(DirectX::XMVECTOR{ Transform.Position.x, Transform.Position.y , Transform.Position.z});
 
 	DirectX::XMMATRIX WorldMatrix = ScaleMatrix * RotationMatrix * TranslationMatrix;
 
@@ -87,9 +87,9 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 	DirectX::XMVECTOR CameraRot{ Camera.Transform.Rotation.x, Camera.Transform.Rotation.y , Camera.Transform.Rotation.z };
 
 	DirectX::XMMATRIX RotMatrix = DirectX::XMMatrixRotationRollPitchYaw(
-		DirectX::XMConvertToRadians(Transform.Rotation.x),
-		DirectX::XMConvertToRadians(Transform.Rotation.y),
-		DirectX::XMConvertToRadians(Transform.Rotation.z)
+		DirectX::XMConvertToRadians(Camera.Transform.Rotation.x),
+		DirectX::XMConvertToRadians(Camera.Transform.Rotation.y),
+		DirectX::XMConvertToRadians(Camera.Transform.Rotation.z)
 	);
 
 	DirectX::XMVECTOR DefaultForward = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
@@ -101,6 +101,7 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 
 	/* 투영 행렬 연산 */
 	DirectX::XMMATRIX ProjectionMatrix = DirectX::XMMatrixOrthographicLH(Camera.Width, Camera.Height, Camera.NearZ, Camera.FarZ);
+	//DirectX::XMMATRIX ProjectionMatrix = DirectX::XMMatrixPerspectiveFovLH(60.0f, 16.0f/9.0f, Camera.NearZ, Camera.FarZ);
 
 	/* WVP 산출 */
 
@@ -122,6 +123,10 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 	memcpy_s(TransformSubresource.pData, sizeof(FTransformConstants), &TransformConstants, sizeof(FTransformConstants));
 
 	DeviceContext->Unmap(TransformConstantBuffer.Get(), 0);
+	
+	ID3D11Buffer* pTransformConstantBuffer[1] = { TransformConstantBuffer.Get() };
+
+	DeviceContext->VSSetConstantBuffers(0, 1, pTransformConstantBuffer);
 }
 
 void URenderSubsystem::CreateDeviceAndContext()
@@ -267,6 +272,8 @@ ID3D11Buffer* URenderSubsystem::GetD3DIndexBuffer(string strName)
 
 void URenderSubsystem::Render(float fDeltaTime)
 {
+	// Camera.Transform.Position.y += 100.0f;
+
 	/* 오류날시 omsetrendertargets의 RTV.GetAddressOf()를 지역변수로 치환해서 넘기는것으로 변경 */
 	DeviceContext->ClearRenderTargetView(RTV.Get(), RenderTargetViewColor);
 	DeviceContext->IASetInputLayout(InputLayout.Get());
@@ -308,14 +315,12 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 
 			ID3D11Buffer* IndexBuffer = GetD3DIndexBuffer(MeshName);
 
-			/* WVP 변환 */
-			this->SetTransformConstantBuffer(LoopActor->GetTransform());
-
 			/* 메쉬별 렌더링 파이프라인 설정 */
 			DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 			DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 			DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
-			DeviceContext->VSSetConstantBuffers(0, 1, TransformConstantBuffer.GetAddressOf());
+			this->SetTransformConstantBuffer(LoopActor->GetTransform());
+			
 			// DeviceContext->PSSetShaderResources();
 			// DeviceContext->PSSetSamplers();
 
@@ -360,7 +365,13 @@ void URenderSubsystem::LateInit()
 
 void URenderSubsystem::CreateVertexShader()
 {
-	HRESULT hr = D3DCompileFromFile(L"Resources\\Shaders\\test.hlsl", nullptr, nullptr, "DefaultVertexShader", "vs_5_0", 0, 0, VSCodeBlob.GetAddressOf(), VSErrorCodeBlob.GetAddressOf());
+	int Flag0{};
+#ifdef _DEBUG
+	Flag0 = D3D10_SHADER_DEBUG;
+#endif
+	Flag0 |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
+
+	HRESULT hr = D3DCompileFromFile(L"Resources\\Shaders\\test.hlsl", nullptr, nullptr, "DefaultVertexShader", "vs_5_0", Flag0, 0, VSCodeBlob.GetAddressOf(), VSErrorCodeBlob.GetAddressOf());
 	if (hr != S_OK)
 	{
 		CRITICAL_ERROR(static_cast<const char *>(VSErrorCodeBlob->GetBufferPointer()));
@@ -376,12 +387,14 @@ void URenderSubsystem::CreateVertexShader()
 void URenderSubsystem::CreateRasterizer()
 {
 	D3D11_RASTERIZER_DESC RasterizerDesc = {};
-	RasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	RasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 	RasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 
 	Device->CreateRasterizerState(&RasterizerDesc, RasterizerState.GetAddressOf());
 
 	/* 뷰포트 설정 */
+	//ViewPortInfo.Width = 300.0f;
+	//ViewPortInfo.Height = 200.0f;
 	ViewPortInfo.Width = (float)WindowSubsystem->GetWindowSize().right;
 	ViewPortInfo.Height = (float)WindowSubsystem->GetWindowSize().bottom;
 	ViewPortInfo.TopLeftX = 0.0f;
