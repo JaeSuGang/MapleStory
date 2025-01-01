@@ -1,5 +1,6 @@
 #include "EnginePch.h"
-#include "Utils/Encoding.h"
+#include "DirectX/DirectXTex.h"
+#include "Utils/Utils.h"
 #include "Engine/ResourceSubsystem.h"
 #include "Engine/RenderSubsystem.h"
 #include "Math/Mesh.h"
@@ -49,6 +50,19 @@ void UResourceSubsystem::SetWorkingDirectory()
 	CRITICAL_ERROR(RESOURCE_FOLDER_FIND_FAILED_TEXT);
 }
 
+void UResourceSubsystem::LoadTextureFile(string strPath)
+{
+	std::wstring wstrPath = Utils::StringToWString(strPath);
+
+	DirectX::ScratchImage NewScratchImage;
+	DirectX::TexMetadata NewTexMetadata;
+
+	if (S_OK != DirectX::LoadFromWICFile(wstrPath.c_str(), DirectX::WIC_FLAGS_NONE, &NewTexMetadata, NewScratchImage))
+	{
+		GEngine->DebugLog("Texture Load Failed" + strPath, 1);
+	}
+}
+
 void UResourceSubsystem::GenerateDefaultMeshes()
 {
 	this->GeneratePlaneMesh();
@@ -60,16 +74,16 @@ void UResourceSubsystem::GeneratePlaneMesh()
 {
 	/* FMesh 持失 */
 	FVertex v1{};
-	v1.POSITION = { -1.0f, 1.0f, 0.0f, 1.0f };
+	v1.POSITION = { -10.0f, 10.0f, 0.0f, 1.0f };
 	v1.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v2{};
-	v2.POSITION = { 1.0f, 1.0f, 0.0f, 1.0f };
+	v2.POSITION = { 10.0f, 10.0f, 0.0f, 1.0f };
 	v2.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v3{};
-	v3.POSITION = { -1.0f, -1.0f, 0.0f, 1.0f };
+	v3.POSITION = { -10.0f, -10.0f, 0.0f, 1.0f };
 	v3.TEXCOORD = { 0.0f, 1.0f };
 	FVertex v4{};
-	v4.POSITION = { 1.0f, -1.0f, 0.0f, 1.0f };
+	v4.POSITION = { 10.0f, -10.0f, 0.0f, 1.0f };
 	v4.TEXCOORD = { 1.0f, 1.0f };
 
 	FMesh Plane;
@@ -143,28 +157,28 @@ void UResourceSubsystem::GenerateCubeMesh()
 {
 	/* FMesh 持失 */
 	FVertex v1{};
-	v1.POSITION = { -1.0f, 1.0f, -1.0f, 1.0f };
+	v1.POSITION = { -10.0f, 10.0f, -10.0f, 1.0f };
 	v1.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v2{};
-	v2.POSITION = { 1.0f, 1.0f, -1.0f, 1.0f };
+	v2.POSITION = { 10.0f, 10.0f, -10.0f, 1.0f };
 	v2.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v3{};
-	v3.POSITION = { -1.0f, -1.0f, -1.0f, 1.0f };
+	v3.POSITION = { -10.0f, -10.0f, -10.0f, 1.0f };
 	v3.TEXCOORD = { 0.0f, 1.0f };
 	FVertex v4{};
-	v4.POSITION = { 1.0f, -1.0f, -1.0f, 1.0f };
+	v4.POSITION = { 10.0f, -10.0f, -10.0f, 1.0f };
 	v4.TEXCOORD = { 1.0f, 1.0f };
 	FVertex v5{};
-	v5.POSITION = { -1.0f, 1.0f, 1.0f, 1.0f };
+	v5.POSITION = { -10.0f, 10.0f, 10.0f, 1.0f };
 	v5.TEXCOORD = { 1.0f, 1.0f };
 	FVertex v6{};
-	v6.POSITION = { 1.0f, 1.0f, 1.0f, 1.0f };
+	v6.POSITION = { 10.0f, 10.0f, 10.0f, 1.0f };
 	v6.TEXCOORD = { 0.0f, 1.0f };
 	FVertex v7{};
-	v7.POSITION = { -1.0f, -1.0f, 1.0f, 1.0f };
+	v7.POSITION = { -10.0f, -10.0f, 10.0f, 1.0f };
 	v7.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v8{};
-	v8.POSITION = { 1.0f, -1.0f, 1.0f, 1.0f };
+	v8.POSITION = { 10.0f, -10.0f, 10.0f, 1.0f };
 	v8.TEXCOORD = { 0.0f, 0.0f };
 
 	FMesh Cube;

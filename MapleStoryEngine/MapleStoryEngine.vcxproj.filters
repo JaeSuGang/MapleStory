@@ -66,7 +66,7 @@
     <ClInclude Include="Public\Engine\DebugSubsystem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Public\Utils.h">
+    <ClInclude Include="Public\Utils\Utils.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actions\GameplayAction.h">
@@ -135,7 +135,7 @@
     <ClInclude Include="Public\Math\Mesh.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Public\Utils\Encoding.h">
+    <ClInclude Include="Public\DirectX\DirectXTex.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

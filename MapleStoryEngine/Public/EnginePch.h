@@ -25,4 +25,7 @@ using std::weak_ptr;
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
 
+// 추가 외부 라이브러리
+#include <DirectXTex.h>
+
 using Microsoft::WRL::ComPtr;

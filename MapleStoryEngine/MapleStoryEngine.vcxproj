@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\DirectX\DirectXTex.h" />
     <ClInclude Include="Public\GameInstance\GameplaySubsystem.h" />
     <ClInclude Include="Public\IMGUI\imconfig.h" />
     <ClInclude Include="Public\IMGUI\imgui.h" />
@@ -156,7 +157,6 @@
     <ClInclude Include="Public\IMGUI\imstb_truetype.h" />
     <ClInclude Include="Public\Math\Mesh.h" />
     <ClInclude Include="Public\Math\Vertex.h" />
-    <ClInclude Include="Public\Utils\Encoding.h" />
     <ClInclude Include="Public\World\ActorComponentManager.h" />
     <ClInclude Include="Public\Math\Transform.h" />
     <ClInclude Include="Public\Actions\ActionComponent.h" />
@@ -178,7 +178,7 @@
     <ClInclude Include="Public\EnginePch.h" />
     <ClInclude Include="Public\EngineDefine.h" />
     <ClInclude Include="Public\Engine\WindowSubsystem.h" />
-    <ClInclude Include="Public\Utils.h" />
+    <ClInclude Include="Public\Utils\Utils.h" />
     <ClInclude Include="Public\World\World.h" />
     <ClInclude Include="Public\World\WorldSubsystem.h" />
     <ClInclude Include="Public\Engine\RenderSubsystem.h" />

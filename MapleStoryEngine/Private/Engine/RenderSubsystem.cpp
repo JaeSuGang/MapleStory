@@ -4,7 +4,7 @@
 #include "Engine/ResourceSubsystem.h"
 #include "Engine/DebugSubsystem.h"
 #include "Engine/WindowSubsystem.h"
-#include "Utils/Encoding.h"
+#include "Utils/Utils.h"
 #include "World/World.h"
 #include "Level/Level.h"
 #include "Actor/Actor.h"
@@ -20,6 +20,7 @@ URenderSubsystem::URenderSubsystem()
 	Camera.Height = DEFAULT_WINDOW_SIZE_Y;
 	Camera.NearZ = 1.0f;
 	Camera.FarZ = 10000.0f;
+	Camera.Transform.Position.z = -1000.0f;
 
 	RenderTargetViewColor[0] = 0.25f;
 	RenderTargetViewColor[1] = 0.25f;

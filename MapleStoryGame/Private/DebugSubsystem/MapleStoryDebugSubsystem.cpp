@@ -28,14 +28,12 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
 		Actor->GetTransform().Scale = { 10.0f, 10.0f, 10.0f };
-		Actor->GetTransform().Position = {0.0f, 0.0f, 50.0f};
 	}
 	if (ImGui::Button("Spawn Cube"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
 		Actor->GetComponentByClass<URenderComponent>()->SetMeshName("Cube");
 		Actor->GetTransform().Scale = { 10.0f, 10.0f, 10.0f };
-		Actor->GetTransform().Position = { 0.0f, 0.0f, 50.0f };
 	}
 	for (shared_ptr<AActor>& Actor : Actors)
 	{

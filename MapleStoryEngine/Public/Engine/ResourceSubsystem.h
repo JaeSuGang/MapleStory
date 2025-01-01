@@ -20,6 +20,8 @@ public:
 private:
 	void SetWorkingDirectory();
 
+	void LoadTextureFile(string strPath);
+
 	void GenerateDefaultMeshes();
 
 	void GeneratePlaneMesh();
@@ -33,6 +35,8 @@ private:
 
 private:
 	/* 그래픽 리소스 */
+	unordered_map<string, DirectX::TexMetadata> TexMetadatas;
+	unordered_map<string, DirectX::ScratchImage> ScratchImages;
 	unordered_map<string, FMesh> Meshes;
 };
 
