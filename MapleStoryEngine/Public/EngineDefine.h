@@ -13,6 +13,8 @@
 #define CRITICAL_ERROR(text) { MessageBoxA(0, text, "Error", MB_OK); assert(false); };
 
 #define RESOURCES_FOLDER_NAME "Resources"
+#define VSShader_PATH "Resources\\Shaders\\Shader_VS.hlsl"
+#define PSShader_PATH "Resources\\Shaders\\Shader_PS.hlsl"
 
 /* »ó¼ö °ª */
 #define DEFAULT_WINDOW_SIZE_X 1920.0f

@@ -20,13 +20,9 @@ cbuffer FTransformConstants : register(b0)
     float4x4 WVP;
 };
 
-Texture2D ImageTexture : register(t0);
-
-SamplerState ImageSampler : register(s0);
-
 
 /* ½¦ÀÌ´õ ÇÔ¼ö */
-VertexShaderOutPut DefaultVertexShader(Vertex _Vertex)
+VertexShaderOutPut VSMain(Vertex _Vertex)
 {
     VertexShaderOutPut OutPut;
 	
@@ -34,12 +30,4 @@ VertexShaderOutPut DefaultVertexShader(Vertex _Vertex)
     OutPut.UV = _Vertex.UV;
     OutPut.COLOR = _Vertex.COLOR;
     return OutPut;
-};
-
-float4 DefaultPixelShader(VertexShaderOutPut _Vertex) : SV_Target0
-{
-    // float4 Color = ImageTexture.Sample(ImageSampler, _Vertex.UV.xy);
-    float4 Color = { 0.05f, 0.8f, 0.05f, 0.3f };
-    
-    return Color;
 };

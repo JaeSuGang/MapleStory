@@ -60,6 +60,12 @@ public:
 
 
 private:
+	/* 개별 매쉬 설정 */
+	void SetTransformConstantBuffer(FTransform Transform);
+
+	void SetTexture(string strTextureKey);
+
+private:
 	/* 렌더링 파이프라인 초기화 */
 	DXGI_SWAP_CHAIN_DESC MakeSwapChainDesc();
 
@@ -69,19 +75,25 @@ private:
 
 	void CreateInputLayout();
 
-	void CreateVertexShader();
+	void CreateDefaultSamplerState();
+
+	void CreateVertexShader(string strShaderPath);
+
+	void CreatePixelShaders(string strShaderPath);
 
 	void CreateRasterizer();
-
-	void CreatePixelShader();
 
 
 private:
 	/* 카메라 설정 */
 	FCamera Camera;
 
-	/* 개별 렌더링 파이프라인 설정 */
-	void SetTransformConstantBuffer(FTransform Transform);
+	/* 픽셀 쉐이더 */
+	ComPtr<ID3D11PixelShader> DefaultPixelShader;
+	ComPtr<ID3D11PixelShader> WireframePixelShader;
+
+	/* 샘플러 */
+	ComPtr<ID3D11SamplerState> DefaultSamplerState;
 
 	/* 메쉬 데이터 */
 	unordered_map<string, ComPtr<ID3D11Buffer>> VertexBuffers;
@@ -98,7 +110,6 @@ private:
 	ComPtr<ID3D11RasterizerState> RasterizerDefaultState;
 	ComPtr<ID3D11RasterizerState> RasterizerWireframeState;
 	ComPtr<ID3D11VertexShader> VertexShader;
-	ComPtr<ID3D11PixelShader> PixelShader;
 	ComPtr<ID3DBlob> VSCodeBlob;
 	ComPtr<ID3DBlob> VSErrorCodeBlob;
 	ComPtr<ID3DBlob> PSCodeBlob;

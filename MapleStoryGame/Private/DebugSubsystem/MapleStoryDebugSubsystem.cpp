@@ -33,6 +33,7 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
 		Actor->GetComponentByClass<URenderComponent>()->SetMeshName("Cube");
+		Actor->GetComponentByClass<URenderComponent>()->SetTextureName("9000404.img.stand.0.png");
 		Actor->GetTransform().Scale = { 10.0f, 10.0f, 10.0f };
 	}
 	for (shared_ptr<AActor>& Actor : Actors)

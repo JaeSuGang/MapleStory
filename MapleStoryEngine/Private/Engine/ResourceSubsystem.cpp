@@ -16,6 +16,8 @@ void UResourceSubsystem::Tick(float fDeltaTime)
 
 void UResourceSubsystem::LateInit()
 {
+	this->LoadFolder(RESOURCES_FOLDER_NAME);
+
 	this->GenerateDefaultMeshes();
 }
 
@@ -49,9 +51,26 @@ void UResourceSubsystem::SetWorkingDirectory()
 	CRITICAL_ERROR(RESOURCE_FOLDER_FIND_FAILED_TEXT);
 }
 
-void UResourceSubsystem::LoadFolder()
+void UResourceSubsystem::LoadFolder(string strDirectoryName)
 {
-	filesystem을 이용한 하위 디렉터리 반복자 구현하기
+	std::filesystem::directory_iterator DirectoryIter{ strDirectoryName };
+
+	while (!DirectoryIter._At_end())
+	{
+		std::filesystem::path ChildPath = *DirectoryIter;
+
+		if (DirectoryIter->is_directory())
+		{
+			this->LoadFolder(ChildPath.string());
+		}
+
+		if (ChildPath.extension().string() == ".png")
+		{
+			this->LoadTextureFile(ChildPath.string());
+		}
+
+		++DirectoryIter;
+	}
 }
 
 void UResourceSubsystem::LoadTextureFile(string strPath)
@@ -59,21 +78,36 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 	std::wstring wstrPath = Utils::StringToWString(strPath);
 
 	ComPtr<ID3D11ShaderResourceView> NewSRV;
+	ComPtr<ID3D11Texture2D> NewTexture;
 	DirectX::ScratchImage NewScratchImage;
 	DirectX::TexMetadata NewTexMetadata;
 
 	if (S_OK != DirectX::LoadFromWICFile(wstrPath.c_str(), DirectX::WIC_FLAGS_NONE, &NewTexMetadata, NewScratchImage))
 	{
-		GEngine->DebugLog("Texture Load Failed" + strPath, 1);
+		GEngine->DebugLog("Texture File Load Failed" + strPath, 1);
+		return;
 	}
 
-	if (S_OK != DirectX::CreateShaderResourceView(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), NewSRV.GetAddressOf()))
+	if (S_OK != DirectX::CreateTexture(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewTexMetadata, (ID3D11Resource**)NewTexture.GetAddressOf()))
 	{
-		GEngine->DebugLog("Shader Resource Creation Failed" + strPath, 1);
+		GEngine->DebugLog("Texture Creation Failed" + strPath, 1);
+		return;
 	}
 
-	std::pair<string, ComPtr<ID3D11ShaderResourceView>> NewPair{strPath, NewSRV};
-	GEngine->RenderSubsystem->ShaderResourceViews.insert(NewPair);
+	/* 텍스쳐를 만들지 않고 ScratchImage를 바로 SRV로 만드는 DirectXTex함수 */
+	/* CreateShaderResourceView(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), NewSRV.GetAddressOf())) */
+
+	// 만일 오류날 경우 srv desc작성
+	if (S_OK != GEngine->RenderSubsystem->Device->CreateShaderResourceView(NewTexture.Get(), nullptr, NewSRV.GetAddressOf()))
+	{
+		GEngine->DebugLog("SRV Creation Failed" + strPath, 1);
+		return;
+	}
+
+	std::pair<string, ComPtr<ID3D11Texture2D>> NewTexturePair{ strPath, NewTexture };
+	std::pair<string, ComPtr<ID3D11ShaderResourceView>> NewSRVPair{ strPath, NewSRV };
+	GEngine->RenderSubsystem->Textures.insert(NewTexturePair);
+	GEngine->RenderSubsystem->ShaderResourceViews.insert(NewSRVPair);
 }
 
 void UResourceSubsystem::GenerateDefaultMeshes()
@@ -169,88 +203,119 @@ void UResourceSubsystem::GeneratePlaneMesh()
 void UResourceSubsystem::GenerateCubeMesh()
 {
 	/* FMesh 생성 */
-	FVertex v1{};
-	v1.POSITION = { -10.0f, 10.0f, -10.0f, 1.0f };
-	v1.TEXCOORD = { 0.0f, 0.0f };
-	FVertex v2{};
-	v2.POSITION = { 10.0f, 10.0f, -10.0f, 1.0f };
-	v2.TEXCOORD = { 1.0f, 0.0f };
-	FVertex v3{};
-	v3.POSITION = { -10.0f, -10.0f, -10.0f, 1.0f };
-	v3.TEXCOORD = { 0.0f, 1.0f };
-	FVertex v4{};
-	v4.POSITION = { 10.0f, -10.0f, -10.0f, 1.0f };
-	v4.TEXCOORD = { 1.0f, 1.0f };
-	FVertex v5{};
-	v5.POSITION = { -10.0f, 10.0f, 10.0f, 1.0f };
-	v5.TEXCOORD = { 1.0f, 1.0f };
-	FVertex v6{};
-	v6.POSITION = { 10.0f, 10.0f, 10.0f, 1.0f };
-	v6.TEXCOORD = { 0.0f, 1.0f };
-	FVertex v7{};
-	v7.POSITION = { -10.0f, -10.0f, 10.0f, 1.0f };
-	v7.TEXCOORD = { 1.0f, 0.0f };
-	FVertex v8{};
-	v8.POSITION = { 10.0f, -10.0f, 10.0f, 1.0f };
-	v8.TEXCOORD = { 0.0f, 0.0f };
+	FVertex v1_1{}; // 정면
+	v1_1.POSITION = { -10.0f, 10.0f, -10.0f, 1.0f };
+	v1_1.TEXCOORD = { 0.0f, 0.0f };
+	FVertex v1_2{};
+	v1_2.POSITION = { 10.0f, 10.0f, -10.0f, 1.0f };
+	v1_2.TEXCOORD = { 0.0f, 1.0f };
+	FVertex v1_3{};
+	v1_3.POSITION = { -10.0f, -10.0f, -10.0f, 1.0f };
+	v1_3.TEXCOORD = { 1.0f, 0.0f };
+	FVertex v1_4{};
+	v1_4.POSITION = { 10.0f, -10.0f, -10.0f, 1.0f };
+	v1_4.TEXCOORD = { 1.0f, 1.0f };
+
+	FVertex v2_1{}; // 왼쪽 면
+	v2_1.POSITION = { -10.0f, 10.0f, 10.0f, 1.0f };
+	v2_1.TEXCOORD = { 1.0f, 0.0f };
+	FVertex v2_2{};
+	v2_2.POSITION = { -10.0f, 10.0f, -10.0f, 1.0f };
+	v2_2.TEXCOORD = { 1.0f, 1.0f };
+	FVertex v2_3{};
+	v2_3.POSITION = { -10.0f, -10.0f, 10.0f, 1.0f };
+	v2_3.TEXCOORD = { 0.0f, 0.0f };
+	FVertex v2_4{};
+	v2_4.POSITION = { -10.0f, -10.0f, -10.0f, 1.0f };
+	v2_4.TEXCOORD = { 0.0f, 1.0f };
+
+	FVertex v3_1{}; // 우측 면
+	v3_1.POSITION = { 10.0f, 10.0f, -10.0f, 1.0f };
+	v3_1.TEXCOORD = { 1.0f, 0.0f };
+	FVertex v3_2{};
+	v3_2.POSITION = { 10.0f, 10.0f, 10.0f, 1.0f };
+	v3_2.TEXCOORD = { 1.0f, 1.0f };
+	FVertex v3_3{};
+	v3_3.POSITION = { 10.0f, -10.0f, -10.0f, 1.0f };
+	v3_3.TEXCOORD = { 0.0f, 0.0f };
+	FVertex v3_4{};
+	v3_4.POSITION = { 10.0f, -10.0f, 10.0f, 1.0f };
+	v3_4.TEXCOORD = { 0.0f, 1.0f };
+
+	FVertex v4_1{}; // 뒷면
+	v4_1.POSITION = { 10.0f, 10.0f, 10.0f, 1.0f };
+	v4_1.TEXCOORD = { 0.0f, 0.0f };
+	FVertex v4_2{};
+	v4_2.POSITION = { -10.0f, 10.0f, 10.0f, 1.0f };
+	v4_2.TEXCOORD = { 0.0f, 1.0f };
+	FVertex v4_3{};
+	v4_3.POSITION = { 10.0f, -10.0f, 10.0f, 1.0f };
+	v4_3.TEXCOORD = { 1.0f, 0.0f };
+	FVertex v4_4{};
+	v4_4.POSITION = { -10.0f, -10.0f, 10.0f, 1.0f };
+	v4_4.TEXCOORD = { 1.0f, 1.0f };
+
+	FVertex v5_1{}; // 윗면
+	v5_1.POSITION = { -10.0f, 10.0f, 10.0f, 1.0f };
+	v5_1.TEXCOORD = { 1.0f, 0.0f };
+	FVertex v5_2{};
+	v5_2.POSITION = { 10.0f, 10.0f, 10.0f, 1.0f };
+	v5_2.TEXCOORD = { 1.0f, 1.0f };
+	FVertex v5_3{};
+	v5_3.POSITION = { -10.0f, 10.0f, -10.0f, 1.0f };
+	v5_3.TEXCOORD = { 0.0f, 0.0f };
+	FVertex v5_4{};
+	v5_4.POSITION = { 10.0f, 10.0f, -10.0f, 1.0f };
+	v5_4.TEXCOORD = { 0.0f, 1.0f };
+
+	FVertex v6_1{}; // 아랫면
+	v6_1.POSITION = { -10.0f, -10.0f, -10.0f, 1.0f };
+	v6_1.TEXCOORD = { 1.0f, 0.0f };
+	FVertex v6_2{};
+	v6_2.POSITION = { 10.0f, -10.0f, -10.0f, 1.0f };
+	v6_2.TEXCOORD = { 1.0f, 1.0f };
+	FVertex v6_3{};
+	v6_3.POSITION = { -10.0f, -10.0f, 10.0f, 1.0f };
+	v6_3.TEXCOORD = { 0.0f, 0.0f };
+	FVertex v6_4{};
+	v6_4.POSITION = { 10.0f, -10.0f, 10.0f, 1.0f };
+	v6_4.TEXCOORD = { 0.0f, 1.0f };
 
 	FMesh Cube;
-	Cube.Vertices.push_back(v1);
-	Cube.Vertices.push_back(v2);
-	Cube.Vertices.push_back(v3);
-	Cube.Vertices.push_back(v4);	
-	Cube.Vertices.push_back(v5);
-	Cube.Vertices.push_back(v6);
-	Cube.Vertices.push_back(v7);
-	Cube.Vertices.push_back(v8);
+	Cube.Vertices.push_back(v1_1);
+	Cube.Vertices.push_back(v1_2);
+	Cube.Vertices.push_back(v1_3);
+	Cube.Vertices.push_back(v1_4);
+	Cube.Vertices.push_back(v2_1);
+	Cube.Vertices.push_back(v2_2);
+	Cube.Vertices.push_back(v2_3);
+	Cube.Vertices.push_back(v2_4);
+	Cube.Vertices.push_back(v3_1);
+	Cube.Vertices.push_back(v3_2);
+	Cube.Vertices.push_back(v3_3);
+	Cube.Vertices.push_back(v3_4);
+	Cube.Vertices.push_back(v4_1);
+	Cube.Vertices.push_back(v4_2);
+	Cube.Vertices.push_back(v4_3);
+	Cube.Vertices.push_back(v4_4);
+	Cube.Vertices.push_back(v5_1);
+	Cube.Vertices.push_back(v5_2);
+	Cube.Vertices.push_back(v5_3);
+	Cube.Vertices.push_back(v5_4);
+	Cube.Vertices.push_back(v6_1);
+	Cube.Vertices.push_back(v6_2);
+	Cube.Vertices.push_back(v6_3);
+	Cube.Vertices.push_back(v6_4);
 
-	// 앞
-	Cube.Indexes.push_back(0);
-	Cube.Indexes.push_back(1);
-	Cube.Indexes.push_back(2);
-	Cube.Indexes.push_back(1);
-	Cube.Indexes.push_back(3);
-	Cube.Indexes.push_back(2);
-
-	// 왼
-	Cube.Indexes.push_back(5);
-	Cube.Indexes.push_back(0);
-	Cube.Indexes.push_back(7);
-	Cube.Indexes.push_back(0);
-	Cube.Indexes.push_back(2);
-	Cube.Indexes.push_back(7);
-
-	// 오
-	Cube.Indexes.push_back(1);
-	Cube.Indexes.push_back(5);
-	Cube.Indexes.push_back(3);
-	Cube.Indexes.push_back(5);
-	Cube.Indexes.push_back(7);
-	Cube.Indexes.push_back(3);
-
-	// 위
-	Cube.Indexes.push_back(4);
-	Cube.Indexes.push_back(5);
-	Cube.Indexes.push_back(0);
-	Cube.Indexes.push_back(5);
-	Cube.Indexes.push_back(1);
-	Cube.Indexes.push_back(0);
-
-	// 아래
-	Cube.Indexes.push_back(2);
-	Cube.Indexes.push_back(3);
-	Cube.Indexes.push_back(6);
-	Cube.Indexes.push_back(3);
-	Cube.Indexes.push_back(7);
-	Cube.Indexes.push_back(6);
-
-	// 뒤
-	Cube.Indexes.push_back(5);
-	Cube.Indexes.push_back(4);
-	Cube.Indexes.push_back(7);
-	Cube.Indexes.push_back(4);
-	Cube.Indexes.push_back(6);
-	Cube.Indexes.push_back(7);
+	for (int i = 0; i < 6; i++)
+	{
+		Cube.Indexes.push_back(i * 4 + 0);
+		Cube.Indexes.push_back(i * 4 + 1);
+		Cube.Indexes.push_back(i * 4 + 2);
+		Cube.Indexes.push_back(i * 4 + 1);
+		Cube.Indexes.push_back(i * 4 + 3);
+		Cube.Indexes.push_back(i * 4 + 2);
+	}
 
 	Cube.PrimitiveTopology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 

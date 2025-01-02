@@ -20,7 +20,7 @@ public:
 private:
 	void SetWorkingDirectory();
 
-	void LoadFolder();
+	void LoadFolder(string strDirectoryName);
 
 	void LoadTextureFile(string strPath);
 

@@ -79,7 +79,7 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 
 	DirectX::XMMATRIX RotationMatrix = DirectX::XMMatrixRotationRollPitchYawFromVector(DirectX::XMVECTOR{ DirectX::XMConvertToRadians(Transform.Rotation.x), DirectX::XMConvertToRadians(Transform.Rotation.y) , DirectX::XMConvertToRadians(Transform.Rotation.z) });
 
-	DirectX::XMMATRIX TranslationMatrix = DirectX::XMMatrixTranslationFromVector(DirectX::XMVECTOR{ Transform.Position.x, Transform.Position.y , Transform.Position.z});
+	DirectX::XMMATRIX TranslationMatrix = DirectX::XMMatrixTranslationFromVector(DirectX::XMVECTOR{ Transform.Position.x, Transform.Position.y , Transform.Position.z, 1.0f});
 
 	DirectX::XMMATRIX WorldMatrix = ScaleMatrix * RotationMatrix * TranslationMatrix;
 
@@ -132,6 +132,29 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 	ID3D11Buffer* pTransformConstantBuffer[1] = { TransformConstantBuffer.Get() };
 
 	DeviceContext->VSSetConstantBuffers(0, 1, pTransformConstantBuffer);
+}
+
+void URenderSubsystem::SetTexture(string strTextureKey)
+{
+	strTextureKey = "Resources\\Textures\\" + strTextureKey;
+	auto TextureFindIter = ShaderResourceViews.find(strTextureKey);
+	ID3D11ShaderResourceView* SRVs[1];
+	ID3D11SamplerState* Samplers[1];
+
+	if (TextureFindIter != ShaderResourceViews.end())
+	{
+		SRVs[0] = TextureFindIter->second.Get();
+	}
+	else
+	{
+		TextureFindIter = ShaderResourceViews.find("Resources\\Textures\\MissingTexture.png");
+		SRVs[0] = TextureFindIter->second.Get();
+	}
+		
+	Samplers[0] = DefaultSamplerState.Get();
+
+	DeviceContext->PSSetShaderResources(0, 1, SRVs);
+	DeviceContext->PSSetSamplers(0, 1, Samplers);
 }
 
 void URenderSubsystem::CreateDeviceAndContext()
@@ -249,6 +272,25 @@ void URenderSubsystem::CreateInputLayout()
 		InputLayout.GetAddressOf());
 }
 
+void URenderSubsystem::CreateDefaultSamplerState()
+{
+	D3D11_SAMPLER_DESC SampInfo = { D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT };
+	SampInfo.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_BORDER; // 0~1사이만 유효
+	SampInfo.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_BORDER; // y
+	SampInfo.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP; // z // 3중 
+
+	SampInfo.BorderColor[0] = 0.0f;
+	SampInfo.BorderColor[1] = 0.0f;
+	SampInfo.BorderColor[2] = 0.0f;
+	SampInfo.BorderColor[3] = 0.0f;
+
+	HRESULT hr = Device->CreateSamplerState(&SampInfo, DefaultSamplerState.GetAddressOf());
+	if (S_OK != hr)
+	{
+		GEngine->DebugLog("Failed To Create Sampler", 2);
+	}
+}
+
 ENGINE_API FCamera& URenderSubsystem::GetCamera()
 {
 	return Camera;
@@ -290,7 +332,7 @@ void URenderSubsystem::Render(float fDeltaTime)
 	DeviceContext->VSSetShader(VertexShader.Get(), nullptr, 0);
 	DeviceContext->RSSetViewports(1, &ViewPortInfo);
 	DeviceContext->RSSetState(Camera.IsWireFrame ? RasterizerWireframeState.Get() : RasterizerDefaultState.Get());
-	DeviceContext->PSSetShader(PixelShader.Get(), nullptr, 0);
+	DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader.Get() : DefaultPixelShader.Get(), nullptr, 0);
 	DeviceContext->OMSetRenderTargets(1, RTV.GetAddressOf(), nullptr);
 
 	this->RenderActors(fDeltaTime);
@@ -323,16 +365,15 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 			UINT nVertexBufferStride = sizeof(FVertex);
 			UINT nVertexBufferOffset = 0;
 
-			ID3D11Buffer* IndexBuffer = GetD3DIndexBuffer(MeshName);
+			ID3D11Buffer* IndexBuffer = this->GetD3DIndexBuffer(MeshName);
 
 			/* 메쉬별 렌더링 파이프라인 설정 */
 			DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 			DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 			DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
 			this->SetTransformConstantBuffer(LoopActor->GetTransform());
-			
-			// DeviceContext->PSSetShaderResources();
-			// DeviceContext->PSSetSamplers();
+			this->SetTexture(RenderComponent->GetTextureName());
+
 
 
 			/* 드로우 콜 */
@@ -359,7 +400,7 @@ void URenderSubsystem::LateInit()
 
 	this->InitSwapChain();
 
-	this->CreateVertexShader();
+	this->CreateVertexShader(VSShader_PATH);
 
 	this->CreateInputLayout();
 
@@ -369,19 +410,22 @@ void URenderSubsystem::LateInit()
 
 	this->CreateRasterizer();
 
-	this->CreatePixelShader();
+	this->CreatePixelShaders(PSShader_PATH);
 
+	this->CreateDefaultSamplerState();
 }
 
-void URenderSubsystem::CreateVertexShader()
+void URenderSubsystem::CreateVertexShader(string strShaderPath)
 {
+	std::wstring wstrShaderPath = Utils::StringToWString(strShaderPath);
+
 	int Flag0{};
 #ifdef _DEBUG
 	Flag0 = D3D10_SHADER_DEBUG;
 #endif
 	Flag0 |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
 
-	HRESULT hr = D3DCompileFromFile(L"Resources\\Shaders\\test.hlsl", nullptr, nullptr, "DefaultVertexShader", "vs_5_0", Flag0, 0, VSCodeBlob.GetAddressOf(), VSErrorCodeBlob.GetAddressOf());
+	HRESULT hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, "VSMain", "vs_5_0", Flag0, 0, VSCodeBlob.GetAddressOf(), VSErrorCodeBlob.GetAddressOf());
 	if (hr != S_OK)
 	{
 		CRITICAL_ERROR(static_cast<const char *>(VSErrorCodeBlob->GetBufferPointer()));
@@ -397,7 +441,7 @@ void URenderSubsystem::CreateVertexShader()
 void URenderSubsystem::CreateRasterizer()
 {
 	D3D11_RASTERIZER_DESC DefaultRasterizerDesc = {};
-	DefaultRasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	DefaultRasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 	DefaultRasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	Device->CreateRasterizerState(&DefaultRasterizerDesc, RasterizerDefaultState.GetAddressOf());
 
@@ -416,21 +460,35 @@ void URenderSubsystem::CreateRasterizer()
 	ViewPortInfo.MaxDepth = 1.0f;
 }
 
-void URenderSubsystem::CreatePixelShader()
+void URenderSubsystem::CreatePixelShaders(string strShaderPath)
 {
+	std::wstring wstrShaderPath = Utils::StringToWString(strShaderPath);
+
 	int Flag0{};
 #ifdef _DEBUG
 	Flag0 = D3D10_SHADER_DEBUG;
 #endif
 	Flag0 |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
 
-	HRESULT hr = D3DCompileFromFile(L"Resources\\Shaders\\test.hlsl", nullptr, nullptr, "DefaultPixelShader", "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+	HRESULT hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, "PSMain", "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
 	if (hr != S_OK)
 	{
 		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
 	}
 
-	hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, PixelShader.GetAddressOf());
+	hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, DefaultPixelShader.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+	}
+
+	hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, "PSWireframe", "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+	}
+
+	hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, WireframePixelShader.GetAddressOf());
 	if (hr != S_OK)
 	{
 		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
