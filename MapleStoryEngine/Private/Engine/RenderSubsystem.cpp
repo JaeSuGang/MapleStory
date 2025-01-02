@@ -186,7 +186,7 @@ void URenderSubsystem::InitSwapChain()
 		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
 	}
 
-	if (S_OK != Device->CreateRenderTargetView(BackBuffer.Get(), nullptr, &RTV))
+	if (S_OK != Device->CreateRenderTargetView(BackBuffer.Get(), nullptr, &RenderTargetView))
 	{
 		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
 	}
@@ -385,14 +385,14 @@ void URenderSubsystem::Render(float fDeltaTime)
 {
 	// Camera.Transform.Position.y += 100.0f;
 
-	/* 오류날시 omsetrendertargets의 RTV.GetAddressOf()를 지역변수로 치환해서 넘기는것으로 변경 */
-	DeviceContext->ClearRenderTargetView(RTV.Get(), RenderTargetViewColor);
+	DeviceContext->ClearRenderTargetView(RenderTargetView.Get(), RenderTargetViewColor);
+	DeviceContext->ClearDepthStencilView(DepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	DeviceContext->IASetInputLayout(InputLayout.Get());
 	DeviceContext->VSSetShader(VertexShader.Get(), nullptr, 0);
 	DeviceContext->RSSetViewports(1, &ViewPortInfo);
 	DeviceContext->RSSetState(Camera.IsWireFrame ? RasterizerWireframeState.Get() : RasterizerDefaultState.Get());
 	DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader.Get() : DefaultPixelShader.Get(), nullptr, 0);
-	DeviceContext->OMSetRenderTargets(1, RTV.GetAddressOf(), nullptr);
+	DeviceContext->OMSetRenderTargets(1, RenderTargetView.GetAddressOf(), DepthStencilView.Get());
 
 	this->RenderActors(fDeltaTime);
 
@@ -471,6 +471,8 @@ void URenderSubsystem::LateInit()
 	this->CreatePixelShaders(PSShader_PATH);
 
 	this->CreateDefaultSamplerState();
+
+	this->CreateDepthStencilView();
 }
 
 void URenderSubsystem::CreateVertexShader(string strShaderPath)
@@ -516,6 +518,31 @@ void URenderSubsystem::CreateRasterizer()
 	ViewPortInfo.TopLeftY = 0.0f;
 	ViewPortInfo.MinDepth = 0.0f;
 	ViewPortInfo.MaxDepth = 1.0f;
+}
+
+void URenderSubsystem::CreateDepthStencilView()
+{
+	DXGI_SWAP_CHAIN_DESC SwapChainDesc{};
+	SwapChain->GetDesc(&SwapChainDesc);
+
+	D3D11_TEXTURE2D_DESC TextureDesc{};
+	TextureDesc.Width = SwapChainDesc.BufferDesc.Width;
+	TextureDesc.Height = SwapChainDesc.BufferDesc.Height;
+	TextureDesc.MipLevels = 1;
+	TextureDesc.ArraySize = 1;
+	TextureDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	TextureDesc.SampleDesc.Count = 1;
+	TextureDesc.Usage = D3D11_USAGE_DEFAULT;
+	TextureDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+
+	Device->CreateTexture2D(&TextureDesc, nullptr, DepthStencilBuffer.GetAddressOf());
+
+	HRESULT hr = Device->CreateDepthStencilView(DepthStencilBuffer.Get(), nullptr, DepthStencilView.GetAddressOf());
+
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
+	}
 }
 
 void URenderSubsystem::CreatePixelShaders(string strShaderPath)

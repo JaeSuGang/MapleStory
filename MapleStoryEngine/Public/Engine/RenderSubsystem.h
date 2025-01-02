@@ -95,6 +95,8 @@ private:
 
 	void CreateRasterizer();
 
+	void CreateDepthStencilView();
+
 private:
 	/* 리소스 */
 	/* SRVs */
@@ -123,6 +125,12 @@ private:
 	/* 샘플러 */
 	ComPtr<ID3D11SamplerState> DefaultSamplerState;
 
+	/* 텍스처와 뷰 */
+	ComPtr<ID3D11Texture2D> BackBuffer;
+	ComPtr<ID3D11RenderTargetView> RenderTargetView;
+	ComPtr<ID3D11Texture2D> DepthStencilBuffer;
+	ComPtr<ID3D11DepthStencilView> DepthStencilView;
+
 
 	/* 렌더링 파이프라인 개별 설정 변수 */
 	ComPtr<ID3D11Buffer> TransformConstantBuffer;
@@ -140,8 +148,6 @@ private:
 	ComPtr<ID3D11Device> Device;
 	ComPtr<ID3D11DeviceContext> DeviceContext;
 	ComPtr<IDXGISwapChain> SwapChain;
-	ComPtr<ID3D11Texture2D> BackBuffer;
-	ComPtr<ID3D11RenderTargetView> RTV;
 
 private:
 	/* 서브시스템 변수들 */
