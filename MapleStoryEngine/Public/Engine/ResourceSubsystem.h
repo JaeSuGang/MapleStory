@@ -14,8 +14,11 @@ public:
 	void LateInit() override;
 
 public:
+	void AddNewMesh(string strKey, FMesh NewMesh);
 
-	FMesh& GetMesh(string strKey);
+	FMesh& GetMeshByID(int ID);
+
+	int GetMeshIDByName(string strKey);
 
 private:
 	void SetWorkingDirectory();
@@ -24,19 +27,18 @@ private:
 
 	void LoadTextureFile(string strPath);
 
+	void SetMissingTexture();
+
 	void GenerateDefaultMeshes();
 
 	void GeneratePlaneMesh();
 
 	void GenerateCubeMesh();
 
-public:
-	unordered_map<string, FMesh>& GetMeshes();
-
-private:
 
 private:
 	/* 그래픽 리소스 */
-	unordered_map<string, FMesh> Meshes;
+	unordered_map<string, int> StringMappedMeshIDs;
+	vector<FMesh> Meshes;
 };
 

@@ -6,6 +6,4 @@
 BP_TestActor::BP_TestActor()
 {
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
-
-	RenderComponent->SetMeshName("Plane");
 }

@@ -2,6 +2,7 @@
 #include "ActorComponent/RenderComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/ResourceSubsystem.h"
+#include "Engine/RenderSubsystem.h"
 
 URenderComponent::URenderComponent()
 {
@@ -13,22 +14,40 @@ void URenderComponent::TickComponent(float fDeltaTime)
 	Super::TickComponent(fDeltaTime);
 }
 
-ENGINE_API void URenderComponent::SetTextureName(const char* lpszNewName)
+ENGINE_API void URenderComponent::SetSRVIDByName(string strName)
 {
-	TextureName = lpszNewName;
+	SRVID = GEngine->RenderSubsystem->GetSRVIDByName(strName);
 }
 
-ENGINE_API const char* URenderComponent::GetTextureName()
+ENGINE_API void URenderComponent::SetMeshIDByName(string strName)
 {
-	return TextureName.data();
+	MeshID = GEngine->ResourceSubsystem->GetMeshIDByName(strName);
 }
 
-void URenderComponent::SetMeshName(const char* lpszNewName)
+ENGINE_API void URenderComponent::SetTextureIDByName(string strName)
 {
-	MeshName = lpszNewName;
+	TextureID = GEngine->RenderSubsystem->GetTextureIDByName(strName);
 }
 
-ENGINE_API const char* URenderComponent::GetMeshName()
+ENGINE_API void URenderComponent::SetIndexBufferIDByName(string strName)
 {
-	return MeshName.data();
+	IndexBufferID = GEngine->RenderSubsystem->GetIndexBufferIDByName(strName);
+}
+
+ENGINE_API void URenderComponent::SetVertexBufferIDByName(string strName)
+{
+	VertexBufferID = GEngine->RenderSubsystem->GetVertexBufferIDByName(strName);
+}
+
+ENGINE_API void URenderComponent::SetMeshInfosByName(string strName)
+{
+	this->SetMeshIDByName(strName);
+	this->SetVertexBufferIDByName(strName);
+	this->SetIndexBufferIDByName(strName);
+}
+
+ENGINE_API void URenderComponent::SetTextureInfosByName(string strName)
+{
+	this->SetTextureIDByName(strName);
+	this->SetSRVIDByName(strName);
 }

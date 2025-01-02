@@ -134,23 +134,12 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 	DeviceContext->VSSetConstantBuffers(0, 1, pTransformConstantBuffer);
 }
 
-void URenderSubsystem::SetTexture(string strTextureKey)
+void URenderSubsystem::SetShaderResources(int SRVID)
 {
-	strTextureKey = "Resources\\Textures\\" + strTextureKey;
-	auto TextureFindIter = ShaderResourceViews.find(strTextureKey);
 	ID3D11ShaderResourceView* SRVs[1];
 	ID3D11SamplerState* Samplers[1];
 
-	if (TextureFindIter != ShaderResourceViews.end())
-	{
-		SRVs[0] = TextureFindIter->second.Get();
-	}
-	else
-	{
-		TextureFindIter = ShaderResourceViews.find("Resources\\Textures\\MissingTexture.png");
-		SRVs[0] = TextureFindIter->second.Get();
-	}
-		
+	SRVs[0] = ShaderResourceViews[SRVID].Get();
 	Samplers[0] = DefaultSamplerState.Get();
 
 	DeviceContext->PSSetShaderResources(0, 1, SRVs);
@@ -202,6 +191,102 @@ void URenderSubsystem::InitSwapChain()
 		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
 	}
 }
+
+int URenderSubsystem::GetVertexBufferIDByName(string strKey)
+{
+	auto FindIter = StringMappedVertexBufferIDs.find(strKey);
+
+	if (FindIter != StringMappedVertexBufferIDs.end())
+	{
+		return FindIter->second;
+	}
+	else
+	{
+		GEngine->DebugLog("Tried To Find Invalid Vertex Buffer Name : " + strKey, 2);
+		return -1;
+	}
+
+}
+
+int URenderSubsystem::GetIndexBufferIDByName(string strKey)
+{
+	auto FindIter = StringMappedIndexBufferIDs.find(strKey);
+
+	if (FindIter != StringMappedIndexBufferIDs.end())
+	{
+		return FindIter->second;
+	}
+	else
+	{
+		GEngine->DebugLog("Tried To Find Invalid Index Buffer Name : " + strKey, 2);
+		return -1;
+	}
+
+}
+
+int URenderSubsystem::GetTextureIDByName(string strKey)
+{
+	auto FindIter = StringMappedTextureIDs.find(strKey);
+
+	if (FindIter != StringMappedTextureIDs.end())
+	{
+		return FindIter->second;
+	}
+	else
+	{
+		GEngine->DebugLog("Tried To Find Invalid Texture Name : " + strKey, 2);
+		return MissingTextureTextureID;
+	}
+
+}
+
+int URenderSubsystem::GetSRVIDByName(string strKey)
+{
+	auto FindIter = StringMappedSRVIDs.find(strKey);
+
+	if (FindIter != StringMappedSRVIDs.end())
+	{
+		return FindIter->second;
+	}
+	else
+	{
+		GEngine->DebugLog("Tried To Find Invalid SRV Name : " + strKey, 2);
+		return MissingTextureSRVID;
+	}
+}
+
+void URenderSubsystem::AddNewVertexBuffer(string strKey, ComPtr<ID3D11Buffer> NewVertexBuffer)
+{
+	int nSize = (int)VertexBuffers.size();
+	std::pair<string, int> MapPair = { strKey, nSize };
+	StringMappedVertexBufferIDs.insert(MapPair);
+	VertexBuffers.push_back(NewVertexBuffer);
+}
+
+void URenderSubsystem::AddNewIndexBuffer(string strKey, ComPtr<ID3D11Buffer> NewIndexBuffer)
+{
+	int nSize = (int)IndexBuffers.size();
+	std::pair<string, int> MapPair = { strKey, nSize };
+	StringMappedIndexBufferIDs.insert(MapPair);
+	IndexBuffers.push_back(NewIndexBuffer);
+}
+
+void URenderSubsystem::AddNewTexture(string strKey, ComPtr<ID3D11Texture2D> NewTexture)
+{
+	int nSize = (int)Textures.size();
+	std::pair<string, int> MapPair = { strKey, nSize };
+	StringMappedTextureIDs.insert(MapPair);
+	Textures.push_back(NewTexture);
+}
+
+void URenderSubsystem::AddNewSRV(string strKey, ComPtr<ID3D11ShaderResourceView> NewSRV)
+{
+	int nSize = (int)ShaderResourceViews.size();
+	std::pair<string, int> MapPair = { strKey, nSize };
+	StringMappedSRVIDs.insert(MapPair);
+	ShaderResourceViews.push_back(NewSRV);
+}
+
 
 void URenderSubsystem::CreateTransformConstantBuffer()
 {
@@ -296,32 +381,6 @@ ENGINE_API FCamera& URenderSubsystem::GetCamera()
 	return Camera;
 }
 
-ID3D11Buffer* URenderSubsystem::GetD3DVertexBuffer(string strName)
-{
-	auto FindIter = VertexBuffers.find(strName);
-
-	if (FindIter == VertexBuffers.end())
-	{
-		GEngine->DebugLog("GetD3DVertexBuffer()로 유효한 키를 찾지 못함", 1);
-		return nullptr;
-	}
-
-	return FindIter->second.Get();
-}
-
-ID3D11Buffer* URenderSubsystem::GetD3DIndexBuffer(string strName)
-{
-	auto FindIter = IndexBuffers.find(strName);
-
-	if (FindIter == IndexBuffers.end())
-	{
-		GEngine->DebugLog("GetD3DIndexBuffer()로 유효한 키를 찾지 못함", 1);
-		return nullptr;
-	}
-
-	return FindIter->second.Get();
-}
-
 void URenderSubsystem::Render(float fDeltaTime)
 {
 	// Camera.Transform.Position.y += 100.0f;
@@ -357,22 +416,21 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		if (URenderComponent* RenderComponent = LoopActor->GetComponentByClass<URenderComponent>())
 		{
 			/* 정보 불러오기 및 지역 변수 설정 */
-			const char* MeshName = RenderComponent->GetMeshName();
-			FMesh& Mesh = GEngine->ResourceSubsystem->GetMesh(MeshName);
-			ID3D11Buffer* VertexBuffer = GetD3DVertexBuffer(MeshName);
+			FMesh& Mesh = GEngine->ResourceSubsystem->GetMeshByID(RenderComponent->MeshID);
+			ID3D11Buffer* VertexBuffer = this->VertexBuffers[RenderComponent->VertexBufferID].Get();
 			ID3D11Buffer* pVertexBuffer[1];
 			pVertexBuffer[0] = VertexBuffer;
 			UINT nVertexBufferStride = sizeof(FVertex);
 			UINT nVertexBufferOffset = 0;
 
-			ID3D11Buffer* IndexBuffer = this->GetD3DIndexBuffer(MeshName);
+			ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->IndexBufferID].Get();
 
 			/* 메쉬별 렌더링 파이프라인 설정 */
 			DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 			DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 			DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
 			this->SetTransformConstantBuffer(LoopActor->GetTransform());
-			this->SetTexture(RenderComponent->GetTextureName());
+			this->SetShaderResources(RenderComponent->SRVID);
 
 
 
@@ -441,7 +499,7 @@ void URenderSubsystem::CreateVertexShader(string strShaderPath)
 void URenderSubsystem::CreateRasterizer()
 {
 	D3D11_RASTERIZER_DESC DefaultRasterizerDesc = {};
-	DefaultRasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
+	DefaultRasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
 	DefaultRasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	Device->CreateRasterizerState(&DefaultRasterizerDesc, RasterizerDefaultState.GetAddressOf());
 

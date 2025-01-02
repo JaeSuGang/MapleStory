@@ -42,10 +42,6 @@ public:
 public:
 	ENGINE_API FCamera& GetCamera();
 
-	ID3D11Buffer* GetD3DVertexBuffer(string strName);
-
-	ID3D11Buffer* GetD3DIndexBuffer(string strName);
-
 	void Render(float fDeltaTime);
 
 	void RenderActors(float fDeltaTime);
@@ -58,12 +54,28 @@ public:
 
 	void InitSwapChain();
 
+public:
+	int GetVertexBufferIDByName(string strKey);
+
+	int GetIndexBufferIDByName(string strKey);
+
+	int GetTextureIDByName(string strKey);
+
+	int GetSRVIDByName(string strKey);
+
+	void AddNewVertexBuffer(string strKey, ComPtr<ID3D11Buffer> NewVertexBuffer);
+
+	void AddNewIndexBuffer(string strKey, ComPtr<ID3D11Buffer> NewIndexBuffer);
+
+	void AddNewTexture(string strKey, ComPtr<ID3D11Texture2D> NewTexture);
+
+	void AddNewSRV(string strKey, ComPtr<ID3D11ShaderResourceView> NewSRV);
 
 private:
 	/* 개별 매쉬 설정 */
 	void SetTransformConstantBuffer(FTransform Transform);
 
-	void SetTexture(string strTextureKey);
+	void SetShaderResources(int SRVID);
 
 private:
 	/* 렌더링 파이프라인 초기화 */
@@ -83,6 +95,22 @@ private:
 
 	void CreateRasterizer();
 
+private:
+	/* 리소스 */
+	/* SRVs */
+	unordered_map<string, int> StringMappedSRVIDs;
+	vector<ComPtr<ID3D11ShaderResourceView>> ShaderResourceViews;
+	int MissingTextureSRVID;
+	/* Textures */
+	unordered_map<string, int> StringMappedTextureIDs;
+	vector<ComPtr<ID3D11Texture2D>> Textures;
+	int MissingTextureTextureID;
+	/* Vertex Buffers */
+	unordered_map<string, int> StringMappedVertexBufferIDs;
+	vector<ComPtr<ID3D11Buffer>> VertexBuffers;
+	/* Index Buffers */
+	unordered_map<string, int> StringMappedIndexBufferIDs;
+	vector<ComPtr<ID3D11Buffer>> IndexBuffers;
 
 private:
 	/* 카메라 설정 */
@@ -95,12 +123,6 @@ private:
 	/* 샘플러 */
 	ComPtr<ID3D11SamplerState> DefaultSamplerState;
 
-	/* 메쉬 데이터 */
-	unordered_map<string, ComPtr<ID3D11Buffer>> VertexBuffers;
-	unordered_map<string, ComPtr<ID3D11Buffer>> IndexBuffers;
-
-	unordered_map<string, ComPtr<ID3D11Texture2D>> Textures;
-	unordered_map<string, ComPtr<ID3D11ShaderResourceView>> ShaderResourceViews;
 
 	/* 렌더링 파이프라인 개별 설정 변수 */
 	ComPtr<ID3D11Buffer> TransformConstantBuffer;

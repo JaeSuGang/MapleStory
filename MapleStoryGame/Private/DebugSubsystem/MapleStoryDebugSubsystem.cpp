@@ -28,13 +28,19 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
 		Actor->GetTransform().Scale = { 10.0f, 10.0f, 10.0f };
+		string strMeshName = "Plane";
+		string strTextureName = "None";
+		Actor->GetComponentByClass<URenderComponent>()->SetMeshInfosByName(strMeshName);
+		Actor->GetComponentByClass<URenderComponent>()->SetTextureInfosByName(strTextureName);
 	}
 	if (ImGui::Button("Spawn Cube"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
-		Actor->GetComponentByClass<URenderComponent>()->SetMeshName("Cube");
-		Actor->GetComponentByClass<URenderComponent>()->SetTextureName("9000404.img.stand.0.png");
 		Actor->GetTransform().Scale = { 10.0f, 10.0f, 10.0f };
+		string strMeshName = "Cube";
+		string strTextureName = "Resources\\Textures\\9000404.img.stand.0.png";
+		Actor->GetComponentByClass<URenderComponent>()->SetMeshInfosByName(strMeshName);
+		Actor->GetComponentByClass<URenderComponent>()->SetTextureInfosByName(strTextureName);
 	}
 	for (shared_ptr<AActor>& Actor : Actors)
 	{

@@ -13,6 +13,7 @@
 #define CRITICAL_ERROR(text) { MessageBoxA(0, text, "Error", MB_OK); assert(false); };
 
 #define RESOURCES_FOLDER_NAME "Resources"
+#define MISSING_TEXTURE_PATH "Resources\\Textures\\MissingTexture.png"
 #define VSShader_PATH "Resources\\Shaders\\Shader_VS.hlsl"
 #define PSShader_PATH "Resources\\Shaders\\Shader_PS.hlsl"
 

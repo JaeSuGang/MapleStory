@@ -18,18 +18,38 @@ void UResourceSubsystem::LateInit()
 {
 	this->LoadFolder(RESOURCES_FOLDER_NAME);
 
+	this->SetMissingTexture();
+
 	this->GenerateDefaultMeshes();
 }
 
 
-FMesh& UResourceSubsystem::GetMesh(string strKey)
+void UResourceSubsystem::AddNewMesh(string strKey, FMesh NewMesh)
 {
-	auto FindIter = Meshes.find(strKey);
+	int nSize = (int)Meshes.size();
+	std::pair<string, int> MapPair = { strKey, nSize };
+	StringMappedMeshIDs.insert(MapPair);
+	Meshes.push_back(NewMesh);
+}
 
-	if (FindIter == Meshes.end())
-		GEngine->DebugLog("존재하지 않는 메쉬 이름을 참조", 1);
+FMesh& UResourceSubsystem::GetMeshByID(int nID)
+{
+	return Meshes[nID];
+}
 
-	return FindIter->second;
+int UResourceSubsystem::GetMeshIDByName(string strKey)
+{
+	auto FindIter = StringMappedMeshIDs.find(strKey);
+
+	if (FindIter != StringMappedMeshIDs.end())
+	{
+		return FindIter->second;
+	}
+	else
+	{
+		GEngine->DebugLog("Tried To Find Invalid Mesh Name : " + strKey, 2);
+		return -1;
+	}
 }
 
 void UResourceSubsystem::SetWorkingDirectory()
@@ -104,10 +124,14 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 		return;
 	}
 
-	std::pair<string, ComPtr<ID3D11Texture2D>> NewTexturePair{ strPath, NewTexture };
-	std::pair<string, ComPtr<ID3D11ShaderResourceView>> NewSRVPair{ strPath, NewSRV };
-	GEngine->RenderSubsystem->Textures.insert(NewTexturePair);
-	GEngine->RenderSubsystem->ShaderResourceViews.insert(NewSRVPair);
+	GEngine->RenderSubsystem->AddNewTexture(strPath, NewTexture);
+	GEngine->RenderSubsystem->AddNewSRV(strPath, NewSRV);
+}
+
+void UResourceSubsystem::SetMissingTexture()
+{
+	GEngine->RenderSubsystem->MissingTextureTextureID = GEngine->RenderSubsystem->GetTextureIDByName(MISSING_TEXTURE_PATH);
+	GEngine->RenderSubsystem->MissingTextureSRVID = GEngine->RenderSubsystem->GetSRVIDByName(MISSING_TEXTURE_PATH);
 }
 
 void UResourceSubsystem::GenerateDefaultMeshes()
@@ -149,11 +173,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 
 	Plane.PrimitiveTopology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-	std::pair<string, FMesh> Pair{};
-	Pair.first = "Plane";
-	Pair.second = Plane;
-
-	Meshes.insert(Pair);
+	this->AddNewMesh("Plane", Plane);
 
 	/* ID3D11Buffer 생성 */
 	ComPtr<ID3D11Buffer> VertexBuffer{};
@@ -171,11 +191,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
 	}
 
-	std::pair<string, ComPtr<ID3D11Buffer>> VertexBufferPair{};
-	VertexBufferPair.first = "Plane";
-	VertexBufferPair.second = VertexBuffer;
-	GEngine->RenderSubsystem->VertexBuffers.insert(VertexBufferPair);
-
+	GEngine->RenderSubsystem->AddNewVertexBuffer("Plane", VertexBuffer);
 
 	/* IndexBuffer 생성 */
 	ComPtr<ID3D11Buffer> IndexBuffer{};
@@ -194,10 +210,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
 	}
 
-	std::pair<string, ComPtr<ID3D11Buffer>> IndexBufferPair{};
-	IndexBufferPair.first = "Plane";
-	IndexBufferPair.second = IndexBuffer;
-	GEngine->RenderSubsystem->IndexBuffers.insert(IndexBufferPair);
+	GEngine->RenderSubsystem->AddNewIndexBuffer("Plane", IndexBuffer);
 }
 
 void UResourceSubsystem::GenerateCubeMesh()
@@ -319,11 +332,7 @@ void UResourceSubsystem::GenerateCubeMesh()
 
 	Cube.PrimitiveTopology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-	std::pair<string, FMesh> Pair{};
-	Pair.first = "Cube";
-	Pair.second = Cube;
-
-	Meshes.insert(Pair);
+	this->AddNewMesh("Cube", Cube);
 
 	/* ID3D11Buffer 생성 */
 	ComPtr<ID3D11Buffer> VertexBuffer{};
@@ -341,11 +350,8 @@ void UResourceSubsystem::GenerateCubeMesh()
 		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
 	}
 
-	std::pair<string, ComPtr<ID3D11Buffer>> VertexBufferPair{};
-	VertexBufferPair.first = "Cube";
-	VertexBufferPair.second = VertexBuffer;
-	GEngine->RenderSubsystem->VertexBuffers.insert(VertexBufferPair);
-
+	GEngine->RenderSubsystem->AddNewVertexBuffer("Cube", VertexBuffer);
+	
 
 	/* IndexBuffer 생성 */
 	ComPtr<ID3D11Buffer> IndexBuffer{};
@@ -364,13 +370,6 @@ void UResourceSubsystem::GenerateCubeMesh()
 		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
 	}
 
-	std::pair<string, ComPtr<ID3D11Buffer>> IndexBufferPair{};
-	IndexBufferPair.first = "Cube";
-	IndexBufferPair.second = IndexBuffer;
-	GEngine->RenderSubsystem->IndexBuffers.insert(IndexBufferPair);
+	GEngine->RenderSubsystem->AddNewIndexBuffer("Cube", IndexBuffer);
 }
 
-unordered_map<string, FMesh>& UResourceSubsystem::GetMeshes()
-{
-	return Meshes;
-}
