@@ -95,32 +95,40 @@ void UResourceSubsystem::LoadFolder(string strDirectoryName)
 
 void UResourceSubsystem::LoadTextureFile(string strPath)
 {
+	HRESULT hr;
 	std::wstring wstrPath = Utils::StringToWString(strPath);
 
 	ComPtr<ID3D11ShaderResourceView> NewSRV;
 	ComPtr<ID3D11Texture2D> NewTexture;
 	DirectX::ScratchImage NewScratchImage;
+	DirectX::ScratchImage NewSRGBScratchImage;
 	DirectX::TexMetadata NewTexMetadata;
 
-	if (S_OK != DirectX::LoadFromWICFile(wstrPath.c_str(), DirectX::WIC_FLAGS_NONE, &NewTexMetadata, NewScratchImage))
+	hr = DirectX::LoadFromWICFile(wstrPath.c_str(), DirectX::WIC_FLAGS_NONE, &NewTexMetadata, NewScratchImage);
+	if (hr != S_OK)
 	{
-		GEngine->DebugLog("Texture File Load Failed" + strPath, 1);
+		GEngine->DebugLog("Texture File Load Failed : " + strPath, 1);
 		return;
 	}
 
-	if (S_OK != DirectX::CreateTexture(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewTexMetadata, (ID3D11Resource**)NewTexture.GetAddressOf()))
+	//hr = DirectX::Convert(NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, DirectX::TEX_FILTER_DEFAULT, DirectX::TEX_THRESHOLD_DEFAULT, NewSRGBScratchImage);
+	//if (hr != S_OK)
+	//{
+	//	GEngine->DebugLog("SRGB Conversion Failed : " + strPath, 1);
+	//	return;
+	//}
+
+	hr = DirectX::CreateTexture(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), (ID3D11Resource**)NewTexture.GetAddressOf());
+	if (hr != S_OK)
 	{
-		GEngine->DebugLog("Texture Creation Failed" + strPath, 1);
+		GEngine->DebugLog("Texture Creation Failed : " + strPath, 1);
 		return;
 	}
 
-	/* 텍스쳐를 만들지 않고 ScratchImage를 바로 SRV로 만드는 DirectXTex함수 */
-	/* CreateShaderResourceView(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), NewSRV.GetAddressOf())) */
-
-	// 만일 오류날 경우 srv desc작성
-	if (S_OK != GEngine->RenderSubsystem->Device->CreateShaderResourceView(NewTexture.Get(), nullptr, NewSRV.GetAddressOf()))
+	hr = DirectX::CreateShaderResourceView(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), NewSRV.GetAddressOf());
+	if (hr != S_OK)
 	{
-		GEngine->DebugLog("SRV Creation Failed" + strPath, 1);
+		GEngine->DebugLog("SRV Creation Failed : " + strPath, 1);
 		return;
 	}
 

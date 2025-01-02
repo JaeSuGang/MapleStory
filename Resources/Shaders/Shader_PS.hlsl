@@ -13,7 +13,9 @@ SamplerState ImageSampler : register(s0);
 float4 PSMain(VertexShaderOutPut _Vertex) : SV_Target0
 {
     float4 Color = ImageTexture.Sample(ImageSampler, _Vertex.UV.xy);
-    return Color;
+    float3 ColorSRGB = pow(Color.rgb, 1.0 / 2.2);
+    
+    return float4(ColorSRGB, Color.a);
 };
 
 float4 PSWireframe(VertexShaderOutPut _Vertex) : SV_Target0
