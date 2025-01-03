@@ -8,6 +8,7 @@ class UResourceSubsystem;
 class UWindowSubsystem;
 class URenderSubsystem;
 class UDebugSubsystem;
+class UTimeSubsystem;
 class UWorld;
 
 class UEngine : public UObject
@@ -74,6 +75,8 @@ public:
 	UWindowSubsystem* WindowSubsystem;
 
 	UDebugSubsystem* DebugSubsystem;
+
+	UTimeSubsystem* TimeSubsystem;
 
 private:
 

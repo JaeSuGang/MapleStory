@@ -19,26 +19,15 @@ void URenderComponent::TickComponent(float fDeltaTime)
 	Super::TickComponent(fDeltaTime);
 }
 
-void URenderComponent::SetAnimation(shared_ptr<UAnimation> _Animation)
+void URenderComponent::EnableAnimation()
 {
-	if (_Animation.get() == nullptr)
-	{
-		Animation = std::make_shared<UAnimation>();
-		Animation->SetMaterialToApply(Material.get());
-	}
-	else
-	{
-		Animation = _Animation;
-		Animation->SetMaterialToApply(Material.get());
-	}
+	Animation = std::make_shared<UAnimation>();
+	Animation->SetMaterialToApply(Material.get());
 }
 
-void URenderComponent::SetMaterial(shared_ptr<UMaterial> _Material)
+void URenderComponent::EnableMaterial()
 {
-	if (_Material.get() == nullptr)
-		Material = std::make_shared<UMaterial>();
-	else
-		Material = _Material;
+	Material = std::make_shared<UMaterial>();
 }
 
 void URenderComponent::SetActorScaleByTextureSize()
@@ -50,36 +39,34 @@ void URenderComponent::SetActorScaleByTextureSize()
 
 void URenderComponent::SetBlendMode(bool bIsTransculent)
 {
-	this->SetMaterialIfNull();
+	this->EnableMaterialIfNot();
 
 	Material->SetBlendMode(bIsTransculent);
 }
 
 void URenderComponent::SetPixelShaderByName(string strShaderName)
 {
-	this->SetMaterialIfNull();
+	this->EnableMaterialIfNot();
 
 	Material->SetPixelShaderByName(strShaderName);
 }
 
 void URenderComponent::SetTextureByName(string strTextureName)
 {
-	this->SetMaterialIfNull();
+	this->EnableMaterialIfNot();
 
 	Material->SetTextureByName(strTextureName);
 }
 
 void URenderComponent::SetMeshIDByName(string strName)
 {
-	this->SetMaterialIfNull();
+	this->EnableMaterialIfNot();
 
 	MeshID = GEngine->ResourceSubsystem->GetMeshIDByName(strName);
 }
 
-void URenderComponent::SetMaterialIfNull()
+void URenderComponent::EnableMaterialIfNot()
 {
 	if (Material.get() == nullptr)
-	{
-		this->SetMaterial(nullptr);
-	}
+		this->EnableMaterial();
 }

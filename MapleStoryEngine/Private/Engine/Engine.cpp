@@ -4,6 +4,7 @@
 #include "Engine/DebugSubsystem.h"
 #include "RenderSystem/RenderSubsystem.h"
 #include "Engine/ResourceSubsystem.h"
+#include "Engine/TimeSubsystem.h"
 #include "World/World.h"
 #include "Level/Level.h"
 
@@ -23,6 +24,10 @@ UEngine::UEngine()
 	RenderSubsystem = CreateSubsystem<URenderSubsystem>();
 
 	ResourceSubsystem = CreateSubsystem<UResourceSubsystem>();
+
+	TimeSubsystem = CreateSubsystem<UTimeSubsystem>();
+
+	TimeSubsystem->LateInit();
 
 	WindowSubsystem->LateInit();
 
@@ -62,7 +67,10 @@ void UEngine::RunForever()
 
 void UEngine::Tick()
 {
-	float fDeltaTime{};
+
+	TimeSubsystem->SetLastTimePointTime();
+	TimeSubsystem->SetDeltaTime(TimeSubsystem->CalculateDeltaTime());
+	float fDeltaTime = TimeSubsystem->GetDeltaTime();
 
 	WindowSubsystem->Tick(fDeltaTime);
 

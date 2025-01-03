@@ -22,9 +22,9 @@ public:
 	void TickComponent(float fDeltaTime) override;
 
 public:
-	ENGINE_API void SetAnimation(shared_ptr<UAnimation> _Animation);
+	ENGINE_API void EnableAnimation();
 
-	ENGINE_API void SetMaterial(shared_ptr<UMaterial> _Material);
+	ENGINE_API void EnableMaterial();
 
 	ENGINE_API void SetActorScaleByTextureSize();
 
@@ -36,7 +36,7 @@ public:
 
 	ENGINE_API void SetMeshIDByName(string strName);
 
-	void SetMaterialIfNull();
+	void EnableMaterialIfNot();
 
 private:
 	shared_ptr<UAnimation> Animation;
