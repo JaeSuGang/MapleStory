@@ -13,6 +13,12 @@ public:
 	ENGINE_API AActor();
 
 public:
+	ENGINE_API void Destroy();
+
+	ENGINE_API UWorld* GetWorld();
+
+	ENGINE_API void SetWorld(UWorld* pWorld);
+
 	ENGINE_API void SetScale(float x, float y, float z);
 
 	ENGINE_API FTransform& GetTransform();
@@ -47,6 +53,8 @@ public:
 	}
 
 protected:
+	UWorld* World;
+
 	unordered_map<string, shared_ptr<UActorComponent>> OwnedComponents;
 
 	FTransform Transform;

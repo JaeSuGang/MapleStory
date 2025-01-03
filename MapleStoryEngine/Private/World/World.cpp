@@ -2,7 +2,37 @@
 #include "Level/Level.h"
 #include "World/World.h"
 
+ENGINE_API void UWorld::DestroyActor(AActor* Actor)
+{
+	PersistentLevel->ActorsToDestroy.push_back(Actor);
+}
+
 vector<shared_ptr<AActor>>& UWorld::GetActors()
 {
 	return PersistentLevel->Actors;
+}
+
+void UWorld::ExecuteActorDestroy()
+{
+	vector<AActor*>& ActorsToDestroy = PersistentLevel->ActorsToDestroy;
+
+	auto RemoveIter = std::remove_if(
+		PersistentLevel->Actors.begin(),
+		PersistentLevel->Actors.end(),
+		[&](shared_ptr<AActor> ActorInContainer)
+		{
+			for (AActor* pActorToDestroy : ActorsToDestroy)
+			{
+				if (ActorInContainer.get() == pActorToDestroy)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		});
+
+	PersistentLevel->Actors.erase(RemoveIter, PersistentLevel->Actors.end());
+
+	ActorsToDestroy.clear();
 }

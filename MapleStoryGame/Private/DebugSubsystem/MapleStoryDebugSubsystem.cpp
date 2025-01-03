@@ -38,6 +38,19 @@ void UMapleStoryDebugSubsystem::CustomCode()
 		RenderComponent->SetActorScaleByTextureSize();
 	}
 
+	if (ImGui::Button("Spawn Transculent Effect"))
+	{
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
+		URenderComponent* RenderComponent = Actor->GetComponentByClass<URenderComponent>();
+		string strMeshName = "Plane";
+		string strTextureName = "Resources\\Textures\\1800_1890.png";
+		RenderComponent->SetMeshIDByName(strMeshName);
+		RenderComponent->SetTextureByName(strTextureName);
+		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+		RenderComponent->SetBlendMode(1);
+		RenderComponent->SetActorScaleByTextureSize();
+	}
+
 	if (ImGui::Button("Spawn Cube"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
@@ -50,9 +63,15 @@ void UMapleStoryDebugSubsystem::CustomCode()
 		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 		RenderComponent->SetBlendMode(0);
 	}
+	int n = 0;
 	for (shared_ptr<AActor>& Actor : Actors)
 	{
+		ImGui::PushID(n++);
 		ImGui::Text("<%s> : %p", typeid(*Actor.get()).name(), Actor.get());
+		if (ImGui::Button("Destroy"))
+		{
+			Actor->Destroy();
+		}
 		ImGui::DragFloat("Scale.X", &Actor->GetTransform().Scale.x, 1);
 		ImGui::DragFloat("Scale.Y", &Actor->GetTransform().Scale.y, 1);
 		ImGui::DragFloat("Scale.Z", &Actor->GetTransform().Scale.z, 1);
@@ -62,6 +81,7 @@ void UMapleStoryDebugSubsystem::CustomCode()
 		ImGui::DragFloat("Position.X", &Actor->GetTransform().Position.x, 1);
 		ImGui::DragFloat("Position.Y", &Actor->GetTransform().Position.y, 1);
 		ImGui::DragFloat("Position.Z", &Actor->GetTransform().Position.z, 1);
+		ImGui::PopID();
 	}
 	ImGui::End();
 }

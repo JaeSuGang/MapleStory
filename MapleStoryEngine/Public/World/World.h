@@ -12,7 +12,11 @@ class UWorld : public UObject
 	friend class UGameplaySubsystem;
 
 public:
+	ENGINE_API void DestroyActor(AActor* Actor);
+
 	ENGINE_API vector<shared_ptr<AActor>>& GetActors();
+
+	void ExecuteActorDestroy();
 
 	template <typename T>
 	T* SpawnActor()
@@ -20,6 +24,8 @@ public:
 		static_assert(std::is_base_of<AActor, T>::value);
 
 		shared_ptr<AActor> NewActor{ static_cast<AActor*>(new T{}) };
+
+		NewActor->SetWorld(this);
 
 		PersistentLevel->Actors.push_back(NewActor);
 

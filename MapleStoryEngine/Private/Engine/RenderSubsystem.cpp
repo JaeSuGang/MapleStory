@@ -385,7 +385,6 @@ void URenderSubsystem::Render(float fDeltaTime)
 	DeviceContext->VSSetShader(VertexShader.Get(), nullptr, 0);
 	DeviceContext->RSSetViewports(1, &ViewPortInfo);
 	DeviceContext->RSSetState(Camera.IsWireFrame ? RasterizerWireframeState.Get() : RasterizerDefaultState.Get());
-	DeviceContext->OMSetRenderTargets(1, RenderTargetView.GetAddressOf(), DepthStencilView.Get());
 	DeviceContext->OMSetBlendState(DefaultBlendState.Get(), nullptr, 0xFFFFFFFF);
 
 	this->RenderActors(fDeltaTime);
@@ -404,11 +403,21 @@ void URenderSubsystem::Render(float fDeltaTime)
 void URenderSubsystem::RenderActors(float fDeltaTime)
 {
 	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActors();
+	vector<URenderComponent*> Transculents;
 
+	DeviceContext->OMSetRenderTargets(1, RenderTargetView.GetAddressOf(), DepthStencilView.Get());
 	for (shared_ptr<AActor>& LoopActor : Actors)
 	{
 		if (URenderComponent* RenderComponent = LoopActor->GetComponentByClass<URenderComponent>())
 		{
+			/* Transculent 머티리얼을 가진 경우 나중에 렌더링 */
+			if (RenderComponent->Material.BlendMode == FMaterial::EBlendMode::Transculent)
+			{
+				Transculents.push_back(RenderComponent);
+				continue;
+			}
+
+
 			/* 정보 불러오기 및 지역 변수 설정 */
 			FMesh& Mesh = GEngine->ResourceSubsystem->GetMeshByID(RenderComponent->MeshID);
 			ID3D11Buffer* VertexBuffer = this->VertexBuffers[RenderComponent->MeshID].Get();
@@ -432,6 +441,34 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 			/* 드로우 콜 */
 			DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
 		}
+	}
+
+
+	/* Transculents 후처리 */
+	DeviceContext->OMSetRenderTargets(1, RenderTargetView.GetAddressOf(), ReadOnlyDepthStencilView.Get());
+	for (URenderComponent* RenderComponent : Transculents)
+	{
+		/* 정보 불러오기 및 지역 변수 설정 */
+		FMesh& Mesh = GEngine->ResourceSubsystem->GetMeshByID(RenderComponent->MeshID);
+		ID3D11Buffer* VertexBuffer = this->VertexBuffers[RenderComponent->MeshID].Get();
+		ID3D11Buffer* pVertexBuffer[1];
+		pVertexBuffer[0] = VertexBuffer;
+		UINT nVertexBufferStride = sizeof(FVertex);
+		UINT nVertexBufferOffset = 0;
+
+		ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->MeshID].Get();
+
+		/* 메쉬별 렌더링 파이프라인 설정 */
+		DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader : PixelShaders[RenderComponent->Material.PSShaderID].Get(), nullptr, 0);
+		DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
+		DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
+		DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
+		this->SetTransformConstantBuffer(RenderComponent->Owner->GetTransform());
+		this->SetShaderResources(RenderComponent->Material.TextureID);
+
+
+		/* 드로우 콜 */
+		DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
 	}
 }
 
@@ -519,6 +556,7 @@ void URenderSubsystem::CreateRasterizer()
 
 void URenderSubsystem::CreateDepthStencilView()
 {
+	HRESULT hr;
 	DXGI_SWAP_CHAIN_DESC SwapChainDesc{};
 	SwapChain->GetDesc(&SwapChainDesc);
 
@@ -534,7 +572,19 @@ void URenderSubsystem::CreateDepthStencilView()
 
 	Device->CreateTexture2D(&TextureDesc, nullptr, DepthStencilBuffer.GetAddressOf());
 
-	HRESULT hr = Device->CreateDepthStencilView(DepthStencilBuffer.Get(), nullptr, DepthStencilView.GetAddressOf());
+	hr = Device->CreateDepthStencilView(DepthStencilBuffer.Get(), nullptr, DepthStencilView.GetAddressOf());
+
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
+	}
+
+	D3D11_DEPTH_STENCIL_VIEW_DESC ReadOnlyDSVDesc{};
+	ReadOnlyDSVDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	ReadOnlyDSVDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	ReadOnlyDSVDesc.Flags = D3D11_DSV_READ_ONLY_DEPTH | D3D11_DSV_READ_ONLY_STENCIL;
+
+	hr = Device->CreateDepthStencilView(DepthStencilBuffer.Get(), &ReadOnlyDSVDesc, ReadOnlyDepthStencilView.GetAddressOf());
 
 	if (hr != S_OK)
 	{

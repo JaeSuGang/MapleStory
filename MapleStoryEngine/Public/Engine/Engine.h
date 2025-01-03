@@ -16,8 +16,10 @@ class UEngine : public UObject
 
 public:
 	UEngine();
+
 	~UEngine();
 
+public:
 	ENGINE_API static shared_ptr<UEngine> Instantiate();
 
 	ENGINE_API void RunForever();
@@ -27,6 +29,8 @@ public:
 	ENGINE_API void DebugLog(string Text, int WarningLevel);
 
 	ENGINE_API UWorld* GetWorld() const;
+
+	void ExecuteActorDestroy();
 
 	void Tick();
 

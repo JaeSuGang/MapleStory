@@ -4,6 +4,8 @@
 #include "Engine/DebugSubsystem.h"
 #include "Engine/RenderSubsystem.h"
 #include "Engine/ResourceSubsystem.h"
+#include "World/World.h"
+#include "Level/Level.h"
 
 UEngine::UEngine()
 {
@@ -76,6 +78,7 @@ void UEngine::Tick()
 
 #endif // _DEBUG
 
+	this->ExecuteActorDestroy();
 }
 
 void UEngine::Terminate()
@@ -91,6 +94,11 @@ ENGINE_API void UEngine::DebugLog(string Text, int WarningLevel)
 UWorld* UEngine::GetWorld() const
 {
 	return ActiveWorld.get();
+}
+
+void UEngine::ExecuteActorDestroy()
+{
+	ActiveWorld->ExecuteActorDestroy();
 }
 
 UEngine* GEngine = nullptr;

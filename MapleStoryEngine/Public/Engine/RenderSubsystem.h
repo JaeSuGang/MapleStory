@@ -143,6 +143,7 @@ private:
 	ComPtr<ID3D11RenderTargetView> RenderTargetView;
 	ComPtr<ID3D11Texture2D> DepthStencilBuffer;
 	ComPtr<ID3D11DepthStencilView> DepthStencilView;
+	ComPtr<ID3D11DepthStencilView> ReadOnlyDepthStencilView;
 
 
 	/* 렌더링 파이프라인 개별 설정 변수 */
