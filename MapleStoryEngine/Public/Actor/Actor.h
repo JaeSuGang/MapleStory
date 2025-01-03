@@ -9,7 +9,11 @@ class UActorComponent;
 class AActor : public UObject
 {
 public:
+	/* 생성자와 오버라이드 */
 	ENGINE_API AActor();
+
+public:
+	ENGINE_API void SetScale(float x, float y, float z);
 
 	ENGINE_API FTransform& GetTransform();
 

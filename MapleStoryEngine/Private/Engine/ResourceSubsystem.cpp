@@ -99,7 +99,7 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 	std::wstring wstrPath = Utils::StringToWString(strPath);
 
 	ComPtr<ID3D11ShaderResourceView> NewSRV;
-	ComPtr<ID3D11Texture2D> NewTexture;
+	ComPtr<ID3D11Texture2D> NewD3DTexture;
 	DirectX::ScratchImage NewScratchImage;
 	DirectX::ScratchImage NewSRGBScratchImage;
 	DirectX::TexMetadata NewTexMetadata;
@@ -118,7 +118,7 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 	//	return;
 	//}
 
-	hr = DirectX::CreateTexture(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), (ID3D11Resource**)NewTexture.GetAddressOf());
+	hr = DirectX::CreateTexture(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), (ID3D11Resource**)NewD3DTexture.GetAddressOf());
 	if (hr != S_OK)
 	{
 		GEngine->DebugLog("Texture Creation Failed : " + strPath, 1);
@@ -132,14 +132,19 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 		return;
 	}
 
+	shared_ptr<UTexture> NewTexture{ new UTexture{} };
+	NewTexture->Width = NewTexMetadata.width;
+	NewTexture->Height = NewTexMetadata.height;
+
+	NewTexture->Texture = NewD3DTexture;
+	NewTexture->SRV = NewSRV;
+
 	GEngine->RenderSubsystem->AddNewTexture(strPath, NewTexture);
-	GEngine->RenderSubsystem->AddNewSRV(strPath, NewSRV);
 }
 
 void UResourceSubsystem::SetMissingTexture()
 {
 	GEngine->RenderSubsystem->MissingTextureTextureID = GEngine->RenderSubsystem->GetTextureIDByName(MISSING_TEXTURE_PATH);
-	GEngine->RenderSubsystem->MissingTextureSRVID = GEngine->RenderSubsystem->GetSRVIDByName(MISSING_TEXTURE_PATH);
 }
 
 void UResourceSubsystem::GenerateDefaultMeshes()
@@ -153,16 +158,16 @@ void UResourceSubsystem::GeneratePlaneMesh()
 {
 	/* FMesh »ý¼º */
 	FVertex v1{};
-	v1.POSITION = { -10.0f, 10.0f, 0.0f, 1.0f };
+	v1.POSITION = { -0.5f, 0.5f, 0.0f, 1.0f };
 	v1.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v2{};
-	v2.POSITION = { 10.0f, 10.0f, 0.0f, 1.0f };
+	v2.POSITION = { 0.5f, 0.5f, 0.0f, 1.0f };
 	v2.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v3{};
-	v3.POSITION = { -10.0f, -10.0f, 0.0f, 1.0f };
+	v3.POSITION = { -0.5f, -0.5f, 0.0f, 1.0f };
 	v3.TEXCOORD = { 0.0f, 1.0f };
 	FVertex v4{};
-	v4.POSITION = { 10.0f, -10.0f, 0.0f, 1.0f };
+	v4.POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
 	v4.TEXCOORD = { 1.0f, 1.0f };
 
 	FMesh Plane;
@@ -225,81 +230,81 @@ void UResourceSubsystem::GenerateCubeMesh()
 {
 	/* FMesh »ý¼º */
 	FVertex v1_1{}; // Á¤¸é
-	v1_1.POSITION = { -10.0f, 10.0f, -10.0f, 1.0f };
+	v1_1.POSITION = { -0.5f, 0.5f, -0.5f, 1.0f };
 	v1_1.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v1_2{};
-	v1_2.POSITION = { 10.0f, 10.0f, -10.0f, 1.0f };
+	v1_2.POSITION = { 0.5f, 0.5f, -0.5f, 1.0f };
 	v1_2.TEXCOORD = { 0.0f, 1.0f };
 	FVertex v1_3{};
-	v1_3.POSITION = { -10.0f, -10.0f, -10.0f, 1.0f };
+	v1_3.POSITION = { -0.5f, -0.5f, -0.5f, 1.0f };
 	v1_3.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v1_4{};
-	v1_4.POSITION = { 10.0f, -10.0f, -10.0f, 1.0f };
+	v1_4.POSITION = { 0.5f, -0.5f, -0.5f, 1.0f };
 	v1_4.TEXCOORD = { 1.0f, 1.0f };
 
 	FVertex v2_1{}; // ¿ÞÂÊ ¸é
-	v2_1.POSITION = { -10.0f, 10.0f, 10.0f, 1.0f };
+	v2_1.POSITION = { -0.5f, 0.5f, 0.5f, 1.0f };
 	v2_1.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v2_2{};
-	v2_2.POSITION = { -10.0f, 10.0f, -10.0f, 1.0f };
+	v2_2.POSITION = { -0.5f, 0.5f, -0.5f, 1.0f };
 	v2_2.TEXCOORD = { 1.0f, 1.0f };
 	FVertex v2_3{};
-	v2_3.POSITION = { -10.0f, -10.0f, 10.0f, 1.0f };
+	v2_3.POSITION = { -0.5f, -0.5f, 0.5f, 1.0f };
 	v2_3.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v2_4{};
-	v2_4.POSITION = { -10.0f, -10.0f, -10.0f, 1.0f };
+	v2_4.POSITION = { -0.5f, -0.5f, -0.5f, 1.0f };
 	v2_4.TEXCOORD = { 0.0f, 1.0f };
 
 	FVertex v3_1{}; // ¿ìÃø ¸é
-	v3_1.POSITION = { 10.0f, 10.0f, -10.0f, 1.0f };
+	v3_1.POSITION = { 0.5f, 0.5f, -0.5f, 1.0f };
 	v3_1.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v3_2{};
-	v3_2.POSITION = { 10.0f, 10.0f, 10.0f, 1.0f };
+	v3_2.POSITION = { 0.5f, 0.5f, 0.5f, 1.0f };
 	v3_2.TEXCOORD = { 1.0f, 1.0f };
 	FVertex v3_3{};
-	v3_3.POSITION = { 10.0f, -10.0f, -10.0f, 1.0f };
+	v3_3.POSITION = { 0.5f, -0.5f, -0.5f, 1.0f };
 	v3_3.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v3_4{};
-	v3_4.POSITION = { 10.0f, -10.0f, 10.0f, 1.0f };
+	v3_4.POSITION = { 0.5f, -0.5f, 0.5f, 1.0f };
 	v3_4.TEXCOORD = { 0.0f, 1.0f };
 
 	FVertex v4_1{}; // µÞ¸é
-	v4_1.POSITION = { 10.0f, 10.0f, 10.0f, 1.0f };
+	v4_1.POSITION = { 0.5f, 0.5f, 0.5f, 1.0f };
 	v4_1.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v4_2{};
-	v4_2.POSITION = { -10.0f, 10.0f, 10.0f, 1.0f };
+	v4_2.POSITION = { -0.5f, 0.5f, 0.5f, 1.0f };
 	v4_2.TEXCOORD = { 0.0f, 1.0f };
 	FVertex v4_3{};
-	v4_3.POSITION = { 10.0f, -10.0f, 10.0f, 1.0f };
+	v4_3.POSITION = { 0.5f, -0.5f, 0.5f, 1.0f };
 	v4_3.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v4_4{};
-	v4_4.POSITION = { -10.0f, -10.0f, 10.0f, 1.0f };
+	v4_4.POSITION = { -0.5f, -0.5f, 0.5f, 1.0f };
 	v4_4.TEXCOORD = { 1.0f, 1.0f };
 
 	FVertex v5_1{}; // À­¸é
-	v5_1.POSITION = { -10.0f, 10.0f, 10.0f, 1.0f };
+	v5_1.POSITION = { -0.5f, 0.5f, 0.5f, 1.0f };
 	v5_1.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v5_2{};
-	v5_2.POSITION = { 10.0f, 10.0f, 10.0f, 1.0f };
+	v5_2.POSITION = { 0.5f, 0.5f, 0.5f, 1.0f };
 	v5_2.TEXCOORD = { 1.0f, 1.0f };
 	FVertex v5_3{};
-	v5_3.POSITION = { -10.0f, 10.0f, -10.0f, 1.0f };
+	v5_3.POSITION = { -0.5f, 0.5f, -0.5f, 1.0f };
 	v5_3.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v5_4{};
-	v5_4.POSITION = { 10.0f, 10.0f, -10.0f, 1.0f };
+	v5_4.POSITION = { 0.5f, 0.5f, -0.5f, 1.0f };
 	v5_4.TEXCOORD = { 0.0f, 1.0f };
 
 	FVertex v6_1{}; // ¾Æ·§¸é
-	v6_1.POSITION = { -10.0f, -10.0f, -10.0f, 1.0f };
+	v6_1.POSITION = { -0.5f, -0.5f, -0.5f, 1.0f };
 	v6_1.TEXCOORD = { 1.0f, 0.0f };
 	FVertex v6_2{};
-	v6_2.POSITION = { 10.0f, -10.0f, -10.0f, 1.0f };
+	v6_2.POSITION = { 0.5f, -0.5f, -0.5f, 1.0f };
 	v6_2.TEXCOORD = { 1.0f, 1.0f };
 	FVertex v6_3{};
-	v6_3.POSITION = { -10.0f, -10.0f, 10.0f, 1.0f };
+	v6_3.POSITION = { -0.5f, -0.5f, 0.5f, 1.0f };
 	v6_3.TEXCOORD = { 0.0f, 0.0f };
 	FVertex v6_4{};
-	v6_4.POSITION = { 10.0f, -10.0f, 10.0f, 1.0f };
+	v6_4.POSITION = { 0.5f, -0.5f, 0.5f, 1.0f };
 	v6_4.TEXCOORD = { 0.0f, 1.0f };
 
 	FMesh Cube;

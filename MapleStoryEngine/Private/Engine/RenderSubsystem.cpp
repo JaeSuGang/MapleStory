@@ -20,7 +20,7 @@ URenderSubsystem::URenderSubsystem()
 	Camera.Height = DEFAULT_WINDOW_SIZE_Y;
 	Camera.NearZ = 1.0f;
 	Camera.FarZ = 10000.0f;
-	Camera.Transform.Position.z = -1000.0f;
+	Camera.Transform.Position.z = -500.0f;
 
 	RenderTargetViewColor[0] = 0.25f;
 	RenderTargetViewColor[1] = 0.25f;
@@ -134,12 +134,12 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 	DeviceContext->VSSetConstantBuffers(0, 1, pTransformConstantBuffer);
 }
 
-void URenderSubsystem::SetShaderResources(int SRVID)
+void URenderSubsystem::SetShaderResources(int TextureID)
 {
 	ID3D11ShaderResourceView* SRVs[1];
 	ID3D11SamplerState* Samplers[1];
 
-	SRVs[0] = ShaderResourceViews[SRVID].Get();
+	SRVs[0] = Textures[TextureID]->SRV.Get();
 	Samplers[0] = DefaultSamplerState.Get();
 
 	DeviceContext->PSSetShaderResources(0, 1, SRVs);
@@ -192,6 +192,22 @@ void URenderSubsystem::InitSwapChain()
 	}
 }
 
+int URenderSubsystem::GetPixelShaderIDByName(string strKey)
+{
+	auto FindIter = StringMappedIndexPixelShaderIDs.find(strKey);
+
+	if (FindIter != StringMappedIndexPixelShaderIDs.end())
+	{
+		return FindIter->second;
+	}
+	else
+	{
+		GEngine->DebugLog("Tried To Find Invalid Pixel Shader : " + strKey, 2);
+		return -1;
+	}
+
+}
+
 int URenderSubsystem::GetVertexBufferIDByName(string strKey)
 {
 	auto FindIter = StringMappedVertexBufferIDs.find(strKey);
@@ -240,20 +256,7 @@ int URenderSubsystem::GetTextureIDByName(string strKey)
 
 }
 
-int URenderSubsystem::GetSRVIDByName(string strKey)
-{
-	auto FindIter = StringMappedSRVIDs.find(strKey);
 
-	if (FindIter != StringMappedSRVIDs.end())
-	{
-		return FindIter->second;
-	}
-	else
-	{
-		GEngine->DebugLog("Tried To Find Invalid SRV Name : " + strKey, 2);
-		return MissingTextureSRVID;
-	}
-}
 
 void URenderSubsystem::AddNewVertexBuffer(string strKey, ComPtr<ID3D11Buffer> NewVertexBuffer)
 {
@@ -271,22 +274,13 @@ void URenderSubsystem::AddNewIndexBuffer(string strKey, ComPtr<ID3D11Buffer> New
 	IndexBuffers.push_back(NewIndexBuffer);
 }
 
-void URenderSubsystem::AddNewTexture(string strKey, ComPtr<ID3D11Texture2D> NewTexture)
+void URenderSubsystem::AddNewTexture(string strKey, shared_ptr<UTexture> NewTexture)
 {
 	int nSize = (int)Textures.size();
 	std::pair<string, int> MapPair = { strKey, nSize };
 	StringMappedTextureIDs.insert(MapPair);
 	Textures.push_back(NewTexture);
 }
-
-void URenderSubsystem::AddNewSRV(string strKey, ComPtr<ID3D11ShaderResourceView> NewSRV)
-{
-	int nSize = (int)ShaderResourceViews.size();
-	std::pair<string, int> MapPair = { strKey, nSize };
-	StringMappedSRVIDs.insert(MapPair);
-	ShaderResourceViews.push_back(NewSRV);
-}
-
 
 void URenderSubsystem::CreateTransformConstantBuffer()
 {
@@ -391,8 +385,8 @@ void URenderSubsystem::Render(float fDeltaTime)
 	DeviceContext->VSSetShader(VertexShader.Get(), nullptr, 0);
 	DeviceContext->RSSetViewports(1, &ViewPortInfo);
 	DeviceContext->RSSetState(Camera.IsWireFrame ? RasterizerWireframeState.Get() : RasterizerDefaultState.Get());
-	DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader.Get() : DefaultPixelShader.Get(), nullptr, 0);
 	DeviceContext->OMSetRenderTargets(1, RenderTargetView.GetAddressOf(), DepthStencilView.Get());
+	DeviceContext->OMSetBlendState(DefaultBlendState.Get(), nullptr, 0xFFFFFFFF);
 
 	this->RenderActors(fDeltaTime);
 
@@ -417,20 +411,21 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		{
 			/* 정보 불러오기 및 지역 변수 설정 */
 			FMesh& Mesh = GEngine->ResourceSubsystem->GetMeshByID(RenderComponent->MeshID);
-			ID3D11Buffer* VertexBuffer = this->VertexBuffers[RenderComponent->VertexBufferID].Get();
+			ID3D11Buffer* VertexBuffer = this->VertexBuffers[RenderComponent->MeshID].Get();
 			ID3D11Buffer* pVertexBuffer[1];
 			pVertexBuffer[0] = VertexBuffer;
 			UINT nVertexBufferStride = sizeof(FVertex);
 			UINT nVertexBufferOffset = 0;
 
-			ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->IndexBufferID].Get();
+			ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->MeshID].Get();
 
 			/* 메쉬별 렌더링 파이프라인 설정 */
+			DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader : PixelShaders[RenderComponent->Material.PSShaderID].Get(), nullptr, 0);
 			DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 			DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 			DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
 			this->SetTransformConstantBuffer(LoopActor->GetTransform());
-			this->SetShaderResources(RenderComponent->SRVID);
+			this->SetShaderResources(RenderComponent->Material.TextureID);
 
 
 
@@ -473,6 +468,8 @@ void URenderSubsystem::LateInit()
 	this->CreateDefaultSamplerState();
 
 	this->CreateDepthStencilView();
+
+	this->CreateBlendState();
 }
 
 void URenderSubsystem::CreateVertexShader(string strShaderPath)
@@ -545,37 +542,64 @@ void URenderSubsystem::CreateDepthStencilView()
 	}
 }
 
+void URenderSubsystem::CreateBlendState()
+{
+	D3D11_BLEND_DESC BlendDesc = {};
+	BlendDesc.RenderTarget[0].BlendEnable = TRUE;
+	BlendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;       // 소스 픽셀의 알파값 사용
+	BlendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;   // 1 - 알파
+	BlendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	BlendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	BlendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	BlendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	BlendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	Device->CreateBlendState(&BlendDesc, DefaultBlendState.GetAddressOf());
+}
+
 void URenderSubsystem::CreatePixelShaders(string strShaderPath)
 {
 	std::wstring wstrShaderPath = Utils::StringToWString(strShaderPath);
 
+	HRESULT hr;
 	int Flag0{};
 #ifdef _DEBUG
 	Flag0 = D3D10_SHADER_DEBUG;
 #endif
 	Flag0 |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
 
-	HRESULT hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, "PSMain", "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+
+
+	/* Default Pixel Shader 생성 */
+	ComPtr<ID3D11PixelShader> DefaultPixelShader;
+	hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, DEFAULT_PIXEL_SHADER_NAME, "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
 	if (hr != S_OK)
 	{
 		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
 	}
-
 	hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, DefaultPixelShader.GetAddressOf());
 	if (hr != S_OK)
 	{
 		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
 	}
+	StringMappedIndexPixelShaderIDs.insert(std::make_pair(DEFAULT_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
+	PixelShaders.push_back(DefaultPixelShader);
 
-	hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, "PSWireframe", "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+
+
+	/* Wireframe Pixel Shader 생성 */
+	ComPtr<ID3D11PixelShader> WireframePixelShader;
+	hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, WIREFRAME_PIXEL_SHADER_NAME, "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
 	if (hr != S_OK)
 	{
 		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
 	}
-
 	hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, WireframePixelShader.GetAddressOf());
 	if (hr != S_OK)
 	{
 		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
 	}
+	StringMappedIndexPixelShaderIDs.insert(std::make_pair(WIREFRAME_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
+	PixelShaders.push_back(WireframePixelShader);
+	this->WireframePixelShader = WireframePixelShader.Get();
 }

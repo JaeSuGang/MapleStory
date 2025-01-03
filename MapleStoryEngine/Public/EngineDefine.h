@@ -12,14 +12,17 @@
 
 #define CRITICAL_ERROR(text) { MessageBoxA(0, text, "Error", MB_OK); assert(false); };
 
+#define DEFAULT_PIXEL_SHADER_NAME "PSDefault"
+#define WIREFRAME_PIXEL_SHADER_NAME "PSWireframe"
+
 #define RESOURCES_FOLDER_NAME "Resources"
 #define MISSING_TEXTURE_PATH "Resources\\Textures\\MissingTexture.png"
 #define VSShader_PATH "Resources\\Shaders\\Shader_VS.hlsl"
 #define PSShader_PATH "Resources\\Shaders\\Shader_PS.hlsl"
 
 /* »ó¼ö °ª */
-#define DEFAULT_WINDOW_SIZE_X 1920.0f
-#define DEFAULT_WINDOW_SIZE_Y 1080.0f
+#define DEFAULT_WINDOW_SIZE_X 1366.0f
+#define DEFAULT_WINDOW_SIZE_Y 768.0f
 #define TAG_CONTAINER_RESERVE_COUNT 100
 #define REGISTERED_TAGS_RESERVE_COUNT 200
 

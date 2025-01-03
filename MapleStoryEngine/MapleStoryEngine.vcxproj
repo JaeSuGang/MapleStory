@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Material\Material.h" />
     <ClInclude Include="Public\GameInstance\GameplaySubsystem.h" />
     <ClInclude Include="Public\IMGUI\imconfig.h" />
     <ClInclude Include="Public\IMGUI\imgui.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Public\Engine\ResourceSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Material\Material.cpp" />
     <ClCompile Include="Private\GameInstance\GameplaySubsystem.cpp" />
     <ClCompile Include="Private\IMGUI\imgui.cpp" />
     <ClCompile Include="Private\IMGUI\imgui_demo.cpp" />

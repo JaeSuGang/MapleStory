@@ -1,8 +1,10 @@
 #pragma once
 #include "ActorComponent.h"
 #include "Math/Transform.h"
+#include "Material/Material.h"
 
 struct FMesh;
+class FMaterial;
 
 class URenderComponent : public UActorComponent
 {
@@ -13,23 +15,24 @@ class URenderComponent : public UActorComponent
 public:
 	/* 생성자와 오버라이드 */
 	ENGINE_API URenderComponent();
+
 	void TickComponent(float fDeltaTime) override;
 
 public:
-	ENGINE_API void SetMeshInfosByName(string strName);
-	ENGINE_API void SetTextureInfosByName(string strName);
+	ENGINE_API void SetActorScaleByTextureSize();
 
-	ENGINE_API void SetSRVIDByName(string strName);
-	ENGINE_API void SetTextureIDByName(string strName);
+	ENGINE_API void SetBlendMode(bool bIsTransculent);
+
+	ENGINE_API void SetPixelShaderByName(string strShaderName);
+
+	ENGINE_API void SetTextureByName(string strShaderName);
+
+	ENGINE_API void SetMaterial(FMaterial MaterialToApply);
+
 	ENGINE_API void SetMeshIDByName(string strName);
-	ENGINE_API void SetVertexBufferIDByName(string strName);
-	ENGINE_API void SetIndexBufferIDByName(string strName);
 
 
 private:
+	FMaterial Material;
 	int MeshID;
-	int VertexBufferID;
-	int IndexBufferID;
-	int TextureID;
-	int SRVID;
 };

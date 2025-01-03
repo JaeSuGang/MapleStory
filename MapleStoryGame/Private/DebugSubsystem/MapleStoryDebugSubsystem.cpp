@@ -3,6 +3,7 @@
 #include "IMGUI/imgui.h"
 #include "Engine/Engine.h"
 #include "Actor/Actor.h"
+#include "Material/Material.h"
 #include "World/World.h"
 #include "Actors/BP_TestActor.h"
 #include "Engine/RenderSubsystem.h"
@@ -27,20 +28,27 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	if (ImGui::Button("Spawn Plane"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
-		Actor->GetTransform().Scale = { 10.0f, 10.0f, 10.0f };
+		URenderComponent* RenderComponent = Actor->GetComponentByClass<URenderComponent>();
 		string strMeshName = "Plane";
 		string strTextureName = "Resources\\Textures\\9000404.img.stand.0.png";
-		Actor->GetComponentByClass<URenderComponent>()->SetMeshInfosByName(strMeshName);
-		Actor->GetComponentByClass<URenderComponent>()->SetTextureInfosByName(strTextureName);
+		RenderComponent->SetMeshIDByName(strMeshName);
+		RenderComponent->SetTextureByName(strTextureName);
+		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+		RenderComponent->SetBlendMode(0);
+		RenderComponent->SetActorScaleByTextureSize();
 	}
+
 	if (ImGui::Button("Spawn Cube"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
-		Actor->GetTransform().Scale = { 10.0f, 10.0f, 10.0f };
+		URenderComponent* RenderComponent = Actor->GetComponentByClass<URenderComponent>();
+		Actor->GetTransform().Scale = { 100.0f, 100.0f, 100.0f };
 		string strMeshName = "Cube";
-		string strTextureName = "Resources\\Textures\\9000404.img.stand.0.png";
-		Actor->GetComponentByClass<URenderComponent>()->SetMeshInfosByName(strMeshName);
-		Actor->GetComponentByClass<URenderComponent>()->SetTextureInfosByName(strTextureName);
+		string strTextureName = "Resources\\Textures\\9fdsa";
+		RenderComponent->SetMeshIDByName(strMeshName);
+		RenderComponent->SetTextureByName(strTextureName);
+		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+		RenderComponent->SetBlendMode(0);
 	}
 	for (shared_ptr<AActor>& Actor : Actors)
 	{

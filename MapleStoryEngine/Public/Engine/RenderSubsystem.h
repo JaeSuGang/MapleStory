@@ -6,6 +6,15 @@
 class UWindowSubsystem;
 class UDebugSubsystem;
 
+class UTexture
+{
+public:
+	ComPtr<ID3D11Texture2D> Texture;
+	ComPtr<ID3D11ShaderResourceView> SRV;
+	unsigned Width;
+	unsigned Height;
+};
+
 struct FTransformConstants
 {
 public:
@@ -30,6 +39,7 @@ public:
 class URenderSubsystem : public UEngineSubsystem
 {
 	friend class UResourceSubsystem;
+	friend class URenderComponent;
 
 public:
 	/* Constructors and Overrides */
@@ -55,6 +65,8 @@ public:
 	void InitSwapChain();
 
 public:
+	int GetPixelShaderIDByName(string strKey);
+
 	int GetVertexBufferIDByName(string strKey);
 
 	int GetIndexBufferIDByName(string strKey);
@@ -67,7 +79,7 @@ public:
 
 	void AddNewIndexBuffer(string strKey, ComPtr<ID3D11Buffer> NewIndexBuffer);
 
-	void AddNewTexture(string strKey, ComPtr<ID3D11Texture2D> NewTexture);
+	void AddNewTexture(string strKey, shared_ptr<UTexture> NewTexture);
 
 	void AddNewSRV(string strKey, ComPtr<ID3D11ShaderResourceView> NewSRV);
 
@@ -75,7 +87,7 @@ private:
 	/* 개별 매쉬 설정 */
 	void SetTransformConstantBuffer(FTransform Transform);
 
-	void SetShaderResources(int SRVID);
+	void SetShaderResources(int TextureID);
 
 private:
 	/* 렌더링 파이프라인 초기화 */
@@ -97,15 +109,13 @@ private:
 
 	void CreateDepthStencilView();
 
+	void CreateBlendState();
+
 private:
 	/* 리소스 */
-	/* SRVs */
-	unordered_map<string, int> StringMappedSRVIDs;
-	vector<ComPtr<ID3D11ShaderResourceView>> ShaderResourceViews;
-	int MissingTextureSRVID;
 	/* Textures */
 	unordered_map<string, int> StringMappedTextureIDs;
-	vector<ComPtr<ID3D11Texture2D>> Textures;
+	vector<shared_ptr<UTexture>> Textures;
 	int MissingTextureTextureID;
 	/* Vertex Buffers */
 	unordered_map<string, int> StringMappedVertexBufferIDs;
@@ -113,17 +123,20 @@ private:
 	/* Index Buffers */
 	unordered_map<string, int> StringMappedIndexBufferIDs;
 	vector<ComPtr<ID3D11Buffer>> IndexBuffers;
+	/* Pixel Shaders */
+	unordered_map<string, int> StringMappedIndexPixelShaderIDs;
+	vector<ComPtr<ID3D11PixelShader>> PixelShaders;
+	ID3D11PixelShader* WireframePixelShader;
 
 private:
 	/* 카메라 설정 */
 	FCamera Camera;
 
-	/* 픽셀 쉐이더 */
-	ComPtr<ID3D11PixelShader> DefaultPixelShader;
-	ComPtr<ID3D11PixelShader> WireframePixelShader;
-
 	/* 샘플러 */
 	ComPtr<ID3D11SamplerState> DefaultSamplerState;
+
+	/* 블렌드 설정 */
+	ComPtr<ID3D11BlendState> DefaultBlendState;
 
 	/* 텍스처와 뷰 */
 	ComPtr<ID3D11Texture2D> BackBuffer;
