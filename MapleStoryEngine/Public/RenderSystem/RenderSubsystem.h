@@ -1,19 +1,11 @@
 #pragma once
 #include "EnginePch.h"
-#include "EngineSubsystem.h"
+#include "Engine/EngineSubsystem.h"
 #include "Math/Transform.h"
 
 class UWindowSubsystem;
 class UDebugSubsystem;
-
-class UTexture
-{
-public:
-	ComPtr<ID3D11Texture2D> Texture;
-	ComPtr<ID3D11ShaderResourceView> SRV;
-	unsigned Width;
-	unsigned Height;
-};
+class UTexture;
 
 struct FTransformConstants
 {
@@ -73,15 +65,11 @@ public:
 
 	int GetTextureIDByName(string strKey);
 
-	int GetSRVIDByName(string strKey);
-
 	void AddNewVertexBuffer(string strKey, ComPtr<ID3D11Buffer> NewVertexBuffer);
 
 	void AddNewIndexBuffer(string strKey, ComPtr<ID3D11Buffer> NewIndexBuffer);
 
 	void AddNewTexture(string strKey, shared_ptr<UTexture> NewTexture);
-
-	void AddNewSRV(string strKey, ComPtr<ID3D11ShaderResourceView> NewSRV);
 
 private:
 	/* 개별 매쉬 설정 */

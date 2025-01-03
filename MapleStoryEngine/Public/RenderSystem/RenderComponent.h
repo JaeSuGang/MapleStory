@@ -1,14 +1,17 @@
 #pragma once
-#include "ActorComponent.h"
+#include "ActorComponent/ActorComponent.h"
 #include "Math/Transform.h"
-#include "Material/Material.h"
+#include "RenderSystem/Material.h"
 
 struct FMesh;
-class FMaterial;
+
+class UMaterial;
+class UAnimation;
 
 class URenderComponent : public UActorComponent
 {
 	friend class URenderSubsystem;
+	friend class UMaterial;
 
 	typedef UActorComponent Super;
 
@@ -19,20 +22,24 @@ public:
 	void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API void SetAnimation(shared_ptr<UAnimation> _Animation);
+
+	ENGINE_API void SetMaterial(shared_ptr<UMaterial> _Material);
+
 	ENGINE_API void SetActorScaleByTextureSize();
 
 	ENGINE_API void SetBlendMode(bool bIsTransculent);
 
 	ENGINE_API void SetPixelShaderByName(string strShaderName);
 
-	ENGINE_API void SetTextureByName(string strShaderName);
-
-	ENGINE_API void SetMaterial(FMaterial MaterialToApply);
+	ENGINE_API void SetTextureByName(string strTextureName);
 
 	ENGINE_API void SetMeshIDByName(string strName);
 
+	void SetMaterialIfNull();
 
 private:
-	FMaterial Material;
+	shared_ptr<UAnimation> Animation;
+	shared_ptr<UMaterial> Material;
 	int MeshID;
 };

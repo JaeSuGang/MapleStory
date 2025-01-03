@@ -3,11 +3,11 @@
 #include "IMGUI/imgui.h"
 #include "Engine/Engine.h"
 #include "Actor/Actor.h"
-#include "Material/Material.h"
+#include "RenderSystem/Material.h"
 #include "World/World.h"
 #include "Actors/BP_TestActor.h"
-#include "Engine/RenderSubsystem.h"
-#include "ActorComponent/RenderComponent.h"
+#include "RenderSystem/RenderSubsystem.h"
+#include "RenderSystem/RenderComponent.h"
 
 void UMapleStoryDebugSubsystem::CustomCode()
 {

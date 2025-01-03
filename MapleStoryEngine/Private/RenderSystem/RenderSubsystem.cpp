@@ -1,14 +1,15 @@
 #include "EnginePch.h"
 #include "Engine/Engine.h"
-#include "Engine/RenderSubsystem.h"
+#include "RenderSystem/RenderSubsystem.h"
 #include "Engine/ResourceSubsystem.h"
 #include "Engine/DebugSubsystem.h"
 #include "Engine/WindowSubsystem.h"
+#include "RenderSystem/Texture.h"
 #include "Utils/Utils.h"
 #include "World/World.h"
 #include "Level/Level.h"
 #include "Actor/Actor.h"
-#include "ActorComponent/RenderComponent.h"
+#include "RenderSystem/RenderComponent.h"
 #include "IMGUI/imgui.h"
 
 URenderSubsystem::URenderSubsystem()
@@ -411,7 +412,7 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		if (URenderComponent* RenderComponent = LoopActor->GetComponentByClass<URenderComponent>())
 		{
 			/* Transculent 머티리얼을 가진 경우 나중에 렌더링 */
-			if (RenderComponent->Material.BlendMode == FMaterial::EBlendMode::Transculent)
+			if (RenderComponent->Material->BlendMode == UMaterial::EBlendMode::Transculent)
 			{
 				Transculents.push_back(RenderComponent);
 				continue;
@@ -429,12 +430,12 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 			ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->MeshID].Get();
 
 			/* 메쉬별 렌더링 파이프라인 설정 */
-			DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader : PixelShaders[RenderComponent->Material.PSShaderID].Get(), nullptr, 0);
+			DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader : PixelShaders[RenderComponent->Material->PSShaderID].Get(), nullptr, 0);
 			DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 			DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 			DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
 			this->SetTransformConstantBuffer(LoopActor->GetTransform());
-			this->SetShaderResources(RenderComponent->Material.TextureID);
+			this->SetShaderResources(RenderComponent->Material->TextureID);
 
 
 
@@ -459,12 +460,12 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->MeshID].Get();
 
 		/* 메쉬별 렌더링 파이프라인 설정 */
-		DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader : PixelShaders[RenderComponent->Material.PSShaderID].Get(), nullptr, 0);
+		DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader : PixelShaders[RenderComponent->Material->PSShaderID].Get(), nullptr, 0);
 		DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 		DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 		DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
 		this->SetTransformConstantBuffer(RenderComponent->Owner->GetTransform());
-		this->SetShaderResources(RenderComponent->Material.TextureID);
+		this->SetShaderResources(RenderComponent->Material->TextureID);
 
 
 		/* 드로우 콜 */

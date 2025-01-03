@@ -147,7 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Public\Material\Material.h" />
+    <ClInclude Include="Public\RenderSystem\Animation.h" />
+    <ClInclude Include="Public\RenderSystem\Material.h" />
     <ClInclude Include="Public\GameInstance\GameplaySubsystem.h" />
     <ClInclude Include="Public\IMGUI\imconfig.h" />
     <ClInclude Include="Public\IMGUI\imgui.h" />
@@ -183,14 +184,16 @@
     <ClInclude Include="Public\Utils\Utils.h" />
     <ClInclude Include="Public\World\World.h" />
     <ClInclude Include="Public\World\WorldSubsystem.h" />
-    <ClInclude Include="Public\Engine\RenderSubsystem.h" />
+    <ClInclude Include="Public\RenderSystem\RenderSubsystem.h" />
     <ClInclude Include="Public\Math\Vector3.h" />
     <ClInclude Include="Public\Math\Vector4.h" />
-    <ClInclude Include="Public\ActorComponent\RenderComponent.h" />
+    <ClInclude Include="Public\RenderSystem\RenderComponent.h" />
     <ClInclude Include="Public\Engine\ResourceSubsystem.h" />
+    <ClInclude Include="Public\RenderSystem\Texture.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Private\Material\Material.cpp" />
+    <ClCompile Include="Private\RenderSystem\Animation.cpp" />
+    <ClCompile Include="Private\RenderSystem\Material.cpp" />
     <ClCompile Include="Private\GameInstance\GameplaySubsystem.cpp" />
     <ClCompile Include="Private\IMGUI\imgui.cpp" />
     <ClCompile Include="Private\IMGUI\imgui_demo.cpp" />
@@ -226,11 +229,12 @@
     <ClCompile Include="Private\Engine\WindowSubsystem.cpp" />
     <ClCompile Include="Private\World\World.cpp" />
     <ClCompile Include="Private\World\WorldSubsystem.cpp" />
-    <ClCompile Include="Private\Engine\RenderSubsystem.cpp" />
+    <ClCompile Include="Private\RenderSystem\RenderSubsystem.cpp" />
     <ClCompile Include="Private\Math\Vector3.cpp" />
     <ClCompile Include="Private\Math\Vector4.cpp" />
-    <ClCompile Include="Private\ActorComponent\RenderComponent.cpp" />
+    <ClCompile Include="Private\RenderSystem\RenderComponent.cpp" />
     <ClCompile Include="Private\Engine\ResourceSubsystem.cpp" />
+    <ClCompile Include="Private\RenderSystem\Texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

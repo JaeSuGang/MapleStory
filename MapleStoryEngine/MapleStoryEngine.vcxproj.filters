@@ -81,7 +81,7 @@
     <ClInclude Include="Public\Attributes\GameplayAttribute.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Public\Engine\RenderSubsystem.h">
+    <ClInclude Include="Public\RenderSystem\RenderSubsystem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Math\Vector3.h">
@@ -93,7 +93,7 @@
     <ClInclude Include="Public\Math\Transform.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Public\ActorComponent\RenderComponent.h">
+    <ClInclude Include="Public\RenderSystem\RenderComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Engine\ResourceSubsystem.h">
@@ -135,7 +135,13 @@
     <ClInclude Include="Public\Math\Mesh.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Public\Material\Material.h">
+    <ClInclude Include="Public\RenderSystem\Material.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\RenderSystem\Texture.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\RenderSystem\Animation.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -200,7 +206,7 @@
     <ClCompile Include="Private\Attributes\AttributeComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Private\Engine\RenderSubsystem.cpp">
+    <ClCompile Include="Private\RenderSystem\RenderSubsystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\Math\Vector3.cpp">
@@ -212,7 +218,7 @@
     <ClCompile Include="Private\Math\Transform.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Private\ActorComponent\RenderComponent.cpp">
+    <ClCompile Include="Private\RenderSystem\RenderComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\Engine\ResourceSubsystem.cpp">
@@ -245,7 +251,13 @@
     <ClCompile Include="Private\GameInstance\GameplaySubsystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Private\Material\Material.cpp">
+    <ClCompile Include="Private\RenderSystem\Material.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\RenderSystem\Texture.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\RenderSystem\Animation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

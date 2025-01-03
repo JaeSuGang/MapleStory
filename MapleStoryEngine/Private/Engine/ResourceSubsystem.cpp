@@ -1,9 +1,10 @@
 #include "EnginePch.h"
 #include "Utils/Utils.h"
 #include "Engine/ResourceSubsystem.h"
-#include "Engine/RenderSubsystem.h"
+#include "RenderSystem/RenderSubsystem.h"
 #include "Math/Mesh.h"
 #include "Engine/Engine.h"
+#include "RenderSystem/Texture.h"
 
 UResourceSubsystem::UResourceSubsystem()
 {
@@ -133,8 +134,8 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 	}
 
 	shared_ptr<UTexture> NewTexture{ new UTexture{} };
-	NewTexture->Width = NewTexMetadata.width;
-	NewTexture->Height = NewTexMetadata.height;
+	NewTexture->Width = (unsigned int)NewTexMetadata.width;
+	NewTexture->Height = (unsigned int)NewTexMetadata.height;
 
 	NewTexture->Texture = NewD3DTexture;
 	NewTexture->SRV = NewSRV;
