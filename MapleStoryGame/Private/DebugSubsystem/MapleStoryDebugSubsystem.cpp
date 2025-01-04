@@ -9,6 +9,7 @@
 #include "RenderSystem/RenderComponent.h"
 #include "Actors/BP_TestActor.h"
 #include "Actors/BP_TestSkill.h"
+#include "Actors/BP_TestSkill2.h"
 
 void UMapleStoryDebugSubsystem::CustomCode()
 {
@@ -42,6 +43,11 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	if (ImGui::Button("Spawn Transculent Effect"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestSkill>();
+	}
+
+	if (ImGui::Button("Spawn Transculent Effect2"))
+	{
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestSkill2>();
 	}
 
 	if (ImGui::Button("Spawn Cube"))

@@ -1,14 +1,14 @@
 #include "GamePch.h"
-#include "actors/BP_TestSkill.h"
+#include "actors/BP_TestSkill2.h"
 #include "RenderSystem/RenderComponent.h"
 #include "RenderSystem/Animation.h"
 
-BP_TestSkill::BP_TestSkill()
+BP_TestSkill2::BP_TestSkill2()
 {
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 }
 
-void BP_TestSkill::BeginPlay()
+void BP_TestSkill2::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -16,17 +16,17 @@ void BP_TestSkill::BeginPlay()
 
 	RenderComponent->SetMeshIDByName("Plane");
 	RenderComponent->SetBlendMode(1);
-	RenderComponent->SetTextureByName("Resources\\Textures\\13141005.screen.frames\\0.png");
+	RenderComponent->SetTextureByName("Resources\\Textures\\13141500.screen.frames\\0.png");
 	RenderComponent->SetActorScaleByTextureSize();
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 
 	/* 애니메이션 추가 */
 	RenderComponent->EnableAnimation();
-	RenderComponent->AddAnimationByFolder(EAnimationName::Screen, "Resources\\Textures\\13141005.screen.frames");
+	RenderComponent->AddAnimationByFolder(EAnimationName::Screen, "Resources\\Textures\\13141500.screen.frames");
 	RenderComponent->SetCurrentAnimation(EAnimationName::Screen);
 }
 
-void BP_TestSkill::Tick(float fDeltaTime)
+void BP_TestSkill2::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 

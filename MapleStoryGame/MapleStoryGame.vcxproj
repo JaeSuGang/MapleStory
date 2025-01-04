@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\BP_TestSkill2.cpp" />
     <ClCompile Include="Private\Actors\BP_TestSkill.cpp" />
     <ClCompile Include="Private\DebugSubsystem\MapleStoryDebugSubsystem.cpp" />
     <ClCompile Include="Private\Actors\BP_TestActor.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="Private\Actors\SkillBase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\BP_TestSkill2.h" />
     <ClInclude Include="Public\Actors\BP_TestSkill.h" />
     <ClInclude Include="Public\DebugSubsystem\MapleStoryDebugSubsystem.h" />
     <ClInclude Include="Public\Actors\BP_TestActor.h" />
