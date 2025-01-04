@@ -3,11 +3,12 @@
 #include "IMGUI/imgui.h"
 #include "Engine/Engine.h"
 #include "Actor/Actor.h"
-#include "RenderSystem/Material.h"
 #include "World/World.h"
-#include "Actors/BP_TestActor.h"
+#include "RenderSystem/Material.h"
 #include "RenderSystem/RenderSubsystem.h"
 #include "RenderSystem/RenderComponent.h"
+#include "Actors/BP_TestActor.h"
+#include "Actors/BP_TestSkill.h"
 
 void UMapleStoryDebugSubsystem::CustomCode()
 {
@@ -40,15 +41,7 @@ void UMapleStoryDebugSubsystem::CustomCode()
 
 	if (ImGui::Button("Spawn Transculent Effect"))
 	{
-		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
-		URenderComponent* RenderComponent = Actor->GetComponentByClass<URenderComponent>();
-		string strMeshName = "Plane";
-		string strTextureName = "Resources\\Textures\\1800_1890.png";
-		RenderComponent->SetMeshIDByName(strMeshName);
-		RenderComponent->SetTextureByName(strTextureName);
-		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
-		RenderComponent->SetBlendMode(1);
-		RenderComponent->SetActorScaleByTextureSize();
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestSkill>();
 	}
 
 	if (ImGui::Button("Spawn Cube"))

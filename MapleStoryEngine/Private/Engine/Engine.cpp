@@ -67,15 +67,16 @@ void UEngine::RunForever()
 
 void UEngine::Tick()
 {
-
-	TimeSubsystem->SetLastTimePointTime();
 	TimeSubsystem->SetDeltaTime(TimeSubsystem->CalculateDeltaTime());
+	TimeSubsystem->SetLastTimePointTime();
 	float fDeltaTime = TimeSubsystem->GetDeltaTime();
 
 	WindowSubsystem->Tick(fDeltaTime);
 
 	if (!bIsLoop)
 		return;
+
+	this->WorldTick(fDeltaTime);
 
 	RenderSubsystem->Tick(fDeltaTime);
 
@@ -87,6 +88,8 @@ void UEngine::Tick()
 #endif // _DEBUG
 
 	this->ExecuteActorDestroy();
+
+	this->ExecuteActorBeginPlay();
 }
 
 void UEngine::Terminate()
@@ -94,7 +97,7 @@ void UEngine::Terminate()
 	bIsLoop = false;
 }
 
-ENGINE_API void UEngine::DebugLog(string Text, int WarningLevel)
+void UEngine::DebugLog(string Text, int WarningLevel)
 {
 	DebugSubsystem->Log(Text, WarningLevel);
 }
@@ -104,9 +107,19 @@ UWorld* UEngine::GetWorld() const
 	return ActiveWorld.get();
 }
 
+void UEngine::WorldTick(float fDeltaTime)
+{
+	ActiveWorld->ExecuteActorTick(fDeltaTime);
+}
+
 void UEngine::ExecuteActorDestroy()
 {
 	ActiveWorld->ExecuteActorDestroy();
+}
+
+void UEngine::ExecuteActorBeginPlay()
+{
+	ActiveWorld->ExecuteActorBeginPlay();
 }
 
 UEngine* GEngine = nullptr;

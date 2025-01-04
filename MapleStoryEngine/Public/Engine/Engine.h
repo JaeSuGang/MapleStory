@@ -31,7 +31,11 @@ public:
 
 	ENGINE_API UWorld* GetWorld() const;
 
+	void WorldTick(float fDeltaTime);
+
 	void ExecuteActorDestroy();
+
+	void ExecuteActorBeginPlay();
 
 	void Tick();
 

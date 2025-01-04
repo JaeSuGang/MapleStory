@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\BP_TestSkill.cpp" />
     <ClCompile Include="Private\DebugSubsystem\MapleStoryDebugSubsystem.cpp" />
     <ClCompile Include="Private\Actors\BP_TestActor.cpp" />
     <ClCompile Include="Private\MainGameInstance\MainGameInstance.cpp" />
@@ -156,14 +157,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Private\Levels\TestLevel.cpp" />
+    <ClCompile Include="Private\Actors\SkillBase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\BP_TestSkill.h" />
     <ClInclude Include="Public\DebugSubsystem\MapleStoryDebugSubsystem.h" />
     <ClInclude Include="Public\Actors\BP_TestActor.h" />
     <ClInclude Include="Public\GameDefine.h" />
     <ClInclude Include="Public\MainGameInstance\MainGameInstance.h" />
     <ClInclude Include="Public\GamePch.h" />
     <ClInclude Include="Public\Levels\TestLevel.h" />
+    <ClInclude Include="Public\Actors\SkillBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,6 +33,12 @@
     <ClCompile Include="Private\DebugSubsystem\MapleStoryDebugSubsystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Private\Actors\SkillBase.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actors\BP_TestSkill.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Public\GamePch.h">
@@ -51,6 +57,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\DebugSubsystem\MapleStoryDebugSubsystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\SkillBase.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\BP_TestSkill.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

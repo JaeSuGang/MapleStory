@@ -15,5 +15,6 @@ public:
 protected:
 	vector<shared_ptr<AActor>> Actors;
 	vector<AActor*> ActorsToDestroy;
+	vector<AActor*> ActorsToBeginPlay;
 };
 

@@ -3,7 +3,7 @@
 
 UTimeSubsystem::UTimeSubsystem()
 {
-	DeltaTime = 0;
+	DeltaTime = 0.0f;
 	LastTimePoint = std::chrono::high_resolution_clock::now();
 }
 
@@ -42,7 +42,7 @@ void UTimeSubsystem::SetLastTimePointTime()
 
 float UTimeSubsystem::CalculateDeltaTime()
 {
-	std::chrono::duration<float> fDeltaTime;
-	fDeltaTime = std::chrono::high_resolution_clock::now() - LastTimePoint;
-	return fDeltaTime.count();
+	std::chrono::duration<float> DeltaTime;
+	DeltaTime = std::chrono::high_resolution_clock::now() - LastTimePoint;
+	return DeltaTime.count();
 }

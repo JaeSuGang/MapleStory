@@ -11,7 +11,10 @@
 
 void UDebugSubsystem::Log(string Text, int WarningLevel)
 {
-
+	if (WarningLevel > 1)
+	{
+		int a = 0;
+	}
 }
 
 void UDebugSubsystem::LateInit()

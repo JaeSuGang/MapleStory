@@ -2,6 +2,7 @@
 #include "ActorComponent/ActorComponent.h"
 #include "Math/Transform.h"
 #include "RenderSystem/Material.h"
+#include "RenderSystem/Animation.h"
 
 struct FMesh;
 
@@ -22,6 +23,12 @@ public:
 	void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API void SetCurrentAnimation(EAnimationName Name);
+
+	ENGINE_API void AddAnimationByFolder(EAnimationName Name, string strFolderPath);
+
+	ENGINE_API void PlayAnimation(float fDeltaTime);
+
 	ENGINE_API void EnableAnimation();
 
 	ENGINE_API void EnableMaterial();

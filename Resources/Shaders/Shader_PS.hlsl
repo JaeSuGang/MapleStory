@@ -15,7 +15,7 @@ float4 PSDefault(VertexShaderOutPut _Vertex) : SV_Target0
     float4 Color = ImageTexture.Sample(ImageSampler, _Vertex.UV.xy);
     
     /* 투명픽셀 제거 */
-    if (Color.a < 0.05f)
+    if (Color.a == 0.0f)
         clip(-1);
     
     /* 감마 보정 */

@@ -251,7 +251,6 @@ int URenderSubsystem::GetTextureIDByName(string strKey)
 	}
 	else
 	{
-		GEngine->DebugLog("Tried To Find Invalid Texture Name : " + strKey, 2);
 		return MissingTextureTextureID;
 	}
 
@@ -465,7 +464,8 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 		DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
 		this->SetTransformConstantBuffer(RenderComponent->Owner->GetTransform());
-		this->SetShaderResources(RenderComponent->Material->TextureID);
+		int a = RenderComponent->Material->TextureID;
+		this->SetShaderResources(a);
 
 
 		/* 드로우 콜 */

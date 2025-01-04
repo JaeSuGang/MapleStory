@@ -19,6 +19,16 @@ void URenderComponent::TickComponent(float fDeltaTime)
 	Super::TickComponent(fDeltaTime);
 }
 
+void URenderComponent::AddAnimationByFolder(EAnimationName Name, string strFolderPath)
+{
+	Animation->AddAnimationByFolder(Name, strFolderPath);
+}
+
+void URenderComponent::PlayAnimation(float fDeltaTime)
+{
+	Animation->Play(fDeltaTime);
+}
+
 void URenderComponent::EnableAnimation()
 {
 	Animation = std::make_shared<UAnimation>();
@@ -69,4 +79,9 @@ void URenderComponent::EnableMaterialIfNot()
 {
 	if (Material.get() == nullptr)
 		this->EnableMaterial();
+}
+
+void URenderComponent::SetCurrentAnimation(EAnimationName Name)
+{
+	Animation->SetCurrentAnimation(Name);
 }

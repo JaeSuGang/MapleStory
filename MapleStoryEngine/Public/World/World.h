@@ -16,7 +16,11 @@ public:
 
 	ENGINE_API vector<shared_ptr<AActor>>& GetActors();
 
+	void ExecuteActorTick(float fDeltaTime);
+
 	void ExecuteActorDestroy();
+
+	void ExecuteActorBeginPlay();
 
 	template <typename T>
 	T* SpawnActor()
@@ -28,6 +32,8 @@ public:
 		NewActor->SetWorld(this);
 
 		PersistentLevel->Actors.push_back(NewActor);
+
+		PersistentLevel->ActorsToBeginPlay.push_back(NewActor.get());
 
 		return static_cast<T*>(NewActor.get());
 	}

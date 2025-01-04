@@ -32,6 +32,7 @@ class URenderSubsystem : public UEngineSubsystem
 {
 	friend class UResourceSubsystem;
 	friend class URenderComponent;
+	friend class UAnimation;
 
 public:
 	/* Constructors and Overrides */

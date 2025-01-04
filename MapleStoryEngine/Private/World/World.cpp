@@ -12,6 +12,27 @@ vector<shared_ptr<AActor>>& UWorld::GetActors()
 	return PersistentLevel->Actors;
 }
 
+void UWorld::ExecuteActorTick(float fDeltaTime)
+{
+	for (shared_ptr<AActor>& LoopActor : PersistentLevel->Actors)
+	{
+		if (LoopActor->GetIsBeginPlayed())
+		{
+			LoopActor->Tick(fDeltaTime);
+		}
+	}
+}
+
+void UWorld::ExecuteActorBeginPlay()
+{
+	for (AActor* LoopActor : PersistentLevel->ActorsToBeginPlay)
+	{
+		LoopActor->BeginPlay();
+	}
+
+	PersistentLevel->ActorsToBeginPlay.clear();
+}
+
 void UWorld::ExecuteActorDestroy()
 {
 	vector<AActor*>& ActorsToDestroy = PersistentLevel->ActorsToDestroy;

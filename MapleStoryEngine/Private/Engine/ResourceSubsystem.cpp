@@ -112,13 +112,6 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 		return;
 	}
 
-	//hr = DirectX::Convert(NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, DirectX::TEX_FILTER_DEFAULT, DirectX::TEX_THRESHOLD_DEFAULT, NewSRGBScratchImage);
-	//if (hr != S_OK)
-	//{
-	//	GEngine->DebugLog("SRGB Conversion Failed : " + strPath, 1);
-	//	return;
-	//}
-
 	hr = DirectX::CreateTexture(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), (ID3D11Resource**)NewD3DTexture.GetAddressOf());
 	if (hr != S_OK)
 	{

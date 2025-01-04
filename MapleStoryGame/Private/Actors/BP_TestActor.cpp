@@ -7,3 +7,13 @@ BP_TestActor::BP_TestActor()
 {
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 }
+
+void BP_TestActor::BeginPlay()
+{
+
+}
+
+void BP_TestActor::Tick(float fDeltaTime)
+{
+
+}

@@ -12,10 +12,16 @@ public:
 	/* 생성자와 오버라이드 */
 	ENGINE_API AActor();
 
+	ENGINE_API virtual void BeginPlay() = 0;
+
+	ENGINE_API virtual void Tick(float fDeltaTime) = 0;
+
 public:
 	ENGINE_API void Destroy();
 
-	ENGINE_API UWorld* GetWorld();
+	ENGINE_API UWorld* GetWorld() const;
+
+	ENGINE_API bool GetIsBeginPlayed() const;
 
 	ENGINE_API void SetWorld(UWorld* pWorld);
 
@@ -58,5 +64,7 @@ protected:
 	unordered_map<string, shared_ptr<UActorComponent>> OwnedComponents;
 
 	FTransform Transform;
+
+	bool IsBeginPlayed;
 };
 
