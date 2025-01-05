@@ -28,5 +28,6 @@ using std::weak_ptr;
 
 // 추가 외부 라이브러리
 #include <DirectXTex.h>
+#include <box2d.h>
 
 using Microsoft::WRL::ComPtr;
