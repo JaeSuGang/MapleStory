@@ -73,6 +73,17 @@ DXGI_SWAP_CHAIN_DESC URenderSubsystem::MakeSwapChainDesc()
 	return ScInfo;
 }
 
+void URenderSubsystem::CreateD3D11Debug()
+{
+	HRESULT hr;
+	hr = Device->QueryInterface(__uuidof(ID3D11Debug), (void**)D3D11Debug.GetAddressOf());
+
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
+	}
+}
+
 void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 {
 	/* 월드 행렬 연산 */
@@ -251,7 +262,7 @@ int URenderSubsystem::GetTextureIDByName(string strKey)
 	}
 	else
 	{
-		return MissingTextureTextureID;
+		return GEngine->ResourceSubsystem->LoadTextureFile(strKey);
 	}
 
 }
@@ -274,12 +285,13 @@ void URenderSubsystem::AddNewIndexBuffer(string strKey, ComPtr<ID3D11Buffer> New
 	IndexBuffers.push_back(NewIndexBuffer);
 }
 
-void URenderSubsystem::AddNewTexture(string strKey, shared_ptr<UTexture> NewTexture)
+int URenderSubsystem::AddNewTexture(string strKey, shared_ptr<UTexture> NewTexture)
 {
 	int nSize = (int)Textures.size();
 	std::pair<string, int> MapPair = { strKey, nSize };
 	StringMappedTextureIDs.insert(MapPair);
 	Textures.push_back(NewTexture);
+	return nSize;
 }
 
 void URenderSubsystem::CreateTransformConstantBuffer()
@@ -370,7 +382,13 @@ void URenderSubsystem::CreateDefaultSamplerState()
 	}
 }
 
-ENGINE_API FCamera& URenderSubsystem::GetCamera()
+void URenderSubsystem::ReleaseTextures()
+{
+	Textures.clear();
+	StringMappedTextureIDs.clear();
+}
+
+FCamera& URenderSubsystem::GetCamera()
 {
 	return Camera;
 }
@@ -489,6 +507,8 @@ void URenderSubsystem::LateInit()
 	WindowSubsystem = Engine->WindowSubsystem;
 
 	this->CreateDeviceAndContext();
+
+	this->CreateD3D11Debug();
 
 	this->InitSwapChain();
 

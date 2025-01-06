@@ -43,6 +43,8 @@ public:
 	void LateInit() override;
 
 public:
+	ENGINE_API void ReleaseTextures();
+
 	ENGINE_API FCamera& GetCamera();
 
 	void Render(float fDeltaTime);
@@ -70,7 +72,7 @@ public:
 
 	void AddNewIndexBuffer(string strKey, ComPtr<ID3D11Buffer> NewIndexBuffer);
 
-	void AddNewTexture(string strKey, shared_ptr<UTexture> NewTexture);
+	int AddNewTexture(string strKey, shared_ptr<UTexture> NewTexture);
 
 private:
 	/* 개별 매쉬 설정 */
@@ -81,6 +83,8 @@ private:
 private:
 	/* 렌더링 파이프라인 초기화 */
 	DXGI_SWAP_CHAIN_DESC MakeSwapChainDesc();
+
+	void CreateD3D11Debug();
 
 	void CreateTransformConstantBuffer();
 	
@@ -117,9 +121,15 @@ private:
 	vector<ComPtr<ID3D11PixelShader>> PixelShaders;
 	ID3D11PixelShader* WireframePixelShader;
 
+
+public:
+	/* 디버그 인터페이스 */
+	ComPtr<ID3D11Debug> D3D11Debug;
+
 private:
 	/* 카메라 설정 */
 	FCamera Camera;
+
 
 	/* 샘플러 */
 	ComPtr<ID3D11SamplerState> DefaultSamplerState;

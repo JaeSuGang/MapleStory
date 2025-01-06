@@ -17,8 +17,6 @@ void UResourceSubsystem::Tick(float fDeltaTime)
 
 void UResourceSubsystem::LateInit()
 {
-	this->LoadFolder(RESOURCES_FOLDER_NAME);
-
 	this->SetMissingTexture();
 
 	this->GenerateDefaultMeshes();
@@ -40,6 +38,7 @@ FMesh& UResourceSubsystem::GetMeshByID(int nID)
 
 int UResourceSubsystem::GetMeshIDByName(string strKey)
 {
+
 	auto FindIter = StringMappedMeshIDs.find(strKey);
 
 	if (FindIter != StringMappedMeshIDs.end())
@@ -72,7 +71,7 @@ void UResourceSubsystem::SetWorkingDirectory()
 	CRITICAL_ERROR(RESOURCE_FOLDER_FIND_FAILED_TEXT);
 }
 
-void UResourceSubsystem::LoadFolder(string strDirectoryName)
+void UResourceSubsystem::LoadFolderRecursively(string strDirectoryName)
 {
 	std::filesystem::directory_iterator DirectoryIter{ strDirectoryName };
 
@@ -82,7 +81,7 @@ void UResourceSubsystem::LoadFolder(string strDirectoryName)
 
 		if (DirectoryIter->is_directory())
 		{
-			this->LoadFolder(ChildPath.string());
+			this->LoadFolderRecursively(ChildPath.string());
 		}
 
 		if (ChildPath.extension().string() == ".png")
@@ -94,7 +93,25 @@ void UResourceSubsystem::LoadFolder(string strDirectoryName)
 	}
 }
 
-void UResourceSubsystem::LoadTextureFile(string strPath)
+void UResourceSubsystem::LoadFolder(string strDirectoryName)
+{
+	std::filesystem::directory_iterator DirectoryIter{ strDirectoryName };
+
+	while (!DirectoryIter._At_end())
+	{
+		std::filesystem::path ChildPath = *DirectoryIter;
+
+		if (ChildPath.extension().string() == ".png")
+		{
+			this->LoadTextureFile(ChildPath.string());
+		}
+
+		++DirectoryIter;
+	}
+}
+
+/* TextureID¸¦ ¸®ÅÏ */
+int UResourceSubsystem::LoadTextureFile(string strPath)
 {
 	HRESULT hr;
 	std::wstring wstrPath = Utils::StringToWString(strPath);
@@ -109,22 +126,25 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 	if (hr != S_OK)
 	{
 		GEngine->DebugLog("Texture File Load Failed : " + strPath, 1);
-		return;
+		return 0;
 	}
 
 	hr = DirectX::CreateTexture(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), (ID3D11Resource**)NewD3DTexture.GetAddressOf());
 	if (hr != S_OK)
 	{
 		GEngine->DebugLog("Texture Creation Failed : " + strPath, 1);
-		return;
+		return 0;
 	}
 
 	hr = DirectX::CreateShaderResourceView(GEngine->RenderSubsystem->Device.Get(), NewScratchImage.GetImages(), NewScratchImage.GetImageCount(), NewScratchImage.GetMetadata(), NewSRV.GetAddressOf());
 	if (hr != S_OK)
 	{
 		GEngine->DebugLog("SRV Creation Failed : " + strPath, 1);
-		return;
+		return 0;
 	}
+
+	D3D11_TEXTURE2D_DESC desc;
+	NewD3DTexture.Get()->GetDesc(&desc);
 
 	shared_ptr<UTexture> NewTexture{ new UTexture{} };
 	NewTexture->Width = (unsigned int)NewTexMetadata.width;
@@ -133,7 +153,7 @@ void UResourceSubsystem::LoadTextureFile(string strPath)
 	NewTexture->Texture = NewD3DTexture;
 	NewTexture->SRV = NewSRV;
 
-	GEngine->RenderSubsystem->AddNewTexture(strPath, NewTexture);
+	return GEngine->RenderSubsystem->AddNewTexture(strPath, NewTexture);
 }
 
 void UResourceSubsystem::SetMissingTexture()

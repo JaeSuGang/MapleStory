@@ -15,6 +15,8 @@ public:
 public:
 	ENGINE_API void TogglePause();
 
+	ENGINE_API float GetFPS() const;
+
 	ENGINE_API float GetDeltaTime() const;
 
 	void SetDeltaTime(float fDeltaTime);

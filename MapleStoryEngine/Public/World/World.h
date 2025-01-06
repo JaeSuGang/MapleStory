@@ -16,6 +16,8 @@ public:
 	/* 생성자와 오버라이드 */
 	ENGINE_API UWorld();
 
+	ENGINE_API ~UWorld();
+
 	ENGINE_API virtual void LateInit();
 
 public:

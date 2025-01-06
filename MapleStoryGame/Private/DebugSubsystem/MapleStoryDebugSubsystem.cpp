@@ -4,6 +4,7 @@
 #include "Engine/Engine.h"
 #include "Actor/Actor.h"
 #include "World/World.h"
+#include "Engine/TimeSubsystem.h"
 #include "RenderSystem/Material.h"
 #include "RenderSystem/RenderSubsystem.h"
 #include "RenderSystem/RenderComponent.h"
@@ -16,15 +17,22 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	ImGuiIO& io = ImGui::GetIO();
 	vector<shared_ptr<AActor>>& Actors = GEngine->GetWorld()->GetActors();
 
+	float fFPS = GEngine->TimeSubsystem->GetFPS();
+
 	ImGui::ShowDemoWindow();
 
 	ImGui::Begin("DebugSystem");
+	ImGui::Text("FPS : %.2f", fFPS);
 	ImGui::Text("Screen Size x: %f, y: %f", io.DisplaySize.x, io.DisplaySize.y);
 
 	ImGui::SeparatorText("Camera");
 	ImGui::Checkbox("Perspective View", &GEngine->RenderSubsystem->GetCamera().IsPerspectiveProjection);
 	ImGui::Checkbox("Wireframe", &GEngine->RenderSubsystem->GetCamera().IsWireFrame);
 	ImGui::DragFloat("FOV", &GEngine->RenderSubsystem->GetCamera().FOV, 1);
+	if (ImGui::Button("Show Resources"))
+	{
+		RenderSubsystem->D3D11Debug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+	}
 
 	ImGui::SeparatorText("Actor");
 	if (ImGui::Button("Spawn Plane"))

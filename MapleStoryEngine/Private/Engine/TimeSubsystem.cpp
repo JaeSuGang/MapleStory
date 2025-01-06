@@ -17,12 +17,17 @@ void UTimeSubsystem::LateInit()
 
 }
 
-ENGINE_API void UTimeSubsystem::TogglePause()
+void UTimeSubsystem::TogglePause()
 {
 	if (!IsPaused)
 		IsPaused = true;
 	else
 		IsPaused = false;
+}
+
+float UTimeSubsystem::GetFPS() const
+{
+	return 1 / DeltaTime;
 }
 
 float UTimeSubsystem::GetDeltaTime() const

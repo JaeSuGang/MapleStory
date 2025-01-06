@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <chrono>
 #include <filesystem>
+#include <format>
 #include <memory>
 #include <ranges>
 #include <string>

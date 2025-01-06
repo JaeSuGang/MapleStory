@@ -2,10 +2,16 @@
 #include "Level/Level.h"
 #include "World/World.h"
 #include "World/PhysicsSubsystem.h"
+#include "RenderSystem/RenderSubsystem.h"
 
 UWorld::UWorld()
 {
 	PhysicsSubsystem = CreateDefaultSubobject<UPhysicsSubsystem>();
+}
+
+UWorld::~UWorld()
+{
+	GEngine->RenderSubsystem->ReleaseTextures();
 }
 
 void UWorld::LateInit()

@@ -14,6 +14,12 @@ public:
 	void LateInit() override;
 
 public:
+	ENGINE_API void LoadFolder(string strDirectoryName);
+
+	ENGINE_API void LoadFolderRecursively(string strDirectoryName);
+
+	ENGINE_API int LoadTextureFile(string strPath);
+
 	void AddNewMesh(string strKey, FMesh NewMesh);
 
 	FMesh& GetMeshByID(int ID);
@@ -22,10 +28,6 @@ public:
 
 private:
 	void SetWorkingDirectory();
-
-	void LoadFolder(string strDirectoryName);
-
-	void LoadTextureFile(string strPath);
 
 	void SetMissingTexture();
 
