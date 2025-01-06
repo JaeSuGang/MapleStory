@@ -1,11 +1,11 @@
 #include "EnginePch.h"
-#include "RenderSystem/RenderComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/ResourceSubsystem.h"
-#include "RenderSystem/RenderSubsystem.h"
 #include "Actor/Actor.h"
-#include "RenderSystem/Texture.h"
-#include "RenderSystem/Animation.h"
+#include "RenderCore/RenderComponent.h"
+#include "RenderCore/RenderSubsystem.h"
+#include "RenderCore/Texture.h"
+#include "RenderCore/Animation.h"
 
 URenderComponent::URenderComponent()
 	:
@@ -79,6 +79,11 @@ void URenderComponent::EnableMaterialIfNot()
 {
 	if (Material.get() == nullptr)
 		this->EnableMaterial();
+}
+
+void URenderComponent::BeginPlay()
+{
+	Super::BeginPlay();
 }
 
 void URenderComponent::SetCurrentAnimation(EAnimationName Name)

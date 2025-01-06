@@ -155,9 +155,10 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Public\World\PhysicsSubsystem.h" />
-    <ClInclude Include="Public\RenderSystem\Animation.h" />
-    <ClInclude Include="Public\RenderSystem\Material.h" />
+    <ClInclude Include="Public\PhysicsCore\PhysicsComponent.h" />
+    <ClInclude Include="Public\PhysicsCore\PhysicsSubsystem.h" />
+    <ClInclude Include="Public\RenderCore\Animation.h" />
+    <ClInclude Include="Public\RenderCore\Material.h" />
     <ClInclude Include="Public\GameInstance\GameplaySubsystem.h" />
     <ClInclude Include="Public\IMGUI\imconfig.h" />
     <ClInclude Include="Public\IMGUI\imgui.h" />
@@ -193,18 +194,19 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClInclude Include="Public\Utils\Utils.h" />
     <ClInclude Include="Public\World\World.h" />
     <ClInclude Include="Public\World\WorldSubsystem.h" />
-    <ClInclude Include="Public\RenderSystem\RenderSubsystem.h" />
+    <ClInclude Include="Public\RenderCore\RenderSubsystem.h" />
     <ClInclude Include="Public\Math\Vector3.h" />
     <ClInclude Include="Public\Math\Vector4.h" />
-    <ClInclude Include="Public\RenderSystem\RenderComponent.h" />
+    <ClInclude Include="Public\RenderCore\RenderComponent.h" />
     <ClInclude Include="Public\Engine\ResourceSubsystem.h" />
-    <ClInclude Include="Public\RenderSystem\Texture.h" />
+    <ClInclude Include="Public\RenderCore\Texture.h" />
     <ClInclude Include="Public\Engine\TimeSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Private\World\PhysicsSubsystem.cpp" />
-    <ClCompile Include="Private\RenderSystem\Animation.cpp" />
-    <ClCompile Include="Private\RenderSystem\Material.cpp" />
+    <ClCompile Include="Private\PhysicsCore\PhysicsComponent.cpp" />
+    <ClCompile Include="Private\PhysicsCore\PhysicsSubsystem.cpp" />
+    <ClCompile Include="Private\RenderCore\Animation.cpp" />
+    <ClCompile Include="Private\RenderCore\Material.cpp" />
     <ClCompile Include="Private\GameInstance\GameplaySubsystem.cpp" />
     <ClCompile Include="Private\IMGUI\imgui.cpp" />
     <ClCompile Include="Private\IMGUI\imgui_demo.cpp" />
@@ -240,12 +242,12 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClCompile Include="Private\Engine\WindowSubsystem.cpp" />
     <ClCompile Include="Private\World\World.cpp" />
     <ClCompile Include="Private\World\WorldSubsystem.cpp" />
-    <ClCompile Include="Private\RenderSystem\RenderSubsystem.cpp" />
+    <ClCompile Include="Private\RenderCore\RenderSubsystem.cpp" />
     <ClCompile Include="Private\Math\Vector3.cpp" />
     <ClCompile Include="Private\Math\Vector4.cpp" />
-    <ClCompile Include="Private\RenderSystem\RenderComponent.cpp" />
+    <ClCompile Include="Private\RenderCore\RenderComponent.cpp" />
     <ClCompile Include="Private\Engine\ResourceSubsystem.cpp" />
-    <ClCompile Include="Private\RenderSystem\Texture.cpp" />
+    <ClCompile Include="Private\RenderCore\Texture.cpp" />
     <ClCompile Include="Private\Engine\TimeSubsystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,8 +1,8 @@
 #include "EnginePch.h"
 #include "Engine/Engine.h"
-#include "RenderSystem/RenderSubsystem.h"
-#include "RenderSystem/Animation.h"
-#include "RenderSystem/Material.h"
+#include "RenderCore/RenderSubsystem.h"
+#include "RenderCore/Animation.h"
+#include "RenderCore/Material.h"
 
 UAnimation::UAnimation()
 	:

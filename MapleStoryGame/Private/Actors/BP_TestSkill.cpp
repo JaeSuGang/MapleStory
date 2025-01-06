@@ -1,7 +1,7 @@
 #include "GamePch.h"
 #include "actors/BP_TestSkill.h"
-#include "RenderSystem/RenderComponent.h"
-#include "RenderSystem/Animation.h"
+#include "RenderCore/RenderComponent.h"
+#include "RenderCore/Animation.h"
 
 BP_TestSkill::BP_TestSkill()
 {

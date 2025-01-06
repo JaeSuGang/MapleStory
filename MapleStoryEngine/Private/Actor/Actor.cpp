@@ -1,6 +1,7 @@
 #include "EnginePch.h"
 #include "World/World.h"
 #include "Actor/Actor.h"
+#include "ActorComponent/ActorComponent.h"
 
 AActor::AActor()
 	:
@@ -17,11 +18,23 @@ AActor::AActor()
 void AActor::BeginPlay()
 {
 	this->IsBeginPlayed = true;
+
+	for (auto Pair : OwnedComponents)
+	{
+		UActorComponent* Component = Pair.second.get();
+
+		Component->BeginPlay();
+	}
 }
 
 void AActor::Tick(float fDeltaTime)
 {
+	for (auto Pair : OwnedComponents)
+	{
+		UActorComponent* Component = Pair.second.get();
 
+		Component->TickComponent(fDeltaTime);
+	}
 }
 
 void AActor::Destroy()

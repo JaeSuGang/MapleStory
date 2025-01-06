@@ -1,8 +1,8 @@
 #pragma once
 #include "ActorComponent/ActorComponent.h"
 #include "Math/Transform.h"
-#include "RenderSystem/Material.h"
-#include "RenderSystem/Animation.h"
+#include "RenderCore/Material.h"
+#include "RenderCore/Animation.h"
 
 struct FMesh;
 
@@ -49,4 +49,7 @@ private:
 	shared_ptr<UAnimation> Animation;
 	shared_ptr<UMaterial> Material;
 	int MeshID;
+
+	// UActorComponent을(를) 통해 상속됨
+	ENGINE_API void BeginPlay() override;
 };

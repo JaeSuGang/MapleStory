@@ -2,7 +2,7 @@
 #include "Engine/Engine.h"
 #include "Engine/WindowSubsystem.h"
 #include "Engine/DebugSubsystem.h"
-#include "RenderSystem/RenderSubsystem.h"
+#include "RenderCore/RenderSubsystem.h"
 #include "Engine/ResourceSubsystem.h"
 #include "Engine/TimeSubsystem.h"
 #include "World/World.h"
@@ -39,7 +39,7 @@ UEngine::UEngine()
 
 UEngine::~UEngine()
 {
-	GEngine = nullptr;
+
 }
 
 ENGINE_API shared_ptr<UEngine> UEngine::Instantiate()
@@ -76,6 +76,8 @@ void UEngine::Tick()
 	if (!bIsLoop)
 		return;
 
+	this->ActiveWorld->ExecutePhysicsTick(fDeltaTime);
+
 	this->WorldTick(fDeltaTime);
 
 	RenderSubsystem->Tick(fDeltaTime);
@@ -107,8 +109,15 @@ UWorld* UEngine::GetWorld() const
 	return ActiveWorld.get();
 }
 
+UGameInstance* UEngine::GetGameInstance() const
+{
+	return ActiveGameInstance.get();
+}
+
 void UEngine::WorldTick(float fDeltaTime)
 {
+	ActiveWorld->ExecuteWorldSubsystemTick(fDeltaTime);
+
 	ActiveWorld->ExecuteActorTick(fDeltaTime);
 }
 

@@ -25,6 +25,10 @@ public:
 
 	ENGINE_API vector<shared_ptr<AActor>>& GetActors();
 
+	void ExecutePhysicsTick(float fDeltaTime);
+
+	void ExecuteWorldSubsystemTick(float fDeltaTime);
+
 	void ExecuteActorTick(float fDeltaTime);
 
 	void ExecuteActorDestroy();

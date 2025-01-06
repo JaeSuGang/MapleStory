@@ -1,7 +1,7 @@
 #include "EnginePch.h"
-#include "RenderSystem/Material.h"
+#include "RenderCore/Material.h"
 #include "Engine/Engine.h"
-#include "RenderSystem/RenderSubsystem.h"
+#include "RenderCore/RenderSubsystem.h"
 
 void UMaterial::SetBlendMode(bool bIsTransculent)
 {

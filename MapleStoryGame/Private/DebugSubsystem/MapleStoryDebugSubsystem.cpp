@@ -4,13 +4,17 @@
 #include "Engine/Engine.h"
 #include "Actor/Actor.h"
 #include "World/World.h"
+#include "GameInstance/GameplaySubsystem.h"
 #include "Engine/TimeSubsystem.h"
-#include "RenderSystem/Material.h"
-#include "RenderSystem/RenderSubsystem.h"
-#include "RenderSystem/RenderComponent.h"
+#include "RenderCore/Material.h"
+#include "RenderCore/RenderSubsystem.h"
+#include "RenderCore/RenderComponent.h"
+#include "Levels/TestLevel.h"
 #include "Actors/BP_TestActor.h"
 #include "Actors/BP_TestSkill.h"
 #include "Actors/BP_TestSkill2.h"
+#include "Actors/BP_TestFloor.h"
+
 
 void UMapleStoryDebugSubsystem::CustomCode()
 {
@@ -29,13 +33,26 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	ImGui::Checkbox("Perspective View", &GEngine->RenderSubsystem->GetCamera().IsPerspectiveProjection);
 	ImGui::Checkbox("Wireframe", &GEngine->RenderSubsystem->GetCamera().IsWireFrame);
 	ImGui::DragFloat("FOV", &GEngine->RenderSubsystem->GetCamera().FOV, 1);
-	if (ImGui::Button("Show Resources"))
+	if (ImGui::Button("Open New Level"))
 	{
-		RenderSubsystem->D3D11Debug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+		GEngine->GetGameInstance()->GameplaySubsystem->OpenLevel<UTestLevel>();
 	}
 
 	ImGui::SeparatorText("Actor");
-	if (ImGui::Button("Spawn Plane"))
+	if (ImGui::Button("Spawn Floor"))
+	{
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestFloor>();
+		URenderComponent* RenderComponent = Actor->GetComponentByClass<URenderComponent>();
+		string strMeshName = "Plane";
+		string strTextureName = "Resources\\Textures\\9000404.img.stand11.0.png";
+		RenderComponent->SetMeshIDByName(strMeshName);
+		RenderComponent->SetTextureByName(strTextureName);
+		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+		RenderComponent->SetBlendMode(0);
+		RenderComponent->SetActorScaleByTextureSize();
+	}
+
+	if (ImGui::Button("Spawn Mob"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
 		URenderComponent* RenderComponent = Actor->GetComponentByClass<URenderComponent>();

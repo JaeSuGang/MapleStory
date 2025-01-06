@@ -60,6 +60,8 @@ public:
 	void InitSwapChain();
 
 public:
+	void SetMissingTexture();
+
 	int GetPixelShaderIDByName(string strKey);
 
 	int GetVertexBufferIDByName(string strKey);
@@ -83,6 +85,8 @@ private:
 private:
 	/* 렌더링 파이프라인 초기화 */
 	DXGI_SWAP_CHAIN_DESC MakeSwapChainDesc();
+
+	void ReserveMemories();
 
 	void CreateD3D11Debug();
 

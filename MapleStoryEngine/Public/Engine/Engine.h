@@ -31,6 +31,8 @@ public:
 
 	ENGINE_API UWorld* GetWorld() const;
 
+	ENGINE_API UGameInstance* GetGameInstance() const;
+
 	void WorldTick(float fDeltaTime);
 
 	void ExecuteActorDestroy();
@@ -83,12 +85,12 @@ public:
 	UTimeSubsystem* TimeSubsystem;
 
 private:
+	unordered_map<string, shared_ptr<UEngineSubsystem>> Subsystems;
 
 	shared_ptr<UGameInstance> ActiveGameInstance;
 
 	shared_ptr<UWorld> ActiveWorld;
 
-	unordered_map<string, shared_ptr<UEngineSubsystem>> Subsystems;
 
 	bool bIsLoop;
 };

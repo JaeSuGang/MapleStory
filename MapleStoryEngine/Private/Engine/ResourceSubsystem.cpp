@@ -1,10 +1,10 @@
 #include "EnginePch.h"
 #include "Utils/Utils.h"
 #include "Engine/ResourceSubsystem.h"
-#include "RenderSystem/RenderSubsystem.h"
+#include "RenderCore/RenderSubsystem.h"
 #include "Math/Mesh.h"
 #include "Engine/Engine.h"
-#include "RenderSystem/Texture.h"
+#include "RenderCore/Texture.h"
 
 UResourceSubsystem::UResourceSubsystem()
 {
@@ -158,7 +158,7 @@ int UResourceSubsystem::LoadTextureFile(string strPath)
 
 void UResourceSubsystem::SetMissingTexture()
 {
-	GEngine->RenderSubsystem->MissingTextureTextureID = GEngine->RenderSubsystem->GetTextureIDByName(MISSING_TEXTURE_PATH);
+	GEngine->RenderSubsystem->SetMissingTexture();
 }
 
 void UResourceSubsystem::GenerateDefaultMeshes()

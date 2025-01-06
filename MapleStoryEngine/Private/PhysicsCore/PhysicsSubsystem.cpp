@@ -1,5 +1,5 @@
 #include "EnginePch.h"
-#include "World/PhysicsSubsystem.h"
+#include "PhysicsCore/PhysicsSubsystem.h"
 
 UPhysicsSubsystem::~UPhysicsSubsystem()
 {
@@ -8,12 +8,21 @@ UPhysicsSubsystem::~UPhysicsSubsystem()
 
 void UPhysicsSubsystem::Tick(float fDeltaTime)
 {
+	AccumulatedDeltaTime += fDeltaTime;
 
+	if (AccumulatedDeltaTime < this->SimulationFrequencyTime)
+		return;
+
+	b2World_Step(this->B2WorldID, this->SimulationFrequencyTime, 4);
+
+	AccumulatedDeltaTime = 0.0f;
 }
 
 void UPhysicsSubsystem::LateInit()
 {
 	b2WorldDef WorldDef = b2DefaultWorldDef();
+
+	WorldDef.gravity = { 0.0f, -9.8f };
 
 	/* World ¼³Á¤ */
 

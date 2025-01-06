@@ -1,8 +1,8 @@
 #include "EnginePch.h"
 #include "Level/Level.h"
 #include "World/World.h"
-#include "World/PhysicsSubsystem.h"
-#include "RenderSystem/RenderSubsystem.h"
+#include "PhysicsCore/PhysicsSubsystem.h"
+#include "RenderCore/RenderSubsystem.h"
 
 UWorld::UWorld()
 {
@@ -27,6 +27,24 @@ ENGINE_API void UWorld::DestroyActor(AActor* Actor)
 vector<shared_ptr<AActor>>& UWorld::GetActors()
 {
 	return PersistentLevel->Actors;
+}
+
+void UWorld::ExecutePhysicsTick(float fDeltaTime)
+{
+	PhysicsSubsystem->Tick(fDeltaTime);
+}
+
+void UWorld::ExecuteWorldSubsystemTick(float fDeltaTime)
+{
+	for (auto Pair : Subsystems)
+	{
+		if (Pair.first == typeid(UPhysicsSubsystem).name())
+			continue;
+
+		UWorldSubsystem* WorldSubsystem = Pair.second.get();
+
+		WorldSubsystem->Tick(fDeltaTime);
+	}
 }
 
 void UWorld::ExecuteActorTick(float fDeltaTime)

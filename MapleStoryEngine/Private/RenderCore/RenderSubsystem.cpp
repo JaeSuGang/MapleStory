@@ -1,15 +1,15 @@
 #include "EnginePch.h"
 #include "Engine/Engine.h"
-#include "RenderSystem/RenderSubsystem.h"
+#include "RenderCore/RenderSubsystem.h"
 #include "Engine/ResourceSubsystem.h"
 #include "Engine/DebugSubsystem.h"
 #include "Engine/WindowSubsystem.h"
-#include "RenderSystem/Texture.h"
+#include "RenderCore/Texture.h"
 #include "Utils/Utils.h"
 #include "World/World.h"
 #include "Level/Level.h"
 #include "Actor/Actor.h"
-#include "RenderSystem/RenderComponent.h"
+#include "RenderCore/RenderComponent.h"
 #include "IMGUI/imgui.h"
 
 URenderSubsystem::URenderSubsystem()
@@ -27,6 +27,7 @@ URenderSubsystem::URenderSubsystem()
 	RenderTargetViewColor[1] = 0.25f;
 	RenderTargetViewColor[2] = 0.25f;
 	RenderTargetViewColor[3] = 1.0f;
+
 }
 
 void URenderSubsystem::Tick(float fDeltaTime)
@@ -71,6 +72,14 @@ DXGI_SWAP_CHAIN_DESC URenderSubsystem::MakeSwapChainDesc()
 	ScInfo.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	return ScInfo;
+}
+
+void URenderSubsystem::ReserveMemories()
+{
+	Textures.reserve(1000);
+	StringMappedTextureIDs.reserve(1000);
+
+
 }
 
 void URenderSubsystem::CreateD3D11Debug()
@@ -202,6 +211,11 @@ void URenderSubsystem::InitSwapChain()
 	{
 		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
 	}
+}
+
+void URenderSubsystem::SetMissingTexture()
+{
+	this->MissingTextureTextureID = GEngine->RenderSubsystem->GetTextureIDByName(MISSING_TEXTURE_PATH);
 }
 
 int URenderSubsystem::GetPixelShaderIDByName(string strKey)
@@ -386,6 +400,7 @@ void URenderSubsystem::ReleaseTextures()
 {
 	Textures.clear();
 	StringMappedTextureIDs.clear();
+	this->SetMissingTexture();
 }
 
 FCamera& URenderSubsystem::GetCamera()
@@ -507,6 +522,8 @@ void URenderSubsystem::LateInit()
 	WindowSubsystem = Engine->WindowSubsystem;
 
 	this->CreateDeviceAndContext();
+
+	this->ReserveMemories();
 
 	this->CreateD3D11Debug();
 

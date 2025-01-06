@@ -4,12 +4,12 @@
 class URenderComponent;
 class UPhysicsComponent;
 
-class BP_TestActor : public AActor
+class BP_TestFloor : public AActor
 {
 	typedef AActor Super;
 
 public:
-	BP_TestActor();
+	BP_TestFloor();
 	void BeginPlay() override;
 	void Tick(float fDeltaTime) override;
 
