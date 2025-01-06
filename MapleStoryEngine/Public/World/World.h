@@ -6,10 +6,17 @@
 #include "World/WorldSubsystem.h"
 
 class ULevel;
+class UPhysicsSubsystem;
 
 class UWorld : public UObject
 {
 	friend class UGameplaySubsystem;
+
+public:
+	/* 생성자와 오버라이드 */
+	ENGINE_API UWorld();
+
+	ENGINE_API virtual void LateInit();
 
 public:
 	ENGINE_API void DestroyActor(AActor* Actor);
@@ -59,6 +66,9 @@ public:
 
 		return static_cast<T*>(FindIter->second.get());
 	}
+
+public:
+	UPhysicsSubsystem* PhysicsSubsystem;
 
 private:
 	shared_ptr<ULevel> PersistentLevel;

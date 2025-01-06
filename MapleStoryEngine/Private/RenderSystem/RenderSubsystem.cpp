@@ -387,6 +387,7 @@ void URenderSubsystem::Render(float fDeltaTime)
 	DeviceContext->RSSetState(Camera.IsWireFrame ? RasterizerWireframeState.Get() : RasterizerDefaultState.Get());
 	DeviceContext->OMSetBlendState(DefaultBlendState.Get(), nullptr, 0xFFFFFFFF);
 
+
 	this->RenderActors(fDeltaTime);
 
 	Engine->DebugSubsystem->Render();

@@ -1,6 +1,17 @@
 #include "EnginePch.h"
 #include "Level/Level.h"
 #include "World/World.h"
+#include "World/PhysicsSubsystem.h"
+
+UWorld::UWorld()
+{
+	PhysicsSubsystem = CreateDefaultSubobject<UPhysicsSubsystem>();
+}
+
+void UWorld::LateInit()
+{
+	PhysicsSubsystem->LateInit();
+}
 
 ENGINE_API void UWorld::DestroyActor(AActor* Actor)
 {

@@ -19,6 +19,8 @@ public:
 		GEngine->ActiveWorld = std::make_shared<UWorld>();
 
 		GEngine->ActiveWorld->PersistentLevel = std::static_pointer_cast<ULevel>(std::make_shared<T>());
+
+		GEngine->ActiveWorld->LateInit();
 	}
 
 private:

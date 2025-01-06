@@ -120,9 +120,13 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);d3d11.lib;box2dd.lib;DirectXTex_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);d3d11.lib;box2dd.lib;DirectXTexd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\Box2D\lib;$(SolutionDir)ThirdParty\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>copy "$(SolutionDir)ThirdParty\Box2D\lib\box2d.pdb" "$(OutDir)";
+copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -142,11 +146,16 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);d3d11.lib;box2d.lib;DirectXTex_Release.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);d3d11.lib;box2d.lib;DirectXTex.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\Box2D\lib;$(SolutionDir)ThirdParty\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>copy "$(SolutionDir)ThirdParty\Box2D\lib\box2d.pdb" "$(OutDir)";
+copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\World\PhysicsSubsystem.h" />
     <ClInclude Include="Public\RenderSystem\Animation.h" />
     <ClInclude Include="Public\RenderSystem\Material.h" />
     <ClInclude Include="Public\GameInstance\GameplaySubsystem.h" />
@@ -193,6 +202,7 @@
     <ClInclude Include="Public\Engine\TimeSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\World\PhysicsSubsystem.cpp" />
     <ClCompile Include="Private\RenderSystem\Animation.cpp" />
     <ClCompile Include="Private\RenderSystem\Material.cpp" />
     <ClCompile Include="Private\GameInstance\GameplaySubsystem.cpp" />
