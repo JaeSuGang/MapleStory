@@ -15,8 +15,15 @@ BP_TestActor::BP_TestActor()
 void BP_TestActor::BeginPlay()
 {
 	Super::BeginPlay();
+	string strMeshName = "Plane";
+	string strTextureName = "Resources\\Textures\\9000404.img.stand.0.png";
+	RenderComponent->SetMeshIDByName(strMeshName);
+	RenderComponent->SetTextureByName(strTextureName);
+	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+	RenderComponent->SetBlendMode(0);
+	RenderComponent->SetActorScaleByTextureSize();
 
-	PhysicsComponent->InitializeAsDynamicRigidBody();
+	PhysicsComponent->InitializeAsDynamicRigidBody(Transform.Scale.x, Transform.Scale.y);
 }
 
 void BP_TestActor::Tick(float fDeltaTime)

@@ -77,8 +77,8 @@ public:
 	UPhysicsSubsystem* PhysicsSubsystem;
 
 private:
-	shared_ptr<ULevel> PersistentLevel;
-
 	unordered_map<string, shared_ptr<UWorldSubsystem>> Subsystems;
+
+	shared_ptr<ULevel> PersistentLevel;
 };
 

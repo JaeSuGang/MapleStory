@@ -25,7 +25,7 @@ void BP_TestFloor::BeginPlay()
 	RenderComponent->SetActorScaleByTextureSize();
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 
-	PhysicsComponent->InitializeAsStatic();
+	PhysicsComponent->InitializeAsStatic(Transform.Scale.x, Transform.Scale.y);
 }
 
 void BP_TestFloor::Tick(float fDeltaTime)

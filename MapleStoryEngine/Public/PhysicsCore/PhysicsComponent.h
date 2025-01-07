@@ -19,9 +19,9 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
-	ENGINE_API void InitializeAsDynamicRigidBody();
+	ENGINE_API void InitializeAsDynamicRigidBody(float fWidth, float fHeight);
 
-	ENGINE_API void InitializeAsStatic();
+	ENGINE_API void InitializeAsStatic(float fWidth, float fHeight);
 
 
 private:

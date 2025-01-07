@@ -14,6 +14,7 @@
 #include "Actors/BP_TestSkill.h"
 #include "Actors/BP_TestSkill2.h"
 #include "Actors/BP_TestFloor.h"
+#include "Actors/BP_TestCube.h"
 
 
 void UMapleStoryDebugSubsystem::CustomCode()
@@ -55,14 +56,7 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	if (ImGui::Button("Spawn Mob"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
-		URenderComponent* RenderComponent = Actor->GetComponentByClass<URenderComponent>();
-		string strMeshName = "Plane";
-		string strTextureName = "Resources\\Textures\\9000404.img.stand.0.png";
-		RenderComponent->SetMeshIDByName(strMeshName);
-		RenderComponent->SetTextureByName(strTextureName);
-		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
-		RenderComponent->SetBlendMode(0);
-		RenderComponent->SetActorScaleByTextureSize();
+
 	}
 
 	if (ImGui::Button("Spawn Transculent Effect"))
@@ -77,15 +71,8 @@ void UMapleStoryDebugSubsystem::CustomCode()
 
 	if (ImGui::Button("Spawn Cube"))
 	{
-		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
-		URenderComponent* RenderComponent = Actor->GetComponentByClass<URenderComponent>();
-		Actor->GetTransform().Scale = { 100.0f, 100.0f, 100.0f };
-		string strMeshName = "Cube";
-		string strTextureName = "Resources\\Textures\\9fdsa";
-		RenderComponent->SetMeshIDByName(strMeshName);
-		RenderComponent->SetTextureByName(strTextureName);
-		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
-		RenderComponent->SetBlendMode(0);
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestCube>();
+
 	}
 	int n = 0;
 	for (shared_ptr<AActor>& Actor : Actors)

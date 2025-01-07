@@ -22,7 +22,7 @@ void UPhysicsSubsystem::LateInit()
 {
 	b2WorldDef WorldDef = b2DefaultWorldDef();
 
-	WorldDef.gravity = { 0.0f, -9.8f };
+	WorldDef.gravity = { 0.0f, -100.0f };
 
 	/* World ¼³Á¤ */
 
