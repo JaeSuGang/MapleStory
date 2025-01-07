@@ -4,10 +4,6 @@
 #include "World/World.h"
 #include "PhysicsCore/PhysicsSubsystem.h"
 
-/* 50px = 1m */
-#define METER_TO_PIXEL_CONSTANT 50
-#define PIXEL_TO_METER_CONSTANT 1 / 50
-
 UPhysicsComponent::UPhysicsComponent()
 {
 	PhysicsSubsystem = GEngine->GetWorld()->PhysicsSubsystem;
@@ -31,7 +27,7 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 	OwnerTransfrom.Position.y = B2Position.y * METER_TO_PIXEL_CONSTANT;
 }
 
-void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight)
+void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight, int nCollisionFlag)
 {
 	FTransform OwnerTransform = Owner->GetTransform();
 	b2WorldId B2WorldID = PhysicsSubsystem->B2WorldID;
@@ -51,10 +47,25 @@ void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight
 	ShapeDef.density = 1.0f;
 	ShapeDef.friction = 1.0f;
 
+	switch (nCollisionFlag)
+	{
+	case FOOTHOLD_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
+		break;
+
+	case MOB_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = MOB_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
+		break;
+	default:
+		break;
+	}
+
 	b2CreatePolygonShape(B2BodyID, &ShapeDef, &DynamicBox);
 }
 
-void UPhysicsComponent::InitializeAsStatic(float fWidth, float fHeight)
+void UPhysicsComponent::InitializeAsStatic(float fWidth, float fHeight, int nCollisionFlag)
 {
 	FTransform OwnerTransform = Owner->GetTransform();
 	b2WorldId B2WorldID = PhysicsSubsystem->B2WorldID;
@@ -69,6 +80,21 @@ void UPhysicsComponent::InitializeAsStatic(float fWidth, float fHeight)
 
 	b2Polygon Box = b2MakeBox(fWidth * PIXEL_TO_METER_CONSTANT / 2.0f, fHeight * PIXEL_TO_METER_CONSTANT / 2.0f);
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+
+	switch (nCollisionFlag)
+	{
+	case FOOTHOLD_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
+		break;
+
+	case MOB_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = MOB_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
+		break;
+	default:
+		break;
+	}
 
 	b2CreatePolygonShape(B2BodyID, &ShapeDef, &Box);
 }

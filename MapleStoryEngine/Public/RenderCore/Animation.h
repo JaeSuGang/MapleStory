@@ -6,6 +6,7 @@ class UMaterial;
 
 enum class EAnimationName
 {
+	Stand,
 	Screen
 };
 
@@ -16,11 +17,11 @@ public:
 	ENGINE_API UAnimation();
 
 public:
-	ENGINE_API void SetTimePerFrame(float fTime);
+	ENGINE_API void SetTimePerFrame(int nTime);
 
 	ENGINE_API void SetMaterialToApply(UMaterial* Material);
 
-	ENGINE_API void AddAnimationByFolder(EAnimationName Name, string strFolderDir);
+	ENGINE_API void AddAnimationByFolder(EAnimationName Name, string strFolderDir, int nTimePerFrame);
 
 	ENGINE_API void AddAnimation(EAnimationName Name, vector<int>TextureIDSequence);
 
@@ -34,6 +35,6 @@ protected:
 	EAnimationName CurrentAnimation;
 	int CurrentIndex;
 	float AccumulatedTime;
-	float TimePerFrame;
+	int TimePerFrame;
 };
 

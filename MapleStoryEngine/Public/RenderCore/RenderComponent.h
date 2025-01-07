@@ -4,6 +4,8 @@
 #include "RenderCore/Material.h"
 #include "RenderCore/Animation.h"
 
+
+
 struct FMesh;
 
 class UMaterial;
@@ -25,7 +27,7 @@ public:
 public:
 	ENGINE_API void SetCurrentAnimation(EAnimationName Name);
 
-	ENGINE_API void AddAnimationByFolder(EAnimationName Name, string strFolderPath);
+	ENGINE_API void AddAnimationByFolder(EAnimationName Name, string strFolderPath, int nTimePerFrame);
 
 	ENGINE_API void PlayAnimation(float fDeltaTime);
 

@@ -18,14 +18,13 @@ void BP_TestFloor::BeginPlay()
 
 	Transform.Position.y = -400.0f;
 
-
 	RenderComponent->SetMeshIDByName("Plane");
 	RenderComponent->SetBlendMode(0);
 	RenderComponent->SetTextureByName("Resources\\Textures\\foothold.0.0.png");
 	RenderComponent->SetActorScaleByTextureSize();
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 
-	PhysicsComponent->InitializeAsStatic(Transform.Scale.x, Transform.Scale.y);
+	PhysicsComponent->InitializeAsStatic(Transform.Scale.x, Transform.Scale.y, FOOTHOLD_COLLISION_FLAG);
 }
 
 void BP_TestFloor::Tick(float fDeltaTime)

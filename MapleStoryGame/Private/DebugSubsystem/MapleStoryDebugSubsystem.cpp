@@ -10,7 +10,7 @@
 #include "RenderCore/RenderSubsystem.h"
 #include "RenderCore/RenderComponent.h"
 #include "Levels/TestLevel.h"
-#include "Actors/BP_TestActor.h"
+#include "Actors/BP_OrangeMushroom.h"
 #include "Actors/BP_TestSkill.h"
 #include "Actors/BP_TestSkill2.h"
 #include "Actors/BP_TestFloor.h"
@@ -55,7 +55,7 @@ void UMapleStoryDebugSubsystem::CustomCode()
 
 	if (ImGui::Button("Spawn Mob"))
 	{
-		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestActor>();
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_OrangeMushroom>();
 
 	}
 

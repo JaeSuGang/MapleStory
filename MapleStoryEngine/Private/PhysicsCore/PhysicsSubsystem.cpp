@@ -4,6 +4,7 @@
 UPhysicsSubsystem::~UPhysicsSubsystem()
 {
 	b2DestroyWorld(B2WorldID);
+
 }
 
 void UPhysicsSubsystem::Tick(float fDeltaTime)

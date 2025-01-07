@@ -4,7 +4,7 @@ from pathlib import Path
 def ParseAnimation(dir_path: str):
     """
     dir_path에 있는 형태가 "<숫자>_<숫자>.png"인 파일을 찾아,
-    정렬 후 0.png, 1.png, 2.png 식으로 순차 리네이밍한다.
+    정렬 후 1.png, 2.png, 3.png 식으로 순차 리네이밍한다.
     """
 
     directory = Path(dir_path)
@@ -25,7 +25,7 @@ def ParseAnimation(dir_path: str):
 
     # 순차적으로 0.png, 1.png, 2.png ... 로 이름 변경
     for index, file_path in enumerate(files):
-        new_name = directory / f"{index}.png"
+        new_name = directory / f"{index+1}.png"
         # 이미 0.png, 1.png 등이 있을 경우 덮어쓰기를 할 수 있으니 주의
         file_path.rename(new_name)
 

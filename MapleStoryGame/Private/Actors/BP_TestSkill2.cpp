@@ -22,7 +22,7 @@ void BP_TestSkill2::BeginPlay()
 
 	/* 애니메이션 추가 */
 	RenderComponent->EnableAnimation();
-	RenderComponent->AddAnimationByFolder(EAnimationName::Screen, "Resources\\Textures\\13141500.screen.frames");
+	RenderComponent->AddAnimationByFolder(EAnimationName::Screen, "Resources\\Textures\\13141500.screen.frames", 60);
 	RenderComponent->SetCurrentAnimation(EAnimationName::Screen);
 }
 

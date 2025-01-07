@@ -19,9 +19,9 @@ void URenderComponent::TickComponent(float fDeltaTime)
 	Super::TickComponent(fDeltaTime);
 }
 
-void URenderComponent::AddAnimationByFolder(EAnimationName Name, string strFolderPath)
+void URenderComponent::AddAnimationByFolder(EAnimationName Name, string strFolderPath, int nTimePerFrame)
 {
-	Animation->AddAnimationByFolder(Name, strFolderPath);
+	Animation->AddAnimationByFolder(Name, strFolderPath, nTimePerFrame);
 }
 
 void URenderComponent::PlayAnimation(float fDeltaTime)
