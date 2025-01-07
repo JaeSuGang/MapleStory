@@ -153,6 +153,9 @@
     <ClInclude Include="Public\PhysicsCore\PhysicsComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Public\TinyXML2\tinyxml2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\EnginePch.cpp">
@@ -276,6 +279,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\PhysicsCore\PhysicsComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\TinyXML2\tinyxml2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

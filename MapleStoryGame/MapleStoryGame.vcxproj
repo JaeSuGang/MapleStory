@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\ObjBase.cpp" />
+    <ClCompile Include="Private\Levels\MapBase.cpp" />
     <ClCompile Include="Private\Actors\BP_OrangeMushroom.cpp" />
     <ClCompile Include="Private\Actors\MobBase.cpp" />
     <ClCompile Include="Private\Actors\BP_TestCube.cpp" />
@@ -165,6 +167,8 @@
     <ClCompile Include="Private\Actors\SkillBase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\ObjBase.h" />
+    <ClInclude Include="Public\Levels\MapBase.h" />
     <ClInclude Include="Public\Actors\BP_OrangeMushroom.h" />
     <ClInclude Include="Public\Actors\MobBase.h" />
     <ClInclude Include="Public\Actors\BP_TestCube.h" />

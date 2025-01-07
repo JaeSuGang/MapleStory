@@ -110,7 +110,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ENGINE_EXPORTS;IMGUI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENGINE_EXPORTS;IMGUI_EXPORTS;TINYXML2_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>EnginePch.h</PrecompiledHeaderFile>
@@ -134,7 +134,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ENGINE_EXPORTS;IMGUI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENGINE_EXPORTS;IMGUI_EXPORTS;TINYXML2_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>EnginePch.h</PrecompiledHeaderFile>
@@ -170,6 +170,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClInclude Include="Public\IMGUI\imstb_truetype.h" />
     <ClInclude Include="Public\Math\Mesh.h" />
     <ClInclude Include="Public\Math\Vertex.h" />
+    <ClInclude Include="Public\TinyXML2\tinyxml2.h" />
     <ClInclude Include="Public\World\ActorComponentManager.h" />
     <ClInclude Include="Public\Math\Transform.h" />
     <ClInclude Include="Public\Actions\ActionComponent.h" />
@@ -215,6 +216,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClCompile Include="Private\IMGUI\imgui_impl_win32.cpp" />
     <ClCompile Include="Private\IMGUI\imgui_tables.cpp" />
     <ClCompile Include="Private\IMGUI\imgui_widgets.cpp" />
+    <ClCompile Include="Private\TinyXML2\tinyxml2.cpp" />
     <ClCompile Include="Private\World\ActorComponentManager.cpp" />
     <ClCompile Include="Private\Math\Transform.cpp" />
     <ClCompile Include="Private\Actions\ActionComponent.cpp" />

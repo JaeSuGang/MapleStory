@@ -17,6 +17,8 @@ UWorld::~UWorld()
 void UWorld::LateInit()
 {
 	PhysicsSubsystem->LateInit();
+
+	PersistentLevel->BeginPlay();
 }
 
 ENGINE_API void UWorld::DestroyActor(AActor* Actor)

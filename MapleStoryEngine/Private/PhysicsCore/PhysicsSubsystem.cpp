@@ -26,6 +26,5 @@ void UPhysicsSubsystem::LateInit()
 	WorldDef.gravity = { 0.0f, -100.0f };
 
 	/* World ¼³Á¤ */
-
 	B2WorldID = b2CreateWorld(&WorldDef);
 }
