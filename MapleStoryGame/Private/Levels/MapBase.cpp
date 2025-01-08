@@ -79,9 +79,9 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 				string TextureFileName{};
 				ObjPath += "\\";
 
-				int ObjX = 0;
-				int ObjY = 0;
-				int ObjZ = 0;
+				float ObjX = 0;
+				float ObjY = 0;
+				float ObjZ = 0;
 				int Flipped = 0;
 
 
@@ -125,19 +125,31 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 					}
 					else if (strName_Attribute == "x")
 					{
-						Value_Attribute->QueryIntValue(&ObjX);
+						int _x{};
+						Value_Attribute->QueryIntValue(&_x);
+						ObjX = (float)_x;
 					}
 					else if (strName_Attribute == "y")
 					{
-						Value_Attribute->QueryIntValue(&ObjY);
+						int _y{};
+						Value_Attribute->QueryIntValue(&_y);
+						ObjY = (float)_y;
 					}
 					else if (strName_Attribute == "z")
 					{
-						Value_Attribute->QueryIntValue(&ObjZ);
+						int _z{};
+						Value_Attribute->QueryIntValue(&_z);
+						ObjZ = (float)_z;
 					}
 					else if (strName_Attribute == "f")
 					{
 						Value_Attribute->QueryIntValue(&Flipped);
+					}
+					else if (strName_Attribute == "zM")
+					{
+						int zMinor{};
+						Value_Attribute->QueryIntValue(&zMinor);
+						ObjZ += zMinor * 0.01f;
 					}
 
 					InfoElement = InfoElement->NextSiblingElement();
@@ -181,10 +193,19 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 				string a = ObjPath + "\\" + TextureFileName;
 				ObjRenderer->SetTextureByName(ObjPath + "\\" + TextureFileName);
 				ObjRenderer->SetActorScaleByTextureSize();
-				nOffsetX = (int)(nOffsetX - Obj->GetTransform().Scale.x / 2);
-				nOffsetY = (int)(nOffsetY - Obj->GetTransform().Scale.y / 2);
-				Obj->SetPosition({ (float)ObjX - (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, (float)ObjZ * -1.0f });
-				Obj->MultiplyScale(Flipped ? -1.0f : 1.0f, 1.0f, 1.0f);
+				if (Flipped)
+				{
+					Obj->MultiplyScale(Flipped ? -1.0f : 1.0f, 1.0f, 1.0f);
+					nOffsetX = (int)(nOffsetX + Obj->GetTransform().Scale.x / 2);
+					nOffsetY = (int)(nOffsetY - Obj->GetTransform().Scale.y / 2);
+					Obj->SetPosition({ ObjX + (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, (float)ObjZ * -1.0f });
+				}
+				else
+				{
+					nOffsetX = (int)(nOffsetX - Obj->GetTransform().Scale.x / 2);
+					nOffsetY = (int)(nOffsetY - Obj->GetTransform().Scale.y / 2);
+					Obj->SetPosition({ ObjX - (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, (float)ObjZ * -1.0f });
+				}
 
 				ObjSubElement = ObjSubElement->NextSiblingElement();
 			}
