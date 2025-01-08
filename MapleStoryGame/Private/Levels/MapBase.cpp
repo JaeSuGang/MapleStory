@@ -49,6 +49,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 
 		Error = MapElement_Attribute->QueryIntValue(&nNumberAttribute);
 
+#pragma region Obj인경우
 		if (!Error)
 		{
 			int SortingLayer = nNumberAttribute;
@@ -224,6 +225,52 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 			}
 
 		}
+
+#pragma endregion
+
+#pragma region Back인 경우
+		else
+		{
+			string strNodeName = MapElement_Attribute->Value();
+
+			if (strNodeName == "back")
+			{
+				tinyxml2::XMLElement* BackElement = MapElement->FirstChildElement();
+
+				while (BackElement != nullptr)
+				{
+					tinyxml2::XMLElement* BackSubElement = BackElement->FirstChildElement();
+					
+					string strTexturePath = { TEXTURES_FOLDER_NAME };
+					strTexturePath += "\\";
+
+					while (BackSubElement != nullptr)
+					{
+						string strPropertyName = BackSubElement->FindAttribute("name")->Value();
+						string strPropertyValue = BackSubElement->FindAttribute("value")->Value();
+
+						if (strPropertyName == "bS")
+						{
+							strTexturePath += strPropertyValue;
+							strTexturePath += ".img\\";
+							strTexturePath += strPropertyValue;
+							strTexturePath += ".img.back.";
+						}
+
+						else if (strPropertyName == "no")
+						{
+							strTexturePath += strPropertyValue;
+							strTexturePath += ".png";
+						}
+
+						BackSubElement = BackSubElement->NextSiblingElement();
+					}
+
+					BackElement = BackElement->NextSiblingElement();
+				}
+			}
+		}
+#pragma endregion
 
 		MapElement = MapElement->NextSiblingElement();
 	}
