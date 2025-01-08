@@ -5,12 +5,15 @@ class URenderComponent;
 
 class AObjBase : public AActor
 {
+	friend class UMapBase;
+
 	typedef AActor Super;
 
 public:
 	enum class EObjType
 	{
 		Obj,
+		Back,
 		Foothold
 	};
 
@@ -29,5 +32,13 @@ protected:
 	EObjType ObjType;
 
 	URenderComponent* RenderComponent;
+
+	float OriginalX;
+
+	float OriginalY;
+
+	float cx;
+
+	float cy;
 };
 

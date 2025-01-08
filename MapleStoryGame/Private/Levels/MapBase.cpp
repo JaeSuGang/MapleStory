@@ -244,6 +244,15 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 					string strTexturePath = { TEXTURES_FOLDER_NAME };
 					strTexturePath += "\\";
 
+					int nFlipped = 0;
+					float ObjX = 0.0f;
+					float ObjY = 0.0f;
+					float cx = 0.0f;
+					float cy = 0.0f;
+					int nOffsetX = 0;
+					int nOffsetY = 0;
+					FVector3 FinalPos{};
+
 					while (BackSubElement != nullptr)
 					{
 						string strPropertyName = BackSubElement->FindAttribute("name")->Value();
@@ -263,8 +272,68 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 							strTexturePath += ".png";
 						}
 
+						else if (strPropertyName == "f")
+						{
+							BackSubElement->FindAttribute("value")->QueryIntValue(&nFlipped);
+						}
+
+						else if (strPropertyName == "x")
+						{
+							int _x{};
+							BackSubElement->FindAttribute("value")->QueryIntValue(&_x);
+							ObjX = (float)_x;
+						}
+
+						else if (strPropertyName == "y")
+						{
+							int _y{};
+							BackSubElement->FindAttribute("value")->QueryIntValue(&_y);
+							ObjY = (float)_y;
+						}
+
+						else if (strPropertyName == "cx")
+						{
+							int _cx{};
+							BackSubElement->FindAttribute("value")->QueryIntValue(&_cx);
+							cx = (float)_cx;
+						}
+
+						else if (strPropertyName == "cy")
+						{
+							int _cy{};
+							BackSubElement->FindAttribute("value")->QueryIntValue(&_cy);
+							cy = (float)_cy;
+						}
+
+
 						BackSubElement = BackSubElement->NextSiblingElement();
 					}
+
+					AObjBase* BackObj = GetWorld()->SpawnActor<AObjBase>();
+					URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
+
+					RenderComponent->SetTextureByName(strTexturePath);
+					RenderComponent->SetActorScaleByTextureSize();
+
+					if (nFlipped)
+					{
+						BackObj->MultiplyScale(nFlipped ? -1.0f : 1.0f, 1.0f, 1.0f);
+						nOffsetX = (int)(nOffsetX + BackObj->GetTransform().Scale.x / 2);
+						nOffsetY = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
+						FinalPos = { ObjX + (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, 0.0f };
+					}
+					else
+					{
+						nOffsetX = (int)(nOffsetX - BackObj->GetTransform().Scale.x / 2);
+						nOffsetY = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
+						FinalPos = { ObjX - (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, 0.0f };
+					}
+
+					BackObj->SetObjType(AObjBase::EObjType::Back);
+					BackObj->OriginalX = FinalPos.x;
+					BackObj->OriginalY = FinalPos.y;
+					BackObj->cx = cx;
+					BackObj->cy = cy;
 
 					BackElement = BackElement->NextSiblingElement();
 				}
