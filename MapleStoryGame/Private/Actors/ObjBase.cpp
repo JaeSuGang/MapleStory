@@ -11,9 +11,6 @@ void AObjBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	RenderComponent->EnableMaterial();
-	RenderComponent->EnableAnimation();
-
 	RenderComponent->SetMeshIDByName("Plane");
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
@@ -22,5 +19,5 @@ void AObjBase::BeginPlay()
 
 void AObjBase::Tick(float fDeltaTime)
 {
-
+	Super::Tick(fDeltaTime);
 }

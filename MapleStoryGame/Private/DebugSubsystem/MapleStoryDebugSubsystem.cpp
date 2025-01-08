@@ -34,6 +34,10 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	ImGui::Checkbox("Perspective View", &GEngine->RenderSubsystem->GetCamera().IsPerspectiveProjection);
 	ImGui::Checkbox("Wireframe", &GEngine->RenderSubsystem->GetCamera().IsWireFrame);
 	ImGui::DragFloat("FOV", &GEngine->RenderSubsystem->GetCamera().FOV, 1);
+	ImGui::DragFloat("Position.X", &GEngine->RenderSubsystem->GetCamera().Transform.Position.x, 1);
+	ImGui::DragFloat("Position.Y", &GEngine->RenderSubsystem->GetCamera().Transform.Position.y, 1);
+	ImGui::DragFloat("Position.Z", &GEngine->RenderSubsystem->GetCamera().Transform.Position.z, 1);
+
 	if (ImGui::Button("Open New Level"))
 	{
 		GEngine->GetGameInstance()->GameplaySubsystem->OpenLevel<UTestLevel>();

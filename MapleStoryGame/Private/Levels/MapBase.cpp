@@ -74,6 +74,11 @@ void UMapBase::LoadXMLToMap(string strPath)
 				string TextureFileName{};
 				ObjPath += "\\";
 
+				int ObjX = 0;
+				int ObjY = 0;
+				int ObjZ = 0;
+				int Flipped = 0;
+
 				tinyxml2::XMLElement* InfoElement = ObjSubElement->FirstChildElement();
 				while (InfoElement != nullptr)
 				{
@@ -96,6 +101,22 @@ void UMapBase::LoadXMLToMap(string strPath)
 						TextureFileName += strValue_Attribute;
 						TextureFileName += ".";
 					}
+					else if (strName_Attribute == "x")
+					{
+						Value_Attribute->QueryIntValue(&ObjX);
+					}
+					else if (strName_Attribute == "y")
+					{
+						Value_Attribute->QueryIntValue(&ObjY);
+					}
+					else if (strName_Attribute == "z")
+					{
+						Value_Attribute->QueryIntValue(&ObjZ);
+					}
+					else if (strName_Attribute == "f")
+					{
+						Value_Attribute->QueryIntValue(&Flipped);
+					}
 
 					InfoElement = InfoElement->NextSiblingElement();
 				}
@@ -108,6 +129,8 @@ void UMapBase::LoadXMLToMap(string strPath)
 				string a = ObjPath + "\\" + TextureFileName;
 				ObjRenderer->SetTextureByName(ObjPath + "\\" + TextureFileName);
 				ObjRenderer->SetActorScaleByTextureSize();
+				Obj->SetPosition({ (float)ObjX , (float)ObjY * -1.0f, (float)ObjZ * -1.0f });
+				Obj->MultiplyScale(Flipped ? -1.0f : 1.0f, 1.0f, 1.0f);
 
 				ObjSubElement = ObjSubElement->NextSiblingElement();
 			}

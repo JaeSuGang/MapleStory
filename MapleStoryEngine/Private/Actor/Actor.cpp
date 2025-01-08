@@ -37,6 +37,11 @@ void AActor::Tick(float fDeltaTime)
 	}
 }
 
+void AActor::SetPosition(FVector3 _Position)
+{
+	Transform.Position = _Position;
+}
+
 void AActor::Destroy()
 {
 	World->DestroyActor(this);
@@ -55,6 +60,13 @@ bool AActor::GetIsBeginPlayed() const
 void AActor::SetWorld(UWorld* pWorld)
 {
 	this->World = pWorld;
+}
+
+void AActor::MultiplyScale(float x, float y, float z)
+{
+	Transform.Scale.x *= x;
+	Transform.Scale.y *= y;
+	Transform.Scale.z *= z;
 }
 
 void AActor::SetScale(float x, float y, float z)

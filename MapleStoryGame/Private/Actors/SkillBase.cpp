@@ -11,9 +11,6 @@ void ASkillBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	RenderComponent->EnableMaterial();
-	RenderComponent->EnableAnimation();
-
 	RenderComponent->SetMeshIDByName("Plane");
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);

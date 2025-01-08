@@ -16,7 +16,7 @@ void BP_TestSkill2::BeginPlay()
 
 	RenderComponent->SetMeshIDByName("Plane");
 	RenderComponent->SetBlendMode(1);
-	RenderComponent->SetTextureByName("Resources\\Textures\\13141500.screen.frames\\0.png");
+	RenderComponent->SetTextureByName("Resources\\Textures\\13141500.screen.frames\\1.png");
 	RenderComponent->SetActorScaleByTextureSize();
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 

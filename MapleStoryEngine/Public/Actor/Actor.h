@@ -17,6 +17,8 @@ public:
 	ENGINE_API virtual void Tick(float fDeltaTime) = 0;
 
 public:
+	ENGINE_API void SetPosition(FVector3 _Position);
+
 	ENGINE_API void Destroy();
 
 	ENGINE_API UWorld* GetWorld() const;
@@ -24,6 +26,8 @@ public:
 	ENGINE_API bool GetIsBeginPlayed() const;
 
 	ENGINE_API void SetWorld(UWorld* pWorld);
+
+	ENGINE_API void MultiplyScale(float x, float y, float z);
 
 	ENGINE_API void SetScale(float x, float y, float z);
 
