@@ -51,6 +51,8 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 
 		if (!Error)
 		{
+			int SortingLayer = nNumberAttribute;
+
 			tinyxml2::XMLElement* ObjElement = MapElement->FirstChildElement();
 
 			while (ObjElement != nullptr)
@@ -81,8 +83,8 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 
 				float ObjX = 0.0f;
 				float ObjY = 0.0f;
-				int SortingLayer = 0;
-				int RenderOrder = 0;
+				int zValue = 0;
+				int zIndex = 0;
 				int Flipped = 0;
 				AObjBase::EObjType ObjType = AObjBase::EObjType::Obj;
 
@@ -110,11 +112,13 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 					else if (strName_Attribute == "l0" || strName_Attribute == "l1" || strName_Attribute == "l2")
 					{
 						if (strValue_Attribute == "foothold")
+						{
 							ObjType = AObjBase::EObjType::Foothold;
+						}
 
 						if (strName_Attribute == "l2")
 						{
-							Value_Attribute->QueryIntValue(&RenderOrder);
+							Value_Attribute->QueryIntValue(&zIndex);
 						}
 
 						TextureFileName += strValue_Attribute;
@@ -146,7 +150,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 					}
 					else if (strName_Attribute == "z")
 					{
-						Value_Attribute->QueryIntValue(&SortingLayer);
+						Value_Attribute->QueryIntValue(&zValue);
 					}
 					else if (strName_Attribute == "f")
 					{
@@ -211,7 +215,8 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 				}
 
 				ObjRenderer->SetSortingLayer(SortingLayer);
-				ObjRenderer->SetRenderOrder(RenderOrder);
+				ObjRenderer->SetZValue(zValue);
+				ObjRenderer->SetZIndex(zIndex);
 
 				Obj->SetPosition(FinalPos);
 

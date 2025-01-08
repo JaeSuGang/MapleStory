@@ -49,11 +49,15 @@ public:
 	
 	ENGINE_API int GetSortingLayer() const;
 
-	ENGINE_API int GetRenderOrder() const;
+	ENGINE_API int GetZValue() const;
+
+	ENGINE_API int GetZIndex() const;
 
 	ENGINE_API void SetSortingLayer(int nLayer);
 
-	ENGINE_API void SetRenderOrder(int nOrder);
+	ENGINE_API void SetZValue(int nZValue);
+
+	ENGINE_API void SetZIndex(int nZIndex);
 
 	void EnableMaterialIfNot();
 
@@ -61,7 +65,8 @@ private:
 	shared_ptr<UAnimation> Animation;
 	shared_ptr<UMaterial> Material;
 	int SortingLayer;
-	int RenderOrder;
+	int ZValue;
+	int ZIndex;
 	int MeshID;
 
 };

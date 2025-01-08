@@ -457,7 +457,12 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		{
 			if (lhs->GetSortingLayer() == rhs->GetSortingLayer())
 			{
-				return lhs->GetRenderOrder() < rhs->GetRenderOrder();
+				if (lhs->GetZValue() == rhs->GetZValue())
+				{
+					return lhs->GetZIndex() < rhs->GetZIndex();
+				}
+
+				return lhs->GetZValue() < rhs->GetZValue();
 			}
 
 			return lhs->GetSortingLayer() < rhs->GetSortingLayer();

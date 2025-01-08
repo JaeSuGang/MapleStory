@@ -24,9 +24,14 @@ int URenderComponent::GetSortingLayer() const
 	return SortingLayer;
 }
 
-int URenderComponent::GetRenderOrder() const
+int URenderComponent::GetZValue() const
 {
-	return RenderOrder;
+	return ZValue;
+}
+
+int URenderComponent::GetZIndex() const
+{
+	return ZIndex;
 }
 
 void URenderComponent::AddAnimationByFolder(EAnimationName Name, string strFolderPath, int nTimePerFrame)
@@ -101,9 +106,14 @@ void URenderComponent::SetSortingLayer(int nLayer)
 	SortingLayer = nLayer;
 }
 
-void URenderComponent::SetRenderOrder(int nOrder)
+void URenderComponent::SetZValue(int nZValue)
 {
-	RenderOrder = nOrder;
+	ZValue = nZValue;
+}
+
+void URenderComponent::SetZIndex(int nZIndex)
+{
+	ZIndex = nZIndex;
 }
 
 void URenderComponent::SetCurrentAnimation(EAnimationName Name)
