@@ -21,3 +21,8 @@ void AObjBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 }
+
+void AObjBase::SetObjType(EObjType _ObjType)
+{
+	this->ObjType = _ObjType;
+}

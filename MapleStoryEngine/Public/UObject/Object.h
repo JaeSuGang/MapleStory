@@ -19,7 +19,7 @@ public:
 	template <typename T>
 	weak_ptr<T> GetWeak()
 	{
-		return weak_ptr<T>(GetShared());
+		return weak_ptr<T>(GetShared<T>());
 	}
 
 	UObject(const UObject& Other) = delete;

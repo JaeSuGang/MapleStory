@@ -19,6 +19,16 @@ void URenderComponent::TickComponent(float fDeltaTime)
 	Super::TickComponent(fDeltaTime);
 }
 
+int URenderComponent::GetSortingLayer() const
+{
+	return SortingLayer;
+}
+
+int URenderComponent::GetRenderOrder() const
+{
+	return RenderOrder;
+}
+
 void URenderComponent::AddAnimationByFolder(EAnimationName Name, string strFolderPath, int nTimePerFrame)
 {
 	Animation->AddAnimationByFolder(Name, strFolderPath, nTimePerFrame);
@@ -44,7 +54,7 @@ void URenderComponent::SetActorScaleByTextureSize()
 {
 	UTexture* Texture = GEngine->RenderSubsystem->Textures[Material->TextureID].get();
 
-	Owner->SetScale((float)Texture->Width, (float)Texture->Height, 1.0f);
+	Owner->SetScale((float)Texture->Width, (float)Texture->Height, 0.0001f);
 }
 
 void URenderComponent::SetBlendMode(bool bIsTransculent)
@@ -84,6 +94,16 @@ void URenderComponent::EnableMaterialIfNot()
 void URenderComponent::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void URenderComponent::SetSortingLayer(int nLayer)
+{
+	SortingLayer = nLayer;
+}
+
+void URenderComponent::SetRenderOrder(int nOrder)
+{
+	RenderOrder = nOrder;
 }
 
 void URenderComponent::SetCurrentAnimation(EAnimationName Name)

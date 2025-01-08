@@ -125,7 +125,6 @@ private:
 	vector<ComPtr<ID3D11PixelShader>> PixelShaders;
 	ID3D11PixelShader* WireframePixelShader;
 
-
 public:
 	/* 디버그 인터페이스 */
 	ComPtr<ID3D11Debug> D3D11Debug;
@@ -134,6 +133,8 @@ private:
 	/* 카메라 설정 */
 	FCamera Camera;
 
+	/* Depth Stencil State */
+	ComPtr<ID3D11DepthStencilState> DefaultDepthStencilState;
 
 	/* 샘플러 */
 	ComPtr<ID3D11SamplerState> DefaultSamplerState;

@@ -8,6 +8,13 @@ class AObjBase : public AActor
 	typedef AActor Super;
 
 public:
+	enum class EObjType
+	{
+		Obj,
+		Foothold
+	};
+
+public:
 	/* 생성자와 오버라이드 */
 	AObjBase();
 
@@ -15,7 +22,12 @@ public:
 
 	virtual void Tick(float fDeltaTime);
 
+public:
+	void SetObjType(EObjType _ObjType);
+
 protected:
+	EObjType ObjType;
+
 	URenderComponent* RenderComponent;
 };
 

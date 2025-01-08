@@ -22,6 +22,8 @@ public:
 	/* 생성자와 오버라이드 */
 	ENGINE_API URenderComponent();
 
+	void BeginPlay() override;
+
 	void TickComponent(float fDeltaTime) override;
 
 public:
@@ -44,14 +46,22 @@ public:
 	ENGINE_API void SetTextureByName(string strTextureName);
 
 	ENGINE_API void SetMeshIDByName(string strName);
+	
+	ENGINE_API int GetSortingLayer() const;
+
+	ENGINE_API int GetRenderOrder() const;
+
+	ENGINE_API void SetSortingLayer(int nLayer);
+
+	ENGINE_API void SetRenderOrder(int nOrder);
 
 	void EnableMaterialIfNot();
 
 private:
 	shared_ptr<UAnimation> Animation;
 	shared_ptr<UMaterial> Material;
+	int SortingLayer;
+	int RenderOrder;
 	int MeshID;
 
-	// UActorComponent을(를) 통해 상속됨
-	ENGINE_API void BeginPlay() override;
 };

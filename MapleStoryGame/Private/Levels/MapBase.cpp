@@ -79,11 +79,12 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 				string TextureFileName{};
 				ObjPath += "\\";
 
-				float ObjX = 0;
-				float ObjY = 0;
-				float ObjZ = 0;
+				float ObjX = 0.0f;
+				float ObjY = 0.0f;
+				int SortingLayer = 0;
+				int RenderOrder = 0;
 				int Flipped = 0;
-
+				AObjBase::EObjType ObjType = AObjBase::EObjType::Obj;
 
 				tinyxml2::XMLElement* InfoElement = ObjSubElement->FirstChildElement();
 
@@ -108,6 +109,14 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 					}
 					else if (strName_Attribute == "l0" || strName_Attribute == "l1" || strName_Attribute == "l2")
 					{
+						if (strValue_Attribute == "foothold")
+							ObjType = AObjBase::EObjType::Foothold;
+
+						if (strName_Attribute == "l2")
+						{
+							Value_Attribute->QueryIntValue(&RenderOrder);
+						}
+
 						TextureFileName += strValue_Attribute;
 						TextureFileName += ".";
 
@@ -137,19 +146,11 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 					}
 					else if (strName_Attribute == "z")
 					{
-						int _z{};
-						Value_Attribute->QueryIntValue(&_z);
-						ObjZ = (float)_z;
+						Value_Attribute->QueryIntValue(&SortingLayer);
 					}
 					else if (strName_Attribute == "f")
 					{
 						Value_Attribute->QueryIntValue(&Flipped);
-					}
-					else if (strName_Attribute == "zM")
-					{
-						int zMinor{};
-						Value_Attribute->QueryIntValue(&zMinor);
-						ObjZ += zMinor * 0.01f;
 					}
 
 					InfoElement = InfoElement->NextSiblingElement();
@@ -189,23 +190,30 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 
 				/* 액터 생성 */
 				AObjBase* Obj = GetWorld()->SpawnActor<AObjBase>();
+				Obj->SetObjType(ObjType);
 				URenderComponent* ObjRenderer = Obj->GetComponentByClass<URenderComponent>();
 				string a = ObjPath + "\\" + TextureFileName;
 				ObjRenderer->SetTextureByName(ObjPath + "\\" + TextureFileName);
 				ObjRenderer->SetActorScaleByTextureSize();
+				FVector3 FinalPos{};
 				if (Flipped)
 				{
 					Obj->MultiplyScale(Flipped ? -1.0f : 1.0f, 1.0f, 1.0f);
 					nOffsetX = (int)(nOffsetX + Obj->GetTransform().Scale.x / 2);
 					nOffsetY = (int)(nOffsetY - Obj->GetTransform().Scale.y / 2);
-					Obj->SetPosition({ ObjX + (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, (float)ObjZ * -1.0f });
+					FinalPos = { ObjX + (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, 0.0f };
 				}
 				else
 				{
 					nOffsetX = (int)(nOffsetX - Obj->GetTransform().Scale.x / 2);
 					nOffsetY = (int)(nOffsetY - Obj->GetTransform().Scale.y / 2);
-					Obj->SetPosition({ ObjX - (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, (float)ObjZ * -1.0f });
+					FinalPos = { ObjX - (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, 0.0f };
 				}
+
+				ObjRenderer->SetSortingLayer(SortingLayer);
+				ObjRenderer->SetRenderOrder(RenderOrder);
+
+				Obj->SetPosition(FinalPos);
 
 				ObjSubElement = ObjSubElement->NextSiblingElement();
 			}
