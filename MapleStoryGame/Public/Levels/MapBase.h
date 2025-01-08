@@ -13,7 +13,7 @@ public:
 
 
 public:
-	void LoadXMLToMap(string strPath);
+	void LoadXMLToMap(string strMapPath, string strImgPath);
 
 
 protected:

@@ -34,9 +34,12 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	ImGui::Checkbox("Perspective View", &GEngine->RenderSubsystem->GetCamera().IsPerspectiveProjection);
 	ImGui::Checkbox("Wireframe", &GEngine->RenderSubsystem->GetCamera().IsWireFrame);
 	ImGui::DragFloat("FOV", &GEngine->RenderSubsystem->GetCamera().FOV, 1);
-	ImGui::DragFloat("Position.X", &GEngine->RenderSubsystem->GetCamera().Transform.Position.x, 1);
-	ImGui::DragFloat("Position.Y", &GEngine->RenderSubsystem->GetCamera().Transform.Position.y, 1);
-	ImGui::DragFloat("Position.Z", &GEngine->RenderSubsystem->GetCamera().Transform.Position.z, 1);
+	ImGui::DragFloat("Rotation.X", &GEngine->RenderSubsystem->GetCamera().Transform.Rotation.x, 1);
+	ImGui::DragFloat("Rotation.Y", &GEngine->RenderSubsystem->GetCamera().Transform.Rotation.y, 1);
+	ImGui::DragFloat("Rotation.Z", &GEngine->RenderSubsystem->GetCamera().Transform.Rotation.z, 1);
+	ImGui::DragFloat("Position.X", &GEngine->RenderSubsystem->GetCamera().Transform.Position.x, 10);
+	ImGui::DragFloat("Position.Y", &GEngine->RenderSubsystem->GetCamera().Transform.Position.y, 10);
+	ImGui::DragFloat("Position.Z", &GEngine->RenderSubsystem->GetCamera().Transform.Position.z, 10);
 
 	if (ImGui::Button("Open New Level"))
 	{

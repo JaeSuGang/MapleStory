@@ -21,16 +21,20 @@ void UMapBase::Tick(float fDeltaTime)
 
 }
 
-void UMapBase::LoadXMLToMap(string strPath)
+void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 {
-	tinyxml2::XMLDocument Document;
+	tinyxml2::XMLDocument MapDocument;
+	tinyxml2::XMLDocument ImgDocument;
 	tinyxml2::XMLError Error;
-	Error = Document.LoadFile(strPath.data());
-
+	Error = MapDocument.LoadFile(strMapPath.data());
 	if (Error)
 		GEngine->DebugLog("XML 로드 실패", 2);
-	
-	tinyxml2::XMLElement* RootElement = Document.FirstChildElement();
+
+	Error = ImgDocument.LoadFile(strImgPath.data());
+	if (Error)
+		GEngine->DebugLog("XML 로드 실패", 2);
+
+	tinyxml2::XMLElement* RootElement = MapDocument.FirstChildElement();
 
 	tinyxml2::XMLElement* MapElement = RootElement->FirstChildElement();
 	while (MapElement != nullptr)
@@ -71,6 +75,7 @@ void UMapBase::LoadXMLToMap(string strPath)
 			while (ObjSubElement != nullptr)
 			{
 				string ObjPath{ TEXTURES_FOLDER_NAME };
+				string strImageOffset{};
 				string TextureFileName{};
 				ObjPath += "\\";
 
@@ -79,7 +84,12 @@ void UMapBase::LoadXMLToMap(string strPath)
 				int ObjZ = 0;
 				int Flipped = 0;
 
+
 				tinyxml2::XMLElement* InfoElement = ObjSubElement->FirstChildElement();
+
+				tinyxml2::XMLElement* ImgElement = ImgDocument.FirstChildElement();
+				tinyxml2::XMLElement* ImgElement2 = ImgElement->FirstChildElement();
+
 				while (InfoElement != nullptr)
 				{
 					const tinyxml2::XMLAttribute* Name_Attribute = InfoElement->FindAttribute("name");
@@ -100,6 +110,18 @@ void UMapBase::LoadXMLToMap(string strPath)
 					{
 						TextureFileName += strValue_Attribute;
 						TextureFileName += ".";
+
+						while (ImgElement2 != nullptr)
+						{
+							string a = ImgElement2->FindAttribute("name")->Value();
+							if (ImgElement2->FindAttribute("name")->Value() == strValue_Attribute)
+							{
+								ImgElement2 = ImgElement2->FirstChildElement();
+								break;
+							}
+
+							ImgElement2 = ImgElement2->NextSiblingElement();
+						}
 					}
 					else if (strName_Attribute == "x")
 					{
@@ -123,13 +145,45 @@ void UMapBase::LoadXMLToMap(string strPath)
 
 				TextureFileName += "0.png";
 
+				int nOffsetX{};
+				int nOffsetY{};
+
+				if (ImgElement2)
+				{
+					strImageOffset = ImgElement2->FirstChildElement()->FindAttribute("value")->Value();
+
+					string strX;
+					string strY;
+
+					auto CharIter = strImageOffset.begin();
+
+					while (*CharIter != ',')
+					{
+						strX += *CharIter;
+						++CharIter;
+					}
+					++CharIter;
+					++CharIter;
+
+					while (CharIter != strImageOffset.end())
+					{
+						strY += *CharIter;
+						++CharIter;
+					}
+
+					nOffsetX = std::stoi(strX);
+					nOffsetY = std::stoi(strY);
+				}
+
 				/* 액터 생성 */
 				AObjBase* Obj = GetWorld()->SpawnActor<AObjBase>();
 				URenderComponent* ObjRenderer = Obj->GetComponentByClass<URenderComponent>();
 				string a = ObjPath + "\\" + TextureFileName;
 				ObjRenderer->SetTextureByName(ObjPath + "\\" + TextureFileName);
 				ObjRenderer->SetActorScaleByTextureSize();
-				Obj->SetPosition({ (float)ObjX , (float)ObjY * -1.0f, (float)ObjZ * -1.0f });
+				nOffsetX = (int)(nOffsetX - Obj->GetTransform().Scale.x / 2);
+				nOffsetY = (int)(nOffsetY - Obj->GetTransform().Scale.y / 2);
+				Obj->SetPosition({ (float)ObjX - (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, (float)ObjZ * -1.0f });
 				Obj->MultiplyScale(Flipped ? -1.0f : 1.0f, 1.0f, 1.0f);
 
 				ObjSubElement = ObjSubElement->NextSiblingElement();
