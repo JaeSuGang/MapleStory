@@ -14,6 +14,8 @@ void BP_OrangeMushroom::BeginPlay()
 	RenderComponent->EnableAnimation();
 	RenderComponent->AddAnimationByFolder(EAnimationName::Stand, "Resources\\Textures\\9000404.img.stand.frames", 180);
 	RenderComponent->SetCurrentAnimation(EAnimationName::Stand);
+
+	RenderComponent->SetSortingLayer(20);
 }
 
 void BP_OrangeMushroom::Tick(float fDeltaTime)

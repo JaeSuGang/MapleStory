@@ -27,6 +27,13 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 	OwnerTransfrom.Position.y = B2Position.y * METER_TO_PIXEL_CONSTANT;
 }
 
+void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float y2)
+{
+	b2BodyDef BodyDef = b2DefaultBodyDef();
+	BodyDef.type = b2_staticBody;
+	b2edgeshap
+}
+
 void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight, int nCollisionFlag)
 {
 	FTransform OwnerTransform = Owner->GetTransform();

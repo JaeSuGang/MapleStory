@@ -233,12 +233,43 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 #pragma endregion
 
-#pragma region Back인 경우
 		else
 		{
 			string strNodeName = MapElement_Attribute->Value();
+#pragma region Foothold인 경우
+			if (strNodeName == "foothold")
+			{
+				tinyxml2::XMLElement* FirstLoopElement = MapElement->FirstChildElement();
 
-			if (strNodeName == "back")
+				while (FirstLoopElement != nullptr)
+				{
+					tinyxml2::XMLElement* SecondLoopElement = FirstLoopElement->FirstChildElement();
+					while (SecondLoopElement != nullptr)
+					{
+						tinyxml2::XMLElement* ThirdLoopElement = FirstLoopElement->FirstChildElement();
+						while (ThirdLoopElement != nullptr)
+						{
+							tinyxml2::XMLElement* FootholdInfoElement = FirstLoopElement->FirstChildElement();
+							while (FootholdInfoElement != nullptr)
+							{
+
+
+
+								풋홀드생성 구현하기
+
+								FootholdInfoElement = FootholdInfoElement->NextSiblingElement();
+							}
+							ThirdLoopElement = ThirdLoopElement->NextSiblingElement();
+						}
+						SecondLoopElement = SecondLoopElement->NextSiblingElement();
+					}
+					FirstLoopElement = FirstLoopElement->NextSiblingElement();
+				}
+			}
+#pragma endregion
+
+#pragma region Back인 경우
+			else if (strNodeName == "back")
 			{
 				tinyxml2::XMLElement* BackElement = MapElement->FirstChildElement();
 
@@ -527,6 +558,10 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 			}
 		}
 #pragma endregion
+
+
+
+
 
 		MapElement = MapElement->NextSiblingElement();
 	}

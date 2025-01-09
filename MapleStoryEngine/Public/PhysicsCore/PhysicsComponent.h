@@ -27,6 +27,8 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API void InitializeAsFoothold(float x1, float y1, float x2, float y2);
+
 	ENGINE_API void InitializeAsDynamicRigidBody(float fWidth, float fHeight, int nCollisionFlag);
 
 	ENGINE_API void InitializeAsStatic(float fWidth, float fHeight, int nCollisionFlag);
