@@ -37,8 +37,8 @@ protected:
 
 	float OriginalY;
 
-	float cx;
+	float rx;
 
-	float cy;
+	float ry;
 };
 

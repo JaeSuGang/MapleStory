@@ -5,6 +5,9 @@
 #include "World/World.h"
 #include "Actors/ObjBase.h"
 #include "RenderCore/RenderComponent.h"
+#include "RenderCore/RenderSubsystem.h"
+
+
 
 UMapBase::UMapBase()
 {
@@ -21,16 +24,21 @@ void UMapBase::Tick(float fDeltaTime)
 
 }
 
-void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
+void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 {
 	tinyxml2::XMLDocument MapDocument;
-	tinyxml2::XMLDocument ImgDocument;
+	tinyxml2::XMLDocument ObjImgDocument;
+	tinyxml2::XMLDocument BackImgDocument;
 	tinyxml2::XMLError Error;
 	Error = MapDocument.LoadFile(strMapPath.data());
 	if (Error)
 		GEngine->DebugLog("XML 로드 실패", 2);
 
-	Error = ImgDocument.LoadFile(strImgPath.data());
+	Error = ObjImgDocument.LoadFile(("Resources\\XMLs\\Map.Obj." + strImgName).data());
+	if (Error)
+		GEngine->DebugLog("XML 로드 실패", 2);
+
+	Error = BackImgDocument.LoadFile(("Resources\\XMLs\\Map.Back." + strImgName).data());
 	if (Error)
 		GEngine->DebugLog("XML 로드 실패", 2);
 
@@ -89,9 +97,11 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 				int Flipped = 0;
 				AObjBase::EObjType ObjType = AObjBase::EObjType::Obj;
 
+				ObjSubElement->FindAttribute("name")->QueryIntValue(&zIndex);
+
 				tinyxml2::XMLElement* InfoElement = ObjSubElement->FirstChildElement();
 
-				tinyxml2::XMLElement* ImgElement = ImgDocument.FirstChildElement();
+				tinyxml2::XMLElement* ImgElement = ObjImgDocument.FirstChildElement();
 				tinyxml2::XMLElement* ImgElement2 = ImgElement->FirstChildElement();
 
 				while (InfoElement != nullptr)
@@ -115,11 +125,6 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 						if (strValue_Attribute == "foothold")
 						{
 							ObjType = AObjBase::EObjType::Foothold;
-						}
-
-						if (strName_Attribute == "l2")
-						{
-							Value_Attribute->QueryIntValue(&zIndex);
 						}
 
 						TextureFileName += strValue_Attribute;
@@ -244,9 +249,14 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 					string strTexturePath = { TEXTURES_FOLDER_NAME };
 					strTexturePath += "\\";
 
+					int nTileMode = TileMode::None;
+
+					bool bIsAni = false;
 					int nFlipped = 0;
 					float ObjX = 0.0f;
 					float ObjY = 0.0f;
+					float rx = 0.0f;
+					float ry = 0.0f;
 					float cx = 0.0f;
 					float cy = 0.0f;
 					int nOffsetX = 0;
@@ -268,8 +278,63 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 
 						else if (strPropertyName == "no")
 						{
+							if (strPropertyValue == "11")
+							{
+								int a = 0;
+							}
+
 							strTexturePath += strPropertyValue;
 							strTexturePath += ".png";
+
+							tinyxml2::XMLElement* ImgCategoryElement = BackImgDocument.FirstChildElement()->FirstChildElement();
+
+							while (ImgCategoryElement != nullptr)
+							{
+								string strImgCategory = ImgCategoryElement->FindAttribute("name")->Value();
+
+								if (strImgCategory == "back")
+								{
+									tinyxml2::XMLElement* BackImgElement = ImgCategoryElement->FirstChildElement();
+
+
+									while (BackImgElement != nullptr)
+									{
+										int strBackImgIndex = BackImgElement->FindAttribute("name")->IntValue();
+										if (strBackImgIndex == std::stoi(strPropertyValue))
+										{
+											break;
+										}
+
+										BackImgElement = BackImgElement->NextSiblingElement();
+									}
+
+									string strWzVector = BackImgElement->FirstChildElement()->FindAttribute("value")->Value();
+
+									string strX;
+									string strY;
+
+									auto CharIter = strWzVector.begin();
+
+									while (*CharIter != ',')
+									{
+										strX += *CharIter;
+										++CharIter;
+									}
+									++CharIter;
+									++CharIter;
+
+									while (CharIter != strWzVector.end())
+									{
+										strY += *CharIter;
+										++CharIter;
+									}
+
+									nOffsetX = std::stoi(strX);
+									nOffsetY = std::stoi(strY);
+								}
+
+								ImgCategoryElement = ImgCategoryElement->NextSiblingElement();
+							}
 						}
 
 						else if (strPropertyName == "f")
@@ -291,6 +356,20 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 							ObjY = (float)_y;
 						}
 
+						else if (strPropertyName == "rx")
+						{
+							int _rx{};
+							BackSubElement->FindAttribute("value")->QueryIntValue(&_rx);
+							rx = (float)_rx;
+						}
+
+						else if (strPropertyName == "ry")
+						{
+							int _ry{};
+							BackSubElement->FindAttribute("value")->QueryIntValue(&_ry);
+							ry = (float)_ry;
+						}
+
 						else if (strPropertyName == "cx")
 						{
 							int _cx{};
@@ -305,35 +384,125 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgPath)
 							cy = (float)_cy;
 						}
 
+						else if (strPropertyName == "ani")
+						{
+							int _bool{};
+							BackSubElement->FindAttribute("value")->QueryIntValue(&_bool);
+							if (_bool != 0)
+								bIsAni = true;
+						}
+
+						else if (strPropertyName == "type")
+						{
+							BackSubElement->FindAttribute("value")->QueryIntValue(&nTileMode);
+						}
 
 						BackSubElement = BackSubElement->NextSiblingElement();
 					}
 
-					AObjBase* BackObj = GetWorld()->SpawnActor<AObjBase>();
-					URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
-
-					RenderComponent->SetTextureByName(strTexturePath);
-					RenderComponent->SetActorScaleByTextureSize();
-
-					if (nFlipped)
+					if (bIsAni)
 					{
-						BackObj->MultiplyScale(nFlipped ? -1.0f : 1.0f, 1.0f, 1.0f);
-						nOffsetX = (int)(nOffsetX + BackObj->GetTransform().Scale.x / 2);
-						nOffsetY = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
-						FinalPos = { ObjX + (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, 0.0f };
-					}
-					else
-					{
-						nOffsetX = (int)(nOffsetX - BackObj->GetTransform().Scale.x / 2);
-						nOffsetY = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
-						FinalPos = { ObjX - (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, 0.0f };
+						BackElement = BackElement->NextSiblingElement();
+						continue;
 					}
 
-					BackObj->SetObjType(AObjBase::EObjType::Back);
-					BackObj->OriginalX = FinalPos.x;
-					BackObj->OriginalY = FinalPos.y;
-					BackObj->cx = cx;
-					BackObj->cy = cy;
+
+					if (nTileMode == TileMode::None)
+					{
+						AObjBase* BackObj = GetWorld()->SpawnActor<AObjBase>();
+						URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
+
+						RenderComponent->SetTextureByName(strTexturePath);
+						RenderComponent->SetActorScaleByTextureSize();
+
+						int nOffsetX2{};
+						int nOffsetY2{};
+
+						if (nFlipped)
+						{
+							BackObj->MultiplyScale(nFlipped ? -1.0f : 1.0f, 1.0f, 1.0f);
+							nOffsetX2 = (int)(nOffsetX + BackObj->GetTransform().Scale.x / 2);
+							nOffsetY2 = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
+							FinalPos = { ObjX + (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
+						}
+						else
+						{
+							nOffsetX2 = (int)(nOffsetX - BackObj->GetTransform().Scale.x / 2);
+							nOffsetY2= (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
+							FinalPos = { ObjX - (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
+						}
+
+						BackObj->SetObjType(AObjBase::EObjType::Back);
+						BackObj->OriginalX = FinalPos.x;
+						BackObj->OriginalY = FinalPos.y;
+						BackObj->rx = rx;
+						BackObj->ry = ry;
+					}
+
+					else if (cx != 0.0f || cy != 0.0f)
+					{
+						int nRepeatWidth{};
+						int nRepeatHeight{};
+
+						if (nTileMode & TileMode::Horizontal)
+						{
+							nRepeatWidth = (int)GEngine->RenderSubsystem->GetCamera().Width;
+						}
+
+						if (nTileMode & TileMode::Vertical)
+						{
+							nRepeatHeight = (int)GEngine->RenderSubsystem->GetCamera().Height;
+						}
+
+						int nCameraLeft = (int)(-nRepeatWidth / 2.0f);
+						int nCameraRight = (int)(nRepeatWidth / 2.0f);
+						int nCameraTop = (int)(nRepeatHeight / 2.0f);
+						int nCameraBottom = (int)(-nRepeatHeight / 2.0f);
+
+						for (int nx = nCameraLeft; nx * cx <= nCameraRight; nx++)
+						{
+							for (int ny = nCameraBottom; ny * cy <= nCameraTop; ny++)
+							{
+								AObjBase* BackObj = GetWorld()->SpawnActor<AObjBase>();
+								URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
+
+								RenderComponent->SetTextureByName(strTexturePath);
+								RenderComponent->SetActorScaleByTextureSize();
+
+								int nOffsetX2{};
+								int nOffsetY2{};
+
+								if (nFlipped)
+								{
+									BackObj->MultiplyScale(nFlipped ? -1.0f : 1.0f, 1.0f, 1.0f);
+									nOffsetX2 = (int)(nOffsetX + BackObj->GetTransform().Scale.x / 2);
+									nOffsetY2 = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
+									FinalPos = { ObjX + (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
+								}
+								else
+								{
+									nOffsetX2 = (int)(nOffsetX - BackObj->GetTransform().Scale.x / 2);
+									nOffsetY2 = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
+									FinalPos = { ObjX - (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
+								}
+
+								FinalPos.x = FinalPos.x + nx * cx;
+								FinalPos.y = FinalPos.y + ny * cy;
+
+								BackObj->SetObjType(AObjBase::EObjType::Back);
+								BackObj->OriginalX = FinalPos.x;
+								BackObj->OriginalY = FinalPos.y;
+								BackObj->rx = rx;
+								BackObj->ry = ry;
+
+								if (cy == 0.0f)
+									break;
+							}
+
+							if (cx == 0.0f)
+								break;
+						}
+					}
 
 					BackElement = BackElement->NextSiblingElement();
 				}

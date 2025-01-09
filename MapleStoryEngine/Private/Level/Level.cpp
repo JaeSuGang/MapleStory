@@ -2,6 +2,8 @@
 #include "Level/Level.h"
 
 ULevel::ULevel()
+	:
+	Actors{}
 {
 	Actors.reserve(3000);
 	ActorsToDestroy.reserve(100);

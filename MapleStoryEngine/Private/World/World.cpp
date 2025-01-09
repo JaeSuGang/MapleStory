@@ -21,7 +21,12 @@ void UWorld::LateInit()
 	PersistentLevel->BeginPlay();
 }
 
-ENGINE_API void UWorld::DestroyActor(AActor* Actor)
+ULevel* UWorld::GetLevel() const
+{
+	return PersistentLevel.get();
+}
+
+void UWorld::DestroyActor(AActor* Actor)
 {
 	PersistentLevel->ActorsToDestroy.push_back(Actor);
 }

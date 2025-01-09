@@ -82,24 +82,28 @@ void UMapleStoryDebugSubsystem::CustomCode()
 
 	}
 	int n = 0;
-	for (shared_ptr<AActor>& Actor : Actors)
+
+	if (GEngine->GetWorld()->GetLevel())
 	{
-		ImGui::PushID(n++);
-		ImGui::Text("<%s> : %p", typeid(*Actor.get()).name(), Actor.get());
-		if (ImGui::Button("Destroy"))
+		for (shared_ptr<AActor>& Actor : Actors)
 		{
-			Actor->Destroy();
+			ImGui::PushID(n++);
+			ImGui::Text("<%s> : %p", typeid(*Actor.get()).name(), Actor.get());
+			if (ImGui::Button("Destroy"))
+			{
+				Actor->Destroy();
+			}
+			ImGui::DragFloat("Scale.X", &Actor->GetTransform().Scale.x, 1);
+			ImGui::DragFloat("Scale.Y", &Actor->GetTransform().Scale.y, 1);
+			ImGui::DragFloat("Scale.Z", &Actor->GetTransform().Scale.z, 1);
+			ImGui::DragFloat("Rotation.X", &Actor->GetTransform().Rotation.x, 1);
+			ImGui::DragFloat("Rotation.Y", &Actor->GetTransform().Rotation.y, 1);
+			ImGui::DragFloat("Rotation.Z", &Actor->GetTransform().Rotation.z, 1);
+			ImGui::DragFloat("Position.X", &Actor->GetTransform().Position.x, 1);
+			ImGui::DragFloat("Position.Y", &Actor->GetTransform().Position.y, 1);
+			ImGui::DragFloat("Position.Z", &Actor->GetTransform().Position.z, 1);
+			ImGui::PopID();
 		}
-		ImGui::DragFloat("Scale.X", &Actor->GetTransform().Scale.x, 1);
-		ImGui::DragFloat("Scale.Y", &Actor->GetTransform().Scale.y, 1);
-		ImGui::DragFloat("Scale.Z", &Actor->GetTransform().Scale.z, 1);
-		ImGui::DragFloat("Rotation.X", &Actor->GetTransform().Rotation.x, 1);
-		ImGui::DragFloat("Rotation.Y", &Actor->GetTransform().Rotation.y, 1);
-		ImGui::DragFloat("Rotation.Z", &Actor->GetTransform().Rotation.z, 1);
-		ImGui::DragFloat("Position.X", &Actor->GetTransform().Position.x, 1);
-		ImGui::DragFloat("Position.Y", &Actor->GetTransform().Position.y, 1);
-		ImGui::DragFloat("Position.Z", &Actor->GetTransform().Position.z, 1);
-		ImGui::PopID();
 	}
 	ImGui::End();
 }

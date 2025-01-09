@@ -21,6 +21,8 @@ public:
 	ENGINE_API virtual void LateInit();
 
 public:
+	ENGINE_API ULevel* GetLevel() const;
+
 	ENGINE_API void DestroyActor(AActor* Actor);
 
 	ENGINE_API vector<shared_ptr<AActor>>& GetActors();
