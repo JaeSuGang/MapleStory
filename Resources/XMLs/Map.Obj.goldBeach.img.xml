@@ -1,0 +1,806 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="goldBeach.img">
+  <dir name="beach">
+    <dir name="palmtree">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="161, 126" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/palmtree/0/0" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="286, 292" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/palmtree/1/0" />
+        </png>
+      </dir>
+      <dir name="2">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="286, 264" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/palmtree/2/0" />
+        </png>
+      </dir>
+      <dir name="3">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="194, 254" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/palmtree/3/0" />
+        </png>
+      </dir>
+      <dir name="4">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="161, 126" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/palmtree/4/0" />
+        </png>
+      </dir>
+      <dir name="5">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="206, 254" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/palmtree/5/0" />
+        </png>
+      </dir>
+      <dir name="6">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="312, 292" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/palmtree/6/0" />
+        </png>
+      </dir>
+    </dir>
+    <dir name="obj">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="72, 18" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/obj/0/0" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="20, 10" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/obj/1/0" />
+        </png>
+      </dir>
+      <dir name="2">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="21, 15" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/obj/2/0" />
+        </png>
+      </dir>
+    </dir>
+    <dir name="plant">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="76, 65" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/plant/0/0" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="87, 38" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/plant/1/0" />
+        </png>
+      </dir>
+      <dir name="2">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="49, 39" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/plant/2/0" />
+        </png>
+      </dir>
+      <dir name="3">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="166, 73" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/beach/plant/3/0" />
+        </png>
+      </dir>
+    </dir>
+  </dir>
+  <dir name="resort">
+    <dir name="beachChair">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="176, 128" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/beachChair/0/0" />
+        </png>
+      </dir>
+    </dir>
+    <dir name="obj">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 26" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 78" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 75" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/2" />
+        </png>
+        <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 75" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/3" />
+        </png>
+        <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 75" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/4" />
+        </png>
+        <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 75" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/5" />
+        </png>
+        <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 75" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/6" />
+        </png>
+        <png name="7" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 75" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/7" />
+        </png>
+        <png name="8" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 75" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/8" />
+        </png>
+        <png name="9" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 75" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/9" />
+        </png>
+        <png name="10" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 78" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/10" />
+        </png>
+        <png name="11" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 25" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/11" />
+        </png>
+        <png name="12" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 26" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/12" />
+        </png>
+        <png name="13" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 26" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/13" />
+        </png>
+        <png name="14" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="94, 26" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="2400" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/0/14" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="57, 34" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/1/0" />
+        </png>
+      </dir>
+      <dir name="2">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="307, 290" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/obj/2/0" />
+        </png>
+      </dir>
+    </dir>
+    <dir name="back">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="45, 76" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/back/0/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="45, 75" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/back/0/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="45, 76" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/back/0/2" />
+        </png>
+        <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="45, 77" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/back/0/3" />
+        </png>
+      </dir>
+    </dir>
+    <dir name="shop">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="178, 194" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/0/0" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="15, 29" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/1/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="17, 31" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/1/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="19, 48" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/1/2" />
+        </png>
+        <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="27, 29" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/1/3" />
+        </png>
+        <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="27, 34" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/1/4" />
+        </png>
+        <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="2, -5" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/1/5" />
+        </png>
+      </dir>
+      <dir name="2">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="114, 62" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/2/0" />
+        </png>
+      </dir>
+      <dir name="3">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="10, 21" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/3/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="8, 16" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/3/0" />
+        </png>
+      </dir>
+      <dir name="4">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="-9, 31" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/4/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY/jPwCAIAAQSARHz4HU/AAAAAElFTkSuQmCC">
+          <vector name="origin" value="102, 160" />
+          <vector name="head" value="-44, -130" />
+          <vector name="lt" value="-102, -160" />
+          <vector name="rb" value="90, -11" />
+          <int32 name="delay" value="180" />
+        </png>
+      </dir>
+      <dir name="5">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="401, 253" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/5/0" />
+        </png>
+      </dir>
+      <dir name="6">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="29, 23" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/6/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="32, 21" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/6/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="36, 21" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/6/2" />
+        </png>
+      </dir>
+      <dir name="7">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="12, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="450" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/7/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="10, 3" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/7/1" />
+        </png>
+      </dir>
+      <dir name="8">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="-46, 6" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/8/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="-40, 6" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/8/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="-34, 6" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/8/2" />
+        </png>
+        <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="12, 6" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/8/3" />
+        </png>
+        <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="15, 6" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/shop/8/4" />
+        </png>
+        <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABDSURBVBhXXcxBDcAgFARRLNQCFmqhFmoBC1ioBSxgoVrQ8prfwIVJ9rCzySYcGDMdFTkFuPHiwfXLBRpKPOxDxrn6B1EzMyPmMWY6AAAAAElFTkSuQmCC">
+          <vector name="origin" value="17, 6" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="360" />
+        </png>
+      </dir>
+    </dir>
+    <dir name="enterance">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="336, 204" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/enterance/0/0" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="27, 37" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/enterance/1/0" />
+        </png>
+      </dir>
+      <dir name="2">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="30, 32" />
+          <int32 name="z" value="0" />
+          <int32 name="a0" value="255" />
+          <int32 name="a1" value="210" />
+          <int32 name="delay" value="360" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/enterance/2/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="30, 32" />
+          <int32 name="z" value="0" />
+          <int32 name="a0" value="210" />
+          <int32 name="a1" value="255" />
+          <int32 name="delay" value="360" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/resort/enterance/2/0" />
+        </png>
+      </dir>
+    </dir>
+  </dir>
+  <dir name="sea">
+    <dir name="stone">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="153, 113" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/sea/stone/0/0" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="218, 198" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/sea/stone/1/0" />
+        </png>
+      </dir>
+      <dir name="2">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="280, 220" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/sea/stone/2/0" />
+        </png>
+      </dir>
+    </dir>
+  </dir>
+  <dir name="foot">
+    <dir name="beach">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="200, 164" />
+          <int32 name="z" value="0" />
+          <wz_convex name="foothold" value="WzComparerR2.WzLib.Wz_Convex" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/beach/0/0" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="200, 164" />
+          <int32 name="z" value="0" />
+          <wz_convex name="foothold" value="WzComparerR2.WzLib.Wz_Convex" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/beach/1/0" />
+        </png>
+      </dir>
+    </dir>
+    <dir name="acc">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="79, 67" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="210" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/0/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="79, 65" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="210" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/0/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="79, 61" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="210" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/0/2" />
+        </png>
+        <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="79, 60" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="210" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/0/3" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="2100" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/2" />
+        </png>
+        <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="43, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/3" />
+        </png>
+        <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/4" />
+        </png>
+        <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/5" />
+        </png>
+        <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/6" />
+        </png>
+        <png name="7" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/7" />
+        </png>
+        <png name="8" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/5" />
+        </png>
+        <png name="9" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/5" />
+        </png>
+        <png name="10" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/10" />
+        </png>
+        <png name="11" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/11" />
+        </png>
+        <png name="12" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/12" />
+        </png>
+        <png name="13" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="43, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/13" />
+        </png>
+        <png name="14" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="42, 7" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/1/14" />
+        </png>
+      </dir>
+      <dir name="2">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="115, 93" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/foot/acc/2/0" />
+        </png>
+      </dir>
+    </dir>
+  </dir>
+  <dir name="submarine">
+    <dir name="submarine">
+      <dir name="0">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="492, 316" />
+          <int32 name="z" value="0" />
+          <wz_convex name="rope" value="WzComparerR2.WzLib.Wz_Convex" />
+          <dir name="foothold">
+            <wz_convex name="0" value="WzComparerR2.WzLib.Wz_Convex" />
+            <wz_convex name="1" value="WzComparerR2.WzLib.Wz_Convex" />
+          </dir>
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/0/0" />
+        </png>
+      </dir>
+      <dir name="1">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="28, 37" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/1/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="28, 35" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/1/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="28, 29" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/1/2" />
+        </png>
+        <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="28, 29" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/1/3" />
+        </png>
+        <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="28, 31" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/1/4" />
+        </png>
+        <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="28, 34" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/1/5" />
+        </png>
+      </dir>
+      <dir name="2">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="32, 50" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/2/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="32, 49" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/2/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="32, 47" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/2/2" />
+        </png>
+        <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="32, 40" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/2/3" />
+        </png>
+        <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="32, 38" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/2/4" />
+        </png>
+        <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="32, 43" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/2/5" />
+        </png>
+        <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="32, 51" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="240" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/2/6" />
+        </png>
+      </dir>
+      <dir name="3">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="110, 70" />
+          <int32 name="z" value="0" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/3/0" />
+        </png>
+      </dir>
+      <dir name="4">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="111, 72" />
+          <int32 name="z" value="0" />
+          <int32 name="a0" value="255" />
+          <int32 name="a1" value="0" />
+          <int32 name="delay" value="1200" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/4/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="111, 72" />
+          <int32 name="z" value="0" />
+          <int32 name="a0" value="0" />
+          <int32 name="a1" value="255" />
+          <int32 name="delay" value="1200" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/4/0" />
+        </png>
+      </dir>
+      <dir name="5">
+        <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 42" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/0" />
+        </png>
+        <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 39" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/1" />
+        </png>
+        <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 34" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/2" />
+        </png>
+        <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 30" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/3" />
+        </png>
+        <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 34" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/4" />
+        </png>
+        <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 39" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/5" />
+        </png>
+        <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 42" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/6" />
+        </png>
+        <png name="7" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 34" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/7" />
+        </png>
+        <png name="8" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 30" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/8" />
+        </png>
+        <png name="9" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 34" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/9" />
+        </png>
+        <png name="10" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+          <vector name="origin" value="135, 39" />
+          <int32 name="z" value="0" />
+          <int32 name="delay" value="180" />
+          <string name="_outlink" value="Map/Obj/_Canvas/goldBeach.img/submarine/submarine/5/10" />
+        </png>
+      </dir>
+    </dir>
+  </dir>
+</dir>

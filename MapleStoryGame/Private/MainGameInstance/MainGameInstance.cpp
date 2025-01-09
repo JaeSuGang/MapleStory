@@ -1,6 +1,7 @@
 #include "GamePch.h"
 #include "Engine/Engine.h"
 #include "Levels/TestLevel.h"
+#include "Levels/TestLevel2.h"
 #include "MainGameInstance/MainGameInstance.h"
 #include "GameplayTags/GameplayTagsManager.h"
 #include "GameInstance/GameplaySubsystem.h"
