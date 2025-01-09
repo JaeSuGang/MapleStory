@@ -119,6 +119,8 @@ void UEngine::WorldTick(float fDeltaTime)
 	ActiveWorld->ExecuteWorldSubsystemTick(fDeltaTime);
 
 	ActiveWorld->ExecuteActorTick(fDeltaTime);
+
+	ActiveWorld->ElapsedTime += fDeltaTime;
 }
 
 void UEngine::ExecuteActorDestroy()

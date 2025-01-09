@@ -278,10 +278,6 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 						else if (strPropertyName == "no")
 						{
-							if (strPropertyValue == "11")
-							{
-								int a = 0;
-							}
 
 							strTexturePath += strPropertyValue;
 							strTexturePath += ".png";
@@ -439,19 +435,19 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						BackObj->ry = ry;
 					}
 
-					else if (cx != 0.0f || cy != 0.0f)
+					else
 					{
 						int nRepeatWidth{};
 						int nRepeatHeight{};
 
-						if (nTileMode & TileMode::Horizontal)
+						if (nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal)
 						{
-							nRepeatWidth = (int)GEngine->RenderSubsystem->GetCamera().Width;
+							nRepeatWidth = (int)GEngine->RenderSubsystem->GetCamera().Width * 10;
 						}
 
-						if (nTileMode & TileMode::Vertical)
+						if (nTileMode & TileMode::Vertical || nTileMode & TileMode::ScrollVertical)
 						{
-							nRepeatHeight = (int)GEngine->RenderSubsystem->GetCamera().Height;
+							nRepeatHeight = (int)GEngine->RenderSubsystem->GetCamera().Height * 5;
 						}
 
 						int nCameraLeft = (int)(-nRepeatWidth / 2.0f);
@@ -459,15 +455,16 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						int nCameraTop = (int)(nRepeatHeight / 2.0f);
 						int nCameraBottom = (int)(-nRepeatHeight / 2.0f);
 
-						for (int nx = nCameraLeft; nx * cx <= nCameraRight; nx++)
+						for (int nx = nCameraLeft; nx <= nCameraRight; nx += (int)cx)
 						{
-							for (int ny = nCameraBottom; ny * cy <= nCameraTop; ny++)
+							for (int ny = nCameraBottom; ny <= nCameraTop; ny += (int)cy)
 							{
 								AObjBase* BackObj = GetWorld()->SpawnActor<AObjBase>();
 								URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
 
 								RenderComponent->SetTextureByName(strTexturePath);
 								RenderComponent->SetActorScaleByTextureSize();
+								RenderComponent->SetBlendMode(0);
 
 								int nOffsetX2{};
 								int nOffsetY2{};
@@ -486,20 +483,31 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 									FinalPos = { ObjX - (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
 								}
 
-								FinalPos.x = FinalPos.x + nx * cx;
-								FinalPos.y = FinalPos.y + ny * cy;
+								FinalPos.x = FinalPos.x + nx;
+								FinalPos.y = FinalPos.y + ny;
+								if (nTileMode == TileMode::ScrollHorizontal)
+									BackObj->SetObjType(AObjBase::EObjType::BackScrollHorizontal);
+								else
+									BackObj->SetObjType(AObjBase::EObjType::Back);
 
-								BackObj->SetObjType(AObjBase::EObjType::Back);
+								BackObj->Transform.Position.x = FinalPos.x;
+								BackObj->Transform.Position.y = FinalPos.y;
 								BackObj->OriginalX = FinalPos.x;
 								BackObj->OriginalY = FinalPos.y;
 								BackObj->rx = rx;
 								BackObj->ry = ry;
 
-								if (cy == 0.0f)
+								cx = cx ? cx : BackObj->Transform.Scale.x;
+								cy = cy ? cy : BackObj->Transform.Scale.y;
+
+								BackObj->cx = cx;
+								BackObj->cy = cy;
+
+								if (!(nTileMode & TileMode::Vertical || nTileMode & TileMode::ScrollVertical))
 									break;
 							}
 
-							if (cx == 0.0f)
+							if (!(nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal))
 								break;
 						}
 					}

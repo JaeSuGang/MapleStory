@@ -21,6 +21,12 @@ void UWorld::LateInit()
 	PersistentLevel->BeginPlay();
 }
 
+
+float UWorld::GetElapsedTime() const
+{
+	return ElapsedTime;
+}
+
 ULevel* UWorld::GetLevel() const
 {
 	return PersistentLevel.get();

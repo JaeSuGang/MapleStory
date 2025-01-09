@@ -1,5 +1,6 @@
 #include "GamePch.h"
 #include "Actors/ObjBase.h"
+#include "World/World.h"
 #include "RenderCore/RenderComponent.h"
 #include "RenderCore/RenderSubsystem.h"
 
@@ -22,12 +23,30 @@ void AObjBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
-	if (ObjType == EObjType::Back)
+	switch (ObjType)
+	{
+	case EObjType::Back:
 	{
 		FCamera& Camera = GEngine->RenderSubsystem->GetCamera();
 
 		Transform.Position.x = this->OriginalX + Camera.Transform.Position.x * (100.0f + this->rx) / 100.0f;
 		Transform.Position.y = this->OriginalY + Camera.Transform.Position.y * (100.0f + this->ry) / 100.0f;
+		break;
+	}
+
+	case EObjType::BackScrollHorizontal:
+	{
+		FCamera& Camera = GEngine->RenderSubsystem->GetCamera();
+		float ElapsedTime = GetWorld()->GetElapsedTime();
+		Transform.Position.x += 5.0f;
+		if (Transform.Position.x > Camera.Width * 5.0f)
+			Transform.Position.x -= (int)(Camera.Width * 10.0f / cx) * cx;
+		Transform.Position.y = this->OriginalY + Camera.Transform.Position.y * (100.0f + this->ry) / 100.0f;
+		break;
+	}
+
+	default:
+		break;
 	}
 }
 

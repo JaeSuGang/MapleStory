@@ -10,6 +10,7 @@ class UPhysicsSubsystem;
 
 class UWorld : public UObject
 {
+	friend class UEngine;
 	friend class UGameplaySubsystem;
 
 public:
@@ -21,6 +22,8 @@ public:
 	ENGINE_API virtual void LateInit();
 
 public:
+	ENGINE_API float GetElapsedTime() const;
+
 	ENGINE_API ULevel* GetLevel() const;
 
 	ENGINE_API void DestroyActor(AActor* Actor);
@@ -82,5 +85,7 @@ private:
 	unordered_map<string, shared_ptr<UWorldSubsystem>> Subsystems;
 
 	shared_ptr<ULevel> PersistentLevel;
+
+	float ElapsedTime;
 };
 

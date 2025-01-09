@@ -14,6 +14,7 @@ public:
 	{
 		Obj,
 		Back,
+		BackScrollHorizontal,
 		Foothold
 	};
 
@@ -40,5 +41,9 @@ protected:
 	float rx;
 
 	float ry;
+
+	float cx;
+
+	float cy;
 };
 
