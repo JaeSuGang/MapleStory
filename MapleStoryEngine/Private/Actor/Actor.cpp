@@ -5,7 +5,8 @@
 
 AActor::AActor()
 	:
-	Transform{}
+	Transform{},
+	IsTickEnabled{true}
 {
 	World = nullptr;
 	IsBeginPlayed = false;
@@ -35,6 +36,16 @@ void AActor::Tick(float fDeltaTime)
 
 		Component->TickComponent(fDeltaTime);
 	}
+}
+
+bool AActor::GetIsTickEnabled() const
+{
+	return IsTickEnabled;
+}
+
+void AActor::SetIsTickEnabled(bool bValue)
+{
+	IsTickEnabled = bValue;
 }
 
 void AActor::SetPosition(FVector3 _Position)

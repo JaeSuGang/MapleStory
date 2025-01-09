@@ -81,8 +81,20 @@ void UMapleStoryDebugSubsystem::CustomCode()
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestCube>();
 
 	}
-	int n = 0;
 
+	int nActorCount = (int)Actors.size();
+
+	ImGui::Text("Actor Count : %d", nActorCount);
+
+	if (ImGui::Button("Destroy All"))
+	{
+		for (shared_ptr<AActor>& Actor : Actors)
+		{
+			Actor->Destroy();
+		}
+	}
+
+	int n = 0;
 	if (GEngine->GetWorld()->GetLevel())
 	{
 		for (shared_ptr<AActor>& Actor : Actors)

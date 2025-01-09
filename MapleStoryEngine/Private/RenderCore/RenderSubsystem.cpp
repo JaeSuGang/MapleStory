@@ -28,6 +28,9 @@ URenderSubsystem::URenderSubsystem()
 	RenderTargetViewColor[2] = 0.25f;
 	RenderTargetViewColor[3] = 1.0f;
 
+	RenderComponents.reserve(2000);
+	Transculents.reserve(1000);
+
 }
 
 void URenderSubsystem::Tick(float fDeltaTime)
@@ -436,10 +439,8 @@ void URenderSubsystem::Render(float fDeltaTime)
 void URenderSubsystem::RenderActors(float fDeltaTime)
 {
 	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActors();
-	vector<URenderComponent*> Transculents;
-	vector<URenderComponent*> RenderComponents;
-	RenderComponents.reserve(2000);
-	Transculents.reserve(1000);
+	RenderComponents.clear();
+	Transculents.clear();
 
 	DeviceContext->OMSetRenderTargets(1, RenderTargetView.GetAddressOf(), DepthStencilView.Get());
 
@@ -548,9 +549,9 @@ void URenderSubsystem::LateInit()
 	this->CreateDeviceAndContext();
 
 	this->ReserveMemories();
-
+#ifdef _DEBUG
 	this->CreateD3D11Debug();
-
+#endif
 	this->InitSwapChain();
 
 	this->CreateVertexShader(VSShader_PATH);

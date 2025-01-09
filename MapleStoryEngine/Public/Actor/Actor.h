@@ -17,6 +17,10 @@ public:
 	ENGINE_API virtual void Tick(float fDeltaTime) = 0;
 
 public:
+	ENGINE_API bool GetIsTickEnabled() const;
+
+	ENGINE_API void SetIsTickEnabled(bool bValue);
+
 	ENGINE_API void SetPosition(FVector3 _Position);
 
 	ENGINE_API void Destroy();
@@ -70,5 +74,7 @@ protected:
 	FTransform Transform;
 
 	bool IsBeginPlayed;
+
+	bool IsTickEnabled;
 };
 

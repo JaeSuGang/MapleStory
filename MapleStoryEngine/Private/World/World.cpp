@@ -64,7 +64,7 @@ void UWorld::ExecuteActorTick(float fDeltaTime)
 {
 	for (shared_ptr<AActor>& LoopActor : PersistentLevel->Actors)
 	{
-		if (LoopActor->GetIsBeginPlayed())
+		if (LoopActor->GetIsTickEnabled() || LoopActor->GetIsBeginPlayed())
 		{
 			LoopActor->Tick(fDeltaTime);
 		}

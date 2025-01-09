@@ -109,6 +109,10 @@ private:
 	void CreateBlendState();
 
 private:
+	vector<URenderComponent*> Transculents;
+	vector<URenderComponent*> RenderComponents;
+
+private:
 	/* ¸®¼Ò½º */
 	/* Textures */
 	unordered_map<string, int> StringMappedTextureIDs;

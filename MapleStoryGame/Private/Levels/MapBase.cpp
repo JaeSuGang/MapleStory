@@ -442,12 +442,22 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 						if (nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal)
 						{
-							nRepeatWidth = (int)GEngine->RenderSubsystem->GetCamera().Width * 10;
+							nRepeatWidth = (int)GEngine->RenderSubsystem->GetCamera().Width * 8.0f;
+
+							if (rx == 0.0f)
+							{
+								nRepeatWidth *= 0.25f;
+							}
 						}
 
 						if (nTileMode & TileMode::Vertical || nTileMode & TileMode::ScrollVertical)
 						{
-							nRepeatHeight = (int)GEngine->RenderSubsystem->GetCamera().Height * 5;
+							nRepeatHeight = (int)GEngine->RenderSubsystem->GetCamera().Height * 4;
+
+							if (ry == 0.0f)
+							{
+								nRepeatHeight *= 0.5f;
+							}
 						}
 
 						int nCameraLeft = (int)(-nRepeatWidth / 2.0f);
