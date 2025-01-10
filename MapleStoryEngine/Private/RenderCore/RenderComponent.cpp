@@ -9,7 +9,8 @@
 
 URenderComponent::URenderComponent()
 	:
-	Material{}
+	Material{},
+	IsVisible{true}
 {
 	MeshID = 0;
 }

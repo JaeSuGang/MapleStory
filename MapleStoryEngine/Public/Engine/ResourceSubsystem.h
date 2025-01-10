@@ -37,6 +37,8 @@ private:
 
 	void GenerateCubeMesh();
 
+	void GenerateLineMesh();
+
 
 private:
 	/* 그래픽 리소스 */

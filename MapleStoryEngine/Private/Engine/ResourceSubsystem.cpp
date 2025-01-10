@@ -166,6 +166,8 @@ void UResourceSubsystem::GenerateDefaultMeshes()
 	this->GeneratePlaneMesh();
 
 	this->GenerateCubeMesh();
+
+	this->GenerateLineMesh();
 }
 
 void UResourceSubsystem::GeneratePlaneMesh()
@@ -184,7 +186,7 @@ void UResourceSubsystem::GeneratePlaneMesh()
 	v4.POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
 	v4.TEXCOORD = { 1.0f, 1.0f };
 
-	FMesh Plane;
+	FMesh Plane{};
 	Plane.Vertices.push_back(v1);
 	Plane.Vertices.push_back(v2);
 	Plane.Vertices.push_back(v3);
@@ -321,7 +323,7 @@ void UResourceSubsystem::GenerateCubeMesh()
 	v6_4.POSITION = { 0.5f, -0.5f, 0.5f, 1.0f };
 	v6_4.TEXCOORD = { 0.0f, 1.0f };
 
-	FMesh Cube;
+	FMesh Cube{};
 	Cube.Vertices.push_back(v1_1);
 	Cube.Vertices.push_back(v1_2);
 	Cube.Vertices.push_back(v1_3);
@@ -398,5 +400,65 @@ void UResourceSubsystem::GenerateCubeMesh()
 	}
 
 	GEngine->RenderSubsystem->AddNewIndexBuffer("Cube", IndexBuffer);
+}
+
+void UResourceSubsystem::GenerateLineMesh()
+{
+	/* FMesh 持失 */
+	FVertex v1{}; // 舛檎
+	v1.POSITION = { 0.0f, 0.0f, 0.0f, 1.0f };
+	v1.TEXCOORD = { 0.0f, 0.0f };
+	v1.COLOR = { 0.0f, 1.0f, 0.0f, 1.0f };
+	FVertex v2{};
+	v2.POSITION = { 1.0f, 0.0f, 0.0f, 1.0f };
+	v2.TEXCOORD = { 1.0f, 1.0f };
+	v2.COLOR = { 0.0f, 1.0f, 0.0f, 1.0f };
+
+	FMesh Line{};
+	Line.Vertices.push_back(v1);
+	Line.Vertices.push_back(v2);
+	Line.Indexes.push_back(0);
+	Line.Indexes.push_back(1);
+
+	Line.PrimitiveTopology = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
+	this->AddNewMesh("Line", Line);
+
+	/* ID3D11Buffer 持失 */
+	ComPtr<ID3D11Buffer> VertexBuffer{};
+
+	D3D11_BUFFER_DESC VertexBufferDesc{};
+	VertexBufferDesc.ByteWidth = (UINT)(sizeof(Line.Vertices[0]) * Line.Vertices.size());
+	VertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	VertexBufferDesc.CPUAccessFlags = 0;
+	VertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	D3D11_SUBRESOURCE_DATA VertexBufferSubresourceData;
+	VertexBufferSubresourceData.pSysMem = &Line.Vertices[0];
+
+	if (S_OK != GEngine->RenderSubsystem->GetDevice()->CreateBuffer(&VertexBufferDesc, &VertexBufferSubresourceData, VertexBuffer.GetAddressOf()))
+	{
+		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
+	}
+
+	GEngine->RenderSubsystem->AddNewVertexBuffer("Line", VertexBuffer);
+
+
+	/* IndexBuffer 持失 */
+	ComPtr<ID3D11Buffer> IndexBuffer{};
+
+	D3D11_BUFFER_DESC IndexBufferInfo{};
+	IndexBufferInfo.ByteWidth = (UINT)(sizeof(Line.Indexes[0]) * Line.Indexes.size());
+	IndexBufferInfo.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	IndexBufferInfo.CPUAccessFlags = 0;
+	IndexBufferInfo.Usage = D3D11_USAGE_DEFAULT;
+
+	D3D11_SUBRESOURCE_DATA IndexBufferSubresourceData{};
+	IndexBufferSubresourceData.pSysMem = &Line.Indexes[0];
+
+	if (S_OK != GEngine->RenderSubsystem->GetDevice()->CreateBuffer(&IndexBufferInfo, &IndexBufferSubresourceData, IndexBuffer.GetAddressOf()))
+	{
+		CRITICAL_ERROR(BUFFER_CREATE_FAILED_TEXT);
+	}
+
+	GEngine->RenderSubsystem->AddNewIndexBuffer("Line", IndexBuffer);
 }
 

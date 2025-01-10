@@ -448,7 +448,10 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 	for (shared_ptr<AActor>& SharedActor : Actors)
 	{
 		if (URenderComponent* RenderComponent = SharedActor->GetComponentByClass<URenderComponent>())
-			RenderComponents.push_back(RenderComponent);
+		{
+			if (RenderComponent->IsVisible)
+				RenderComponents.push_back(RenderComponent);
+		}
 	}
 
 	std::sort(
@@ -490,7 +493,13 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->MeshID].Get();
 
 		/* 메쉬별 렌더링 파이프라인 설정 */
-		DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader : PixelShaders[RenderComponent->Material->PSShaderID].Get(), nullptr, 0);
+		int nPSShaderID{};
+		if (Camera.IsWireFrame)
+			nPSShaderID = WireframePixelShaderID;
+
+		else
+			nPSShaderID = RenderComponent->Material->PSShaderID;
+		DeviceContext->PSSetShader(PixelShaders[nPSShaderID].Get(), nullptr, 0);
 		DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 		DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 		DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
@@ -518,7 +527,13 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->MeshID].Get();
 
 		/* 메쉬별 렌더링 파이프라인 설정 */
-		DeviceContext->PSSetShader(Camera.IsWireFrame ? WireframePixelShader : PixelShaders[RenderComponent->Material->PSShaderID].Get(), nullptr, 0);
+		int nPSShaderID{};
+		if (Camera.IsWireFrame)
+			nPSShaderID = WireframePixelShaderID;
+
+		else
+			nPSShaderID = RenderComponent->Material->PSShaderID;
+		DeviceContext->PSSetShader(PixelShaders[nPSShaderID].Get(), nullptr, 0);
 		DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 		DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 		DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
@@ -720,8 +735,26 @@ void URenderSubsystem::CreatePixelShaders(string strShaderPath)
 	{
 		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
 	}
-	StringMappedIndexPixelShaderIDs.insert(std::make_pair(WIREFRAME_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
+	int nWireframePixelShaderID = (int)PixelShaders.size();
+	StringMappedIndexPixelShaderIDs.insert(std::make_pair(WIREFRAME_PIXEL_SHADER_NAME, nWireframePixelShaderID));
 	PixelShaders.push_back(WireframePixelShader);
-	this->WireframePixelShader = WireframePixelShader.Get();
+	this->WireframePixelShaderID = nWireframePixelShaderID;
+
+	/* Wireframe Pixel Shader 생성 */
+	ComPtr<ID3D11PixelShader> GreenPixelShader;
+	hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, GREEN_PIXEL_SHADER_NAME, "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+	}
+	hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, GreenPixelShader.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+	}
+	int nGreenPixelShaderID = (int)PixelShaders.size();
+	StringMappedIndexPixelShaderIDs.insert(std::make_pair(GREEN_PIXEL_SHADER_NAME, nGreenPixelShaderID));
+	PixelShaders.push_back(GreenPixelShader);
 }
+
 

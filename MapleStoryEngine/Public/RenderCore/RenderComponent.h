@@ -68,5 +68,6 @@ private:
 	int ZValue;
 	int ZIndex;
 	int MeshID;
+	bool IsVisible;
 
 };

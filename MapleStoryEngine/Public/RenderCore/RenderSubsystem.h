@@ -127,7 +127,7 @@ private:
 	/* Pixel Shaders */
 	unordered_map<string, int> StringMappedIndexPixelShaderIDs;
 	vector<ComPtr<ID3D11PixelShader>> PixelShaders;
-	ID3D11PixelShader* WireframePixelShader;
+	int WireframePixelShaderID;
 
 public:
 	/* 디버그 인터페이스 */

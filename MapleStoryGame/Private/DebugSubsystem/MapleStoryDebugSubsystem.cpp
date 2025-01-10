@@ -62,8 +62,11 @@ void UMapleStoryDebugSubsystem::CustomCode()
 
 	if (ImGui::Button("Spawn Mob"))
 	{
-		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_OrangeMushroom>();
+		FVector3 Pos = GEngine->RenderSubsystem->GetCamera().Transform.Position;
+		Pos.z = 0.0f;
 
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_OrangeMushroom>();
+		Actor->SetPosition(Pos);
 	}
 
 	if (ImGui::Button("Spawn Transculent Effect"))

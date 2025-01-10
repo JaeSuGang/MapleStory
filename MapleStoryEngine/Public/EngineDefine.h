@@ -14,6 +14,7 @@
 
 #define DEFAULT_PIXEL_SHADER_NAME "PSDefault"
 #define WIREFRAME_PIXEL_SHADER_NAME "PSWireframe"
+#define GREEN_PIXEL_SHADER_NAME "PSGreen"
 
 #define RESOURCES_FOLDER_NAME "Resources"
 #define TEXTURES_FOLDER_NAME "Resources\\Textures"

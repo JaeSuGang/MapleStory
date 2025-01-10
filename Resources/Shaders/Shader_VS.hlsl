@@ -31,3 +31,13 @@ VertexShaderOutPut VSMain(Vertex _Vertex)
     OutPut.COLOR = _Vertex.COLOR;
     return OutPut;
 };
+
+VertexShaderOutPut VSDebugLine(Vertex _Vertex)
+{
+    VertexShaderOutPut OutPut;
+	
+    OutPut.SVPOSITION = mul(_Vertex.POSITION, WVP);
+    OutPut.UV = _Vertex.UV;
+    OutPut.COLOR = _Vertex.COLOR;
+    return OutPut;
+};

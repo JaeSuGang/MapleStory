@@ -4,8 +4,10 @@
 #include "Engine/Engine.h"
 #include "World/World.h"
 #include "Actors/ObjBase.h"
+#include "Actors/FootholdBase.h"
 #include "RenderCore/RenderComponent.h"
 #include "RenderCore/RenderSubsystem.h"
+#include "PhysicsCore/PhysicsComponent.h"
 
 
 
@@ -246,19 +248,41 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 					tinyxml2::XMLElement* SecondLoopElement = FirstLoopElement->FirstChildElement();
 					while (SecondLoopElement != nullptr)
 					{
-						tinyxml2::XMLElement* ThirdLoopElement = FirstLoopElement->FirstChildElement();
+						tinyxml2::XMLElement* ThirdLoopElement = SecondLoopElement->FirstChildElement();
 						while (ThirdLoopElement != nullptr)
 						{
-							tinyxml2::XMLElement* FootholdInfoElement = FirstLoopElement->FirstChildElement();
+							int x1{};
+							int x2{};
+							int y1{};
+							int y2{};
+
+							tinyxml2::XMLElement* FootholdInfoElement = ThirdLoopElement->FirstChildElement();
 							while (FootholdInfoElement != nullptr)
 							{
+								const tinyxml2::XMLAttribute* NameAttribute = FootholdInfoElement->FindAttribute("name");
+								const tinyxml2::XMLAttribute* ValueAttribute = FootholdInfoElement->FindAttribute("value");
+								string strNameAttribute = NameAttribute->Value();
+								int nValueAttribute = ValueAttribute->IntValue();
 
+								if (strNameAttribute == "x1")
+									x1 = nValueAttribute;
 
+								else if (strNameAttribute == "x2")
+									x2 = nValueAttribute;
 
-								풋홀드생성 구현하기
+								else if (strNameAttribute == "y1")
+									y1 = nValueAttribute;
+
+								else if (strNameAttribute == "y2")
+									y2 = nValueAttribute;
 
 								FootholdInfoElement = FootholdInfoElement->NextSiblingElement();
 							}
+
+							/* 액터 생성 */
+							AFootholdBase* FootholdActor = GetWorld()->SpawnActor<AFootholdBase>();
+							FootholdActor->InitializeValues((float)x1, (float)-y1, (float)x2, (float)-y2);
+
 							ThirdLoopElement = ThirdLoopElement->NextSiblingElement();
 						}
 						SecondLoopElement = SecondLoopElement->NextSiblingElement();
@@ -566,3 +590,4 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 		MapElement = MapElement->NextSiblingElement();
 	}
 }
+

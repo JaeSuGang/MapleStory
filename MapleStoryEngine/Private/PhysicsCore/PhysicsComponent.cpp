@@ -23,15 +23,33 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 
 	FTransform& OwnerTransfrom = Owner->GetTransform();
 	b2Vec2 B2Position = b2Body_GetPosition(this->B2BodyID);
+
 	OwnerTransfrom.Position.x = B2Position.x * METER_TO_PIXEL_CONSTANT;
 	OwnerTransfrom.Position.y = B2Position.y * METER_TO_PIXEL_CONSTANT;
 }
 
 void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float y2)
 {
+	IsLine = true;
+
+	x1 = x1 * PIXEL_TO_METER_CONSTANT;
+	x2 = x2 * PIXEL_TO_METER_CONSTANT;
+	y1 = y1 * PIXEL_TO_METER_CONSTANT;
+	y2 = y2 * PIXEL_TO_METER_CONSTANT;
+
 	b2BodyDef BodyDef = b2DefaultBodyDef();
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	b2Segment Segment{ {0.0f, 0.0f}, {x2 - x1, y2 - y1} };
+
+	BodyDef.position.x = x1;
+	BodyDef.position.y = y1;
 	BodyDef.type = b2_staticBody;
-	b2edgeshap
+	ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
+	ShapeDef.friction = 0.9f;
+
+	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
+	b2CreateSegmentShape(B2BodyID, &ShapeDef, &Segment);
 }
 
 void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight, int nCollisionFlag)
@@ -109,4 +127,9 @@ void UPhysicsComponent::InitializeAsStatic(float fWidth, float fHeight, int nCol
 void UPhysicsComponent::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+b2BodyId UPhysicsComponent::GetBodyID() const
+{
+	return B2BodyID;
 }

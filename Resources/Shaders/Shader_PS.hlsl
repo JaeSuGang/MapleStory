@@ -29,3 +29,9 @@ float4 PSWireframe(VertexShaderOutPut _Vertex) : SV_Target0
     float4 Color = {0.0f, 0.0f, 0.0f, 1.0f};
     return Color;
 };
+
+float4 PSGreen(VertexShaderOutPut _Vertex) : SV_Target0
+{
+    float4 Color = { 0.0f, 1.0f, 0.0f, 1.0f };
+    return Color;
+};
