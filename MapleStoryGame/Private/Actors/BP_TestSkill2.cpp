@@ -6,6 +6,7 @@
 BP_TestSkill2::BP_TestSkill2()
 {
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
+	IsScreenSkill = true;
 }
 
 void BP_TestSkill2::BeginPlay()

@@ -4,6 +4,7 @@
 #include "GameInstance/GameInstance.h"
 
 class UEngineSubsystem;
+class UKeyInputSubsystem;
 class UResourceSubsystem;
 class UWindowSubsystem;
 class URenderSubsystem;
@@ -16,12 +17,14 @@ class UEngine : public UObject
 	friend class UGameplaySubsystem;
 
 public:
+	ENGINE_API void LateInit();
 	UEngine();
 
 	~UEngine();
 
 public:
 	ENGINE_API static shared_ptr<UEngine> Instantiate();
+
 
 	ENGINE_API void RunForever();
 
@@ -74,6 +77,8 @@ public:
 	}
 
 public:
+	UKeyInputSubsystem* KeyInputSubsystem;
+
 	UResourceSubsystem* ResourceSubsystem;
 
 	URenderSubsystem* RenderSubsystem;

@@ -39,8 +39,8 @@ void AObjBase::Tick(float fDeltaTime)
 		FCamera& Camera = GEngine->RenderSubsystem->GetCamera();
 		float ElapsedTime = GetWorld()->GetElapsedTime();
 		Transform.Position.x += fDeltaTime * 50;
-		if (Transform.Position.x > Camera.Width * 5.0f)
-			Transform.Position.x -= (int)(Camera.Width * 10.0f / cx) * cx;
+		if (Transform.Position.x > Camera.Width * 4.0f)
+			Transform.Position.x -= (int)(Camera.Width * 8.0f / cx) * cx;
 		Transform.Position.y = this->OriginalY + Camera.Transform.Position.y * (100.0f + this->ry) / 100.0f;
 		break;
 	}

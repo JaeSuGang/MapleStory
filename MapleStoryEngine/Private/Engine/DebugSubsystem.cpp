@@ -24,8 +24,6 @@ void UDebugSubsystem::LateInit()
 	RenderSubsystem = Engine->RenderSubsystem;
 
 	InitIMGUI();
-
-	b2DefaultWorldDef();
 }
 
 void UDebugSubsystem::Tick(float fDeltaTime)

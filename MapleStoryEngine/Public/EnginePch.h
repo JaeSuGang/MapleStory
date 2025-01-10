@@ -7,6 +7,7 @@
 #include <chrono>
 #include <filesystem>
 #include <format>
+#include <functional>
 #include <memory>
 #include <ranges>
 #include <string>

@@ -15,7 +15,9 @@ public:
 
 	virtual void Tick(float fDeltaTime) = 0;
 
-private:
+protected:
 	URenderComponent* RenderComponent;
+
+	bool IsScreenSkill;
 };
 

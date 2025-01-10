@@ -155,6 +155,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Engine\KeyInputSubsystem.h" />
     <ClInclude Include="Public\PhysicsCore\PhysicsComponent.h" />
     <ClInclude Include="Public\PhysicsCore\PhysicsSubsystem.h" />
     <ClInclude Include="Public\RenderCore\Animation.h" />
@@ -204,6 +205,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClInclude Include="Public\Engine\TimeSubsystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Engine\KeyInputSubsystem.cpp" />
     <ClCompile Include="Private\PhysicsCore\PhysicsComponent.cpp" />
     <ClCompile Include="Private\PhysicsCore\PhysicsSubsystem.cpp" />
     <ClCompile Include="Private\RenderCore\Animation.cpp" />

@@ -4,6 +4,8 @@
 #include "RenderCore/RenderComponent.h"
 
 AFootholdBase::AFootholdBase()
+	:
+	BodyID{}
 {
 	PhysicsComponent = CreateDefaultSubobject<UPhysicsComponent>();
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();

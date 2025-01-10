@@ -4,9 +4,21 @@
 #include "Engine/DebugSubsystem.h"
 #include "RenderCore/RenderSubsystem.h"
 #include "Engine/ResourceSubsystem.h"
+#include "Engine/KeyInputSubsystem.h"
 #include "Engine/TimeSubsystem.h"
 #include "World/World.h"
 #include "Level/Level.h"
+
+void UEngine::LateInit()
+{
+	TimeSubsystem->LateInit();
+
+	WindowSubsystem->LateInit();
+
+	RenderSubsystem->LateInit();
+
+	ResourceSubsystem->LateInit();
+}
 
 UEngine::UEngine()
 {
@@ -27,14 +39,7 @@ UEngine::UEngine()
 
 	TimeSubsystem = CreateSubsystem<UTimeSubsystem>();
 
-	TimeSubsystem->LateInit();
-
-	WindowSubsystem->LateInit();
-
-	RenderSubsystem->LateInit();
-
-	ResourceSubsystem->LateInit();
-
+	KeyInputSubsystem = CreateSubsystem<UKeyInputSubsystem>();
 }
 
 UEngine::~UEngine()
@@ -42,7 +47,7 @@ UEngine::~UEngine()
 
 }
 
-ENGINE_API shared_ptr<UEngine> UEngine::Instantiate()
+shared_ptr<UEngine> UEngine::Instantiate()
 {
 	shared_ptr<UEngine> SharedEngine;
 
@@ -50,6 +55,7 @@ ENGINE_API shared_ptr<UEngine> UEngine::Instantiate()
 	{
 		SharedEngine = std::make_shared<UEngine>();
 		GEngine = SharedEngine.get();
+		GEngine->LateInit();
 	}
 
 	return SharedEngine;
@@ -57,8 +63,6 @@ ENGINE_API shared_ptr<UEngine> UEngine::Instantiate()
 
 void UEngine::RunForever()
 {
-
-
 	while (bIsLoop)
 	{
 		Tick();
@@ -75,6 +79,8 @@ void UEngine::Tick()
 
 	if (!bIsLoop)
 		return;
+
+	KeyInputSubsystem->Tick(fDeltaTime);
 
 	this->ActiveWorld->ExecutePhysicsTick(fDeltaTime);
 

@@ -1,6 +1,7 @@
 #include "GamePch.h"
 #include "Actors/SkillBase.h"
 #include "RenderCore/RenderComponent.h"
+#include "RenderCore/RenderSubsystem.h"
 
 ASkillBase::ASkillBase()
 {
@@ -20,4 +21,11 @@ void ASkillBase::BeginPlay()
 void ASkillBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
+
+	if (IsScreenSkill)
+	{
+		FTransform CameraTransform = GEngine->RenderSubsystem->GetCamera().Transform;
+		Transform.Position.x = CameraTransform.Position.x;
+		Transform.Position.y = CameraTransform.Position.y;
+	}
 }
