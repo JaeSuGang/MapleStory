@@ -8,14 +8,14 @@ void BP_OrangeMushroom::BeginPlay()
 	RenderComponent->SetTextureByName("Resources\\Textures\\9000404.img.stand.0.png");
 	RenderComponent->SetActorScaleByTextureSize();
 
-	PhysicsComponent->InitializeAsDynamicRigidBody(Transform.Scale.x, Transform.Scale.y, MOB_COLLISION_FLAG);
+	PhysicsComponent->InitializeAsMobFoot(1.0f, Transform.Scale.y * -0.49f, MOB_COLLISION_FLAG);
 
 	/* 애니메이션 추가 */
 	RenderComponent->EnableAnimation();
 	RenderComponent->AddAnimationByFolder(EAnimationName::Stand, "Resources\\Textures\\9000404.img.stand.frames", 180);
 	RenderComponent->SetCurrentAnimation(EAnimationName::Stand);
 
-	RenderComponent->SetSortingLayer(20);
+	
 }
 
 void BP_OrangeMushroom::Tick(float fDeltaTime)

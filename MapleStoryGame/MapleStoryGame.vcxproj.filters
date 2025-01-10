@@ -66,6 +66,9 @@
     <ClCompile Include="Private\Actors\FootholdBase.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Private\Actors\CharacterBase.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Public\GamePch.h">
@@ -117,6 +120,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actors\FootholdBase.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\CharacterBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

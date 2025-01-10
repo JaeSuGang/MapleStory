@@ -1,6 +1,7 @@
 #include "GamePch.h"
 #include "Actors/MobBase.h"
 #include "RenderCore/RenderComponent.h"
+#include "PhysicsCore/PhysicsComponent.h"
 
 AMobBase::AMobBase()
 {
@@ -17,6 +18,7 @@ void AMobBase::BeginPlay()
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 	RenderComponent->SetBlendMode(0);
+	RenderComponent->SetSortingLayer(20);
 }
 
 void AMobBase::Tick(float fDeltaTime)

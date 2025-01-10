@@ -133,3 +133,41 @@ b2BodyId UPhysicsComponent::GetBodyID() const
 {
 	return B2BodyID;
 }
+
+void UPhysicsComponent::InitializeAsMobFoot(float fWidth, float fYOffsetFromCenter, int nCollisionFlag)
+{
+	FTransform OwnerTransform = Owner->GetTransform();
+	b2WorldId B2WorldID = PhysicsSubsystem->B2WorldID;
+
+	b2BodyDef BodyDef = b2DefaultBodyDef();
+
+	BodyDef.type = b2_dynamicBody;
+	BodyDef.fixedRotation = true;
+	BodyDef.gravityScale = 1;
+	BodyDef.linearDamping = 0.0f;
+	BodyDef.position.x = OwnerTransform.Position.x * PIXEL_TO_METER_CONSTANT;
+	BodyDef.position.y = OwnerTransform.Position.y * PIXEL_TO_METER_CONSTANT;
+
+	this->B2BodyID = b2CreateBody(B2WorldID, &BodyDef);
+	b2Circle Circle = { {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, fWidth * PIXEL_TO_METER_CONSTANT };
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	ShapeDef.density = 1.0f;
+	ShapeDef.friction = 1.0f;
+
+	switch (nCollisionFlag)
+	{
+	case FOOTHOLD_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
+		break;
+
+	case MOB_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = MOB_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
+		break;
+	default:
+		break;
+	}
+
+	b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
+}

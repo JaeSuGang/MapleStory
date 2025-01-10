@@ -29,6 +29,8 @@ public:
 public:
 	ENGINE_API b2BodyId GetBodyID() const;
 
+	ENGINE_API void InitializeAsMobFoot(float fWidth, float fYOffsetFromCenter, int nCollisionFlag);
+
 	ENGINE_API void InitializeAsFoothold(float x1, float y1, float x2, float y2);
 
 	ENGINE_API void InitializeAsDynamicRigidBody(float fWidth, float fHeight, int nCollisionFlag);

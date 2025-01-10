@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\CharacterBase.cpp" />
     <ClCompile Include="Private\Actors\FootholdBase.cpp" />
     <ClCompile Include="Private\Actors\ObjBase.cpp" />
     <ClCompile Include="Private\Levels\MapBase.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\CharacterBase.h" />
     <ClInclude Include="Public\Actors\FootholdBase.h" />
     <ClInclude Include="Public\Actors\ObjBase.h" />
     <ClInclude Include="Public\Levels\MapBase.h" />

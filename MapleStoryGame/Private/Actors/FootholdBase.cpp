@@ -37,7 +37,7 @@ void AFootholdBase::InitializeValues(float x1, float y1, float x2, float y2)
 	BodyID = PhysicsComponent->GetBodyID();
 
 
-	Transform.Scale.x = std::pow(std::pow((x2 - x1), 2) + std::pow((y2 - y1), 2), 0.5f);
+	Transform.Scale.x = (float)(std::pow(std::pow((x2 - x1), 2) + std::pow((y2 - y1), 2), 0.5f));
 	Transform.Scale.y = 1.0f;
 	Transform.Scale.z = 1.0f;
 
