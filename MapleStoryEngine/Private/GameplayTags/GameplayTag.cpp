@@ -1,7 +1,7 @@
 #include "EnginePch.h"
 #include "GameplayTags/GameplayTag.h"
 
-FGameplayTag::FGameplayTag()
+bool FGameplayTag::operator==(const FGameplayTag& _Other) const
 {
-
+	return this->ID == _Other.ID;
 }

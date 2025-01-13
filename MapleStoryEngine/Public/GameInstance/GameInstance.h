@@ -5,6 +5,7 @@
 
 class UGameInstanceSubsystem;
 class UGameplaySubsystem;
+class UGameplayTagsManager;
 class UWidget;
 class ULevel;
 
@@ -57,6 +58,8 @@ public:
 
 public:
 	UGameplaySubsystem* GameplaySubsystem;
+
+	UGameplayTagsManager* GameplayTagsManager;
 
 protected:
 	unordered_map<string, shared_ptr<UGameInstanceSubsystem>> Subsystems;

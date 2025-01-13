@@ -16,7 +16,12 @@ UGameplayTagsManager::UGameplayTagsManager()
 	RegisterTag("Null");
 }
 
-void UGameplayTagsManager::ExtractParentsFromString(const string StringToParse, vector<string>& Parents)
+UGameplayTagsManager::~UGameplayTagsManager()
+{
+	int a = 0;
+}
+
+void UGameplayTagsManager::ExtractParentsFromString(string StringToParse, vector<string>& Parents)
 {
 	vector<string> SplittedString;
 	Utils::ParseString(StringToParse, '.', SplittedString);
@@ -52,7 +57,7 @@ int UGameplayTagsManager::FindRegisteredTagIDExact(string TagName)
 	return FindIter->second;
 }
 
-ENGINE_API void UGameplayTagsManager::RegisterTag(string TagName)
+void UGameplayTagsManager::RegisterTag(string TagName)
 {
 	if (FindRegisteredTagIDExact(TagName) != 0)
 		return;

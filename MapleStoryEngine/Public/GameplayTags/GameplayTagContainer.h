@@ -1,7 +1,6 @@
 #pragma once
 #include "EnginePch.h"
-
-struct FGameplayTag;
+#include "GameplayTags/GameplayTag.h"
 
 struct FGameplayTagContainer
 {
@@ -12,10 +11,13 @@ public:
 
 	ENGINE_API bool HasTag(FGameplayTag& );
 
-	ENGINE_API bool HasTagExact(FGameplayTag& );
+	ENGINE_API bool HasTagExact(string _Name) const;
+
+	ENGINE_API bool HasTagExact(FGameplayTag& _Tag) const;
 
 protected:
-	
+	UGameplayTagsManager* TagManager;
+
 	 vector<FGameplayTag> Tags;
 };
 

@@ -2,6 +2,7 @@
 #include "World/World.h"
 #include "Actor/Actor.h"
 #include "ActorComponent/ActorComponent.h"
+#include "GameplayTags/GameplayTagContainer.h"
 
 AActor::AActor()
 	:
@@ -36,6 +37,16 @@ void AActor::Tick(float fDeltaTime)
 
 		Component->TickComponent(fDeltaTime);
 	}
+}
+
+bool AActor::HasTagExact(FGameplayTag& _Tag) const
+{
+	return TagContainer.HasTagExact(_Tag);
+}
+
+bool AActor::HasTagExact(string _Name) const
+{
+	return TagContainer.HasTagExact(_Name);
 }
 
 bool AActor::GetIsTickEnabled() const

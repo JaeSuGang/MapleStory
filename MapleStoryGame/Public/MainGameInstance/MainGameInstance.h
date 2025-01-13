@@ -14,12 +14,6 @@ public:
 	void BeginPlay() override;
 
 public:
-	
 
-	UGameplayTagsManager* GetGameplayTagManager() { return GameplayTagManager; }
-	
-
-protected:
-	UGameplayTagsManager* GameplayTagManager;
 };
 

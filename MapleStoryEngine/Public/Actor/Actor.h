@@ -3,6 +3,7 @@
 #include "UObject/Object.h"
 #include "Engine/DebugSubsystem.h"
 #include "Math/Transform.h"
+#include "GameplayTags/GameplayTagContainer.h"
 
 class UActorComponent;
 
@@ -17,6 +18,10 @@ public:
 	ENGINE_API virtual void Tick(float fDeltaTime) = 0;
 
 public:
+	ENGINE_API bool HasTagExact(FGameplayTag& _Tag) const;
+
+	ENGINE_API bool HasTagExact(string _Name) const;
+
 	ENGINE_API bool GetIsTickEnabled() const;
 
 	ENGINE_API void SetIsTickEnabled(bool bValue);
@@ -70,6 +75,8 @@ protected:
 	UWorld* World;
 
 	unordered_map<string, shared_ptr<UActorComponent>> OwnedComponents;
+
+	FGameplayTagContainer TagContainer;
 
 	FTransform Transform;
 

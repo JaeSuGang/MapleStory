@@ -12,12 +12,14 @@ class UGameplayTagsManager : public UGameInstanceSubsystem
 public:
 	ENGINE_API UGameplayTagsManager();
 
+	ENGINE_API ~UGameplayTagsManager();
+
 	ENGINE_API void RegisterTag(string TagName);
 
-private:
-	void ExtractParentsFromString(const string StringToParse, vector<string>& Parents);
+	ENGINE_API FGameplayTag FindRegisteredTagExact(string TagName);
 
-	FGameplayTag FindRegisteredTagExact(string TagName);
+private:
+	void ExtractParentsFromString(string StringToParse, vector<string>& Parents);
 
 	int FindRegisteredTagIDExact(string TagName);
 

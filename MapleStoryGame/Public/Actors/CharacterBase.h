@@ -3,6 +3,7 @@
 
 class URenderComponent;
 class UPhysicsComponent;
+class UActionComponent;
 
 class ACharacterBase : public AActor
 {
@@ -17,10 +18,16 @@ public:
 	void Tick(float fDeltaTime) override;
 
 public:
+	void BindKeys();
+
+protected:
+	void InitTextureAndPhysics();
 
 protected:
 	URenderComponent* RenderComponent;
 
 	UPhysicsComponent* PhysicsComponent;
+
+	UActionComponent* ActionComponent;
 };
 

@@ -4,8 +4,8 @@
 struct FGameplayTag
 {
 public:
-	FGameplayTag();
-	
+	ENGINE_API bool operator==(const FGameplayTag& _Other) const;
+
 public:
 	string TagName;
 	int ID;

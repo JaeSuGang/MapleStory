@@ -9,17 +9,15 @@
 
 UMainGameInstance::UMainGameInstance()
 {
-	GameplayTagManager = CreateSubsystem<UGameplayTagsManager>();
+	GameplayTagsManager->RegisterTag("Status.Debuff.Stunned");
 
-	GameplayTagManager->RegisterTag("Status.Debuff.Stunned");
+	GameplayTagsManager->RegisterTag("Status.Debuff.Poisoned");
 
-	GameplayTagManager->RegisterTag("Status.Debuff.Poisoned");
+	GameplayTagsManager->RegisterTag("Status.Debuff.Bleeding");
 
-	GameplayTagManager->RegisterTag("Status.Debuff.Bleeding");
+	GameplayTagsManager->RegisterTag("Status.Buff.AttackIncreased");
 
-	GameplayTagManager->RegisterTag("Status.Buff.AttackIncreased");
-
-	GameplayTagManager->RegisterTag("Action.TakeDamage");
+	GameplayTagsManager->RegisterTag("Action.TakeDamage");
 }
 
 void UMainGameInstance::BeginPlay()
