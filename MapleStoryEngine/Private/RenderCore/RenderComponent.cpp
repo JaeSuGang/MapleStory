@@ -102,6 +102,12 @@ void URenderComponent::BeginPlay()
 	Super::BeginPlay();
 }
 
+/* SortingLayer 0 : BackGround */
+/* SortingLayer 0 ~ 7 : 맵 지정 */
+/* SortingLayer 8 : 몹 */
+/* SortingLayer 9 : 캐릭터 */
+/* SortingLayer 10 : 스킬 */
+/* SortingLayer 11 : 디버그 레이어 */
 void URenderComponent::SetSortingLayer(int nLayer)
 {
 	SortingLayer = nLayer;

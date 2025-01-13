@@ -15,6 +15,7 @@ void ASkillBase::BeginPlay()
 	RenderComponent->SetMeshIDByName("Plane");
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+	RenderComponent->SetSortingLayer(10);
 	RenderComponent->SetBlendMode(1);
 }
 

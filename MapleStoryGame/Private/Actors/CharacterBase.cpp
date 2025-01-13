@@ -2,7 +2,7 @@
 #include "Actors/CharacterBase.h"
 #include "RenderCore/RenderComponent.h"
 #include "PhysicsCore/PhysicsComponent.h"
-#include "Components/FSMComponent.h"
+
 
 ACharacterBase::ACharacterBase()
 {
@@ -10,7 +10,6 @@ ACharacterBase::ACharacterBase()
 
 	PhysicsComponent = CreateDefaultSubobject<UPhysicsComponent>();
 
-	FSMComponent = CreateDefaultSubobject<UFSMComponent>();
 }
 
 void ACharacterBase::BeginPlay()
@@ -23,34 +22,16 @@ void ACharacterBase::BeginPlay()
 
 	RenderComponent->SetBlendMode(0);
 
-	RenderComponent->SetSortingLayer(20);
+	RenderComponent->SetSortingLayer(9);
+
+	RenderComponent->SetTextureByName("Resources\\Textures\\Avatar\\stand_0.png");
+
+	RenderComponent->SetActorScaleByTextureSize();
+
+	PhysicsComponent->InitializeAsMobFoot(1.0f, Transform.Scale.y * -0.49f, MOB_COLLISION_FLAG);
 }
 
 void ACharacterBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
-}
-
-void ACharacterBase::UIdleState::OnStateEnter()
-{
-}
-
-void ACharacterBase::UIdleState::OnStateUpdate(float fDeltaTime)
-{
-}
-
-void ACharacterBase::UIdleState::OnStateExit()
-{
-}
-
-void ACharacterBase::UMoveState::OnStateEnter()
-{
-}
-
-void ACharacterBase::UMoveState::OnStateUpdate(float fDeltaTime)
-{
-}
-
-void ACharacterBase::UMoveState::OnStateExit()
-{
 }

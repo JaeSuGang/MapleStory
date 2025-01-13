@@ -18,7 +18,7 @@ void AMobBase::BeginPlay()
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 	RenderComponent->SetBlendMode(0);
-	RenderComponent->SetSortingLayer(20);
+	RenderComponent->SetSortingLayer(8);
 }
 
 void AMobBase::Tick(float fDeltaTime)

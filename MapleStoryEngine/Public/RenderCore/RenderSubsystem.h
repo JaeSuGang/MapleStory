@@ -3,6 +3,15 @@
 #include "Engine/EngineSubsystem.h"
 #include "Math/Transform.h"
 
+/* SortingLayer 0 : BackGround */
+/* SortingLayer 0 ~ 7 : 맵 지정 */
+/* SortingLayer 8 : 몹 */
+/* SortingLayer 9 : 캐릭터 */
+/* SortingLayer 10 : 스킬 */
+/* SortingLayer 11 : 디버그 레이어 */
+
+
+
 class UWindowSubsystem;
 class UDebugSubsystem;
 class UTexture;
@@ -46,6 +55,8 @@ public:
 	ENGINE_API void ReleaseTextures();
 
 	ENGINE_API FCamera& GetCamera();
+
+	void RenderWidgets(float fDeltaTime);
 
 	void Render(float fDeltaTime);
 
@@ -109,8 +120,10 @@ private:
 	void CreateBlendState();
 
 private:
+	vector<URenderComponent*> Widgets;
 	vector<URenderComponent*> Transculents;
-	vector<URenderComponent*> RenderComponents;
+	/* Sorting Layer, Order in Group, Components */
+	vector<vector<vector<vector<URenderComponent*>>>> RenderOrder;
 
 private:
 	/* 리소스 */

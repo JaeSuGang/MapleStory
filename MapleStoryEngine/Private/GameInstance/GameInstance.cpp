@@ -4,10 +4,17 @@
 
 UGameInstance::UGameInstance()
 {
+	Widgets.resize(2);
+
 	GameplaySubsystem = CreateSubsystem<UGameplaySubsystem>();
 }
 
-ENGINE_API void UGameInstance::BeginPlay()
+void UGameInstance::BeginPlay()
 {
 
+}
+
+vector<vector<shared_ptr<UWidget>>>& UGameInstance::GetWidgets()
+{
+	return Widgets;
 }

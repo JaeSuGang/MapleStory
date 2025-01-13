@@ -203,6 +203,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClInclude Include="Public\Engine\ResourceSubsystem.h" />
     <ClInclude Include="Public\RenderCore\Texture.h" />
     <ClInclude Include="Public\Engine\TimeSubsystem.h" />
+    <ClInclude Include="Public\RenderCore\Widget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\Engine\KeyInputSubsystem.cpp" />
@@ -253,6 +254,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClCompile Include="Private\Engine\ResourceSubsystem.cpp" />
     <ClCompile Include="Private\RenderCore\Texture.cpp" />
     <ClCompile Include="Private\Engine\TimeSubsystem.cpp" />
+    <ClCompile Include="Private\RenderCore\Widget.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,7 @@
 
 class UGameInstanceSubsystem;
 class UGameplaySubsystem;
+class UWidget;
 class ULevel;
 
 class UGameInstance : public UObject
@@ -16,6 +17,22 @@ public:
 	ENGINE_API virtual void BeginPlay() = 0;
 
 public:
+	ENGINE_API vector<vector<shared_ptr<UWidget>>>& GetWidgets();
+
+	template<typename T>
+	T* AddWidget()
+	{
+		static_assert(std::is_base_of<UWidget, T>::value);
+
+		T* RawWidget = new T{};
+
+		shared_ptr<UWidget> NewWidget{ RawWidget };
+
+		Widgets[0].push_back(NewWidget);
+
+		return RawWidget;
+	}
+
 	template <typename T>
 	T* GetSubsystem()
 	{
@@ -43,5 +60,7 @@ public:
 
 protected:
 	unordered_map<string, shared_ptr<UGameInstanceSubsystem>> Subsystems;
+
+	vector<vector<shared_ptr<UWidget>>> Widgets;
 };
 

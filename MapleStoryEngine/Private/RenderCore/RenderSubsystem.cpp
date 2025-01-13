@@ -10,6 +10,7 @@
 #include "Level/Level.h"
 #include "Actor/Actor.h"
 #include "RenderCore/RenderComponent.h"
+#include "RenderCore/Widget.h"
 #include "IMGUI/imgui.h"
 
 URenderSubsystem::URenderSubsystem()
@@ -23,14 +24,24 @@ URenderSubsystem::URenderSubsystem()
 	Camera.FarZ = 10000.0f;
 	Camera.Transform.Position.z = -500.0f;
 
-	RenderTargetViewColor[0] = 0.25f;
-	RenderTargetViewColor[1] = 0.25f;
-	RenderTargetViewColor[2] = 0.25f;
+	RenderTargetViewColor[0] = 103.0f / 255.0f;
+	RenderTargetViewColor[1] = 146.0f / 255.0f;
+	RenderTargetViewColor[2] = 190.0f / 255.0f;
 	RenderTargetViewColor[3] = 1.0f;
 
-	RenderComponents.reserve(2000);
-	Transculents.reserve(1000);
+	int nSortingLayers = 12;
+	int nZValues = 20;
+	int nZIndexes = 100;
+	RenderOrder.resize(nSortingLayers);
 
+	for (int i = 0; i < nSortingLayers; i++)
+		RenderOrder[i].resize(nZValues);
+
+	for (int i = 0; i < nSortingLayers; i++)
+		for (int j = 0; j < nZValues; j++)
+			RenderOrder[i][j].resize(nZIndexes);
+
+	Transculents.reserve(1000);
 }
 
 void URenderSubsystem::Tick(float fDeltaTime)
@@ -411,6 +422,42 @@ FCamera& URenderSubsystem::GetCamera()
 	return Camera;
 }
 
+void URenderSubsystem::RenderWidgets(float fDeltaTime)
+{
+	int nPlaneMeshID = GEngine->ResourceSubsystem->GetMeshIDByName("Plane");
+	FMesh& Mesh = GEngine->ResourceSubsystem->GetMeshByID(nPlaneMeshID);
+
+	ID3D11Buffer* pVertexBuffer[] = { this->VertexBuffers[nPlaneMeshID].Get() };
+	ID3D11Buffer* IndexBuffer = { this->IndexBuffers[nPlaneMeshID].Get() };
+	UINT nVertexBufferStride = sizeof(FVertex);
+	UINT nVertexBufferOffset = 0;
+
+	DeviceContext->OMSetRenderTargets(1, RenderTargetView.GetAddressOf(), nullptr);
+	DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
+	DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
+	DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
+
+	UGameInstance* GameInstance = GEngine->GetGameInstance();
+
+	auto Widgets = GameInstance->GetWidgets();
+
+	for (int i = 0; i < Widgets.size(); i++)
+	{
+		for (shared_ptr<UWidget>& Widget : Widgets[i])
+		{
+			int nPSShaderID = Widget->GetPSShaderID();
+
+			DeviceContext->PSSetShader(PixelShaders[nPSShaderID].Get(), nullptr, 0);
+			// this->SetTransformConstantBuffer(RenderComponent->Owner->GetTransform());
+			// this->SetShaderResources(RenderComponent->Material->TextureID);
+
+
+			/* 드로우 콜 */
+			DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
+		}
+	}
+}
+
 void URenderSubsystem::Render(float fDeltaTime)
 {
 	DeviceContext->ClearRenderTargetView(RenderTargetView.Get(), RenderTargetViewColor);
@@ -424,6 +471,8 @@ void URenderSubsystem::Render(float fDeltaTime)
 
 
 	this->RenderActors(fDeltaTime);
+
+	this->RenderWidgets(fDeltaTime);
 
 	Engine->DebugSubsystem->Render();
 
@@ -439,7 +488,6 @@ void URenderSubsystem::Render(float fDeltaTime)
 void URenderSubsystem::RenderActors(float fDeltaTime)
 {
 	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActors();
-	RenderComponents.clear();
 	Transculents.clear();
 
 	DeviceContext->OMSetRenderTargets(1, RenderTargetView.GetAddressOf(), DepthStencilView.Get());
@@ -449,68 +497,63 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 	{
 		if (URenderComponent* RenderComponent = SharedActor->GetComponentByClass<URenderComponent>())
 		{
-			if (RenderComponent->IsVisible)
-				RenderComponents.push_back(RenderComponent);
-		}
-	}
-
-	std::sort(
-		RenderComponents.begin(),
-		RenderComponents.end(),
-		[](URenderComponent* lhs, URenderComponent* rhs)
-		{
-			if (lhs->GetSortingLayer() == rhs->GetSortingLayer())
+			if (SharedActor->GetIsBeginPlayed() && RenderComponent->IsVisible)
 			{
-				if (lhs->GetZValue() == rhs->GetZValue())
-				{
-					return lhs->GetZIndex() < rhs->GetZIndex();
-				}
-
-				return lhs->GetZValue() < rhs->GetZValue();
+				int i = RenderComponent->GetSortingLayer();
+				int j = RenderComponent->GetZValue();
+				int k = RenderComponent->GetZIndex();
+				RenderOrder[i][j][k].push_back(RenderComponent);
 			}
-
-			return lhs->GetSortingLayer() < rhs->GetSortingLayer();
-		});
-
-	for (URenderComponent* RenderComponent : RenderComponents)
-	{
-		/* Transculent 머티리얼을 가진 경우 나중에 렌더링 */
-		if (RenderComponent->Material->BlendMode == UMaterial::EBlendMode::Transculent)
-		{
-			Transculents.push_back(RenderComponent);
-			continue;
 		}
-
-
-		/* 정보 불러오기 및 지역 변수 설정 */
-		FMesh& Mesh = GEngine->ResourceSubsystem->GetMeshByID(RenderComponent->MeshID);
-		ID3D11Buffer* VertexBuffer = this->VertexBuffers[RenderComponent->MeshID].Get();
-		ID3D11Buffer* pVertexBuffer[1];
-		pVertexBuffer[0] = VertexBuffer;
-		UINT nVertexBufferStride = sizeof(FVertex);
-		UINT nVertexBufferOffset = 0;
-
-		ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->MeshID].Get();
-
-		/* 메쉬별 렌더링 파이프라인 설정 */
-		int nPSShaderID{};
-		if (Camera.IsWireFrame)
-			nPSShaderID = WireframePixelShaderID;
-
-		else
-			nPSShaderID = RenderComponent->Material->PSShaderID;
-		DeviceContext->PSSetShader(PixelShaders[nPSShaderID].Get(), nullptr, 0);
-		DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
-		DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
-		DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
-		this->SetTransformConstantBuffer(RenderComponent->Owner->GetTransform());
-		this->SetShaderResources(RenderComponent->Material->TextureID);
-
-
-		/* 드로우 콜 */
-		DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
 	}
 
+	for (int i = 0; i < RenderOrder.size(); i++)
+	{
+		for (int j = 0; j < RenderOrder[i].size(); j++)
+		{
+			for (int k = 0; k < RenderOrder[i][j].size(); k++)
+			{
+				for (URenderComponent* RenderComponent : RenderOrder[i][j][k])
+				{
+					/* Transculent 머티리얼을 가진 경우 나중에 렌더링 */
+					if (RenderComponent->Material->BlendMode == UMaterial::EBlendMode::Transculent)
+					{
+						Transculents.push_back(RenderComponent);
+						continue;
+					}
+
+
+					/* 정보 불러오기 및 지역 변수 설정 */
+					FMesh& Mesh = GEngine->ResourceSubsystem->GetMeshByID(RenderComponent->MeshID);
+					ID3D11Buffer* VertexBuffer = this->VertexBuffers[RenderComponent->MeshID].Get();
+					ID3D11Buffer* pVertexBuffer[1];
+					pVertexBuffer[0] = VertexBuffer;
+					UINT nVertexBufferStride = sizeof(FVertex);
+					UINT nVertexBufferOffset = 0;
+
+					ID3D11Buffer* IndexBuffer = this->IndexBuffers[RenderComponent->MeshID].Get();
+
+					/* 메쉬별 렌더링 파이프라인 설정 */
+					int nPSShaderID{};
+					if (Camera.IsWireFrame)
+						nPSShaderID = WireframePixelShaderID;
+
+					else
+						nPSShaderID = RenderComponent->Material->PSShaderID;
+					DeviceContext->PSSetShader(PixelShaders[nPSShaderID].Get(), nullptr, 0);
+					DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
+					DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
+					DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
+					this->SetTransformConstantBuffer(RenderComponent->Owner->GetTransform());
+					this->SetShaderResources(RenderComponent->Material->TextureID);
+
+
+					/* 드로우 콜 */
+					DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
+				}
+			}
+		}
+	}
 
 	/* Transculents 후처리 */
 	DeviceContext->OMSetRenderTargets(1, RenderTargetView.GetAddressOf(), ReadOnlyDepthStencilView.Get());
@@ -545,6 +588,12 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		/* 드로우 콜 */
 		DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
 	}
+
+	for (int i = 0; i < RenderOrder.size(); i++)
+		for (int j = 0; j < RenderOrder[i].size(); j++)
+			for (int k = 0; k < RenderOrder[i][j].size(); k++)
+				RenderOrder[i][j][k].clear();
+
 }
 
 ID3D11Device* URenderSubsystem::GetDevice() const
