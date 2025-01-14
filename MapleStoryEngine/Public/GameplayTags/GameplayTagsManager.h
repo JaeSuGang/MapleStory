@@ -12,8 +12,6 @@ class UGameplayTagsManager : public UGameInstanceSubsystem
 public:
 	ENGINE_API UGameplayTagsManager();
 
-	ENGINE_API ~UGameplayTagsManager();
-
 	ENGINE_API void RegisterTag(string TagName);
 
 	ENGINE_API FGameplayTag FindRegisteredTagExact(string TagName);

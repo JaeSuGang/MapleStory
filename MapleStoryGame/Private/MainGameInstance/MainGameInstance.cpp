@@ -9,6 +9,10 @@
 
 UMainGameInstance::UMainGameInstance()
 {
+	GameplayTagsManager->RegisterTag("Action.MoveLeft");
+
+	GameplayTagsManager->RegisterTag("Action.MoveRight");
+
 	GameplayTagsManager->RegisterTag("Status.Debuff.Stunned");
 
 	GameplayTagsManager->RegisterTag("Status.Debuff.Poisoned");

@@ -16,11 +16,6 @@ UGameplayTagsManager::UGameplayTagsManager()
 	RegisterTag("Null");
 }
 
-UGameplayTagsManager::~UGameplayTagsManager()
-{
-	int a = 0;
-}
-
 void UGameplayTagsManager::ExtractParentsFromString(string StringToParse, vector<string>& Parents)
 {
 	vector<string> SplittedString;

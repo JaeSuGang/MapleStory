@@ -4,6 +4,8 @@
 #include "PhysicsCore/PhysicsComponent.h"
 #include "Actions/ActionComponent.h"
 #include "Engine/KeyInputSubsystem.h"
+#include "Actions/BP_MoveLeftAction.h"
+#include "Actions/BP_MoveRightAction.h"
 
 
 ACharacterBase::ACharacterBase()
@@ -21,7 +23,9 @@ void ACharacterBase::BeginPlay()
 
 	this->InitTextureAndPhysics();
 
+	this->InitActions();
 
+	this->BindKeys();
 }
 
 void ACharacterBase::Tick(float fDeltaTime)
@@ -31,7 +35,15 @@ void ACharacterBase::Tick(float fDeltaTime)
 
 void ACharacterBase::BindKeys()
 {
-	// GEngine->KeyInputSubsystem->BindKey('A', UKeyInputSubsystem::EKeyState::KeyDown, );
+	GEngine->KeyInputSubsystem->BindKey('A', UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.MoveLeft" }));
+	GEngine->KeyInputSubsystem->BindKey('D', UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.MoveRight" }));
+}
+
+void ACharacterBase::InitActions()
+{
+	ActionComponent->AddAction<BP_MoveLeftAction>();
+
+	ActionComponent->AddAction<BP_MoveRightAction>();
 }
 
 void ACharacterBase::InitTextureAndPhysics()

@@ -72,7 +72,10 @@
     <ClCompile Include="Private\Components\FSMComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Private\Actions\BP_MoveAction.cpp">
+    <ClCompile Include="Private\Actions\BP_MoveLeftAction.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actions\BP_MoveRightAction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,7 +137,10 @@
     <ClInclude Include="Public\Components\FSMComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Public\Actions\BP_MoveAction.h">
+    <ClInclude Include="Public\Actions\BP_MoveLeftAction.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actions\BP_MoveRightAction.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

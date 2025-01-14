@@ -147,7 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Private\Actions\BP_MoveAction.cpp" />
+    <ClCompile Include="Private\Actions\BP_MoveLeftAction.cpp" />
+    <ClCompile Include="Private\Actions\BP_MoveRightAction.cpp" />
     <ClCompile Include="Private\Components\FSMComponent.cpp" />
     <ClCompile Include="Private\Actors\CharacterBase.cpp" />
     <ClCompile Include="Private\Actors\FootholdBase.cpp" />
@@ -172,7 +173,8 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Public\Actions\BP_MoveAction.h" />
+    <ClInclude Include="Public\Actions\BP_MoveLeftAction.h" />
+    <ClInclude Include="Public\Actions\BP_MoveRightAction.h" />
     <ClInclude Include="Public\Components\FSMComponent.h" />
     <ClInclude Include="Public\Actors\CharacterBase.h" />
     <ClInclude Include="Public\Actors\FootholdBase.h" />

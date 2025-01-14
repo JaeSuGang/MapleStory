@@ -3,6 +3,7 @@
 #include "Actor/Actor.h"
 #include "World/World.h"
 #include "PhysicsCore/PhysicsSubsystem.h"
+#include "Engine/TimeSubsystem.h"
 
 UPhysicsComponent::UPhysicsComponent()
 {
@@ -28,6 +29,16 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 	OwnerTransfrom.Position.y = B2Position.y * METER_TO_PIXEL_CONSTANT;
 }
 
+
+void UPhysicsComponent::SetXVelocity(float _x)
+{
+	float fDeltaTime = GEngine->TimeSubsystem->GetDeltaTime();
+
+	b2Vec2 CurrentVelocity = b2Body_GetLinearVelocity(B2BodyID);
+
+	b2Body_SetLinearVelocity(B2BodyID, {_x * fDeltaTime, CurrentVelocity.y});
+}
+
 void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float y2)
 {
 	IsLine = true;
@@ -46,7 +57,7 @@ void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float
 	BodyDef.type = b2_staticBody;
 	ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
 	ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
-	ShapeDef.friction = 0.9f;
+	ShapeDef.friction = 0.5f;
 
 	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
 	b2CreateSegmentShape(B2BodyID, &ShapeDef, &Segment);
@@ -70,7 +81,7 @@ void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight
 	b2Polygon DynamicBox = b2MakeBox(fWidth * PIXEL_TO_METER_CONSTANT / 2.0f, fHeight * PIXEL_TO_METER_CONSTANT / 2.0f);
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.density = 1.0f;
-	ShapeDef.friction = 1.0f;
+	ShapeDef.friction = 0.5f;
 
 	switch (nCollisionFlag)
 	{
@@ -152,7 +163,7 @@ void UPhysicsComponent::InitializeAsMobFoot(float fWidth, float fYOffsetFromCent
 	b2Circle Circle = { {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, fWidth * PIXEL_TO_METER_CONSTANT };
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.density = 1.0f;
-	ShapeDef.friction = 1.0f;
+	ShapeDef.friction = 0.5f;
 
 	switch (nCollisionFlag)
 	{

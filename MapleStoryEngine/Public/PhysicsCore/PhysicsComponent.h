@@ -1,5 +1,6 @@
 #pragma once
 #include "ActorComponent/ActorComponent.h"
+#include "Math/Vector3.h"
 
 /* 50px = 1m */
 #define METER_TO_PIXEL_CONSTANT 50
@@ -27,6 +28,8 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API void SetXVelocity(float _x);
+
 	ENGINE_API b2BodyId GetBodyID() const;
 
 	ENGINE_API void InitializeAsMobFoot(float fWidth, float fYOffsetFromCenter, int nCollisionFlag);

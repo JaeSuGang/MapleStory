@@ -21,6 +21,8 @@ public:
 	void BindKeys();
 
 protected:
+	void InitActions();
+
 	void InitTextureAndPhysics();
 
 protected:

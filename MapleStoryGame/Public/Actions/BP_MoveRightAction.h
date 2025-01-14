@@ -1,10 +1,10 @@
 #pragma once
 #include "Actions/GameplayAction.h"
 
-class BP_MoveAction : public UGameplayAction
+class BP_MoveRightAction : public UGameplayAction
 {
 public:
-	BP_MoveAction();
+	BP_MoveRightAction();
 
 	void StartAction(AActor* Instigator) override;
 
