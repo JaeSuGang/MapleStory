@@ -28,6 +28,8 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API FVector3 GetVelocity() const;
+
 	ENGINE_API void SetXVelocity(float _x);
 
 	ENGINE_API b2BodyId GetBodyID() const;

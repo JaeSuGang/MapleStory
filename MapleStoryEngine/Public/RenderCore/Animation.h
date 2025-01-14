@@ -3,10 +3,12 @@
 #include "UObject/Object.h"
 
 class UMaterial;
+class URenderComponent;
 
 enum class EAnimationName
 {
-	Stand,
+	Idle,
+	Walk,
 	Screen
 };
 
@@ -17,6 +19,8 @@ public:
 	ENGINE_API UAnimation();
 
 public:
+	ENGINE_API void SetRenderComponent(URenderComponent* _Component);
+
 	ENGINE_API void SetTimePerFrame(int nTime);
 
 	ENGINE_API void SetMaterialToApply(UMaterial* Material);
@@ -30,6 +34,7 @@ public:
 	ENGINE_API void Play(float fDeltaTime);
 
 protected:
+	URenderComponent* RenderComponent;
 	UMaterial* MaterialToApply;
 	unordered_map<EAnimationName, vector<int>> Animations;
 	EAnimationName CurrentAnimation;

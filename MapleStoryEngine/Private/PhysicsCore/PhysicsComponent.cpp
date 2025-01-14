@@ -30,6 +30,13 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 }
 
 
+FVector3 UPhysicsComponent::GetVelocity() const
+{
+	b2Vec2 Velocity = b2Body_GetLinearVelocity(B2BodyID);
+
+	return { Velocity.x, Velocity.y, 0.0f };
+}
+
 void UPhysicsComponent::SetXVelocity(float _x)
 {
 	float fDeltaTime = GEngine->TimeSubsystem->GetDeltaTime();
@@ -162,7 +169,7 @@ void UPhysicsComponent::InitializeAsMobFoot(float fWidth, float fYOffsetFromCent
 	this->B2BodyID = b2CreateBody(B2WorldID, &BodyDef);
 	b2Circle Circle = { {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, fWidth * PIXEL_TO_METER_CONSTANT };
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
-	ShapeDef.density = 1.0f;
+	ShapeDef.density = 0.1f;
 	ShapeDef.friction = 0.5f;
 
 	switch (nCollisionFlag)

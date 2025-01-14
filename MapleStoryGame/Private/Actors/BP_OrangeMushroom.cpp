@@ -12,8 +12,8 @@ void BP_OrangeMushroom::BeginPlay()
 
 	/* 애니메이션 추가 */
 	RenderComponent->EnableAnimation();
-	RenderComponent->AddAnimationByFolder(EAnimationName::Stand, "Resources\\Textures\\9000404.img.stand.frames", 180);
-	RenderComponent->SetCurrentAnimation(EAnimationName::Stand);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\9000404.img.stand.frames", 180);
+	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 
 	
 }

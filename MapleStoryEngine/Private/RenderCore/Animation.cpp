@@ -3,6 +3,7 @@
 #include "RenderCore/RenderSubsystem.h"
 #include "RenderCore/Animation.h"
 #include "RenderCore/Material.h"
+#include "RenderCore/RenderComponent.h"
 
 UAnimation::UAnimation()
 	:
@@ -11,6 +12,11 @@ UAnimation::UAnimation()
 {
 	CurrentIndex = 1;
 	AccumulatedTime = 0.0f;
+}
+
+void UAnimation::SetRenderComponent(URenderComponent* _Component)
+{
+	RenderComponent = _Component;
 }
 
 void UAnimation::SetTimePerFrame(int nTime)
@@ -61,6 +67,9 @@ void UAnimation::AddAnimation(EAnimationName Name, vector<int> TextureIDSequence
 
 void UAnimation::SetCurrentAnimation(EAnimationName Name)
 {
+	if (CurrentAnimation == Name)
+		return;
+
 	CurrentAnimation = Name;
 	AccumulatedTime = 0.0f;
 	CurrentIndex = 1;
@@ -78,7 +87,9 @@ void UAnimation::SetCurrentAnimation(EAnimationName Name)
 void UAnimation::Play(float fDeltaTime)
 {
 	if (!MaterialToApply)
+	{
 		return;
+	}
 
 	AccumulatedTime += fDeltaTime;
 
@@ -95,7 +106,9 @@ void UAnimation::Play(float fDeltaTime)
 
 			CurrentIndex < TextureIDSequence.size() - 1 ? CurrentIndex++ : CurrentIndex = 1;
 
-			MaterialToApply->TextureID = (FindIter->second)[CurrentIndex];
+			MaterialToApply->TextureID = TextureIDSequence[CurrentIndex];
+
+			RenderComponent->SetActorScaleByTextureSize();
 
 			AccumulatedTime = 0.0f;
 		}

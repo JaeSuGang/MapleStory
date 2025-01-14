@@ -91,11 +91,18 @@ void AActor::MultiplyScale(float x, float y, float z)
 	Transform.Scale.z *= z;
 }
 
-void AActor::SetScale(float x, float y, float z)
+void AActor::SetRotation(FVector3 _Vector)
 {
-	Transform.Scale.x = x;
-	Transform.Scale.y = y;
-	Transform.Scale.z = z;
+	Transform.Rotation.x = _Vector.x;
+	Transform.Rotation.y = _Vector.y;
+	Transform.Rotation.z = _Vector.z;
+}
+
+void AActor::SetScale(FVector3 _Vector)
+{
+	Transform.Scale.x = _Vector.x;
+	Transform.Scale.y = _Vector.y;
+	Transform.Scale.z = _Vector.z;
 }
 
 FTransform& AActor::GetTransform()

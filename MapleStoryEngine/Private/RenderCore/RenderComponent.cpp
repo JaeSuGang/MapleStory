@@ -49,6 +49,7 @@ void URenderComponent::EnableAnimation()
 {
 	Animation = std::make_shared<UAnimation>();
 	Animation->SetMaterialToApply(Material.get());
+	Animation->SetRenderComponent(this);
 }
 
 void URenderComponent::EnableMaterial()
@@ -60,7 +61,7 @@ void URenderComponent::SetActorScaleByTextureSize()
 {
 	UTexture* Texture = GEngine->RenderSubsystem->Textures[Material->TextureID].get();
 
-	Owner->SetScale((float)Texture->Width, (float)Texture->Height, 0.0001f);
+	Owner->SetScale({ (float)Texture->Width, (float)Texture->Height, 0.0001f });
 }
 
 void URenderComponent::SetBlendMode(bool bIsTransculent)

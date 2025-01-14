@@ -17,6 +17,11 @@ ACharacterBase::ACharacterBase()
 	ActionComponent = CreateDefaultSubobject<UActionComponent>();
 }
 
+ACharacterBase::~ACharacterBase()
+{
+	GEngine->KeyInputSubsystem->ClearKeys();
+}
+
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
@@ -25,18 +30,35 @@ void ACharacterBase::BeginPlay()
 
 	this->InitActions();
 
+	this->InitAnimations();
+
 	this->BindKeys();
 }
 
 void ACharacterBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
+
+	this->CheckVelocity();
+
+	RenderComponent->PlayAnimation(fDeltaTime);
 }
 
 void ACharacterBase::BindKeys()
 {
-	GEngine->KeyInputSubsystem->BindKey('A', UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.MoveLeft" }));
-	GEngine->KeyInputSubsystem->BindKey('D', UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.MoveRight" }));
+	GEngine->KeyInputSubsystem->BindKey(VK_LEFT, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.MoveLeft" }));
+
+	GEngine->KeyInputSubsystem->BindKey(VK_RIGHT, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.MoveRight"}));
+}
+
+void ACharacterBase::CheckVelocity()
+{
+	FVector3 Velocity = PhysicsComponent->GetVelocity();
+
+	if (abs(Velocity.x) < 0.01f && abs(Velocity.y) < 0.01f)
+	{
+		RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
+	}
 }
 
 void ACharacterBase::InitActions()
@@ -56,9 +78,22 @@ void ACharacterBase::InitTextureAndPhysics()
 
 	RenderComponent->SetSortingLayer(9);
 
-	RenderComponent->SetTextureByName("Resources\\Textures\\Avatar\\stand_0.png");
+	RenderComponent->SetTextureByName("Resources\\Textures\\Avatar\\Idle\\1.png");
 
 	RenderComponent->SetActorScaleByTextureSize();
 
 	PhysicsComponent->InitializeAsMobFoot(1.0f, Transform.Scale.y * -0.49f, MOB_COLLISION_FLAG);
+
+	RenderComponent->EnableMaterial();
+}
+
+void ACharacterBase::InitAnimations()
+{
+	RenderComponent->EnableAnimation();
+
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Avatar\\Idle", 500);
+
+	RenderComponent->AddAnimationByFolder(EAnimationName::Walk, "Resources\\Textures\\Avatar\\Walk", 100);
+
+	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }

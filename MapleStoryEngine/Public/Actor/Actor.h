@@ -38,7 +38,9 @@ public:
 
 	ENGINE_API void MultiplyScale(float x, float y, float z);
 
-	ENGINE_API void SetScale(float x, float y, float z);
+	ENGINE_API void SetRotation(FVector3 _Vector);
+
+	ENGINE_API void SetScale(FVector3 _Vector);
 
 	ENGINE_API FTransform& GetTransform();
 
