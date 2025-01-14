@@ -85,7 +85,7 @@ void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float
 	BodyDef.type = b2_staticBody;
 	ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
 	ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
-	ShapeDef.friction = 0.6f;
+	ShapeDef.friction = 0.65f;
 
 	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
 	b2CreateSegmentShape(B2BodyID, &ShapeDef, &Segment);
@@ -109,7 +109,7 @@ void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight
 	b2Polygon DynamicBox = b2MakeBox(fWidth * PIXEL_TO_METER_CONSTANT / 2.0f, fHeight * PIXEL_TO_METER_CONSTANT / 2.0f);
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.density = 1.0f;
-	ShapeDef.friction = 0.6f;
+	ShapeDef.friction = 0.65f;
 
 	switch (nCollisionFlag)
 	{
@@ -191,7 +191,7 @@ void UPhysicsComponent::InitializeAsMobFoot(float fWidth, float fYOffsetFromCent
 	b2Circle Circle = { {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, fWidth * PIXEL_TO_METER_CONSTANT };
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.density = 0.0001f;
-	ShapeDef.friction = 0.6f;
+	ShapeDef.friction = 0.65f;
 
 	switch (nCollisionFlag)
 	{
@@ -210,3 +210,4 @@ void UPhysicsComponent::InitializeAsMobFoot(float fWidth, float fYOffsetFromCent
 
 	b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
 }
+
