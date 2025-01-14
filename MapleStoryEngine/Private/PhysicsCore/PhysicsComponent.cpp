@@ -76,19 +76,25 @@ void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float
 	y1 = y1 * PIXEL_TO_METER_CONSTANT;
 	y2 = y2 * PIXEL_TO_METER_CONSTANT;
 
-	b2BodyDef BodyDef = b2DefaultBodyDef();
-	b2ShapeDef ShapeDef = b2DefaultShapeDef();
-	b2Segment Segment{ {0.0f, 0.0f}, {x2 - x1, y2 - y1} };
 
+	b2BodyDef BodyDef = b2DefaultBodyDef();
 	BodyDef.position.x = x1;
 	BodyDef.position.y = y1;
 	BodyDef.type = b2_staticBody;
-	ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
-	ShapeDef.friction = 0.65f;
+
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+
+	b2ChainDef ChainDef = b2DefaultChainDef();
+	b2Vec2 VecPoints[4] = { {x2 - x1, y2 - y1}, {x2 - x1, y2 - y1}, {0.0f, 0.0f}, {0.0f, 0.0f} };
+	ChainDef.points = VecPoints;
+	ChainDef.count = 4;
+	ChainDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
+	ChainDef.filter.maskBits = MOB_COLLISION_FLAG;
+	ShapeDef.friction = 0.7f;
 
 	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
-	b2CreateSegmentShape(B2BodyID, &ShapeDef, &Segment);
+	b2CreateChain(B2BodyID, &ChainDef);
+
 }
 
 void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight, int nCollisionFlag)
@@ -109,7 +115,7 @@ void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight
 	b2Polygon DynamicBox = b2MakeBox(fWidth * PIXEL_TO_METER_CONSTANT / 2.0f, fHeight * PIXEL_TO_METER_CONSTANT / 2.0f);
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.density = 1.0f;
-	ShapeDef.friction = 0.65f;
+	ShapeDef.friction = 0.7f;
 
 	switch (nCollisionFlag)
 	{
@@ -188,10 +194,10 @@ void UPhysicsComponent::InitializeAsMobFoot(float fWidth, float fYOffsetFromCent
 	BodyDef.position.y = OwnerTransform.Position.y * PIXEL_TO_METER_CONSTANT;
 
 	this->B2BodyID = b2CreateBody(B2WorldID, &BodyDef);
-	b2Circle Circle = { {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, fWidth * PIXEL_TO_METER_CONSTANT };
+	b2Capsule Capsule = { {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, fWidth * PIXEL_TO_METER_CONSTANT };
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
-	ShapeDef.density = 0.0001f;
-	ShapeDef.friction = 0.65f;
+	ShapeDef.density = 0.1f;
+	ShapeDef.friction = 0.7f;
 
 	switch (nCollisionFlag)
 	{
@@ -208,6 +214,6 @@ void UPhysicsComponent::InitializeAsMobFoot(float fWidth, float fYOffsetFromCent
 		break;
 	}
 
-	b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
+	b2CreateCapsuleShape(B2BodyID, &ShapeDef, &Capsule);
 }
 

@@ -23,9 +23,6 @@ void BP_MoveRightAction::StartAction(AActor* Instigator)
 	{
 		FVector3 Velocity = PhysicsComponent->GetVelocity();
 
-		if (abs(Velocity.y) > 0.15f)
-			return;
-
 		if (Velocity.x <= 4.0f)
 			PhysicsComponent->SetXVelocity(4.0f);
 	}
