@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actions\BP_FairyTurnAction.cpp" />
+    <ClCompile Include="Private\Actions\BP_JumpAction.cpp" />
     <ClCompile Include="Private\Actions\BP_MoveLeftAction.cpp" />
     <ClCompile Include="Private\Actions\BP_MoveRightAction.cpp" />
     <ClCompile Include="Private\Components\FSMComponent.cpp" />
@@ -173,6 +175,8 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actions\BP_FairyTurnAction.h" />
+    <ClInclude Include="Public\Actions\BP_JumpAction.h" />
     <ClInclude Include="Public\Actions\BP_MoveLeftAction.h" />
     <ClInclude Include="Public\Actions\BP_MoveRightAction.h" />
     <ClInclude Include="Public\Components\FSMComponent.h" />

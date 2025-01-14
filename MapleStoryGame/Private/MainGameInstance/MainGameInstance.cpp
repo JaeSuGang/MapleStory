@@ -9,9 +9,13 @@
 
 UMainGameInstance::UMainGameInstance()
 {
+	GameplayTagsManager->RegisterTag("Action.FairyTurn");
+
 	GameplayTagsManager->RegisterTag("Action.MoveLeft");
 
 	GameplayTagsManager->RegisterTag("Action.MoveRight");
+
+	GameplayTagsManager->RegisterTag("Action.Jump");
 
 	GameplayTagsManager->RegisterTag("Status.Debuff.Stunned");
 

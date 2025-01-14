@@ -9,6 +9,8 @@ enum class EAnimationName
 {
 	Idle,
 	Walk,
+	Jump,
+	SwingT1,
 	Screen
 };
 

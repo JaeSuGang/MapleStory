@@ -12,6 +12,7 @@ UAnimation::UAnimation()
 {
 	CurrentIndex = 1;
 	AccumulatedTime = 0.0f;
+	TimePerFrame = 500;
 }
 
 void UAnimation::SetRenderComponent(URenderComponent* _Component)
@@ -80,8 +81,16 @@ void UAnimation::SetCurrentAnimation(EAnimationName Name)
 		GEngine->DebugLog("유효하지 않은 애니메이션 Enum", 1);
 		return;
 	}
+	else
+	{
+		vector<int>& TextureIDSequence = FindIter->second;
 
+		MaterialToApply->TextureID = TextureIDSequence[CurrentIndex];
+
+		RenderComponent->SetActorScaleByTextureSize();
+	}
 	TimePerFrame = FindIter->second[0];
+
 }
 
 void UAnimation::Play(float fDeltaTime)

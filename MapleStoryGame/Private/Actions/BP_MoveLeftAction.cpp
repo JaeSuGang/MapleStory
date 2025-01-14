@@ -13,13 +13,23 @@ BP_MoveLeftAction::BP_MoveLeftAction()
 
 void BP_MoveLeftAction::StartAction(AActor* Instigator)
 {
+	float fDeltaTime = GEngine->TimeSubsystem->GetDeltaTime();
+
 	FTransform _Transform = Instigator->GetTransform();
 	_Transform.Rotation.y = 0;
 	Instigator->SetRotation(_Transform.Rotation);
 
 	UPhysicsComponent* PhysicsComponent = Instigator->GetComponentByClass<UPhysicsComponent>();
 	if (PhysicsComponent)
-		PhysicsComponent->SetXVelocity(-300.0f);
+	{
+		FVector3 Velocity = PhysicsComponent->GetVelocity();
+
+		if (abs(Velocity.y) > 0.15f)
+			return;
+
+		if (Velocity.x >= -4.0f)
+			PhysicsComponent->SetXVelocity(-4.0f);
+	}
 
 	URenderComponent* RenderComponent = Instigator->GetComponentByClass<URenderComponent>();
 	if (RenderComponent)

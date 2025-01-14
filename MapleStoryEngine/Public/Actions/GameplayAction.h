@@ -2,6 +2,7 @@
 #include "UObject/Object.h"
 #include "EnginePch.h"
 #include "GameplayTags/GameplayTag.h"
+#include "Engine/TimeSubsystem.h"
 
 class AActor;
 class UGameplayTagsManager;
@@ -19,6 +20,8 @@ public:
 
 
 protected:
+	UTimeSubsystem* Timesubsystem;
+
 	UGameplayTagsManager* GameplayTagsManager;
 
 	FGameplayTag Tag;

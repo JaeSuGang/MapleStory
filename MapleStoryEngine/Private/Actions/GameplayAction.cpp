@@ -7,6 +7,8 @@
 UGameplayAction::UGameplayAction()
 {
 	GameplayTagsManager = GEngine->GetGameInstance()->GameplayTagsManager;
+
+	Timesubsystem = GEngine->TimeSubsystem;
 }
 
 FGameplayTag& UGameplayAction::GetTag()
