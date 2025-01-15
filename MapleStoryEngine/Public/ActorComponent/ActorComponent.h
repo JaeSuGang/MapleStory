@@ -1,5 +1,6 @@
 #pragma once
 #include "UObject/Object.h"
+#include "EnginePch.h"
 
 class AActor;
 

@@ -10,7 +10,7 @@ void UTestLevel::BeginPlay()
 
 	this->LoadXMLToMap("Resources\\XMLs\\Map.Map.Map4.450003000.img.xml", "Lacheln.img.xml");
 
-	GetWorld()->SpawnActor<ACharacterBase>();
+	MainActor = GetWorld()->SpawnActor<ACharacterBase>();
 }
 
 void UTestLevel::Tick(float fDeltaTime)

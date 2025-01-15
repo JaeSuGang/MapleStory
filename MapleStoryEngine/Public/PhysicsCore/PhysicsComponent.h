@@ -28,6 +28,8 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API bool GetIsGrounded();
+
 	ENGINE_API void AddXVelocity(float _x);
 
 	ENGINE_API void AddYVelocity(float _y);
@@ -38,7 +40,11 @@ public:
 
 	ENGINE_API b2BodyId GetBodyID() const;
 
-	ENGINE_API void InitializeAsMobFoot(float fWidth, float fYOffsetFromCenter, int nCollisionFlag);
+	ENGINE_API void InitializeBody(b2BodyType _type);
+
+	ENGINE_API void InitializeHitbox(float fWidth, float fHeight);
+
+	ENGINE_API void InitializeFootCollider(float fYOffsetFromCenter, int nCollisionFlag);
 
 	ENGINE_API void InitializeAsFoothold(float x1, float y1, float x2, float y2);
 
@@ -46,12 +52,20 @@ public:
 
 	ENGINE_API void InitializeAsStatic(float fWidth, float fHeight, int nCollisionFlag);
 
+protected:
+	void SyncPos();
 
-private:
+protected:
 	UPhysicsSubsystem* PhysicsSubsystem;
 		
 	b2BodyId B2BodyID;
 
+	b2ShapeId B2FootID;
+
+	b2ShapeId B2HitboxID;
+
 	bool IsLine;
+
+	bool IsBodyInitialized;
 };
 

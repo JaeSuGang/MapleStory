@@ -4,6 +4,7 @@
 class URenderComponent;
 class UPhysicsComponent;
 class UActionComponent;
+class UAttributeComponent;
 
 class ACharacterBase : public AActor
 {
@@ -23,7 +24,7 @@ public:
 	void BindKeys();
 
 protected:
-	void CheckVelocity();
+	void CheckFalling();
 
 	void InitActions();
 
@@ -37,5 +38,7 @@ protected:
 	UPhysicsComponent* PhysicsComponent;
 
 	UActionComponent* ActionComponent;
+
+	UAttributeComponent* AttributeComponent;
 };
 

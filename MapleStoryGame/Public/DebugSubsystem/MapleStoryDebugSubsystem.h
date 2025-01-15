@@ -7,6 +7,7 @@ public:
 	/* 생성자와 오버라이드 */
 	void CustomCode() override;
 
-
+protected:
+	void PlayerTab();
 };
 

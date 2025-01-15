@@ -16,6 +16,8 @@ public:
 
 	ENGINE_API FGameplayTag FindRegisteredTagExact(string TagName);
 
+	ENGINE_API FGameplayTag FindRegisteredTagByID(int ID);
+
 private:
 	void ExtractParentsFromString(string StringToParse, vector<string>& Parents);
 

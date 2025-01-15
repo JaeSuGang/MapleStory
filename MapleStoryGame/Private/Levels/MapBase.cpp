@@ -26,6 +26,11 @@ void UMapBase::Tick(float fDeltaTime)
 
 }
 
+AActor* UMapBase::GetMainActor() const
+{
+	return MainActor;
+}
+
 void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 {
 	tinyxml2::XMLDocument MapDocument;

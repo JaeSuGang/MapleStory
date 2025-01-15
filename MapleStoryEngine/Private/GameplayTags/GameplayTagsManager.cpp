@@ -42,6 +42,11 @@ FGameplayTag UGameplayTagsManager::FindRegisteredTagExact(string TagName)
 	return RegisteredTags[ID];
 }
 
+FGameplayTag UGameplayTagsManager::FindRegisteredTagByID(int ID)
+{
+	return RegisteredTags[ID];
+}
+
 int UGameplayTagsManager::FindRegisteredTagIDExact(string TagName)
 {
 	unordered_map<string, int>::iterator FindIter = StringMappedIDs.find(TagName);

@@ -9,6 +9,8 @@
 #include "RenderCore/Material.h"
 #include "RenderCore/RenderSubsystem.h"
 #include "RenderCore/RenderComponent.h"
+#include "Attributes/AttributeComponent.h"
+#include "GameplayTags/GameplayTagsManager.h"
 #include "Levels/TestLevel.h"
 #include "Actors/BP_OrangeMushroom.h"
 #include "Actors/BP_TestSkill.h"
@@ -25,6 +27,8 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	float fFPS = GEngine->TimeSubsystem->GetFPS();
 
 	ImGui::ShowDemoWindow();
+
+	this->PlayerTab();
 
 	ImGui::Begin("DebugSystem");
 	ImGui::Text("FPS : %.2f", fFPS);
@@ -96,5 +100,35 @@ void UMapleStoryDebugSubsystem::CustomCode()
 			Actor->Destroy();
 		}
 	}
+	ImGui::End();
+}
+
+void UMapleStoryDebugSubsystem::PlayerTab()
+{
+	UMapBase* Level = static_cast<UMapBase*>(GEngine->GetWorld()->GetLevel());
+
+	AActor* Player = Level->GetMainActor();
+
+	if (!Player)
+		return;
+
+	UAttributeComponent* Attributes = Player->GetComponentByClass<UAttributeComponent>();
+
+	ImGui::Begin("Player");
+
+	int ImguiID = 0;
+	for (auto pair : Attributes->Attributes)
+	{
+		int TagID = pair.first;
+
+		FGameplayTag Tag = GEngine->GetGameInstance()->GameplayTagsManager->FindRegisteredTagByID(TagID);
+
+		ImguiID++;
+
+		ImGui::PushID(ImguiID);
+		ImGui::TextUnformatted(Tag.TagName.c_str());
+		ImGui::PopID();
+	}
+
 	ImGui::End();
 }

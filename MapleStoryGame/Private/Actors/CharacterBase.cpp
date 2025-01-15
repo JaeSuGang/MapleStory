@@ -3,6 +3,7 @@
 #include "RenderCore/RenderComponent.h"
 #include "PhysicsCore/PhysicsComponent.h"
 #include "Actions/ActionComponent.h"
+#include "Attributes/AttributeComponent.h"
 #include "Engine/KeyInputSubsystem.h"
 #include "Actions/BP_MoveLeftAction.h"
 #include "Actions/BP_MoveRightAction.h"
@@ -18,6 +19,8 @@ ACharacterBase::ACharacterBase()
 	PhysicsComponent = CreateDefaultSubobject<UPhysicsComponent>();
 
 	ActionComponent = CreateDefaultSubobject<UActionComponent>();
+
+	AttributeComponent = CreateDefaultSubobject<UAttributeComponent>();
 }
 
 ACharacterBase::~ACharacterBase()
@@ -42,7 +45,7 @@ void ACharacterBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
-	this->CheckVelocity();
+	this->CheckFalling();
 
 	RenderComponent->PlayAnimation(fDeltaTime);
 }
@@ -58,14 +61,13 @@ void ACharacterBase::BindKeys()
 	GEngine->KeyInputSubsystem->BindKey('S', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.FairyTurn"}));
 }
 
-void ACharacterBase::CheckVelocity()
+void ACharacterBase::CheckFalling()
 {
-	FVector3 Velocity = PhysicsComponent->GetVelocity();
+	if (PhysicsComponent->GetIsGrounded())
+		AttributeComponent->RemoveAttribute("Status.Falling");
+	else
+		AttributeComponent->AddAttribute("Status.Falling");
 
-	if (abs(Velocity.x) < 0.001f && abs(Velocity.y) < 0.001f)
-	{
-		RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
-	}
 }
 
 void ACharacterBase::InitActions()
@@ -95,7 +97,9 @@ void ACharacterBase::InitTextureAndPhysics()
 
 	RenderComponent->SetActorScaleByTextureSize();
 
-	PhysicsComponent->InitializeAsMobFoot(1.0f, Transform.Scale.y * -0.49f, MOB_COLLISION_FLAG);
+	PhysicsComponent->InitializeBody(b2BodyType::b2_dynamicBody);
+
+	PhysicsComponent->InitializeFootCollider(Transform.Scale.y * -0.49f, MOB_COLLISION_FLAG);
 
 }
 
@@ -109,7 +113,7 @@ void ACharacterBase::InitAnimations()
 
 	RenderComponent->AddAnimationByFolder(EAnimationName::Jump, "Resources\\Textures\\Avatar\\Jump", 0);
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::SwingT1, "Resources\\Textures\\Avatar\\SwingT1", 80);
+	RenderComponent->AddAnimationByFolder(EAnimationName::SwingT1, "Resources\\Textures\\Avatar\\SwingT1", 60);
 
 	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }

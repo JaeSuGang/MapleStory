@@ -22,11 +22,12 @@ public:
 
 	void Tick(float fDeltaTime) override;
 
-
 public:
+	AActor* GetMainActor() const;
+
 	void LoadXMLToMap(string strMapPath, string strImgName);
 
-
 protected:
+	AActor* MainActor;
 };
 
