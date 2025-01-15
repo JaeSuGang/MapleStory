@@ -29,6 +29,4 @@ void BP_TestSkill::BeginPlay()
 void BP_TestSkill::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
-
-	RenderComponent->PlayAnimation(fDeltaTime);
 }

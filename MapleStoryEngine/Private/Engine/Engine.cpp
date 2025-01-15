@@ -95,6 +95,8 @@ void UEngine::Tick()
 
 #endif // _DEBUG
 
+	this->LateTick(fDeltaTime);
+
 	this->ExecuteActorDestroy();
 
 	this->ExecuteActorBeginPlay();
@@ -127,6 +129,11 @@ void UEngine::WorldTick(float fDeltaTime)
 	ActiveWorld->ExecuteActorTick(fDeltaTime);
 
 	ActiveWorld->ElapsedTime += fDeltaTime;
+}
+
+void UEngine::LateTick(float fDeltaTime)
+{
+	ActiveWorld->ExecuteActorLateTick(fDeltaTime);
 }
 
 void UEngine::ExecuteActorDestroy()

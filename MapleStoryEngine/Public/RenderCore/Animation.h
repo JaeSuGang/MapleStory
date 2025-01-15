@@ -16,6 +16,8 @@ enum class EAnimationName
 
 class UAnimation : public UObject
 {
+	friend class URenderComponent;
+
 public:
 	/* 생성자와 오버라이드 */
 	ENGINE_API UAnimation();
@@ -43,5 +45,6 @@ protected:
 	int CurrentIndex;
 	float AccumulatedTime;
 	int TimePerFrame;
+	bool HasPassedLastFrame;
 };
 

@@ -27,6 +27,8 @@ public:
 	void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API bool GetHasPassedLastFrame() const;
+
 	ENGINE_API void SetCurrentAnimation(EAnimationName Name);
 
 	ENGINE_API void AddAnimationByFolder(EAnimationName Name, string strFolderPath, int nTimePerFrame);

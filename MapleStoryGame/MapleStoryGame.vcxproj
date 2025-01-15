@@ -147,6 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actions\BP_GustShiftAction.cpp" />
+    <ClCompile Include="Private\Actors\Skills\BP_GustShiftSkill_1.cpp" />
+    <ClCompile Include="Private\Actors\Skills\BP_GustShiftSkill_0.cpp" />
+    <ClCompile Include="Private\Actions\BP_DoubleJumpAction.cpp" />
     <ClCompile Include="Private\Actions\BP_FairyTurnAction.cpp" />
     <ClCompile Include="Private\Actions\BP_JumpAction.cpp" />
     <ClCompile Include="Private\Actions\BP_MoveLeftAction.cpp" />
@@ -175,6 +179,10 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actions\BP_GustShiftAction.h" />
+    <ClInclude Include="Public\Actors\Skills\BP_GustShiftSkill_1.h" />
+    <ClInclude Include="Public\Actors\Skills\BP_GustShiftSkill_0.h" />
+    <ClInclude Include="Public\Actions\BP_DoubleJumpAction.h" />
     <ClInclude Include="Public\Actions\BP_FairyTurnAction.h" />
     <ClInclude Include="Public\Actions\BP_JumpAction.h" />
     <ClInclude Include="Public\Actions\BP_MoveLeftAction.h" />

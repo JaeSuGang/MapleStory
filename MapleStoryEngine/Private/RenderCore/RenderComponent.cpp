@@ -124,6 +124,11 @@ void URenderComponent::SetZIndex(int nZIndex)
 	ZIndex = nZIndex;
 }
 
+bool URenderComponent::GetHasPassedLastFrame() const
+{
+	return Animation->HasPassedLastFrame;
+}
+
 void URenderComponent::SetCurrentAnimation(EAnimationName Name)
 {
 	Animation->SetCurrentAnimation(Name);

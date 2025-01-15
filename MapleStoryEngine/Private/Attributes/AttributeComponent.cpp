@@ -23,6 +23,11 @@ float UAttributeComponent::GetAttributeValue(FGameplayTag _Tag)
 	return Attributes.find(_Tag.ID)->second;
 }
 
+bool UAttributeComponent::HasAttributeExact(string _TagName)
+{
+	return this->HasAttributeExact(GEngine->GetGameInstance()->GameplayTagsManager->FindRegisteredTagExact(_TagName));
+}
+
 bool UAttributeComponent::HasAttributeExact(FGameplayTag _Tag)
 {
 	auto FindIter = Attributes.find(_Tag.ID);

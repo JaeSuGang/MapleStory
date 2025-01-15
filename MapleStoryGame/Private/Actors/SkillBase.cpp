@@ -23,10 +23,18 @@ void ASkillBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
+	if (RenderComponent->GetHasPassedLastFrame())
+	{
+		this->Destroy();
+		return;
+	}
+
 	if (IsScreenSkill)
 	{
 		FTransform CameraTransform = GEngine->RenderSubsystem->GetCamera().Transform;
 		Transform.Position.x = CameraTransform.Position.x;
 		Transform.Position.y = CameraTransform.Position.y;
 	}
+
+	RenderComponent->PlayAnimation(fDeltaTime);
 }

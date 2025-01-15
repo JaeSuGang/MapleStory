@@ -36,6 +36,8 @@ public:
 
 	void ExecuteActorTick(float fDeltaTime);
 
+	void ExecuteActorLateTick(float fDeltaTime);
+
 	void ExecuteActorDestroy();
 
 	void ExecuteActorBeginPlay();

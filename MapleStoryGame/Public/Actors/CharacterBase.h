@@ -20,10 +20,14 @@ public:
 
 	void Tick(float fDeltaTime) override;
 
+	void LateTick(float fDeltaTime) override;
+
 public:
 	void BindKeys();
 
 protected:
+	void DecideAnimation();
+
 	void CheckFalling();
 
 	void InitActions();

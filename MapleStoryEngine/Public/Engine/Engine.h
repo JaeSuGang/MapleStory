@@ -38,6 +38,8 @@ public:
 
 	void WorldTick(float fDeltaTime);
 
+	void LateTick(float fDeltaTime);
+
 	void ExecuteActorDestroy();
 
 	void ExecuteActorBeginPlay();

@@ -16,7 +16,7 @@ void UKeyInputSubsystem::Tick(float fDeltaTime)
 		unsigned short __KeyState = static_cast<unsigned short>(GetAsyncKeyState(i));
 
 
-		/* 키를 누르고 있을 때 */
+		/* 키가 눌릴 때 바로 */
 		if (__KeyState != 0x0000 && VKStates[i] == 0x0000)
 		{
 			for (FKeyEvent& KeyEvent : InputMappingContexts[CurrentInputMappingContextID])
@@ -26,7 +26,7 @@ void UKeyInputSubsystem::Tick(float fDeltaTime)
 			}
 		}
 
-		/* 키가 눌릴 때 바로 */
+		/* 키를 누르고 있을 때 */
 		if (VKStates[i] != 0x0000 && __KeyState != 0x0000)
 		{
 			for (FKeyEvent& KeyEvent : InputMappingContexts[CurrentInputMappingContextID])
@@ -56,6 +56,27 @@ void UKeyInputSubsystem::LateInit()
 	Super::LateInit();
 
 
+}
+
+bool UKeyInputSubsystem::GetKey(int VKeyCode, EKeyState _KeyState) const
+{
+	switch (_KeyState)
+	{
+	case UKeyInputSubsystem::EKeyState::None:
+		break;
+
+	case UKeyInputSubsystem::EKeyState::Triggered:
+		return VKStates[VKeyCode];
+
+	case UKeyInputSubsystem::EKeyState::KeyDown:
+		break;
+
+	case UKeyInputSubsystem::EKeyState::KeyUp:
+		break;
+
+	default:
+		break;
+	}
 }
 
 void UKeyInputSubsystem::SetCurrentInputMappingContextID(int nID)

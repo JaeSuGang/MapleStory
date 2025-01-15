@@ -17,6 +17,8 @@ public:
 
 	ENGINE_API virtual void Tick(float fDeltaTime) = 0;
 
+	ENGINE_API virtual void LateTick(float fDeltaTime);
+
 public:
 	ENGINE_API bool HasTagExact(FGameplayTag& _Tag) const;
 

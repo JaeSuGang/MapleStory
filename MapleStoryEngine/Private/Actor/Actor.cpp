@@ -39,6 +39,11 @@ void AActor::Tick(float fDeltaTime)
 	}
 }
 
+void AActor::LateTick(float fDeltaTime)
+{
+
+}
+
 bool AActor::HasTagExact(FGameplayTag& _Tag) const
 {
 	return TagContainer.HasTagExact(_Tag);

@@ -1,11 +1,12 @@
 #pragma once
 #include "Actor/Actor.h"
+#include "SkillBase.h"
 
 class URenderComponent;
 
-class BP_TestSkill : public AActor
+class BP_TestSkill : public ASkillBase
 {
-	typedef AActor Super;
+	typedef ASkillBase Super;
 
 public:
 	BP_TestSkill();

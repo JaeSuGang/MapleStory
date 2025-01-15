@@ -1,15 +1,13 @@
 #include "GamePch.h"
-#include "actors/BP_TestSkill2.h"
+#include "Actors/Skills/BP_GustShiftSkill_0.h"
 #include "RenderCore/RenderComponent.h"
-#include "RenderCore/Animation.h"
 
-BP_TestSkill2::BP_TestSkill2()
+BP_GustShiftSkill_0::BP_GustShiftSkill_0()
 {
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
-	IsScreenSkill = true;
 }
 
-void BP_TestSkill2::BeginPlay()
+void BP_GustShiftSkill_0::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -17,17 +15,18 @@ void BP_TestSkill2::BeginPlay()
 
 	RenderComponent->SetMeshIDByName("Plane");
 	RenderComponent->SetBlendMode(1);
-	RenderComponent->SetTextureByName("Resources\\Textures\\13141500.screen.frames\\1.png");
+	RenderComponent->SetTextureByName("Resources\\Textures\\13001024.effect.frames\\1.png");
 	RenderComponent->SetActorScaleByTextureSize();
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 
 	/* 애니메이션 추가 */
 	RenderComponent->EnableAnimation();
-	RenderComponent->AddAnimationByFolder(EAnimationName::Screen, "Resources\\Textures\\13141500.screen.frames", 60);
-	RenderComponent->SetCurrentAnimation(EAnimationName::Screen);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\13001024.effect.frames", 60);
+	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }
 
-void BP_TestSkill2::Tick(float fDeltaTime)
+void BP_GustShiftSkill_0::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
+
 }

@@ -11,6 +11,8 @@ UMainGameInstance::UMainGameInstance()
 {
 	GameplayTagsManager->RegisterTag("Action.FairyTurn");
 
+	GameplayTagsManager->RegisterTag("Action.GustShift");
+
 	GameplayTagsManager->RegisterTag("Action.MoveLeft");
 
 	GameplayTagsManager->RegisterTag("Action.MoveRight");
@@ -18,6 +20,10 @@ UMainGameInstance::UMainGameInstance()
 	GameplayTagsManager->RegisterTag("Action.Jump");
 
 	GameplayTagsManager->RegisterTag("Status.Falling");
+
+	GameplayTagsManager->RegisterTag("Status.Walking");
+
+	GameplayTagsManager->RegisterTag("Status.CanDoubleJump");
 
 }
 

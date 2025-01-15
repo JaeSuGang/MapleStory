@@ -10,6 +10,7 @@ UAnimation::UAnimation()
 	CurrentAnimation{},
 	MaterialToApply{}
 {
+	HasPassedLastFrame = false;
 	CurrentIndex = 1;
 	AccumulatedTime = 0.0f;
 	TimePerFrame = 500;
@@ -113,7 +114,15 @@ void UAnimation::Play(float fDeltaTime)
 		{
 			vector<int>& TextureIDSequence = FindIter->second;
 
-			CurrentIndex < TextureIDSequence.size() - 1 ? CurrentIndex++ : CurrentIndex = 1;
+			if (CurrentIndex < TextureIDSequence.size() - 1)
+				CurrentIndex++;
+
+			else
+				CurrentIndex = 1;
+
+			if (CurrentIndex == TextureIDSequence.size() - 2)
+				HasPassedLastFrame = true;
+
 
 			MaterialToApply->TextureID = TextureIDSequence[CurrentIndex];
 

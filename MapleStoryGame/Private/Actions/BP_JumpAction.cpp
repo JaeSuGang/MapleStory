@@ -5,6 +5,7 @@
 #include "PhysicsCore/PhysicsComponent.h"
 #include "RenderCore/RenderComponent.h"
 #include "RenderCore/RenderSubsystem.h"
+#include "Attributes/AttributeComponent.h"
 
 BP_JumpAction::BP_JumpAction()
 {
@@ -13,6 +14,10 @@ BP_JumpAction::BP_JumpAction()
 
 void BP_JumpAction::StartAction(AActor* Instigator)
 {
+	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
+	if (AttributeComponent && AttributeComponent->HasAttributeExact("Status.Falling"))
+		return;
+
 	UPhysicsComponent* PhysicsComponent = Instigator->GetComponentByClass<UPhysicsComponent>();
 	if (PhysicsComponent)
 		PhysicsComponent->AddYVelocity(12.0f);

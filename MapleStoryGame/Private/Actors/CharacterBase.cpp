@@ -8,7 +8,9 @@
 #include "Actions/BP_MoveLeftAction.h"
 #include "Actions/BP_MoveRightAction.h"
 #include "Actions/BP_JumpAction.h"
+#include "Actions/BP_DoubleJumpAction.h"
 #include "Actions/BP_FairyTurnAction.h"
+#include "Actions/BP_GustShiftAction.h"
 
 
 
@@ -47,7 +49,14 @@ void ACharacterBase::Tick(float fDeltaTime)
 
 	this->CheckFalling();
 
+	this->DecideAnimation();
+
 	RenderComponent->PlayAnimation(fDeltaTime);
+}
+
+void ACharacterBase::LateTick(float fDeltaTime)
+{
+	AttributeComponent->RemoveAttribute("Status.Walking");
 }
 
 void ACharacterBase::BindKeys()
@@ -58,13 +67,33 @@ void ACharacterBase::BindKeys()
 
 	GEngine->KeyInputSubsystem->BindKey(VK_SPACE, UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.Jump"}));
 
+	GEngine->KeyInputSubsystem->BindKey(VK_SPACE, UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.DoubleJump"}));
+
 	GEngine->KeyInputSubsystem->BindKey('S', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.FairyTurn"}));
+}
+
+void ACharacterBase::DecideAnimation()
+{
+	if (AttributeComponent->HasAttributeExact("Status.Attacking"))
+		return;
+
+	if (AttributeComponent->HasAttributeExact("Status.Falling"))
+		RenderComponent->SetCurrentAnimation(EAnimationName::Jump);
+
+	else if (AttributeComponent->HasAttributeExact("Status.Walking"))
+		RenderComponent->SetCurrentAnimation(EAnimationName::Walk);
+
+	else
+		RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }
 
 void ACharacterBase::CheckFalling()
 {
 	if (PhysicsComponent->GetIsGrounded())
+	{
 		AttributeComponent->RemoveAttribute("Status.Falling");
+		AttributeComponent->AddAttribute("Status.CanDoubleJump");
+	}
 	else
 		AttributeComponent->AddAttribute("Status.Falling");
 
@@ -78,7 +107,11 @@ void ACharacterBase::InitActions()
 
 	ActionComponent->AddAction<BP_JumpAction>();
 
+	ActionComponent->AddAction<BP_DoubleJumpAction>();
+
 	ActionComponent->AddAction<BP_FairyTurnAction>();
+
+	ActionComponent->AddAction<BP_GustShiftAction>();
 }
 
 void ACharacterBase::InitTextureAndPhysics()

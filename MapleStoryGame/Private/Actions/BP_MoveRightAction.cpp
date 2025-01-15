@@ -4,6 +4,7 @@
 #include "Actor/Actor.h"
 #include "PhysicsCore/PhysicsComponent.h"
 #include "RenderCore/RenderComponent.h"
+#include "Attributes/AttributeComponent.h"
 
 BP_MoveRightAction::BP_MoveRightAction()
 {
@@ -18,6 +19,14 @@ void BP_MoveRightAction::StartAction(AActor* Instigator)
 	_Transform.Rotation.y = 180;
 	Instigator->SetRotation(_Transform.Rotation);
 
+	/* TagComponent */
+	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
+	if (AttributeComponent)
+	{
+		AttributeComponent->AddAttribute("Status.Walking");
+	}
+
+	/* PhysicsComponent */
 	UPhysicsComponent* PhysicsComponent = Instigator->GetComponentByClass<UPhysicsComponent>();
 	if (PhysicsComponent)
 	{
@@ -27,6 +36,7 @@ void BP_MoveRightAction::StartAction(AActor* Instigator)
 			PhysicsComponent->SetXVelocity(4.0f);
 	}
 
+	/* RenderComponent */
 	URenderComponent* RenderComponent = Instigator->GetComponentByClass<URenderComponent>();
 	if (RenderComponent)
 	{

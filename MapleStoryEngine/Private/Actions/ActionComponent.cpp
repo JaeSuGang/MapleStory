@@ -6,7 +6,7 @@
 #include "GameplayTags/GameplayTagsManager.h"
 #include "Actions/GameplayAction.h"
 
-void UActionComponent::StartActionByName(AActor* Instigator, string& Name)
+void UActionComponent::StartActionByName(AActor* Instigator, string Name)
 {
 	FGameplayTag ActionTag = GEngine->GetGameInstance()->GameplayTagsManager->FindRegisteredTagExact(Name);
 

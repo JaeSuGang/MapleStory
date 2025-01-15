@@ -6,6 +6,7 @@
 
 class AActor;
 class UGameplayTagsManager;
+class UWorld;
 
 class UGameplayAction : public UObject
 {
@@ -16,6 +17,8 @@ public:
 	ENGINE_API virtual void StartAction(AActor* Instigator) = 0;
 
 public:
+	ENGINE_API UWorld* GetWorld() const;
+
 	ENGINE_API FGameplayTag& GetTag();
 
 

@@ -11,6 +11,11 @@ UGameplayAction::UGameplayAction()
 	Timesubsystem = GEngine->TimeSubsystem;
 }
 
+UWorld* UGameplayAction::GetWorld() const
+{
+	return GEngine->GetWorld();
+}
+
 FGameplayTag& UGameplayAction::GetTag()
 {
 	return Tag;

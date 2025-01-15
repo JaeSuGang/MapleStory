@@ -31,6 +31,8 @@ public:
 	void LateInit() override;
 
 public:
+	ENGINE_API bool GetKey(int VKeyCode, EKeyState _KeyState) const;
+
 	ENGINE_API void SetCurrentInputMappingContextID(int nID);
 
 	ENGINE_API void ClearKeys();

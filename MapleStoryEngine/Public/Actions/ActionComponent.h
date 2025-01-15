@@ -19,7 +19,7 @@ public:
 
 
 public:
-	ENGINE_API void StartActionByName(AActor* Instigator, string& Name);
+	ENGINE_API void StartActionByName(AActor* Instigator, string Name);
 
 	ENGINE_API void StartActionByTag(AActor* Instigator, FGameplayTag& ActionTag);
 

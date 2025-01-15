@@ -71,6 +71,17 @@ void UWorld::ExecuteActorTick(float fDeltaTime)
 	}
 }
 
+void UWorld::ExecuteActorLateTick(float fDeltaTime)
+{
+	for (shared_ptr<AActor>& LoopActor : PersistentLevel->Actors)
+	{
+		if (LoopActor->GetIsTickEnabled() && LoopActor->GetIsBeginPlayed())
+		{
+			LoopActor->LateTick(fDeltaTime);
+		}
+	}
+}
+
 void UWorld::ExecuteActorBeginPlay()
 {
 	for (AActor* LoopActor : PersistentLevel->ActorsToBeginPlay)
