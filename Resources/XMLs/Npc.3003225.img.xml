@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="3003225.img">
+  <dir name="info" />
+  <dir name="stand">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="21, 68" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003225.img/stand/0" />
+    </png>
+  </dir>
+</dir>

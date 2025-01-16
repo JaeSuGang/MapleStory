@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="3003105.img">
+  <dir name="info">
+    <dir name="script">
+      <dir name="0">
+        <string name="script" value="npc_3003105" />
+      </dir>
+    </dir>
+  </dir>
+  <dir name="stand">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/stand/0" />
+    </png>
+  </dir>
+  <dir name="eye">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="150" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/stand/0" />
+    </png>
+    <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="150" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/eye/1" />
+    </png>
+    <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="150" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/eye/2" />
+    </png>
+  </dir>
+  <dir name="say">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="150" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/say/0" />
+    </png>
+    <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="150" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/say/1" />
+    </png>
+    <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="150" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/say/2" />
+    </png>
+    <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="150" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/say/1" />
+    </png>
+    <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="150" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/say/2" />
+    </png>
+    <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="55, 106" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="150" />
+      <string name="_outlink" value="Npc/_Canvas/3003105.img/say/1" />
+    </png>
+    <uol name="6" value="4" />
+    <uol name="7" value="5" />
+    <uol name="8" value="4" />
+    <uol name="9" value="5" />
+    <dir name="speak">
+      <string name="0" value="n0" />
+      <string name="1" value="n1" />
+    </dir>
+  </dir>
+</dir>

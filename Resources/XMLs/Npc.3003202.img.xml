@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="3003202.img">
+  <dir name="info" />
+  <dir name="stand">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="43, 86" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003201.img/stand/0" />
+    </png>
+  </dir>
+  <dir name="condition1">
+    <int32 name="34308" value="2" />
+    <int32 name="hide" value="1" />
+    <uol name="stand" value="../stand" />
+  </dir>
+  <dir name="condition2">
+    <int32 name="34306" value="2" />
+    <uol name="stand" value="../stand" />
+  </dir>
+  <dir name="condition3">
+    <int32 name="34306" value="1" />
+    <uol name="stand" value="../stand" />
+  </dir>
+  <dir name="condition4">
+    <int32 name="34300" value="2" />
+    <int32 name="hide" value="1" />
+    <uol name="stand" value="../stand" />
+  </dir>
+</dir>

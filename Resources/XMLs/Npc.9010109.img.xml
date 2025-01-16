@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="9010109.img">
+  <dir name="info">
+    <dir name="script">
+      <dir name="0">
+        <string name="script" value="NPC_unionShop" />
+      </dir>
+    </dir>
+    <int32 name="dcRight" value="77" />
+    <int32 name="dcLeft" value="-62" />
+    <int32 name="dcTop" value="-156" />
+    <int32 name="dcBottom" value="0" />
+    <int32 name="miniMapType" value="1" />
+  </dir>
+  <dir name="stand">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="35, 145" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/9010107.img/stand/0" />
+    </png>
+  </dir>
+  <dir name="say">
+    <dir name="speak">
+      <string name="0" value="n0" />
+    </dir>
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="35, 145" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="200" />
+      <string name="_outlink" value="Npc/_Canvas/9010107.img/say/0" />
+    </png>
+    <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="35, 145" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="200" />
+      <string name="_outlink" value="Npc/_Canvas/9010107.img/stand/0" />
+    </png>
+  </dir>
+  <dir name="blink">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="35, 145" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/9010107.img/stand/0" />
+    </png>
+    <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="35, 145" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/9010107.img/blink/1" />
+    </png>
+    <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="35, 145" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/9010107.img/blink/2" />
+    </png>
+  </dir>
+</dir>

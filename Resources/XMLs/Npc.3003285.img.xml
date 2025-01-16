@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="3003285.img">
+  <dir name="info">
+    <int32 name="hideName" value="1" />
+    <int32 name="hide" value="1" />
+  </dir>
+  <dir name="stand">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="101, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/0" />
+    </png>
+    <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="100, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/1" />
+    </png>
+    <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="99, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/2" />
+    </png>
+    <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="101, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/3" />
+    </png>
+    <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="101, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/4" />
+    </png>
+    <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="102, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/5" />
+    </png>
+    <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="102, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/6" />
+    </png>
+    <png name="7" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="101, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/7" />
+    </png>
+    <png name="8" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="100, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/8" />
+    </png>
+    <png name="9" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="100, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/9" />
+    </png>
+    <png name="10" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="100, 135" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Npc/_Canvas/3003285.img/stand/10" />
+    </png>
+  </dir>
+  <dir name="condition1">
+    <dir name="stand">
+      <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC" />
+    </dir>
+    <int32 name="34370" value="2" />
+    <int32 name="hide" value="1" />
+  </dir>
+  <dir name="condition2">
+    <uol name="stand" value="../stand" />
+    <int32 name="34370" value="1" />
+  </dir>
+  <dir name="condition3">
+    <uol name="stand" value="../stand" />
+    <int32 name="34370" value="0" />
+  </dir>
+</dir>

@@ -630,7 +630,11 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 					float fLifePosX = 0.0f;
 					float fLifePosY = 0.0f;
+					int nOffsetX = 0;
+					int nOffsetY = 0;
+					int nFlipped = 0;
 					float cy = 0.0f;
+					FVector3 FinalPos{};
 
 					while (LifeInfoElement != nullptr)
 					{
@@ -647,7 +651,10 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 							fLifePosX = (float)LifeInfoElement->FindAttribute("value")->IntValue();
 
 						if (strPropertyName == "y")
-							fLifePosY = -1.0f * (float)LifeInfoElement->FindAttribute("value")->IntValue();
+							fLifePosY = (float)LifeInfoElement->FindAttribute("value")->IntValue();
+
+						if (strPropertyName == "f")
+							nFlipped = LifeInfoElement->FindAttribute("value")->IntValue();
 
 						LifeInfoElement = LifeInfoElement->NextSiblingElement();
 					}
@@ -659,15 +666,74 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						strImagePath += "\\Textures\\Mobs\\" + strLifeID + ".img";
 						strImagePath += "\\" + strLifeID + ".img.stand.0.png";
 
-						ANPCBase* NPC = GetWorld()->SpawnActor<ANPCBase>();
+						tinyxml2::XMLDocument NpcDocument;
+						Error = NpcDocument.LoadFile(("Resources\\XMLs\\Npc." + strLifeID + ".img.xml").data());
+						if (Error)
+						{
+							LifeIndexElement = LifeIndexElement->NextSiblingElement();
+							continue;
+						}
 
-						FTransform& NPCTransform = NPC->GetTransform();
-						NPCTransform.Position.x = fLifePosX;
-						NPCTransform.Position.y = fLifePosY;
+						tinyxml2::XMLElement* NpcStatusElement = NpcDocument.FirstChildElement()->FirstChildElement();
+						while (NpcStatusElement != nullptr)
+						{
+							string strPropertyName = NpcStatusElement->FindAttribute("name")->Value();
+
+							if (strPropertyName == "stand")
+							{
+								string strWzVector = NpcStatusElement->FirstChildElement()->FirstChildElement()->FindAttribute("value")->Value();
+
+								string strX;
+								string strY;
+
+								auto CharIter = strWzVector.begin();
+
+								while (*CharIter != ',')
+								{
+									strX += *CharIter;
+									++CharIter;
+								}
+								++CharIter;
+								++CharIter;
+
+								while (CharIter != strWzVector.end())
+								{
+									strY += *CharIter;
+									++CharIter;
+								}
+
+								nOffsetX = std::stoi(strX);
+								nOffsetY = std::stoi(strY);
+							}
+
+							NpcStatusElement = NpcStatusElement->NextSiblingElement();
+						}
+
+						ANPCBase* NPC = GetWorld()->SpawnActor<ANPCBase>();
 
 						URenderComponent* RenderComponent = NPC->GetComponentByClass<URenderComponent>();
 						RenderComponent->SetTextureByName(strImagePath);
 						RenderComponent->SetActorScaleByTextureSize();
+
+						int nOffsetX2{};
+						int nOffsetY2{};
+
+						if (nFlipped)
+						{
+							NPC->MultiplyScale(nFlipped ? -1.0f : 1.0f, 1.0f, 1.0f);
+							nOffsetX2 = (int)(nOffsetX + NPC->GetTransform().Scale.x / 2);
+							nOffsetY2 = (int)(nOffsetY - NPC->GetTransform().Scale.y / 2);
+							FinalPos = { fLifePosX + (float)nOffsetX2, ((float)fLifePosY - (float)nOffsetY2) * -1.0f, 0.0f };
+						}
+						else
+						{
+							nOffsetX2 = (int)(nOffsetX - NPC->GetTransform().Scale.x / 2);
+							nOffsetY2 = (int)(nOffsetY - NPC->GetTransform().Scale.y / 2);
+							FinalPos = { fLifePosX - (float)nOffsetX2, ((float)fLifePosY - (float)nOffsetY2) * -1.0f, 0.0f };
+						}
+
+						FTransform& NPCTransform = NPC->GetTransform();
+						NPCTransform.Position = FinalPos;
 					}
 
 					LifeIndexElement = LifeIndexElement->NextSiblingElement();

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="3003227.img">
+  <dir name="info" />
+  <dir name="stand">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="39, 86" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <string name="_outlink" value="Npc/_Canvas/3003227.img/stand/0" />
+    </png>
+    <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="38, 87" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <string name="_outlink" value="Npc/_Canvas/3003227.img/stand/1" />
+    </png>
+    <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="37, 86" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <string name="_outlink" value="Npc/_Canvas/3003227.img/stand/2" />
+    </png>
+    <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="38, 85" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <string name="_outlink" value="Npc/_Canvas/3003227.img/stand/3" />
+    </png>
+  </dir>
+</dir>

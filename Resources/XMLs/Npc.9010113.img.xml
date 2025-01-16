@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="9010113.img">
+  <dir name="info">
+    <dir name="script">
+      <dir name="0">
+        <string name="script" value="npc_9010113" />
+      </dir>
+    </dir>
+    <int32 name="miniMapType" value="3" />
+    <int32 name="dcLeft" value="-80" />
+    <int32 name="dcTop" value="-200" />
+    <int32 name="dcRight" value="80" />
+    <int32 name="dcBottom" value="0" />
+  </dir>
+  <dir name="stand">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/0" />
+    </png>
+    <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/1" />
+    </png>
+    <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 209" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/2" />
+    </png>
+    <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 206" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/3" />
+    </png>
+    <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="118, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/4" />
+    </png>
+    <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/5" />
+    </png>
+    <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/6" />
+    </png>
+    <png name="7" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 212" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/7" />
+    </png>
+    <png name="8" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/8" />
+    </png>
+    <png name="9" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="114, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/9" />
+    </png>
+    <png name="10" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/10" />
+    </png>
+    <png name="11" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="112, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/11" />
+    </png>
+    <png name="12" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/12" />
+    </png>
+    <png name="13" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/13" />
+    </png>
+    <png name="14" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/14" />
+    </png>
+    <png name="15" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 209" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/15" />
+    </png>
+    <png name="16" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 206" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/16" />
+    </png>
+    <png name="17" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="118, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/17" />
+    </png>
+    <png name="18" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/18" />
+    </png>
+    <png name="19" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/19" />
+    </png>
+    <png name="20" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 212" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/20" />
+    </png>
+    <png name="21" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/21" />
+    </png>
+    <png name="22" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="114, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/9" />
+    </png>
+    <png name="23" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/10" />
+    </png>
+    <png name="24" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="112, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/11" />
+    </png>
+    <png name="25" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/12" />
+    </png>
+    <png name="26" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/13" />
+    </png>
+    <png name="27" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/27" />
+    </png>
+    <png name="28" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/28" />
+    </png>
+    <png name="29" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 209" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/29" />
+    </png>
+    <png name="30" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 206" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/30" />
+    </png>
+    <png name="31" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="118, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/31" />
+    </png>
+    <png name="32" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/32" />
+    </png>
+    <png name="33" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/33" />
+    </png>
+    <png name="34" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 212" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/34" />
+    </png>
+    <png name="35" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/35" />
+    </png>
+    <png name="36" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="114, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/36" />
+    </png>
+    <png name="37" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/37" />
+    </png>
+    <png name="38" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="112, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/38" />
+    </png>
+    <png name="39" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/39" />
+    </png>
+    <png name="40" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/40" />
+    </png>
+    <png name="41" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/41" />
+    </png>
+    <png name="42" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/42" />
+    </png>
+    <png name="43" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 209" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/43" />
+    </png>
+    <png name="44" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 206" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/44" />
+    </png>
+    <png name="45" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="118, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/45" />
+    </png>
+    <png name="46" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/46" />
+    </png>
+    <png name="47" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/47" />
+    </png>
+    <png name="48" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 212" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/48" />
+    </png>
+    <png name="49" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/49" />
+    </png>
+    <png name="50" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="114, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/36" />
+    </png>
+    <png name="51" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/37" />
+    </png>
+    <png name="52" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="112, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/38" />
+    </png>
+    <png name="53" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/39" />
+    </png>
+    <png name="54" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/40" />
+    </png>
+    <png name="55" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/55" />
+    </png>
+    <png name="56" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/56" />
+    </png>
+    <png name="57" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 209" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/57" />
+    </png>
+    <png name="58" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 206" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/58" />
+    </png>
+    <png name="59" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="118, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/59" />
+    </png>
+    <png name="60" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/60" />
+    </png>
+    <png name="61" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/61" />
+    </png>
+    <png name="62" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 212" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/62" />
+    </png>
+    <png name="63" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/63" />
+    </png>
+    <png name="64" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="114, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/64" />
+    </png>
+    <png name="65" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/65" />
+    </png>
+    <png name="66" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="112, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/66" />
+    </png>
+    <png name="67" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/67" />
+    </png>
+    <png name="68" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/68" />
+    </png>
+    <png name="69" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/69" />
+    </png>
+    <png name="70" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/70" />
+    </png>
+    <png name="71" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 209" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/71" />
+    </png>
+    <png name="72" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 206" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/72" />
+    </png>
+    <png name="73" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="118, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/73" />
+    </png>
+    <png name="74" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/74" />
+    </png>
+    <png name="75" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/75" />
+    </png>
+    <png name="76" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="116, 212" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/76" />
+    </png>
+    <png name="77" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="115, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/77" />
+    </png>
+    <png name="78" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="114, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/64" />
+    </png>
+    <png name="79" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="113, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/65" />
+    </png>
+    <png name="80" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="112, 208" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/80" />
+    </png>
+    <png name="81" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 210" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/67" />
+    </png>
+    <png name="82" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="117, 211" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="60" />
+      <string name="_outlink" value="Npc/_Canvas/9010113.img/stand/68" />
+    </png>
+  </dir>
+</dir>

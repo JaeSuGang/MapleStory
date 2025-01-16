@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="9010100.img">
+  <dir name="info">
+    <dir name="script">
+      <dir name="0">
+        <string name="script" value="midnightChaser_NPC" />
+      </dir>
+    </dir>
+    <int32 name="hide" value="1" />
+  </dir>
+  <dir name="stand">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="101, 185" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="1800" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/0" />
+    </png>
+    <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="103, 181" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/1" />
+    </png>
+    <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="102, 179" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/2" />
+    </png>
+    <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="101, 178" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/3" />
+    </png>
+    <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="101, 177" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/4" />
+    </png>
+    <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="100, 177" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/5" />
+    </png>
+    <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="96, 185" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/6" />
+    </png>
+    <png name="7" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="98, 185" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/7" />
+    </png>
+    <png name="8" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="101, 185" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/8" />
+    </png>
+    <png name="9" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="92, 185" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/9" />
+    </png>
+    <png name="10" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="96, 185" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/10" />
+    </png>
+    <png name="11" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+      <vector name="origin" value="98, 185" />
+      <int32 name="z" value="0" />
+      <int32 name="delay" value="180" />
+      <vector name="lt" value="-100, -185" />
+      <vector name="rb" value="68, -1" />
+      <vector name="head" value="-31, -123" />
+      <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/11" />
+    </png>
+  </dir>
+  <dir name="condition1">
+    <dir name="stand">
+      <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="101, 185" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="1800" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/0" />
+      </png>
+      <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="103, 181" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/1" />
+      </png>
+      <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="102, 179" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/2" />
+      </png>
+      <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="101, 178" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/3" />
+      </png>
+      <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="101, 177" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/4" />
+      </png>
+      <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="100, 177" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/5" />
+      </png>
+      <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="96, 185" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/6" />
+      </png>
+      <png name="7" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="98, 185" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/7" />
+      </png>
+      <png name="8" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="101, 185" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/8" />
+      </png>
+      <png name="9" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="92, 185" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/9" />
+      </png>
+      <png name="10" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="96, 185" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/10" />
+      </png>
+      <png name="11" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY2BgYGAAAAAFAAGKM+MAAAAAAElFTkSuQmCC">
+        <vector name="origin" value="98, 185" />
+        <int32 name="z" value="0" />
+        <int32 name="delay" value="180" />
+        <vector name="lt" value="-100, -185" />
+        <vector name="rb" value="68, -1" />
+        <vector name="head" value="-31, -123" />
+        <string name="_outlink" value="Npc/_Canvas/9010100.img/stand/11" />
+      </png>
+    </dir>
+    <int32 name="34331" value="2" />
+  </dir>
+</dir>
