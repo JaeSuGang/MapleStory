@@ -155,6 +155,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Public\ActorComponent\CameraComponent.h" />
     <ClInclude Include="Public\Engine\KeyInputSubsystem.h" />
     <ClInclude Include="Public\PhysicsCore\PhysicsComponent.h" />
     <ClInclude Include="Public\PhysicsCore\PhysicsSubsystem.h" />
@@ -206,6 +207,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClInclude Include="Public\RenderCore\Widget.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\ActorComponent\CameraComponent.cpp" />
     <ClCompile Include="Private\Engine\KeyInputSubsystem.cpp" />
     <ClCompile Include="Private\PhysicsCore\PhysicsComponent.cpp" />
     <ClCompile Include="Private\PhysicsCore\PhysicsSubsystem.cpp" />

@@ -162,6 +162,9 @@
     <ClInclude Include="Public\RenderCore\Widget.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Public\ActorComponent\CameraComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\EnginePch.cpp">
@@ -294,6 +297,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\RenderCore\Widget.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\ActorComponent\CameraComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -5,6 +5,7 @@ class URenderComponent;
 class UPhysicsComponent;
 class UActionComponent;
 class UAttributeComponent;
+class UCameraComponent;
 
 class ACharacterBase : public AActor
 {
@@ -44,5 +45,7 @@ protected:
 	UActionComponent* ActionComponent;
 
 	UAttributeComponent* AttributeComponent;
+
+	UCameraComponent* CameraComponent;
 };
 

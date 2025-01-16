@@ -38,12 +38,12 @@ void BP_GustShiftAction::StartAction(AActor* Instigator)
 		Skill2Transform.Position.y += 1.0f;
 
 		UPhysicsComponent* PhysicsComponent = Instigator->GetComponentByClass<UPhysicsComponent>();
-		PhysicsComponent->AddYVelocity(8.0f);
+		PhysicsComponent->AddYVelocity(7.0f);
 
 		if (bIsLeftDirection)
-			PhysicsComponent->SetXVelocity(-15.0f);
+			PhysicsComponent->SetXVelocity(-13.0f);
 		else
-			PhysicsComponent->SetXVelocity(15.0f);
+			PhysicsComponent->SetXVelocity(13.0f);
 	}
 
 

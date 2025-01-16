@@ -2,6 +2,7 @@
 #include "Actors/CharacterBase.h"
 #include "RenderCore/RenderComponent.h"
 #include "PhysicsCore/PhysicsComponent.h"
+#include "ActorComponent/CameraComponent.h"
 #include "Actions/ActionComponent.h"
 #include "Attributes/AttributeComponent.h"
 #include "Engine/KeyInputSubsystem.h"
@@ -23,6 +24,9 @@ ACharacterBase::ACharacterBase()
 	ActionComponent = CreateDefaultSubobject<UActionComponent>();
 
 	AttributeComponent = CreateDefaultSubobject<UAttributeComponent>();
+
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>();
+	CameraComponent->SetMainCamera(true);
 }
 
 ACharacterBase::~ACharacterBase()
