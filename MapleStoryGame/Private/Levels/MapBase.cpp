@@ -8,6 +8,7 @@
 #include "RenderCore/RenderComponent.h"
 #include "RenderCore/RenderSubsystem.h"
 #include "PhysicsCore/PhysicsComponent.h"
+#include "Actors/NPCs/NPCBase.h"
 
 
 
@@ -93,6 +94,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 			while (ObjSubElement != nullptr)
 			{
 				string ObjPath{ TEXTURES_FOLDER_NAME };
+				ObjPath += "\\Maps";
 				string strImageOffset{};
 				string TextureFileName{};
 				ObjPath += "\\";
@@ -307,7 +309,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 					tinyxml2::XMLElement* BackSubElement = BackElement->FirstChildElement();
 					
 					string strTexturePath = { TEXTURES_FOLDER_NAME };
-					strTexturePath += "\\";
+					strTexturePath += "\\Maps\\";
 
 					int nTileMode = TileMode::None;
 
@@ -585,9 +587,97 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 					BackElement = BackElement->NextSiblingElement();
 				}
 			}
-		}
 #pragma endregion
 
+#pragma region info인 경우
+			else if (strNodeName == "info")
+			{
+				tinyxml2::XMLElement* InfoElement = MapElement->FirstChildElement();
+
+				while (InfoElement != nullptr)
+				{
+					string strPropertyName = InfoElement->FindAttribute("name")->Value();
+					string strPropertyValue = InfoElement->FindAttribute("value")->Value();
+
+					if (strPropertyName == "VRTop")
+						this->VRTopInverted = -1.0f * (float)InfoElement->FindAttribute("value")->IntValue();
+
+					else if (strPropertyName == "VRLeft")
+						this->VRLeft = (float)InfoElement->FindAttribute("value")->IntValue();
+
+					else if (strPropertyName == "VRBottom")
+						this->VRBottomInverted = -1.0f * (float)InfoElement->FindAttribute("value")->IntValue();
+
+					else if (strPropertyName == "VRRight")
+						this->VRRight = (float)InfoElement->FindAttribute("value")->IntValue();
+
+					InfoElement = InfoElement->NextSiblingElement();
+				}
+			}
+#pragma endregion
+
+#pragma region life인 경우
+			else if (strNodeName == "life")
+			{
+				tinyxml2::XMLElement* LifeIndexElement = MapElement->FirstChildElement();
+
+				while (LifeIndexElement != nullptr)
+				{
+					tinyxml2::XMLElement* LifeInfoElement = LifeIndexElement->FirstChildElement();
+
+					string strLifeType{};
+					string strLifeID{};
+
+					float fLifePosX = 0.0f;
+					float fLifePosY = 0.0f;
+					float cy = 0.0f;
+
+					while (LifeInfoElement != nullptr)
+					{
+						string strPropertyName = LifeInfoElement->FindAttribute("name")->Value();
+						string strPropertyValue = LifeInfoElement->FindAttribute("value")->Value();
+
+						if (strPropertyName == "type")
+							strLifeType = strPropertyValue;
+
+						if (strPropertyName == "id")
+							strLifeID = strPropertyValue;
+
+						if (strPropertyName == "x")
+							fLifePosX = (float)LifeInfoElement->FindAttribute("value")->IntValue();
+
+						if (strPropertyName == "y")
+							fLifePosY = -1.0f * (float)LifeInfoElement->FindAttribute("value")->IntValue();
+
+						LifeInfoElement = LifeInfoElement->NextSiblingElement();
+					}
+
+					/* 처리 시작 */
+					if (strLifeType == "n")
+					{
+						string strImagePath = { RESOURCES_FOLDER_NAME };
+						strImagePath += "\\Textures\\Mobs\\" + strLifeID + ".img";
+						strImagePath += "\\" + strLifeID + ".img.stand.0.png";
+
+						ANPCBase* NPC = GetWorld()->SpawnActor<ANPCBase>();
+
+						FTransform& NPCTransform = NPC->GetTransform();
+						NPCTransform.Position.x = fLifePosX;
+						NPCTransform.Position.y = fLifePosY;
+
+						URenderComponent* RenderComponent = NPC->GetComponentByClass<URenderComponent>();
+						RenderComponent->SetTextureByName(strImagePath);
+						RenderComponent->SetActorScaleByTextureSize();
+					}
+
+					LifeIndexElement = LifeIndexElement->NextSiblingElement();
+				}
+			}
+#pragma endregion
+
+
+
+		}
 
 
 

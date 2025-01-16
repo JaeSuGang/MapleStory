@@ -2,7 +2,6 @@
 #include "Actors/Characters/CharacterBase.h"
 #include "RenderCore/RenderComponent.h"
 #include "PhysicsCore/PhysicsComponent.h"
-#include "ActorComponent/CameraComponent.h"
 #include "Actions/ActionComponent.h"
 #include "Attributes/AttributeComponent.h"
 #include "Engine/KeyInputSubsystem.h"
@@ -12,6 +11,7 @@
 #include "Actions/BP_DoubleJumpAction.h"
 #include "Actions/BP_FairyTurnAction.h"
 #include "Actions/BP_GustShiftAction.h"
+#include "Components/MapleCameraComponent.h"
 
 
 
@@ -25,7 +25,7 @@ ACharacterBase::ACharacterBase()
 
 	AttributeComponent = CreateDefaultSubobject<UAttributeComponent>();
 
-	CameraComponent = CreateDefaultSubobject<UCameraComponent>();
+	CameraComponent = CreateDefaultSubobject<UMapleCameraComponent>();
 	CameraComponent->SetMainCamera(true);
 }
 
@@ -130,7 +130,7 @@ void ACharacterBase::InitTextureAndPhysics()
 
 	RenderComponent->EnableMaterial();
 
-	RenderComponent->SetTextureByName("Resources\\Textures\\Avatar\\WindBreaker\\Idle\\1.png");
+	RenderComponent->SetTextureByName("Resources\\Textures\\Avatars\\WindBreaker\\Idle\\1.png");
 
 	RenderComponent->SetActorScaleByTextureSize();
 
@@ -144,13 +144,13 @@ void ACharacterBase::InitAnimations()
 {
 	RenderComponent->EnableAnimation();
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Avatar\\WindBreaker\\Idle", 500);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Avatars\\WindBreaker\\Idle", 500);
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Walk, "Resources\\Textures\\Avatar\\WindBreaker\\Walk", 120);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Walk, "Resources\\Textures\\Avatars\\WindBreaker\\Walk", 120);
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Jump, "Resources\\Textures\\Avatar\\WindBreaker\\Jump", 0);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Jump, "Resources\\Textures\\Avatars\\WindBreaker\\Jump", 0);
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::SwingT1, "Resources\\Textures\\Avatar\\WindBreaker\\SwingT1", 60);
+	RenderComponent->AddAnimationByFolder(EAnimationName::SwingT1, "Resources\\Textures\\Avatars\\WindBreaker\\SwingT1", 60);
 
 	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }

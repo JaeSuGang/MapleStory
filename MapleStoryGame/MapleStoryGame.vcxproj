@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\NPCs\NPCBase.cpp" />
+    <ClCompile Include="Private\Components\MapleCameraComponent.cpp" />
     <ClCompile Include="Private\Actors\Characters\BP_WindBreaker.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_FairyTurn_0.cpp" />
     <ClCompile Include="Private\Actions\BP_GustShiftAction.cpp" />
@@ -163,7 +165,7 @@
     <ClCompile Include="Private\Actors\ObjBase.cpp" />
     <ClCompile Include="Private\Levels\MapBase.cpp" />
     <ClCompile Include="Private\Actors\BP_OrangeMushroom.cpp" />
-    <ClCompile Include="Private\Actors\MobBase.cpp" />
+    <ClCompile Include="Private\Actors\Monsters\MobBase.cpp" />
     <ClCompile Include="Private\Actors\BP_TestCube.cpp" />
     <ClCompile Include="Private\Actors\BP_TestFloor.cpp" />
     <ClCompile Include="Private\Actors\BP_TestSkill2.cpp" />
@@ -181,6 +183,8 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\NPCs\NPCBase.h" />
+    <ClInclude Include="Public\Components\MapleCameraComponent.h" />
     <ClInclude Include="Public\Actors\Characters\BP_WindBreaker.h" />
     <ClInclude Include="Public\Actors\Skills\BP_FairyTurn_0.h" />
     <ClInclude Include="Public\Actions\BP_GustShiftAction.h" />
@@ -197,7 +201,7 @@
     <ClInclude Include="Public\Actors\ObjBase.h" />
     <ClInclude Include="Public\Levels\MapBase.h" />
     <ClInclude Include="Public\Actors\BP_OrangeMushroom.h" />
-    <ClInclude Include="Public\Actors\MobBase.h" />
+    <ClInclude Include="Public\Actors\Monsters\MobBase.h" />
     <ClInclude Include="Public\Actors\BP_TestCube.h" />
     <ClInclude Include="Public\Actors\BP_TestFloor.h" />
     <ClInclude Include="Public\Actors\BP_TestSkill2.h" />

@@ -48,7 +48,7 @@
     <ClCompile Include="Private\Actors\BP_TestCube.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Private\Actors\MobBase.cpp">
+    <ClCompile Include="Private\Actors\Monsters\MobBase.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\Actors\BP_OrangeMushroom.cpp">
@@ -102,6 +102,12 @@
     <ClCompile Include="Private\Actors\Characters\BP_WindBreaker.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Private\Components\MapleCameraComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actors\NPCs\NPCBase.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Public\GamePch.h">
@@ -137,7 +143,7 @@
     <ClInclude Include="Public\Actors\BP_TestCube.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Public\Actors\MobBase.h">
+    <ClInclude Include="Public\Actors\Monsters\MobBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actors\BP_OrangeMushroom.h">
@@ -189,6 +195,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actors\Characters\BP_WindBreaker.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Components\MapleCameraComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\NPCs\NPCBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

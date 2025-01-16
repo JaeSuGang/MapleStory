@@ -13,6 +13,7 @@ enum TileMode
 
 class UMapBase : public ULevel
 {
+	friend class UMapleCameraComponent;
 
 public:
 	/* 생성자와 오버라이드 */
@@ -29,5 +30,10 @@ public:
 
 protected:
 	AActor* MainActor;
+
+	float VRTopInverted;
+	float VRLeft;
+	float VRBottomInverted;
+	float VRRight;
 };
 
