@@ -27,6 +27,10 @@ public:
 	void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API void AddAnimationEvent(EAnimationName _AnimationName, int _Sequence, std::function<void()> _Function);
+
+	ENGINE_API void AddAnimationEvent(FAnimationEvent _AnimationEvent);
+
 	ENGINE_API bool GetHasPassedLastFrame() const;
 
 	ENGINE_API void SetCurrentAnimation(EAnimationName Name);

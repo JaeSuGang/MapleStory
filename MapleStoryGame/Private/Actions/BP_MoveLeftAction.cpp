@@ -16,16 +16,18 @@ void BP_MoveLeftAction::StartAction(AActor* Instigator)
 {
 	float fDeltaTime = GEngine->TimeSubsystem->GetDeltaTime();
 
-	FTransform _Transform = Instigator->GetTransform();
-	_Transform.Rotation.y = 0;
-	Instigator->SetRotation(_Transform.Rotation);
-
 	/* TagComponent */
 	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
 	if (AttributeComponent)
 	{
+		if (AttributeComponent->ContainsAttribute("Status.Attacking"))
+			return;
 		AttributeComponent->AddAttribute("Status.Walking");
 	}
+
+	FTransform _Transform = Instigator->GetTransform();
+	_Transform.Rotation.y = 0;
+	Instigator->SetRotation(_Transform.Rotation);
 
 	/* PhysicsComponent */
 	UPhysicsComponent* PhysicsComponent = Instigator->GetComponentByClass<UPhysicsComponent>();

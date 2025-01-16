@@ -5,6 +5,9 @@
 #include "PhysicsCore/PhysicsComponent.h"
 #include "RenderCore/RenderComponent.h"
 #include "RenderCore/RenderSubsystem.h"
+#include "Attributes/AttributeComponent.h"
+#include "Actors/Skills/BP_FairyTurn_0.h"
+#include "World/World.h"
 
 BP_FairyTurnAction::BP_FairyTurnAction()
 {
@@ -18,4 +21,20 @@ void BP_FairyTurnAction::StartAction(AActor* Instigator)
 	{
 		RenderComponent->SetCurrentAnimation(EAnimationName::SwingT1);
 	}
+
+	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
+
+	if (RenderComponent && AttributeComponent)
+	{
+		AttributeComponent->AddAttribute("Status.Attacking.SwingT1");
+		RenderComponent->AddAnimationEvent(EAnimationName::SwingT1, 6, std::bind((void(UAttributeComponent::*)(string))(&UAttributeComponent::RemoveAttribute), AttributeComponent, "Status.Attacking.SwingT1"));
+	}
+
+	ASkillBase* Skill1 = GetWorld()->SpawnActor<BP_FairyTurn_0>();
+	Skill1->SetInstigator(Instigator);
+
+	FTransform& CharacterTransform = Instigator->GetTransform();
+	FTransform& Skill1Transform = Skill1->GetTransform();
+
+	Skill1Transform.Rotation = CharacterTransform.Rotation;
 }

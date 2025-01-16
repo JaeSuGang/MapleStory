@@ -23,6 +23,8 @@ UMainGameInstance::UMainGameInstance()
 
 	GameplayTagsManager->RegisterTag("Status.Walking");
 
+	GameplayTagsManager->RegisterTag("Status.Attacking.SwingT1");
+
 	GameplayTagsManager->RegisterTag("Status.CanDoubleJump");
 
 }

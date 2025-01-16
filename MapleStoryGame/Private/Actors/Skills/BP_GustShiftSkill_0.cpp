@@ -28,4 +28,27 @@ void BP_GustShiftSkill_0::BeginPlay()
 void BP_GustShiftSkill_0::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
+
+	if (Instigator)
+	{
+		FTransform& InstigatorTransform = Instigator->GetTransform();
+
+		bool bIsLeftDirection = ((int)InstigatorTransform.Rotation.y % 360 < 90 || (int)InstigatorTransform.Rotation.y % 360 > 270);
+		bool bIsUpDirection = (int)Transform.Rotation.z % 360 == 270;
+
+		Transform.Position = InstigatorTransform.Position;
+
+		if (bIsUpDirection)
+			Transform.Position.y -= 90.0f;
+		else
+		{
+			Transform.Rotation = InstigatorTransform.Rotation;
+			Transform.Position.y -= 10.0f;
+			if (bIsLeftDirection)
+				Transform.Position.x += 90.0f;
+
+			else
+				Transform.Position.x -= 90.0f;
+		}
+	}
 }

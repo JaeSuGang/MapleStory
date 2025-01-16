@@ -1,5 +1,5 @@
 #include "GamePch.h"
-#include "Actors/SkillBase.h"
+#include "Actors/Skills/SkillBase.h"
 #include "RenderCore/RenderComponent.h"
 #include "RenderCore/RenderSubsystem.h"
 
@@ -37,4 +37,9 @@ void ASkillBase::Tick(float fDeltaTime)
 	}
 
 	RenderComponent->PlayAnimation(fDeltaTime);
+}
+
+void ASkillBase::SetInstigator(AActor* _Instigator)
+{
+	Instigator = _Instigator;
 }

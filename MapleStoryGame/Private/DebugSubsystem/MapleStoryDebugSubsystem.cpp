@@ -117,7 +117,7 @@ void UMapleStoryDebugSubsystem::PlayerTab()
 	ImGui::Begin("Player");
 
 	int ImguiID = 0;
-	for (auto pair : Attributes->Attributes)
+	for (auto pair : Attributes->Attributes.Tags)
 	{
 		int TagID = pair.first;
 

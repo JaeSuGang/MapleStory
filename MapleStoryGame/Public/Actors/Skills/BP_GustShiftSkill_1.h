@@ -1,5 +1,5 @@
 #pragma once
-#include "Actors/SkillBase.h"
+#include "Actors/Skills/SkillBase.h"
 
 class BP_GustShiftSkill_1 : public ASkillBase
 {

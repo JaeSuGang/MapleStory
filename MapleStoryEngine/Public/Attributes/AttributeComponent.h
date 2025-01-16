@@ -2,6 +2,7 @@
 #include "EnginePch.h"
 #include "ActorComponent/ActorComponent.h"
 #include "GameplayTags/GameplayTag.h"
+#include "GameplayTags/GameplayTagContainer.h"
 
 class UAttributeComponent : public UActorComponent
 {
@@ -15,7 +16,15 @@ public:
 
 	ENGINE_API void SetAttributeValue(FGameplayTag _Tag, float _Value);
 
+	ENGINE_API void SetAttributeValue(string _TagName, float _Value);
+
+	ENGINE_API float GetAttributeValue(string _TagName);
+
 	ENGINE_API float GetAttributeValue(FGameplayTag _Tag);
+
+	ENGINE_API bool ContainsAttribute(string _TagName);
+
+	ENGINE_API bool ContainsAttribute(FGameplayTag _Tag);
 
 	ENGINE_API bool HasAttributeExact(string _TagName);
 
@@ -30,6 +39,6 @@ public:
 	ENGINE_API void RemoveAttribute(string _TagName);
 
 public:
-	unordered_map<int, float> Attributes;
+	FGameplayTagContainer Attributes;
 };
 

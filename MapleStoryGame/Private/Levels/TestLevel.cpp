@@ -2,7 +2,7 @@
 #include "Levels/TestLevel.h"
 #include "Levels/MapBase.h"
 #include "World/World.h"
-#include "Actors/CharacterBase.h"
+#include "Actors/Characters/CharacterBase.h"
 
 void UTestLevel::BeginPlay()
 {

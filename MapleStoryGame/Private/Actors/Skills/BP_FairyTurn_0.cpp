@@ -1,13 +1,13 @@
 #include "GamePch.h"
-#include "Actors/Skills/BP_GustShiftSkill_1.h"
+#include "Actors/Skills/BP_FairyTurn_0.h"
 #include "RenderCore/RenderComponent.h"
 
-BP_GustShiftSkill_1::BP_GustShiftSkill_1()
+BP_FairyTurn_0::BP_FairyTurn_0()
 {
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 }
 
-void BP_GustShiftSkill_1::BeginPlay()
+void BP_FairyTurn_0::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -15,17 +15,17 @@ void BP_GustShiftSkill_1::BeginPlay()
 
 	RenderComponent->SetMeshIDByName("Plane");
 	RenderComponent->SetBlendMode(1);
-	RenderComponent->SetTextureByName("Resources\\Textures\\13001024.effect0.frames\\1.png");
+	RenderComponent->SetTextureByName("Resources\\Textures\\13141004.effect.frames\\1.png");
 	RenderComponent->SetActorScaleByTextureSize();
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 
 	/* 애니메이션 추가 */
 	RenderComponent->EnableAnimation();
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\13001024.effect0.frames", 60);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\13141004.effect.frames", 60);
 	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }
 
-void BP_GustShiftSkill_1::Tick(float fDeltaTime)
+void BP_FairyTurn_0::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
@@ -34,19 +34,11 @@ void BP_GustShiftSkill_1::Tick(float fDeltaTime)
 		FTransform& InstigatorTransform = Instigator->GetTransform();
 
 		bool bIsLeftDirection = ((int)InstigatorTransform.Rotation.y % 360 < 90 || (int)InstigatorTransform.Rotation.y % 360 > 270);
-		bool bIsUpDirection = (int)Transform.Rotation.z % 360 == 270;
 
 		Transform.Position = InstigatorTransform.Position;
-
-		if (bIsUpDirection)
-			Transform.Position.y -= 150.0f;
+		if (bIsLeftDirection)
+			Transform.Position.x -= 200.0f;
 		else
-		{
-			Transform.Rotation = InstigatorTransform.Rotation;
-			if (bIsLeftDirection)
-				Transform.Position.x += 150.0f;
-			else
-				Transform.Position.x -= 150.0f;
-		}
+			Transform.Position.x += 200.0f;
 	}
 }

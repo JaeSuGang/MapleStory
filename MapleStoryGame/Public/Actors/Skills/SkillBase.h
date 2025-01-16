@@ -15,7 +15,12 @@ public:
 
 	virtual void Tick(float fDeltaTime) = 0;
 
+public:
+	void SetInstigator(AActor* _Instigator);
+
 protected:
+	AActor* Instigator;
+
 	URenderComponent* RenderComponent;
 
 	bool IsScreenSkill;

@@ -1,6 +1,7 @@
 #pragma once
 #include "EnginePch.h"
 #include "UObject/Object.h"
+#include "Actor/Actor.h"
 
 class UMaterial;
 class URenderComponent;
@@ -14,6 +15,13 @@ enum class EAnimationName
 	Screen
 };
 
+struct FAnimationEvent
+{
+	EAnimationName AnimationName;
+	int AnimationIndex;
+	std::function<void()> Function;
+};
+
 class UAnimation : public UObject
 {
 	friend class URenderComponent;
@@ -23,6 +31,10 @@ public:
 	ENGINE_API UAnimation();
 
 public:
+	ENGINE_API void AddAnimationEvent(EAnimationName _AnimationName, int _Sequence, std::function<void()> _Function);
+
+	ENGINE_API void AddAnimationEvent(FAnimationEvent _AnimationEvent);
+
 	ENGINE_API void SetRenderComponent(URenderComponent* _Component);
 
 	ENGINE_API void SetTimePerFrame(int nTime);
@@ -38,9 +50,13 @@ public:
 	ENGINE_API void Play(float fDeltaTime);
 
 protected:
+	void CheckAnimationEvents();
+
+protected:
 	URenderComponent* RenderComponent;
 	UMaterial* MaterialToApply;
 	unordered_map<EAnimationName, vector<int>> Animations;
+	vector<FAnimationEvent> AnimationEvents;
 	EAnimationName CurrentAnimation;
 	int CurrentIndex;
 	float AccumulatedTime;

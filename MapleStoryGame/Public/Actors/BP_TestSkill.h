@@ -1,6 +1,6 @@
 #pragma once
 #include "Actor/Actor.h"
-#include "SkillBase.h"
+#include "Actors/Skills/SkillBase.h"
 
 class URenderComponent;
 

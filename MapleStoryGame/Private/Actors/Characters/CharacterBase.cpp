@@ -1,5 +1,5 @@
 #include "GamePch.h"
-#include "Actors/CharacterBase.h"
+#include "Actors/Characters/CharacterBase.h"
 #include "RenderCore/RenderComponent.h"
 #include "PhysicsCore/PhysicsComponent.h"
 #include "ActorComponent/CameraComponent.h"
@@ -78,7 +78,7 @@ void ACharacterBase::BindKeys()
 
 void ACharacterBase::DecideAnimation()
 {
-	if (AttributeComponent->HasAttributeExact("Status.Attacking"))
+	if (AttributeComponent->ContainsAttribute("Status.Attacking"))
 		return;
 
 	if (AttributeComponent->HasAttributeExact("Status.Falling"))
@@ -130,7 +130,7 @@ void ACharacterBase::InitTextureAndPhysics()
 
 	RenderComponent->EnableMaterial();
 
-	RenderComponent->SetTextureByName("Resources\\Textures\\Avatar\\Idle\\1.png");
+	RenderComponent->SetTextureByName("Resources\\Textures\\Avatar\\WindBreaker\\Idle\\1.png");
 
 	RenderComponent->SetActorScaleByTextureSize();
 
@@ -144,13 +144,13 @@ void ACharacterBase::InitAnimations()
 {
 	RenderComponent->EnableAnimation();
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Avatar\\Idle", 500);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Avatar\\WindBreaker\\Idle", 500);
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Walk, "Resources\\Textures\\Avatar\\Walk", 120);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Walk, "Resources\\Textures\\Avatar\\WindBreaker\\Walk", 120);
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Jump, "Resources\\Textures\\Avatar\\Jump", 0);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Jump, "Resources\\Textures\\Avatar\\WindBreaker\\Jump", 0);
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::SwingT1, "Resources\\Textures\\Avatar\\SwingT1", 60);
+	RenderComponent->AddAnimationByFolder(EAnimationName::SwingT1, "Resources\\Textures\\Avatar\\WindBreaker\\SwingT1", 60);
 
 	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }

@@ -124,6 +124,16 @@ void URenderComponent::SetZIndex(int nZIndex)
 	ZIndex = nZIndex;
 }
 
+void URenderComponent::AddAnimationEvent(EAnimationName _AnimationName, int _Sequence, std::function<void()> _Function)
+{
+	Animation->AddAnimationEvent(_AnimationName, _Sequence, _Function);
+}
+
+void URenderComponent::AddAnimationEvent(FAnimationEvent _AnimationEvent)
+{
+	Animation->AddAnimationEvent(_AnimationEvent);
+}
+
 bool URenderComponent::GetHasPassedLastFrame() const
 {
 	return Animation->HasPassedLastFrame;

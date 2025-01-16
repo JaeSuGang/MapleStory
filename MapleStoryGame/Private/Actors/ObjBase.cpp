@@ -48,6 +48,9 @@ void AObjBase::Tick(float fDeltaTime)
 	default:
 		break;
 	}
+
+	Transform.Position.x = std::floor(Transform.Position.x);
+	Transform.Position.y = std::floor(Transform.Position.y);
 }
 
 void AObjBase::SetObjType(EObjType _ObjType)

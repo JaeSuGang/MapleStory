@@ -5,9 +5,10 @@
 
 class AActor;
 
+/* Tag 런타임 삭제 금지 */
 class UGameplayTagsManager : public UGameInstanceSubsystem
 {
-	/* Tag 런타임 삭제 금지 */
+	friend struct FGameplayTagContainer;
 
 public:
 	ENGINE_API UGameplayTagsManager();

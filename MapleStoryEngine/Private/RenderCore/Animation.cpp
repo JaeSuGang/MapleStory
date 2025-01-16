@@ -16,6 +16,18 @@ UAnimation::UAnimation()
 	TimePerFrame = 500;
 }
 
+/* 반드시 함수의 주체 Instigator는 이 애니메이션을 소유한 Actor일 것 */
+void UAnimation::AddAnimationEvent(EAnimationName _AnimationName, int _Sequence, std::function<void()> _Function)
+{
+	this->AddAnimationEvent(FAnimationEvent{ _AnimationName, _Sequence, _Function });
+}
+
+/* 반드시 함수의 주체 Instigator는 이 애니메이션을 소유한 Actor일 것 */
+void UAnimation::AddAnimationEvent(FAnimationEvent _AnimationEvent)
+{
+	AnimationEvents.push_back(_AnimationEvent);
+}
+
 void UAnimation::SetRenderComponent(URenderComponent* _Component)
 {
 	RenderComponent = _Component;
@@ -104,32 +116,53 @@ void UAnimation::Play(float fDeltaTime)
 
 	AccumulatedTime += fDeltaTime;
 
-	if (AccumulatedTime > TimePerFrame * 0.001f)
-	{
-		auto FindIter = Animations.find(CurrentAnimation);
+	if (AccumulatedTime < TimePerFrame * 0.001f)
+		return;
 
-		if (FindIter == Animations.end())
-			GEngine->DebugLog("등록되지 않은 EAnimationName을 사용", 1);
+	auto FindIter = Animations.find(CurrentAnimation);
+
+	if (FindIter == Animations.end())
+		GEngine->DebugLog("등록되지 않은 EAnimationName을 사용", 1);
+
+	else
+	{
+		vector<int>& TextureIDSequence = FindIter->second;
+
+		if (CurrentIndex < TextureIDSequence.size() - 1)
+			CurrentIndex++;
 
 		else
+			CurrentIndex = 1;
+
+		if (CurrentIndex == TextureIDSequence.size() - 2)
+			HasPassedLastFrame = true;
+
+
+		MaterialToApply->TextureID = TextureIDSequence[CurrentIndex];
+
+		RenderComponent->SetActorScaleByTextureSize();
+
+		AccumulatedTime = 0.0f;
+
+		this->CheckAnimationEvents();
+	}
+}
+
+void UAnimation::CheckAnimationEvents()
+{
+	auto LoopIter = AnimationEvents.begin();
+
+	while (LoopIter != AnimationEvents.end())
+	{
+		FAnimationEvent& AnimationEvent = *LoopIter;
+
+		if (CurrentAnimation != AnimationEvent.AnimationName || CurrentIndex != AnimationEvent.AnimationIndex)
 		{
-			vector<int>& TextureIDSequence = FindIter->second;
-
-			if (CurrentIndex < TextureIDSequence.size() - 1)
- 				CurrentIndex++;
-
-			else
-				CurrentIndex = 1;
-
-			if (CurrentIndex == TextureIDSequence.size() - 2)
-				HasPassedLastFrame = true;
-
-
-			MaterialToApply->TextureID = TextureIDSequence[CurrentIndex];
-
-			RenderComponent->SetActorScaleByTextureSize();
-
-			AccumulatedTime = 0.0f;
+			++LoopIter;
+			continue;
 		}
+
+		AnimationEvent.Function();
+		LoopIter = AnimationEvents.erase(LoopIter);
 	}
 }

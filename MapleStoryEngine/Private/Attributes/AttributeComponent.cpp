@@ -15,56 +15,60 @@ void UAttributeComponent::TickComponent(float fDeltaTime)
 
 void UAttributeComponent::SetAttributeValue(FGameplayTag _Tag, float _Value)
 {
-	Attributes.find(_Tag.ID)->second = _Value;
+	return Attributes.SetTagValue(_Tag, _Value);
+}
+
+void UAttributeComponent::SetAttributeValue(string _TagName, float _Value)
+{
+	return Attributes.SetTagValue(_TagName, _Value);
+}
+
+float UAttributeComponent::GetAttributeValue(string _TagName)
+{
+	return Attributes.GetTagValue(_TagName);
 }
 
 float UAttributeComponent::GetAttributeValue(FGameplayTag _Tag)
 {
-	return Attributes.find(_Tag.ID)->second;
+	return Attributes.GetTagValue(_Tag);
+}
+
+bool UAttributeComponent::ContainsAttribute(string _TagName)
+{
+	return Attributes.ContainsTag(_TagName);
+}
+
+bool UAttributeComponent::ContainsAttribute(FGameplayTag _Tag)
+{
+	return Attributes.ContainsTag(_Tag);
 }
 
 bool UAttributeComponent::HasAttributeExact(string _TagName)
 {
-	return this->HasAttributeExact(GEngine->GetGameInstance()->GameplayTagsManager->FindRegisteredTagExact(_TagName));
+	return Attributes.HasTagExact(_TagName);
 }
 
 bool UAttributeComponent::HasAttributeExact(FGameplayTag _Tag)
 {
-	auto FindIter = Attributes.find(_Tag.ID);
-
-	return FindIter != Attributes.end();
+	return Attributes.HasTagExact(_Tag);
 }
 
 void UAttributeComponent::AddAttribute(FGameplayTag _Tag)
 {
-	auto FindIter = Attributes.find(_Tag.ID);
-
-	if (FindIter != Attributes.end())
-		return;
-
-	Attributes.insert(std::make_pair(_Tag.ID, 0.0f));
+	Attributes.AddTag(_Tag);
 }
 
 void UAttributeComponent::AddAttribute(string _TagName)
 {
-	FGameplayTag Tag = GEngine->GetGameInstance()->GameplayTagsManager->FindRegisteredTagExact(_TagName);
-
-	this->AddAttribute(Tag);
+	Attributes.AddTag(_TagName);
 }
 
 void UAttributeComponent::RemoveAttribute(FGameplayTag _Tag)
 {
-	auto FindIter = Attributes.find(_Tag.ID);
-
-	if (FindIter == Attributes.end())
-		return;
-
-	Attributes.erase(FindIter);
+	Attributes.RemoveTag(_Tag);
 }
 
 void UAttributeComponent::RemoveAttribute(string _TagName)
 {
-	FGameplayTag Tag = GEngine->GetGameInstance()->GameplayTagsManager->FindRegisteredTagExact(_TagName);
-
-	this->RemoveAttribute(Tag);
+	Attributes.RemoveTag(_TagName);
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "Actors/SkillBase.h"
+#include "Actors/Skills/SkillBase.h"
 
 class URenderComponent;
 

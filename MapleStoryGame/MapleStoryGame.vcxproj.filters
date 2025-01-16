@@ -33,7 +33,7 @@
     <ClCompile Include="Private\DebugSubsystem\MapleStoryDebugSubsystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Private\Actors\SkillBase.cpp">
+    <ClCompile Include="Private\Actors\Skills\SkillBase.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\Actors\BP_TestSkill.cpp">
@@ -66,7 +66,7 @@
     <ClCompile Include="Private\Actors\FootholdBase.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Private\Actors\CharacterBase.cpp">
+    <ClCompile Include="Private\Actors\Characters\CharacterBase.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Private\Components\FSMComponent.cpp">
@@ -96,6 +96,12 @@
     <ClCompile Include="Private\Actions\BP_GustShiftAction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Private\Actors\Skills\BP_FairyTurn_0.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actors\Characters\BP_WindBreaker.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Public\GamePch.h">
@@ -116,7 +122,7 @@
     <ClInclude Include="Public\DebugSubsystem\MapleStoryDebugSubsystem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Public\Actors\SkillBase.h">
+    <ClInclude Include="Public\Actors\Skills\SkillBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actors\BP_TestSkill.h">
@@ -149,7 +155,7 @@
     <ClInclude Include="Public\Actors\FootholdBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Public\Actors\CharacterBase.h">
+    <ClInclude Include="Public\Actors\Characters\CharacterBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Components\FSMComponent.h">
@@ -177,6 +183,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actions\BP_GustShiftAction.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Skills\BP_FairyTurn_0.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Characters\BP_WindBreaker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
