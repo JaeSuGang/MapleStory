@@ -28,5 +28,4 @@ void BP_GustShiftSkill_0::BeginPlay()
 void BP_GustShiftSkill_0::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
-
 }

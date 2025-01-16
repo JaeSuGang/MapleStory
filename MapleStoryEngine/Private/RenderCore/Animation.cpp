@@ -60,6 +60,7 @@ void UAnimation::AddAnimationByFolder(EAnimationName Name, string strFolderDir, 
 		nIndex++;
 	}
 
+	TimePerFrame = nTimePerFrame;
 }
 
 void UAnimation::AddAnimation(EAnimationName Name, vector<int> TextureIDSequence)
@@ -115,7 +116,7 @@ void UAnimation::Play(float fDeltaTime)
 			vector<int>& TextureIDSequence = FindIter->second;
 
 			if (CurrentIndex < TextureIDSequence.size() - 1)
-				CurrentIndex++;
+ 				CurrentIndex++;
 
 			else
 				CurrentIndex = 1;

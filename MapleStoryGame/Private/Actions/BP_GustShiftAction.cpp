@@ -5,6 +5,7 @@
 #include "World/World.h"
 #include "Engine/KeyInputSubsystem.h"
 #include "GameplayTags/GameplayTagsManager.h"
+#include "PhysicsCore/PhysicsComponent.h"
 
 BP_GustShiftAction::BP_GustShiftAction()
 {
@@ -15,17 +16,35 @@ void BP_GustShiftAction::StartAction(AActor* Instigator)
 {
 	if (GEngine->KeyInputSubsystem->GetKey(VK_UP, UKeyInputSubsystem::EKeyState::Triggered))
 	{
+
 	}
 	else
 	{
-		GetWorld()->SpawnActor<BP_GustShiftSkill_0>();
-		GetWorld()->SpawnActor<BP_GustShiftSkill_1>();
+		AActor* Skill1 = GetWorld()->SpawnActor<BP_GustShiftSkill_0>();
+		AActor* Skill2 = GetWorld()->SpawnActor<BP_GustShiftSkill_1>();
 
-		FTransform Transform = Instigator->GetTransform();
+		FTransform& CharacterTransform = Instigator->GetTransform();
+		FTransform& Skill1Transform = Skill1->GetTransform();
+		FTransform& Skill2Transform = Skill2->GetTransform();
 
-		if (Transform.Rotation.y >= 0 && Transform.Rotation.y < 180)
-		{
+		bool bIsLeftDirection = ((int)CharacterTransform.Rotation.y % 360 < 90 || (int)CharacterTransform.Rotation.y % 360 > 270);
 
-		}
+		Skill1Transform.Position = CharacterTransform.Position;
+		Skill1Transform.Rotation = CharacterTransform.Rotation;
+		Skill1Transform.Position.y += 1.0f;
+
+		Skill2Transform.Position = CharacterTransform.Position;
+		Skill2Transform.Rotation = CharacterTransform.Rotation;
+		Skill2Transform.Position.y += 1.0f;
+
+		UPhysicsComponent* PhysicsComponent = Instigator->GetComponentByClass<UPhysicsComponent>();
+		PhysicsComponent->AddYVelocity(8.0f);
+
+		if (bIsLeftDirection)
+			PhysicsComponent->SetXVelocity(-15.0f);
+		else
+			PhysicsComponent->SetXVelocity(15.0f);
 	}
+
+
 }

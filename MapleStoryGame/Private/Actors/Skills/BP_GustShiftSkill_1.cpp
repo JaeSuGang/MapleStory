@@ -2,7 +2,7 @@
 #include "Actors/Skills/BP_GustShiftSkill_1.h"
 #include "RenderCore/RenderComponent.h"
 
-BP_GustShiftSkill_1::BP_GustShiftActor_1()
+BP_GustShiftSkill_1::BP_GustShiftSkill_1()
 {
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 }
@@ -27,5 +27,5 @@ void BP_GustShiftSkill_1::BeginPlay()
 
 void BP_GustShiftSkill_1::Tick(float fDeltaTime)
 {
-
+	Super::Tick(fDeltaTime);
 }

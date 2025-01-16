@@ -33,8 +33,17 @@ void BP_MoveLeftAction::StartAction(AActor* Instigator)
 	{
 		FVector3 Velocity = PhysicsComponent->GetVelocity();
 
-		if (Velocity.x >= -4.0f)
-			PhysicsComponent->SetXVelocity(-4.0f);
+		if (!AttributeComponent->HasAttributeExact("Status.Falling"))
+		{
+			if (Velocity.x >= -4.0f)
+				PhysicsComponent->SetXVelocity(-4.0f);
+		}
+
+		else
+		{
+			if (Velocity.x >= -4.0f)
+				PhysicsComponent->AddXVelocity(-10.0f * fDeltaTime);
+		}
 	}
 
 	/* RenderComponent */
