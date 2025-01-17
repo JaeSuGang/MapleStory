@@ -242,3 +242,18 @@ void UPhysicsComponent::InitializeFootCollider(float fYOffsetFromCenter, int nCo
 	B2FootID = b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
 }
 
+void UPhysicsComponent::InitializeNPCFootCollider()
+{
+	FTransform& Transform = Owner->GetTransform();
+
+	b2Circle Circle = { {0.0f, -1.0f * Transform.Scale.y * 0.49f * PIXEL_TO_METER_CONSTANT}, 1.0f * PIXEL_TO_METER_CONSTANT };
+
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	ShapeDef.density = 0.1f;
+	ShapeDef.friction = 0.7f;
+	ShapeDef.filter.categoryBits = MOB_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
+
+	B2FootID = b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
+}
+

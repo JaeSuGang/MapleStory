@@ -734,6 +734,8 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 						FTransform& NPCTransform = NPC->GetTransform();
 						NPCTransform.Position = FinalPos;
+
+						NPC->InitPhysics();
 					}
 
 					LifeIndexElement = LifeIndexElement->NextSiblingElement();

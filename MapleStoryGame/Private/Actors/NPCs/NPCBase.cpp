@@ -4,6 +4,8 @@
 ANPCBase::ANPCBase()
 {
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
+
+	PhysicsComponent = CreateDefaultSubobject<UPhysicsComponent>();
 }
 
 void ANPCBase::BeginPlay()
@@ -13,11 +15,21 @@ void ANPCBase::BeginPlay()
 	RenderComponent->SetMeshIDByName("Plane");
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+
 	RenderComponent->SetBlendMode(0);
+
 	RenderComponent->SetSortingLayer(8);
+
 }
 
 void ANPCBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
+}
+
+void ANPCBase::InitPhysics()
+{
+	PhysicsComponent->InitializeBody(b2BodyType::b2_dynamicBody);
+
+	PhysicsComponent->InitializeNPCFootCollider();
 }

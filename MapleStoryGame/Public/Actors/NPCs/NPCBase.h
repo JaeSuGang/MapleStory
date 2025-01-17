@@ -19,5 +19,10 @@ public:
 	virtual void Tick(float fDeltaTime);
 
 public:
+	void InitPhysics();
+
+protected:
 	URenderComponent* RenderComponent;
+
+	UPhysicsComponent* PhysicsComponent;
 };
