@@ -157,6 +157,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
   <ItemGroup>
     <ClInclude Include="Public\ActorComponent\CameraComponent.h" />
     <ClInclude Include="Public\Engine\KeyInputSubsystem.h" />
+    <ClInclude Include="Public\Math\Math.h" />
     <ClInclude Include="Public\PhysicsCore\PhysicsComponent.h" />
     <ClInclude Include="Public\PhysicsCore\PhysicsSubsystem.h" />
     <ClInclude Include="Public\RenderCore\Animation.h" />

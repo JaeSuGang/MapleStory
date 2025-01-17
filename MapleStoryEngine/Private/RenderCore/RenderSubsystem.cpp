@@ -770,7 +770,23 @@ void URenderSubsystem::CreatePixelShaders(string strShaderPath)
 	StringMappedIndexPixelShaderIDs.insert(std::make_pair(DEFAULT_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
 	PixelShaders.push_back(DefaultPixelShader);
 
+	/* Green Outlined Pixel Shader 持失 */
+	{
 
+	ComPtr<ID3D11PixelShader> GreenOutlinedPixelShader;
+	hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME, "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+	}
+	hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, GreenOutlinedPixelShader.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+	}
+	StringMappedIndexPixelShaderIDs.insert(std::make_pair(BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
+	PixelShaders.push_back(GreenOutlinedPixelShader);
+	}
 
 	/* Wireframe Pixel Shader 持失 */
 	ComPtr<ID3D11PixelShader> WireframePixelShader;

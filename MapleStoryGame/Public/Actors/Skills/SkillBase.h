@@ -18,6 +18,8 @@ public:
 public:
 	void SetInstigator(AActor* _Instigator);
 
+	void SetPositionRelativeToInstigator(float fLeft, float fUp);
+
 protected:
 	AActor* Instigator;
 

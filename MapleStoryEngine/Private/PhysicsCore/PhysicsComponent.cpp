@@ -4,6 +4,7 @@
 #include "World/World.h"
 #include "PhysicsCore/PhysicsSubsystem.h"
 #include "Engine/TimeSubsystem.h"
+#include "Math/Math.h"
 
 UPhysicsComponent::UPhysicsComponent()
 {
@@ -23,7 +24,10 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 	if (!IsBodyInitialized)
 		return;
 
-	SyncPos();
+	if (IsLine)
+		SyncPos();
+	else
+		SyncPosAndRot();
 }
 
 bool UPhysicsComponent::GetIsGrounded()
@@ -113,14 +117,26 @@ void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float
 	b2CreateChain(B2BodyID, &ChainDef);
 }
 
-
 void UPhysicsComponent::SyncPos()
 {
 	FTransform& OwnerTransfrom = Owner->GetTransform();
-	b2Vec2 B2Position = b2Body_GetPosition(B2BodyID);
+	b2Transform b2Trans = b2Body_GetTransform(B2BodyID);
 
-	OwnerTransfrom.Position.x = B2Position.x * METER_TO_PIXEL_CONSTANT;
-	OwnerTransfrom.Position.y = B2Position.y * METER_TO_PIXEL_CONSTANT;
+	FVector3 Pos{ b2Trans.p.x * METER_TO_PIXEL_CONSTANT, b2Trans.p.y * METER_TO_PIXEL_CONSTANT, OwnerTransfrom.Position.z };
+
+	OwnerTransfrom.Position = Pos;
+}
+
+void UPhysicsComponent::SyncPosAndRot()
+{
+	FTransform& OwnerTransfrom = Owner->GetTransform();
+	b2Transform b2Trans = b2Body_GetTransform(B2BodyID);
+
+	FVector3 Pos{ b2Trans.p.x * METER_TO_PIXEL_CONSTANT, b2Trans.p.y * METER_TO_PIXEL_CONSTANT, OwnerTransfrom.Position.z };
+	FVector3 Rot { OwnerTransfrom.Rotation.x, OwnerTransfrom.Rotation.y, RadianToDegree(std::acos(b2Trans.q.c)) };
+
+	OwnerTransfrom.Position = Pos;
+	OwnerTransfrom.Rotation = Rot;
 }
 
 void UPhysicsComponent::BeginPlay()

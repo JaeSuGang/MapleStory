@@ -1,5 +1,8 @@
 #include "EnginePch.h"
 #include "PhysicsCore/PhysicsSubsystem.h"
+#include "PhysicsCore/PhysicsComponent.h"
+#include "Math/Transform.h"
+#include "Math/Math.h"
 
 UPhysicsSubsystem::~UPhysicsSubsystem()
 {
@@ -44,6 +47,15 @@ void UPhysicsSubsystem::FetchCapsuleOverlap(b2Capsule Capsule, b2Transform Capsu
 	CapsulePos.q.s = 0;
 	CapsulePos.q.c = 1;
 	b2World_OverlapCapsule(B2WorldID, &Capsule, CapsulePos, Filter, &UPhysicsSubsystem::OverlapCallback, pVector);
+}
+
+void UPhysicsSubsystem::FetchBoxOverlap(float fWidth, float fHeight, FTransform Transform, b2QueryFilter Filter, vector<b2ShapeId>* pReturnShapeIds)
+{
+	b2Polygon Box = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
+	b2Vec2 Vec{ Transform.Position.x * PIXEL_TO_METER_CONSTANT, Transform.Position.y * PIXEL_TO_METER_CONSTANT };
+	b2Rot Rot{ std::cos(DegreeToRadian(Transform.Rotation.z)), std::sin(DegreeToRadian(Transform.Rotation.z)) };
+	b2Transform b2Transform{ Vec, Rot};
+	b2World_OverlapPolygon(B2WorldID, &Box, b2Transform, Filter, &UPhysicsSubsystem::OverlapCallback, pReturnShapeIds);
 }
 
 bool UPhysicsSubsystem::OverlapCallback(b2ShapeId _ID, void* _Context)

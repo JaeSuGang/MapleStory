@@ -1,6 +1,10 @@
 #include "GamePch.h"
 #include "Actors/Skills/BP_FairyTurn_0.h"
 #include "RenderCore/RenderComponent.h"
+#include "Engine/Engine.h"
+#include "World/World.h"
+#include "PhysicsCore/PhysicsSubsystem.h"
+#include "PhysicsCore/PhysicsComponent.h"
 
 BP_FairyTurn_0::BP_FairyTurn_0()
 {
@@ -17,28 +21,35 @@ void BP_FairyTurn_0::BeginPlay()
 	RenderComponent->SetBlendMode(1);
 	RenderComponent->SetTextureByName("Resources\\Textures\\13141004.effect.frames\\1.png");
 	RenderComponent->SetActorScaleByTextureSize();
-	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+	RenderComponent->SetPixelShaderByName(BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME);
 
 	/* 애니메이션 추가 */
 	RenderComponent->EnableAnimation();
 	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\13141004.effect.frames", 60);
 	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
+
+	/* 데미지 연산*/
+	this->SetPositionRelativeToInstigator(200.0f, 0.0f);
+
+
+
+	vector<b2ShapeId> OverlappedShapeIds;
+	b2QueryFilter Filter{};
+	Filter.categoryBits = -1;
+	Filter.maskBits = MOB_HITBOX_COLLISION_FLAG;
+	GEngine->GetWorld()->PhysicsSubsystem->FetchBoxOverlap(Transform.Scale.x, Transform.Scale.y, Transform, Filter, &OverlappedShapeIds);
+
+	for (b2ShapeId& ShapeID : OverlappedShapeIds)
+	{
+		UPhysicsComponent* PhysicsComponent = GEngine->GetWorld()->PhysicsSubsystem->GetPhysicsComponentByShapeID(ShapeID);
+		PhysicsComponent->GetOwner()->Destroy();
+	}
+
 }
 
 void BP_FairyTurn_0::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
-	if (Instigator)
-	{
-		FTransform& InstigatorTransform = Instigator->GetTransform();
-
-		bool bIsLeftDirection = ((int)InstigatorTransform.Rotation.y % 360 < 90 || (int)InstigatorTransform.Rotation.y % 360 > 270);
-
-		Transform.Position = InstigatorTransform.Position;
-		if (bIsLeftDirection)
-			Transform.Position.x -= 200.0f;
-		else
-			Transform.Position.x += 200.0f;
-	}
+	this->SetPositionRelativeToInstigator(200.0f, 0.0f);
 }

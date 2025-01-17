@@ -57,6 +57,8 @@ public:
 protected:
 	void SyncPos();
 
+	void SyncPosAndRot();
+
 protected:
 	UPhysicsSubsystem* PhysicsSubsystem;
 		

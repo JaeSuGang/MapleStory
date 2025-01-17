@@ -1,5 +1,6 @@
 #pragma once
 #include "World/WorldSubsystem.h"
+#include "Math/Transform.h"
 
 class UPhysicsSubsystem : public UWorldSubsystem
 {
@@ -19,6 +20,8 @@ public:
 	ENGINE_API UPhysicsComponent* GetPhysicsComponentByShapeID(b2ShapeId _ShapeId);
 
 	ENGINE_API void FetchCapsuleOverlap(b2Capsule Capsule, b2Transform CapsulePos, b2QueryFilter Filter, vector<b2ShapeId>* pReturnShapeIds);
+
+	ENGINE_API void FetchBoxOverlap(float fWidth, float fHeight, FTransform Transform, b2QueryFilter Filter, vector<b2ShapeId>* pReturnShapeIds);
 
 public:
 	static bool OverlapCallback(b2ShapeId _ID, void* _Context);

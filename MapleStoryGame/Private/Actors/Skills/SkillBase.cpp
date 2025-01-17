@@ -43,3 +43,25 @@ void ASkillBase::SetInstigator(AActor* _Instigator)
 {
 	Instigator = _Instigator;
 }
+
+void ASkillBase::SetPositionRelativeToInstigator(float fLeft, float fUp)
+{
+	if (Instigator)
+	{
+		FTransform& InstigatorTransform = Instigator->GetTransform();
+
+		bool bIsLeftDirection = ((int)InstigatorTransform.Rotation.y % 360 < 90 || (int)InstigatorTransform.Rotation.y % 360 > 270);
+
+		Transform.Position = InstigatorTransform.Position;
+		if (bIsLeftDirection)
+		{
+			Transform.Position.x -= fLeft;
+			Transform.Position.y += fUp;
+		}
+		else
+		{
+			Transform.Position.x += fLeft;
+			Transform.Position.y += fUp;
+		}
+	}
+}
