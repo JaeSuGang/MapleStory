@@ -23,6 +23,12 @@ public:
 
 	void LateTick(float fDeltaTime) override;
 
+	virtual void InitActions();
+
+	virtual void InitAnimations();
+
+	virtual void InitTextureAndPhysics();
+
 public:
 	void BindKeys();
 
@@ -31,11 +37,6 @@ protected:
 
 	void CheckFalling();
 
-	void InitActions();
-
-	void InitTextureAndPhysics();
-
-	void InitAnimations();
 
 protected:
 	URenderComponent* RenderComponent;

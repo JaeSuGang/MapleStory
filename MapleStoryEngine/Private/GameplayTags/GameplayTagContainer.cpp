@@ -63,6 +63,9 @@ void FGameplayTagContainer::AddTag(string _Name)
 
 bool FGameplayTagContainer::ContainsTag(FGameplayTag _Tag)
 {
+    if (this->HasTagExact(_Tag))
+        return true;
+
     for (auto LoopPair : Tags)
     {
         int LoopTagID = LoopPair.first;

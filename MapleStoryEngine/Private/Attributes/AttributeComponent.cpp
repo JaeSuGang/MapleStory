@@ -63,6 +63,13 @@ void UAttributeComponent::AddAttribute(string _TagName)
 	Attributes.AddTag(_TagName);
 }
 
+void UAttributeComponent::AddAttribute(string _TagName, float _val)
+{
+	this->AddAttribute(_TagName);
+
+	this->SetAttributeValue(_TagName, _val);
+}
+
 void UAttributeComponent::RemoveAttribute(FGameplayTag _Tag)
 {
 	Attributes.RemoveTag(_Tag);

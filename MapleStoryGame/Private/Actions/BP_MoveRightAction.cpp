@@ -21,6 +21,10 @@ void BP_MoveRightAction::StartAction(AActor* Instigator)
 	{
 		if (AttributeComponent->ContainsAttribute("Status.Attacking"))
 			return;
+
+		if (AttributeComponent->HasAttributeExact("Status.Proning"))
+			return;
+
 		AttributeComponent->AddAttribute("Status.Walking");
 	}
 
@@ -37,14 +41,14 @@ void BP_MoveRightAction::StartAction(AActor* Instigator)
 
 		if (!AttributeComponent->HasAttributeExact("Status.Falling"))
 		{
-			if (Velocity.x <= 4.0f)
-				PhysicsComponent->SetXVelocity(4.0f);
+			if (Velocity.x <= 200.0f)
+				PhysicsComponent->SetXVelocity(200.0f);
 		}
 
 		else
 		{
-			if (Velocity.x <= 4.0f)
-				PhysicsComponent->AddXVelocity(10.0f * fDeltaTime);
+			if (Velocity.x <= 200.0f)
+				PhysicsComponent->AddXVelocity(500.0f * fDeltaTime);
 		}
 	}
 

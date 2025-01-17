@@ -8,9 +8,7 @@
 #include "Actions/BP_MoveLeftAction.h"
 #include "Actions/BP_MoveRightAction.h"
 #include "Actions/BP_JumpAction.h"
-#include "Actions/BP_DoubleJumpAction.h"
-#include "Actions/BP_FairyTurnAction.h"
-#include "Actions/BP_GustShiftAction.h"
+#include "Actions/BP_ProneAction.h"
 #include "Components/MapleCameraComponent.h"
 
 
@@ -61,6 +59,8 @@ void ACharacterBase::Tick(float fDeltaTime)
 void ACharacterBase::LateTick(float fDeltaTime)
 {
 	AttributeComponent->RemoveAttribute("Status.Walking");
+
+	AttributeComponent->RemoveAttribute("Status.Proning");
 }
 
 void ACharacterBase::BindKeys()
@@ -68,6 +68,8 @@ void ACharacterBase::BindKeys()
 	GEngine->KeyInputSubsystem->BindKey(VK_LEFT, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.MoveLeft" }));
 
 	GEngine->KeyInputSubsystem->BindKey(VK_RIGHT, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.MoveRight"}));
+
+	GEngine->KeyInputSubsystem->BindKey(VK_DOWN, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.Prone"}));
 
 	GEngine->KeyInputSubsystem->BindKey(VK_SPACE, UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.Jump"}));
 
@@ -84,6 +86,9 @@ void ACharacterBase::DecideAnimation()
 	if (AttributeComponent->HasAttributeExact("Status.Falling"))
 		RenderComponent->SetCurrentAnimation(EAnimationName::Jump);
 
+	else if (AttributeComponent->HasAttributeExact("Status.Proning"))
+		RenderComponent->SetCurrentAnimation(EAnimationName::Prone);
+
 	else if (AttributeComponent->HasAttributeExact("Status.Walking"))
 		RenderComponent->SetCurrentAnimation(EAnimationName::Walk);
 
@@ -93,10 +98,15 @@ void ACharacterBase::DecideAnimation()
 
 void ACharacterBase::CheckFalling()
 {
-	if (PhysicsComponent->GetIsGrounded())
+	bool bIsGrounded = PhysicsComponent->GetIsGrounded();
+
+	if (bIsGrounded)
 	{
 		AttributeComponent->RemoveAttribute("Status.Falling");
-		AttributeComponent->AddAttribute("Status.CanDoubleJump");
+
+		FVector3 Vel = PhysicsComponent->GetVelocity();
+		if (abs(Vel.y) < 0.01f)
+			AttributeComponent->AddAttribute("Status.CanDoubleJump");
 	}
 	else
 		AttributeComponent->AddAttribute("Status.Falling");
@@ -105,17 +115,14 @@ void ACharacterBase::CheckFalling()
 
 void ACharacterBase::InitActions()
 {
+	ActionComponent->AddAction<BP_ProneAction>();
+
 	ActionComponent->AddAction<BP_MoveLeftAction>();
 
 	ActionComponent->AddAction<BP_MoveRightAction>();
 
 	ActionComponent->AddAction<BP_JumpAction>();
 
-	ActionComponent->AddAction<BP_DoubleJumpAction>();
-
-	ActionComponent->AddAction<BP_FairyTurnAction>();
-
-	ActionComponent->AddAction<BP_GustShiftAction>();
 }
 
 void ACharacterBase::InitTextureAndPhysics()
@@ -129,28 +136,9 @@ void ACharacterBase::InitTextureAndPhysics()
 	RenderComponent->SetSortingLayer(9);
 
 	RenderComponent->EnableMaterial();
-
-	RenderComponent->SetTextureByName("Resources\\Textures\\Avatars\\WindBreaker\\Idle\\1.png");
-
-	RenderComponent->SetActorScaleByTextureSize();
-
-	PhysicsComponent->InitializeBody(b2BodyType::b2_dynamicBody);
-
-	PhysicsComponent->InitializeFootCollider(Transform.Scale.y * -0.49f, MOB_COLLISION_FLAG);
-
 }
 
 void ACharacterBase::InitAnimations()
 {
-	RenderComponent->EnableAnimation();
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Avatars\\WindBreaker\\Idle", 500);
-
-	RenderComponent->AddAnimationByFolder(EAnimationName::Walk, "Resources\\Textures\\Avatars\\WindBreaker\\Walk", 120);
-
-	RenderComponent->AddAnimationByFolder(EAnimationName::Jump, "Resources\\Textures\\Avatars\\WindBreaker\\Jump", 0);
-
-	RenderComponent->AddAnimationByFolder(EAnimationName::SwingT1, "Resources\\Textures\\Avatars\\WindBreaker\\SwingT1", 60);
-
-	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }

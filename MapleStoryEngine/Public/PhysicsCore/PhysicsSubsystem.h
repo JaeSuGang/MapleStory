@@ -14,8 +14,16 @@ public:
 	void LateInit() override;
 
 public:
+	ENGINE_API b2WorldId GetB2WorldID() const;
 
-private:
+	ENGINE_API UPhysicsComponent* GetPhysicsComponentByShapeID(b2ShapeId _ShapeId);
+
+	ENGINE_API void FetchCapsuleOverlap(b2Capsule Capsule, b2Transform CapsulePos, b2QueryFilter Filter, vector<b2ShapeId>* pReturnShapeIds);
+
+public:
+	static bool OverlapCallback(b2ShapeId _ID, void* _Context);
+
+protected:
 	b2WorldId B2WorldID;
 
 	const float SimulationFrequencyTime = 1.0f / 60.0f;

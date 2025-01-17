@@ -15,3 +15,8 @@ void UActorComponent::SetOwner(AActor* pOwner)
 {
 	Owner = pOwner;
 }
+
+AActor* UActorComponent::GetOwner() const
+{
+	return Owner;
+}

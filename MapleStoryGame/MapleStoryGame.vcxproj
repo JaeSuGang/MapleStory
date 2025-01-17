@@ -147,6 +147,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actions\BP_TakeDamageAction.cpp" />
+    <ClCompile Include="Private\Actors\Monsters\BP_Cleaner.cpp" />
+    <ClCompile Include="Private\Actions\BP_ProneAction.cpp" />
     <ClCompile Include="Private\Actors\NPCs\NPCBase.cpp" />
     <ClCompile Include="Private\Components\MapleCameraComponent.cpp" />
     <ClCompile Include="Private\Actors\Characters\BP_WindBreaker.cpp" />
@@ -164,14 +167,11 @@
     <ClCompile Include="Private\Actors\FootholdBase.cpp" />
     <ClCompile Include="Private\Actors\ObjBase.cpp" />
     <ClCompile Include="Private\Levels\MapBase.cpp" />
-    <ClCompile Include="Private\Actors\BP_OrangeMushroom.cpp" />
     <ClCompile Include="Private\Actors\Monsters\MobBase.cpp" />
     <ClCompile Include="Private\Actors\BP_TestCube.cpp" />
-    <ClCompile Include="Private\Actors\BP_TestFloor.cpp" />
     <ClCompile Include="Private\Actors\BP_TestSkill2.cpp" />
     <ClCompile Include="Private\Actors\BP_TestSkill.cpp" />
     <ClCompile Include="Private\DebugSubsystem\MapleStoryDebugSubsystem.cpp" />
-    <ClCompile Include="Private\Actors\BP_TestActor.cpp" />
     <ClCompile Include="Private\MainGameInstance\MainGameInstance.cpp" />
     <ClCompile Include="Private\EntryPoint.cpp" />
     <ClCompile Include="Private\GamePch.cpp">
@@ -183,6 +183,9 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actions\BP_TakeDamageAction.h" />
+    <ClInclude Include="Public\Actors\Monsters\BP_Cleaner.h" />
+    <ClInclude Include="Public\Actions\BP_ProneAction.h" />
     <ClInclude Include="Public\Actors\NPCs\NPCBase.h" />
     <ClInclude Include="Public\Components\MapleCameraComponent.h" />
     <ClInclude Include="Public\Actors\Characters\BP_WindBreaker.h" />
@@ -200,14 +203,11 @@
     <ClInclude Include="Public\Actors\FootholdBase.h" />
     <ClInclude Include="Public\Actors\ObjBase.h" />
     <ClInclude Include="Public\Levels\MapBase.h" />
-    <ClInclude Include="Public\Actors\BP_OrangeMushroom.h" />
     <ClInclude Include="Public\Actors\Monsters\MobBase.h" />
     <ClInclude Include="Public\Actors\BP_TestCube.h" />
-    <ClInclude Include="Public\Actors\BP_TestFloor.h" />
     <ClInclude Include="Public\Actors\BP_TestSkill2.h" />
     <ClInclude Include="Public\Actors\BP_TestSkill.h" />
     <ClInclude Include="Public\DebugSubsystem\MapleStoryDebugSubsystem.h" />
-    <ClInclude Include="Public\Actors\BP_TestActor.h" />
     <ClInclude Include="Public\GameDefine.h" />
     <ClInclude Include="Public\MainGameInstance\MainGameInstance.h" />
     <ClInclude Include="Public\GamePch.h" />

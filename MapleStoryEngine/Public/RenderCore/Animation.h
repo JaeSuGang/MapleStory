@@ -11,6 +11,7 @@ enum class EAnimationName
 	Idle,
 	Walk,
 	Jump,
+	Prone,
 	SwingT1,
 	Screen
 };

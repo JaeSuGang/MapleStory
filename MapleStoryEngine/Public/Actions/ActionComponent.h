@@ -1,6 +1,10 @@
 #pragma once
 #include "EnginePch.h"
 #include "ActorComponent/ActorComponent.h"
+#include "Engine/Engine.h"
+#include "GameInstance/GameInstance.h"
+#include "GameplayTags/GameplayTagsManager.h"
+#include "Actions/GameplayAction.h"
 
 struct FGameplayTag;
 
@@ -22,6 +26,27 @@ public:
 	ENGINE_API void StartActionByName(AActor* Instigator, string Name);
 
 	ENGINE_API void StartActionByTag(AActor* Instigator, FGameplayTag& ActionTag);
+
+	/* 사용시 nullptr 검사후 사용 */
+	template <typename T>
+	T* GetAction()
+	{
+		static_assert(std::is_base_of<UGameplayAction, T>::value);
+
+		UGameplayAction* Action = static_cast<UGameplayAction*>(new T{});
+
+		for (shared_ptr<UGameplayAction>& LoopAction : Actions)
+		{
+			if (LoopAction->Tag.ID == Action->Tag.ID)
+			{
+				delete Action;
+				return LoopAction.get();
+			}
+		}
+
+		delete Action;
+		return nullptr;
+	}
 
 	template <typename T>
 	T* AddAction()

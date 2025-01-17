@@ -15,6 +15,8 @@ public:
 public:
 	ENGINE_API void SetOwner(AActor* pOwner);
 
+	ENGINE_API AActor* GetOwner() const;
+
 protected:
 	AActor* Owner;
 };

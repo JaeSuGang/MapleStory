@@ -2,7 +2,7 @@
 #include "Levels/TestLevel.h"
 #include "Levels/MapBase.h"
 #include "World/World.h"
-#include "Actors/Characters/CharacterBase.h"
+#include "Actors/Characters/BP_WindBreaker.h"
 
 void UTestLevel::BeginPlay()
 {
@@ -10,7 +10,7 @@ void UTestLevel::BeginPlay()
 
 	this->LoadXMLToMap("Resources\\XMLs\\Map.Map.Map4.450003000.img.xml", "Lacheln.img.xml");
 
-	MainActor = GetWorld()->SpawnActor<ACharacterBase>();
+	MainActor = GetWorld()->SpawnActor<BP_WindBreaker>();
 }
 
 void UTestLevel::Tick(float fDeltaTime)

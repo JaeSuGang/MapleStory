@@ -31,13 +31,23 @@ bool UPhysicsComponent::GetIsGrounded()
 	return b2Shape_GetContactCapacity(B2FootID) ? true : false;
 }
 
+void UPhysicsComponent::AddYPosition(float _y)
+{
+	b2Vec2 pos = b2Body_GetPosition(B2BodyID);
+	pos.y += _y * PIXEL_TO_METER_CONSTANT;
+
+	b2Rot rot = b2Body_GetRotation(B2BodyID);
+
+	b2Body_SetTransform(B2BodyID, pos, rot);
+}
+
 void UPhysicsComponent::AddXVelocity(float _x)
 {
 	float fDeltaTime = GEngine->TimeSubsystem->GetDeltaTime();
 
 	b2Vec2 Velocity = b2Body_GetLinearVelocity(B2BodyID);
 
-	Velocity.x += _x;
+	Velocity.x += _x * PIXEL_TO_METER_CONSTANT;
 
 	b2Body_SetLinearVelocity(B2BodyID, Velocity);
 }
@@ -48,7 +58,7 @@ void UPhysicsComponent::AddYVelocity(float _y)
 
 	b2Vec2 Velocity = b2Body_GetLinearVelocity(B2BodyID);
 
-	Velocity.y += _y;
+	Velocity.y += _y * PIXEL_TO_METER_CONSTANT;
 
 	b2Body_SetLinearVelocity(B2BodyID, Velocity);
 }
@@ -57,14 +67,14 @@ FVector3 UPhysicsComponent::GetVelocity() const
 {
 	b2Vec2 Velocity = b2Body_GetLinearVelocity(B2BodyID);
 
-	return { Velocity.x, Velocity.y, 0.0f };
+	return { Velocity.x * METER_TO_PIXEL_CONSTANT, Velocity.y * METER_TO_PIXEL_CONSTANT, 0.0f };
 }
 
 void UPhysicsComponent::SetXVelocity(float _x)
 {
 	b2Vec2 Velocity = b2Body_GetLinearVelocity(B2BodyID);
 
-	Velocity.x = _x;
+	Velocity.x = _x * PIXEL_TO_METER_CONSTANT;
 
 	b2Body_SetLinearVelocity(B2BodyID, Velocity);
 }
@@ -94,7 +104,7 @@ void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float
 	ChainDef.points = VecPoints;
 	ChainDef.count = 4;
 	ChainDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
-	ChainDef.filter.maskBits = MOB_COLLISION_FLAG;
+	ChainDef.filter.maskBits = MOB_FOOT_COLLISION_FLAG;
 
 	ShapeDef.friction = 0.7f;
 
@@ -103,77 +113,6 @@ void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float
 	b2CreateChain(B2BodyID, &ChainDef);
 }
 
-void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight, int nCollisionFlag)
-{
-	FTransform OwnerTransform = Owner->GetTransform();
-	b2WorldId B2WorldID = PhysicsSubsystem->B2WorldID;
-
-	b2BodyDef BodyDef = b2DefaultBodyDef();
-
-	BodyDef.type = b2_dynamicBody;
-	BodyDef.gravityScale = 1;
-	BodyDef.linearDamping = 0.0f;
-	BodyDef.position.x = OwnerTransform.Position.x * PIXEL_TO_METER_CONSTANT;
-	BodyDef.position.y = OwnerTransform.Position.y * PIXEL_TO_METER_CONSTANT;
-
-	this->B2BodyID = b2CreateBody(B2WorldID, &BodyDef);
-
-	b2Polygon DynamicBox = b2MakeBox(fWidth * PIXEL_TO_METER_CONSTANT / 2.0f, fHeight * PIXEL_TO_METER_CONSTANT / 2.0f);
-	b2ShapeDef ShapeDef = b2DefaultShapeDef();
-	ShapeDef.density = 1.0f;
-	ShapeDef.friction = 0.7f;
-
-	switch (nCollisionFlag)
-	{
-	case FOOTHOLD_COLLISION_FLAG:
-		ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
-		ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
-		break;
-
-	case MOB_COLLISION_FLAG:
-		ShapeDef.filter.categoryBits = MOB_COLLISION_FLAG;
-		ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
-		break;
-	default:
-		break;
-	}
-
-	b2CreatePolygonShape(B2BodyID, &ShapeDef, &DynamicBox);
-}
-
-void UPhysicsComponent::InitializeAsStatic(float fWidth, float fHeight, int nCollisionFlag)
-{
-	FTransform OwnerTransform = Owner->GetTransform();
-	b2WorldId B2WorldID = PhysicsSubsystem->B2WorldID;
-
-	b2BodyDef BodyDef = b2DefaultBodyDef();
-
-	BodyDef.type = b2_staticBody;
-	BodyDef.position.x = OwnerTransform.Position.x * PIXEL_TO_METER_CONSTANT;
-	BodyDef.position.y = OwnerTransform.Position.y * PIXEL_TO_METER_CONSTANT;
-
-	this->B2BodyID = b2CreateBody(B2WorldID, &BodyDef);
-
-	b2Polygon Box = b2MakeBox(fWidth * PIXEL_TO_METER_CONSTANT / 2.0f, fHeight * PIXEL_TO_METER_CONSTANT / 2.0f);
-	b2ShapeDef ShapeDef = b2DefaultShapeDef();
-
-	switch (nCollisionFlag)
-	{
-	case FOOTHOLD_COLLISION_FLAG:
-		ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
-		ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
-		break;
-
-	case MOB_COLLISION_FLAG:
-		ShapeDef.filter.categoryBits = MOB_COLLISION_FLAG;
-		ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
-		break;
-	default:
-		break;
-	}
-
-	b2CreatePolygonShape(B2BodyID, &ShapeDef, &Box);
-}
 
 void UPhysicsComponent::SyncPos()
 {
@@ -207,37 +146,33 @@ void UPhysicsComponent::InitializeBody(b2BodyType _type)
 	BodyDef.linearDamping = 0.0f;
 	BodyDef.position.x = OwnerTransform.Position.x * PIXEL_TO_METER_CONSTANT;
 	BodyDef.position.y = OwnerTransform.Position.y * PIXEL_TO_METER_CONSTANT;
+	BodyDef.userData = this;
 
 	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
 }
 
 void UPhysicsComponent::InitializeHitbox(float fWidth, float fHeight)
 {
+	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
 
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	ShapeDef.density = 0.0f;
+	ShapeDef.friction = 0.0f;
+	ShapeDef.filter.categoryBits = MOB_HITBOX_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = NO_COLLISION_FLAG;
+
+	B2HitboxID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
 }
 
-void UPhysicsComponent::InitializeFootCollider(float fYOffsetFromCenter, int nCollisionFlag)
+void UPhysicsComponent::InitializeFootCollider(float fYOffsetFromCenter)
 {
 	b2Circle Circle = { {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, 1.0f * PIXEL_TO_METER_CONSTANT };
 
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.density = 0.1f;
 	ShapeDef.friction = 0.7f;
-
-	switch (nCollisionFlag)
-	{
-	case FOOTHOLD_COLLISION_FLAG:
-		ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
-		ShapeDef.filter.maskBits = MOB_COLLISION_FLAG;
-		break;
-
-	case MOB_COLLISION_FLAG:
-		ShapeDef.filter.categoryBits = MOB_COLLISION_FLAG;
-		ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
-		break;
-	default:
-		break;
-	}
+	ShapeDef.filter.categoryBits = MOB_FOOT_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
 
 	B2FootID = b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
 }
@@ -251,9 +186,82 @@ void UPhysicsComponent::InitializeNPCFootCollider()
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.density = 0.1f;
 	ShapeDef.friction = 0.7f;
-	ShapeDef.filter.categoryBits = MOB_COLLISION_FLAG;
+	ShapeDef.filter.categoryBits = MOB_FOOT_COLLISION_FLAG;
 	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
 
 	B2FootID = b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
 }
 
+/* Obsolete Codes
+void UPhysicsComponent::InitializeAsDynamicRigidBody(float fWidth, float fHeight, int nCollisionFlag)
+{
+	FTransform OwnerTransform = Owner->GetTransform();
+	b2WorldId B2WorldID = PhysicsSubsystem->B2WorldID;
+
+	b2BodyDef BodyDef = b2DefaultBodyDef();
+
+	BodyDef.type = b2_dynamicBody;
+	BodyDef.gravityScale = 1;
+	BodyDef.linearDamping = 0.0f;
+	BodyDef.position.x = OwnerTransform.Position.x * PIXEL_TO_METER_CONSTANT;
+	BodyDef.position.y = OwnerTransform.Position.y * PIXEL_TO_METER_CONSTANT;
+
+	this->B2BodyID = b2CreateBody(B2WorldID, &BodyDef);
+
+	b2Polygon DynamicBox = b2MakeBox(fWidth * PIXEL_TO_METER_CONSTANT / 2.0f, fHeight * PIXEL_TO_METER_CONSTANT / 2.0f);
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	ShapeDef.density = 1.0f;
+	ShapeDef.friction = 0.7f;
+
+	switch (nCollisionFlag)
+	{
+	case FOOTHOLD_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = MOB_FOOT_COLLISION_FLAG;
+		break;
+
+	case MOB_FOOT_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = MOB_FOOT_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
+		break;
+	default:
+		break;
+	}
+
+	b2CreatePolygonShape(B2BodyID, &ShapeDef, &DynamicBox);
+}
+
+void UPhysicsComponent::InitializeAsStatic(float fWidth, float fHeight, int nCollisionFlag)
+{
+	FTransform OwnerTransform = Owner->GetTransform();
+	b2WorldId B2WorldID = PhysicsSubsystem->B2WorldID;
+
+	b2BodyDef BodyDef = b2DefaultBodyDef();
+
+	BodyDef.type = b2_staticBody;
+	BodyDef.position.x = OwnerTransform.Position.x * PIXEL_TO_METER_CONSTANT;
+	BodyDef.position.y = OwnerTransform.Position.y * PIXEL_TO_METER_CONSTANT;
+
+	this->B2BodyID = b2CreateBody(B2WorldID, &BodyDef);
+
+	b2Polygon Box = b2MakeBox(fWidth * PIXEL_TO_METER_CONSTANT / 2.0f, fHeight * PIXEL_TO_METER_CONSTANT / 2.0f);
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+
+	switch (nCollisionFlag)
+	{
+	case FOOTHOLD_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = MOB_FOOT_COLLISION_FLAG;
+		break;
+
+	case MOB_FOOT_COLLISION_FLAG:
+		ShapeDef.filter.categoryBits = MOB_FOOT_COLLISION_FLAG;
+		ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
+		break;
+	default:
+		break;
+	}
+
+	b2CreatePolygonShape(B2BodyID, &ShapeDef, &Box);
+}
+*/

@@ -12,10 +12,9 @@
 #include "Attributes/AttributeComponent.h"
 #include "GameplayTags/GameplayTagsManager.h"
 #include "Levels/TestLevel.h"
-#include "Actors/BP_OrangeMushroom.h"
+#include "Actors/Monsters/BP_Cleaner.h"
 #include "Actors/BP_TestSkill.h"
 #include "Actors/BP_TestSkill2.h"
-#include "Actors/BP_TestFloor.h"
 #include "Actors/BP_TestCube.h"
 
 
@@ -51,25 +50,13 @@ void UMapleStoryDebugSubsystem::CustomCode()
 	}
 
 	ImGui::SeparatorText("Actor");
-	if (ImGui::Button("Spawn Floor"))
-	{
-		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestFloor>();
-		URenderComponent* RenderComponent = Actor->GetComponentByClass<URenderComponent>();
-		string strMeshName = "Plane";
-		string strTextureName = "Resources\\Textures\\9000404.img.stand11.0.png";
-		RenderComponent->SetMeshIDByName(strMeshName);
-		RenderComponent->SetTextureByName(strTextureName);
-		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
-		RenderComponent->SetBlendMode(0);
-		RenderComponent->SetActorScaleByTextureSize();
-	}
 
 	if (ImGui::Button("Spawn Mob"))
 	{
 		FVector3 Pos = GEngine->RenderSubsystem->GetCamera().Transform.Position;
 		Pos.z = 0.0f;
 
-		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_OrangeMushroom>();
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_Cleaner>();
 		Actor->SetPosition(Pos);
 	}
 

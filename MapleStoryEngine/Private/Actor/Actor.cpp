@@ -44,16 +44,6 @@ void AActor::LateTick(float fDeltaTime)
 
 }
 
-bool AActor::HasTagExact(FGameplayTag& _Tag) const
-{
-	return TagContainer.HasTagExact(_Tag);
-}
-
-bool AActor::HasTagExact(string _Name) const
-{
-	return TagContainer.HasTagExact(_Name);
-}
-
 bool AActor::GetIsTickEnabled() const
 {
 	return IsTickEnabled;

@@ -14,5 +14,8 @@ public:
 	void BeginPlay() override;
 
 protected:
+	void InitTags();
+
+protected:
 };
 

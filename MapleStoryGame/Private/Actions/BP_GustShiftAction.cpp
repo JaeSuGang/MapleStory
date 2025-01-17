@@ -30,7 +30,7 @@ void BP_GustShiftAction::StartAction(AActor* Instigator)
 		Skill1Transform.Rotation.z = 270.0f;
 		Skill2Transform.Rotation.z = 270.0f;
 
-		PhysicsComponent->AddYVelocity(18.0f);
+		PhysicsComponent->AddYVelocity(900.0f);
 	}
 
 	else
@@ -40,12 +40,12 @@ void BP_GustShiftAction::StartAction(AActor* Instigator)
 		Skill1Transform.Rotation = CharacterTransform.Rotation;
 		Skill2Transform.Rotation = CharacterTransform.Rotation;
 
-		PhysicsComponent->AddYVelocity(7.0f);
+		PhysicsComponent->AddYVelocity(350.0f);
 
 		if (bIsLeftDirection)
-			PhysicsComponent->SetXVelocity(-13.0f);
+			PhysicsComponent->SetXVelocity(-650.0f);
 		else
-			PhysicsComponent->SetXVelocity(13.0f);
+			PhysicsComponent->SetXVelocity(650.0f);
 	}
 
 

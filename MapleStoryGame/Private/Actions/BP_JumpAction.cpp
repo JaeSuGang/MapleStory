@@ -6,6 +6,8 @@
 #include "RenderCore/RenderComponent.h"
 #include "RenderCore/RenderSubsystem.h"
 #include "Attributes/AttributeComponent.h"
+#include "Engine/Engine.h"
+#include "Engine/KeyInputSubsystem.h"
 
 BP_JumpAction::BP_JumpAction()
 {
@@ -18,13 +20,30 @@ void BP_JumpAction::StartAction(AActor* Instigator)
 	if (AttributeComponent && AttributeComponent->HasAttributeExact("Status.Falling"))
 		return;
 
-	UPhysicsComponent* PhysicsComponent = Instigator->GetComponentByClass<UPhysicsComponent>();
-	if (PhysicsComponent)
-		PhysicsComponent->AddYVelocity(12.0f);
+	bool bIsDownPressed = GEngine->KeyInputSubsystem->GetKey(VK_DOWN, UKeyInputSubsystem::EKeyState::Triggered);
 
-	URenderComponent* RenderComponent = Instigator->GetComponentByClass<URenderComponent>();
-	if (RenderComponent)
+	if (bIsDownPressed)
 	{
-		RenderComponent->SetCurrentAnimation(EAnimationName::Jump);
+		UPhysicsComponent* PhysicsComponent = Instigator->GetComponentByClass<UPhysicsComponent>();
+		if (PhysicsComponent)
+			PhysicsComponent->AddYPosition(-2.0f);
+
+		URenderComponent* RenderComponent = Instigator->GetComponentByClass<URenderComponent>();
+		if (RenderComponent)
+		{
+			RenderComponent->SetCurrentAnimation(EAnimationName::Jump);
+		}
+	}
+	else
+	{
+		UPhysicsComponent* PhysicsComponent = Instigator->GetComponentByClass<UPhysicsComponent>();
+		if (PhysicsComponent)
+			PhysicsComponent->AddYVelocity(600.0f);
+
+		URenderComponent* RenderComponent = Instigator->GetComponentByClass<URenderComponent>();
+		if (RenderComponent)
+		{
+			RenderComponent->SetCurrentAnimation(EAnimationName::Jump);
+		}
 	}
 }

@@ -9,24 +9,7 @@
 
 UMainGameInstance::UMainGameInstance()
 {
-	GameplayTagsManager->RegisterTag("Action.FairyTurn");
-
-	GameplayTagsManager->RegisterTag("Action.GustShift");
-
-	GameplayTagsManager->RegisterTag("Action.MoveLeft");
-
-	GameplayTagsManager->RegisterTag("Action.MoveRight");
-
-	GameplayTagsManager->RegisterTag("Action.Jump");
-
-	GameplayTagsManager->RegisterTag("Status.Falling");
-
-	GameplayTagsManager->RegisterTag("Status.Walking");
-
-	GameplayTagsManager->RegisterTag("Status.Attacking.SwingT1");
-
-	GameplayTagsManager->RegisterTag("Status.CanDoubleJump");
-
+	this->InitTags();
 }
 
 void UMainGameInstance::BeginPlay()
@@ -38,5 +21,32 @@ void UMainGameInstance::BeginPlay()
 	GEngine->DebugSubsystem->LateInit();
 
 	GameplaySubsystem->OpenLevel<UTestLevel>();
+}
+
+void UMainGameInstance::InitTags()
+{
+	GameplayTagsManager->RegisterTag("Action.FairyTurn");
+
+	GameplayTagsManager->RegisterTag("Action.GustShift");
+
+	GameplayTagsManager->RegisterTag("Action.MoveLeft");
+
+	GameplayTagsManager->RegisterTag("Action.MoveRight");
+
+	GameplayTagsManager->RegisterTag("Action.Jump");
+
+	GameplayTagsManager->RegisterTag("Action.Prone");
+
+	GameplayTagsManager->RegisterTag("Status.Falling");
+
+	GameplayTagsManager->RegisterTag("Status.Proning");
+
+	GameplayTagsManager->RegisterTag("Status.Walking");
+
+	GameplayTagsManager->RegisterTag("Status.Attacking.SwingT1");
+
+	GameplayTagsManager->RegisterTag("Status.CanDoubleJump");
+
+	GameplayTagsManager->RegisterTag("Value.Hp");
 }
 

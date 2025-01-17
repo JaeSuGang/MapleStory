@@ -7,8 +7,10 @@
 #define PIXEL_TO_METER_CONSTANT 1 / 50
 
 /* Collision Flag */
+#define NO_COLLISION_FLAG 0x1
 #define FOOTHOLD_COLLISION_FLAG 0x2
-#define MOB_COLLISION_FLAG 0x4
+#define MOB_FOOT_COLLISION_FLAG 0x4
+#define MOB_HITBOX_COLLISION_FLAG 0x8
 
 class UPhysicsSubsystem;
 
@@ -30,6 +32,8 @@ public:
 public:
 	ENGINE_API bool GetIsGrounded();
 
+	ENGINE_API void AddYPosition(float _y);
+
 	ENGINE_API void AddXVelocity(float _x);
 
 	ENGINE_API void AddYVelocity(float _y);
@@ -44,15 +48,11 @@ public:
 
 	ENGINE_API void InitializeHitbox(float fWidth, float fHeight);
 
-	ENGINE_API void InitializeFootCollider(float fYOffsetFromCenter, int nCollisionFlag);
+	ENGINE_API void InitializeFootCollider(float fYOffsetFromCenter);
 
 	ENGINE_API void InitializeNPCFootCollider();
 
 	ENGINE_API void InitializeAsFoothold(float x1, float y1, float x2, float y2);
-
-	ENGINE_API void InitializeAsDynamicRigidBody(float fWidth, float fHeight, int nCollisionFlag);
-
-	ENGINE_API void InitializeAsStatic(float fWidth, float fHeight, int nCollisionFlag);
 
 protected:
 	void SyncPos();

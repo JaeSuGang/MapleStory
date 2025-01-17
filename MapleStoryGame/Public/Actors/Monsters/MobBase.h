@@ -5,6 +5,7 @@
 
 class URenderComponent;
 class UPhysicsComponent;
+class UAttributeComponent;
 
 class AMobBase : public AActor
 {
@@ -14,13 +15,25 @@ public:
 	/* 생성자와 오버라이드 */
 	AMobBase();
 
-	virtual void BeginPlay() = 0;
+	void BeginPlay() override;
 
-	virtual void Tick(float fDeltaTime) = 0;
+	void Tick(float fDeltaTime) override;
+
+	virtual void SetAttributes() = 0;
+
+	virtual void SetTexture() = 0;
+
+public:
+
+protected:
+	void InitPhysics();
+
 
 public:
 	URenderComponent* RenderComponent;
 
 	UPhysicsComponent* PhysicsComponent;
+
+	UAttributeComponent* AttributeComponent;
 };
 

@@ -34,6 +34,8 @@ public:
 
 	ENGINE_API void AddAttribute(string _TagName);
 
+	ENGINE_API void AddAttribute(string _TagName, float _val);
+
 	ENGINE_API void RemoveAttribute(FGameplayTag _Tag);
 
 	ENGINE_API void RemoveAttribute(string _TagName);

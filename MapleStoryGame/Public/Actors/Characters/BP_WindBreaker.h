@@ -3,5 +3,14 @@
 
 class BP_WindBreaker : public ACharacterBase
 {
+	typedef ACharacterBase Super;
+
+public:
+	void InitActions() override;
+
+	void InitAnimations() override;
+
+	void InitTextureAndPhysics() override;
+
 };
 

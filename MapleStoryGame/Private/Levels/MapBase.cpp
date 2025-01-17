@@ -663,7 +663,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 					if (strLifeType == "n")
 					{
 						string strImagePath = { RESOURCES_FOLDER_NAME };
-						strImagePath += "\\Textures\\Mobs\\" + strLifeID + ".img";
+						strImagePath += "\\Textures\\Npcs\\" + strLifeID + ".img";
 						strImagePath += "\\" + strLifeID + ".img.stand.0.png";
 
 						tinyxml2::XMLDocument NpcDocument;
