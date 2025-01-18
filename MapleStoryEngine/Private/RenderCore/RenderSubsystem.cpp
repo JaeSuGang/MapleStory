@@ -12,6 +12,8 @@
 #include "RenderCore/RenderComponent.h"
 #include "RenderCore/Widget.h"
 #include "IMGUI/imgui.h"
+#include "Engine/TimeSubsystem.h"
+#include "Engine/KeyInputSubsystem.h"
 
 URenderSubsystem::URenderSubsystem()
 	:
@@ -227,6 +229,28 @@ void URenderSubsystem::InitSwapChain()
 	}
 }
 
+void URenderSubsystem::MoveCamera(FVector3 _MoveVector)
+{
+	float fDeltaTime = GEngine->TimeSubsystem->GetDeltaTime();
+
+	DirectX::XMVECTOR MoveXMVector{ _MoveVector.x * fDeltaTime, _MoveVector.y * fDeltaTime, _MoveVector.z * fDeltaTime, 1.0f };
+
+	DirectX::XMMATRIX TranslationMatrix = DirectX::XMMatrixTranslationFromVector(MoveXMVector);
+
+	DirectX::XMMATRIX RotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(
+		DirectX::XMConvertToRadians(Camera.Transform.Rotation.x),
+		DirectX::XMConvertToRadians(Camera.Transform.Rotation.y),
+		DirectX::XMConvertToRadians(Camera.Transform.Rotation.z)
+	);
+	DirectX::XMMATRIX FinalMatrix = TranslationMatrix * RotationMatrix;
+	DirectX::XMVECTOR FinalMoveVector = FinalMatrix.r[3];
+
+	Camera.Transform.Position.x += FinalMoveVector.m128_f32[0];
+	Camera.Transform.Position.y += FinalMoveVector.m128_f32[1];
+	Camera.Transform.Position.z += FinalMoveVector.m128_f32[2];
+
+}
+
 void URenderSubsystem::SetMissingTexture()
 {
 	this->MissingTextureTextureID = GEngine->RenderSubsystem->GetTextureIDByName(MISSING_TEXTURE_PATH);
@@ -415,6 +439,28 @@ void URenderSubsystem::ReleaseTextures()
 	Textures.clear();
 	StringMappedTextureIDs.clear();
 	this->SetMissingTexture();
+}
+
+void URenderSubsystem::RotateCameraByMousePosition()
+{
+	POINT CurrentMousePosition = GEngine->KeyInputSubsystem->GetMousePosition();
+
+	if (LastMousePosition.x == 0 && LastMousePosition.y == 0)
+	{
+		LastMousePosition = CurrentMousePosition;
+		return;
+	}
+
+	FVector3 VectorDiff{ CurrentMousePosition.x - LastMousePosition.x, CurrentMousePosition.y - LastMousePosition.y };
+
+	Camera.Transform.Rotation.y += VectorDiff.x;
+	Camera.Transform.Rotation.x += VectorDiff.y;
+	LastMousePosition = CurrentMousePosition;
+}
+
+void URenderSubsystem::ResetCameraMousePosition()
+{
+	LastMousePosition = { 0, 0 };
 }
 
 FCamera& URenderSubsystem::GetCamera()

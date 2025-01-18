@@ -56,6 +56,12 @@ public:
 public:
 	ENGINE_API void ReleaseTextures();
 
+	ENGINE_API void RotateCameraByMousePosition();
+
+	ENGINE_API void ResetCameraMousePosition();
+
+	ENGINE_API void MoveCamera(FVector3 _MoveVector);
+
 	ENGINE_API FCamera& GetCamera();
 
 	void RenderWidgets(float fDeltaTime);
@@ -73,6 +79,7 @@ public:
 	void InitSwapChain();
 
 public:
+
 	void SetMissingTexture();
 
 	int GetPixelShaderIDByName(string strKey);
@@ -133,6 +140,7 @@ private:
 	unordered_map<string, int> StringMappedTextureIDs;
 	vector<shared_ptr<UTexture>> Textures;
 	int MissingTextureTextureID;
+
 	/* Vertex Buffers */
 	unordered_map<string, int> StringMappedVertexBufferIDs;
 	vector<ComPtr<ID3D11Buffer>> VertexBuffers;
@@ -152,6 +160,7 @@ public:
 private:
 	/* 카메라 설정 */
 	FCamera Camera;
+	POINT LastMousePosition;
 
 	/* Depth Stencil State */
 	ComPtr<ID3D11DepthStencilState> DefaultDepthStencilState;

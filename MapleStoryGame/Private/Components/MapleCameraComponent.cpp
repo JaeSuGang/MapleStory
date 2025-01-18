@@ -14,6 +14,12 @@ void UMapleCameraComponent::TickComponent(float fDeltaTime)
 	{
 		FCamera& Camera = GEngine->RenderSubsystem->GetCamera();
 
+		if (Camera.IsFreeMode)
+			return;
+
+		Camera.Transform.Rotation = { 0.0f, 0.0f, 0.0f };
+		Camera.Transform.Position.z = -450.0f;
+
 		FVector3 ActorPos = Owner->GetTransform().Position;
 		FVector3 CameraPos = Camera.Transform.Position;
 		FVector3 PosOffset = { 0.0f, 130.0f, 0.0f };

@@ -16,6 +16,7 @@
 #include "Actors/BP_TestSkill.h"
 #include "Actors/BP_TestSkill2.h"
 #include "Actors/BP_TestCube.h"
+#include "Engine/KeyInputSubsystem.h"
 
 
 UMapleStoryDebugSubsystem::UMapleStoryDebugSubsystem()
@@ -33,6 +34,8 @@ void UMapleStoryDebugSubsystem::CustomCode()
 
 void UMapleStoryDebugSubsystem::CustomInit()
 {
+	this->BindFreeCameraKeys();
+
 	this->SetupUnrealStyleImGui();
 }
 
@@ -64,6 +67,23 @@ void UMapleStoryDebugSubsystem::PlayerTab()
 	}
 
 	ImGui::End();
+}
+
+void UMapleStoryDebugSubsystem::ToggleFreeCamera()
+{
+	FCamera& Camera = GEngine->RenderSubsystem->GetCamera();
+	if (Camera.IsFreeMode)
+	{
+		Camera.IsFreeMode = false;
+		GEngine->KeyInputSubsystem->SetCurrentMappingContext(UKeyInputSubsystem::EInputMappingContext::Game);
+		Camera.IsPerspectiveProjection = false;
+	}
+	else
+	{
+		Camera.IsFreeMode = true;
+		GEngine->KeyInputSubsystem->SetCurrentMappingContext(UKeyInputSubsystem::EInputMappingContext::Debug);
+		Camera.IsPerspectiveProjection = true;
+	}
 }
 
 void UMapleStoryDebugSubsystem::SetupUnrealStyleImGui()
@@ -101,6 +121,19 @@ void UMapleStoryDebugSubsystem::SetupUnrealStyleImGui()
 	style.Colors[ImGuiCol_TextSelectedBg] = ImVec4(0.25f, 0.40f, 0.40f, 1.00f);
 }
 
+void UMapleStoryDebugSubsystem::BindFreeCameraKeys()
+{
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Debug, 'W', UKeyInputSubsystem::EKeyState::Triggered, []() {GEngine->RenderSubsystem->MoveCamera({0.0f, 0.0f, 500.0f}); });
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Debug, 'A', UKeyInputSubsystem::EKeyState::Triggered, []() {GEngine->RenderSubsystem->MoveCamera({ -500.0f, 0.0f, 0.0f }); });
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Debug, 'S', UKeyInputSubsystem::EKeyState::Triggered, []() {GEngine->RenderSubsystem->MoveCamera({0.0f, 0.0f, -500.0f }); });
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Debug, 'D', UKeyInputSubsystem::EKeyState::Triggered, []() {GEngine->RenderSubsystem->MoveCamera({ 500.0f, 0.0f, 0.0f }); });
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Debug, 'Q', UKeyInputSubsystem::EKeyState::Triggered, []() {GEngine->RenderSubsystem->MoveCamera({0.0f, -500.0f, 0.0f }); });
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Debug, 'E', UKeyInputSubsystem::EKeyState::Triggered, []() {GEngine->RenderSubsystem->MoveCamera({0.0f, 500.0f, 0.0f }); });
+
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Debug, VK_RBUTTON, UKeyInputSubsystem::EKeyState::Triggered, []() { GEngine->RenderSubsystem->RotateCameraByMousePosition(); });
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Debug, VK_RBUTTON, UKeyInputSubsystem::EKeyState::KeyUp, []() { GEngine->RenderSubsystem->ResetCameraMousePosition(); });
+}
+
 void UMapleStoryDebugSubsystem::MainDebugTab()
 {
 	ImGuiIO& io = ImGui::GetIO();
@@ -112,7 +145,8 @@ void UMapleStoryDebugSubsystem::MainDebugTab()
 	ImGui::Text("Screen Size x: %.0f, y: %.0f", io.DisplaySize.x, io.DisplaySize.y);
 
 	ImGui::SeparatorText("Camera");
-	ImGui::Checkbox("Perspective View", &GEngine->RenderSubsystem->GetCamera().IsPerspectiveProjection);
+	if (ImGui::Button("Toggle Free Camera"))
+		this->ToggleFreeCamera();
 	ImGui::Checkbox("Wireframe", &GEngine->RenderSubsystem->GetCamera().IsWireFrame);
 	ImGui::InputInt("Debug Layer", &GEngine->RenderSubsystem->GetCamera().DebugLayerLevel, 1);
 	ImGui::DragFloat("FOV", &GEngine->RenderSubsystem->GetCamera().FOV, 1);

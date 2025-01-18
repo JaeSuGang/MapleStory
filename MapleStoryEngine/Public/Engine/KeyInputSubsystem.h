@@ -1,6 +1,7 @@
 #pragma once
 #include "EnginePch.h"
 #include "Engine/EngineSubsystem.h"
+#include "Math/Vector3.h"
 
 class UKeyInputSubsystem : public UEngineSubsystem
 {
@@ -37,6 +38,8 @@ public:
 	void LateInit() override;
 
 public:
+	ENGINE_API POINT GetMousePosition() const;
+
 	ENGINE_API bool GetKey(int VKeyCode, EKeyState _KeyState) const;
 
 	ENGINE_API void SetCurrentMappingContext(EInputMappingContext _Context);

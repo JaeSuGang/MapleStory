@@ -1,5 +1,7 @@
 #include "EnginePch.h"
 #include "Engine/KeyInputSubsystem.h"
+#include "Engine/WindowSubsystem.h"
+#include "Engine/Engine.h"
 
 UKeyInputSubsystem::UKeyInputSubsystem()
 {
@@ -58,6 +60,15 @@ void UKeyInputSubsystem::LateInit()
 
 }
 
+POINT UKeyInputSubsystem::GetMousePosition() const
+{
+	POINT MousePos{};
+	GetCursorPos(&MousePos);
+	ScreenToClient(GEngine->WindowSubsystem->GetWindowHandle(), &MousePos);
+
+	return MousePos;
+}
+
 bool UKeyInputSubsystem::GetKey(int VKeyCode, EKeyState _KeyState) const
 {
 	switch (_KeyState)
@@ -93,5 +104,5 @@ void UKeyInputSubsystem::ClearKeys(EInputMappingContext _Context)
 
 void UKeyInputSubsystem::BindKey(EInputMappingContext _Context, int VKeyCode, EKeyState _KeyState, std::function<void()> _Function)
 {
-	InputMappingContexts[CurrentInputMappingContext].emplace_back(VKeyCode, _KeyState, _Function);
+	InputMappingContexts[_Context].emplace_back(VKeyCode, _KeyState, _Function);
 }

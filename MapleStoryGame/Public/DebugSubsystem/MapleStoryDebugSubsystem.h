@@ -12,10 +12,15 @@ public:
 	void CustomInit() override;
 
 protected:
-	void SetupUnrealStyleImGui();
+	void BindFreeCameraKeys();
 
 	void MainDebugTab();
 
 	void PlayerTab();
+
+	void SetupUnrealStyleImGui();
+
+protected:
+	void ToggleFreeCamera();
 };
 

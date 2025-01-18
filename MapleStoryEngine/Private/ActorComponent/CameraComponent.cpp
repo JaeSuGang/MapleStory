@@ -18,6 +18,9 @@ void UCameraComponent::TickComponent(float fDeltaTime)
 	{
 		FCamera& Camera = GEngine->RenderSubsystem->GetCamera();
 
+		if (Camera.IsFreeMode)
+			return;
+
 		FVector3 ActorPos = Owner->GetTransform().Position;
 		FVector3 CameraPos = Camera.Transform.Position;
 		FVector3 PosOffset = {0.0f, 130.0f, 0.0f};
