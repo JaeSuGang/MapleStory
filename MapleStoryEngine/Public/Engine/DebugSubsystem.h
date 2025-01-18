@@ -7,6 +7,8 @@ class URenderSubsystem;
 class UWindowSubsystem;
 struct ImGuiIO;
 
+typedef unsigned int ImGuiID;
+
 /* WindowSystem과 RenderSystem에 종속적 */
 class UDebugSubsystem : public UEngineSubsystem
 {
@@ -16,6 +18,7 @@ public:
 	ENGINE_API void LateInit() override;
 	ENGINE_API void Tick(float fDeltaTime);
 	ENGINE_API virtual void CustomCode() = 0;
+	ENGINE_API virtual void CustomInit() = 0;
 
 public:
 	void Render();
@@ -34,6 +37,10 @@ protected:
 	UWindowSubsystem* WindowSubsystem;
 
 	URenderSubsystem* RenderSubsystem;
+
+	float FPS;
+
+	float FPSRefreshTime;
 
 };
 

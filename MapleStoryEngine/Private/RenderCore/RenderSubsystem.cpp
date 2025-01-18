@@ -465,7 +465,13 @@ void URenderSubsystem::Render(float fDeltaTime)
 	DeviceContext->IASetInputLayout(InputLayout.Get());
 	DeviceContext->VSSetShader(VertexShader.Get(), nullptr, 0);
 	DeviceContext->RSSetViewports(1, &ViewPortInfo);
-	DeviceContext->RSSetState(Camera.IsWireFrame ? RasterizerWireframeState.Get() : RasterizerDefaultState.Get());
+
+	if (Camera.IsWireFrame)
+		DeviceContext->RSSetState(RasterizerWireframeState.Get());
+
+	else
+		DeviceContext->RSSetState(RasterizerDefaultState.Get());
+
 	DeviceContext->OMSetBlendState(DefaultBlendState.Get(), nullptr, 0xFFFFFFFF);
 	DeviceContext->OMSetDepthStencilState(DefaultDepthStencilState.Get(), 1);
 
@@ -539,7 +545,15 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 						nPSShaderID = WireframePixelShaderID;
 
 					else
-						nPSShaderID = RenderComponent->Material->PSShaderID;
+					{
+						if (i >= Camera.DebugLayerLevel)
+							nPSShaderID = GreenOutlinePixelShaderID;
+
+						else
+							nPSShaderID = RenderComponent->Material->PSShaderID;
+					}
+
+
 					DeviceContext->PSSetShader(PixelShaders[nPSShaderID].Get(), nullptr, 0);
 					DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 					DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
@@ -575,7 +589,13 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 			nPSShaderID = WireframePixelShaderID;
 
 		else
-			nPSShaderID = RenderComponent->Material->PSShaderID;
+		{
+			if (7 >= Camera.DebugLayerLevel)
+				nPSShaderID = GreenOutlinePixelShaderID;
+
+			else
+				nPSShaderID = RenderComponent->Material->PSShaderID;
+		}
 		DeviceContext->PSSetShader(PixelShaders[nPSShaderID].Get(), nullptr, 0);
 		DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 		DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
@@ -784,8 +804,10 @@ void URenderSubsystem::CreatePixelShaders(string strShaderPath)
 	{
 		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
 	}
+	int nPixelShaderID = (int)PixelShaders.size();
 	StringMappedIndexPixelShaderIDs.insert(std::make_pair(BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
 	PixelShaders.push_back(GreenOutlinedPixelShader);
+	this->GreenOutlinePixelShaderID = nPixelShaderID;
 	}
 
 	/* Wireframe Pixel Shader »ý¼º */

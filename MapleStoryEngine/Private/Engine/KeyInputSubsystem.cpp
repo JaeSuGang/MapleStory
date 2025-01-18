@@ -3,8 +3,8 @@
 
 UKeyInputSubsystem::UKeyInputSubsystem()
 {
+	CurrentInputMappingContext = EInputMappingContext::Game;
 	VKStates.resize(VK_F12 + 1);
-	InputMappingContexts.resize(1);
 }
 
 void UKeyInputSubsystem::Tick(float fDeltaTime)
@@ -19,7 +19,7 @@ void UKeyInputSubsystem::Tick(float fDeltaTime)
 		/* 키가 눌릴 때 바로 */
 		if (__KeyState != 0x0000 && VKStates[i] == 0x0000)
 		{
-			for (FKeyEvent& KeyEvent : InputMappingContexts[CurrentInputMappingContextID])
+			for (FKeyEvent& KeyEvent : InputMappingContexts[CurrentInputMappingContext])
 			{
 				if (KeyEvent.KeyCode == i && KeyEvent.KeyState == EKeyState::KeyDown)
 					KeyEvent.Function();
@@ -29,7 +29,7 @@ void UKeyInputSubsystem::Tick(float fDeltaTime)
 		/* 키를 누르고 있을 때 */
 		if (VKStates[i] != 0x0000 && __KeyState != 0x0000)
 		{
-			for (FKeyEvent& KeyEvent : InputMappingContexts[CurrentInputMappingContextID])
+			for (FKeyEvent& KeyEvent : InputMappingContexts[CurrentInputMappingContext])
 			{
 				if (KeyEvent.KeyCode == i && KeyEvent.KeyState == EKeyState::Triggered)
 					KeyEvent.Function();
@@ -39,7 +39,7 @@ void UKeyInputSubsystem::Tick(float fDeltaTime)
 		/* 키를 뗐을 때 */
 		if (VKStates[i] != 0x0000 && __KeyState == 0x0000)
 		{
-			for (FKeyEvent& KeyEvent : InputMappingContexts[CurrentInputMappingContextID])
+			for (FKeyEvent& KeyEvent : InputMappingContexts[CurrentInputMappingContext])
 			{
 				if (KeyEvent.KeyCode == i && KeyEvent.KeyState == EKeyState::KeyUp)
 					KeyEvent.Function();
@@ -77,22 +77,21 @@ bool UKeyInputSubsystem::GetKey(int VKeyCode, EKeyState _KeyState) const
 	default:
 		break;
 	}
+
+	return false;
 }
 
-void UKeyInputSubsystem::SetCurrentInputMappingContextID(int nID)
+void UKeyInputSubsystem::SetCurrentMappingContext(EInputMappingContext _Context)
 {
-	CurrentInputMappingContextID = nID;
-
-	if (nID >= InputMappingContexts.size())
-		InputMappingContexts.resize(nID + 1);
+	CurrentInputMappingContext = _Context;
 }
 
-void UKeyInputSubsystem::ClearKeys()
+void UKeyInputSubsystem::ClearKeys(EInputMappingContext _Context)
 {
-	InputMappingContexts[CurrentInputMappingContextID].clear();
+	InputMappingContexts[_Context].clear();
 }
 
-void UKeyInputSubsystem::BindKey(int VKeyCode, EKeyState _KeyState, std::function<void()> _Function)
+void UKeyInputSubsystem::BindKey(EInputMappingContext _Context, int VKeyCode, EKeyState _KeyState, std::function<void()> _Function)
 {
-	InputMappingContexts[CurrentInputMappingContextID].emplace_back(VKeyCode, _KeyState, _Function);
+	InputMappingContexts[CurrentInputMappingContext].emplace_back(VKeyCode, _KeyState, _Function);
 }

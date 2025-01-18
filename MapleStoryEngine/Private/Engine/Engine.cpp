@@ -21,7 +21,13 @@ void UEngine::LateInit()
 }
 
 UEngine::UEngine()
+	:
+	IsDebug{}
 {
+#ifdef _DEBUG
+	IsDebug = true;
+#endif
+
 	bIsLoop = true;
 
 	GEngine = this;
@@ -80,6 +86,11 @@ void UEngine::Tick()
 	if (!bIsLoop)
 		return;
 
+	this->ExecuteNewWorldIfExists();
+
+	if (ActiveWorld.get() == nullptr)
+		return;
+
 	KeyInputSubsystem->Tick(fDeltaTime);
 
 	this->ActiveWorld->ExecutePhysicsTick(fDeltaTime);
@@ -100,6 +111,7 @@ void UEngine::Tick()
 	this->ExecuteActorDestroy();
 
 	this->ExecuteActorBeginPlay();
+
 }
 
 void UEngine::Terminate()
@@ -134,6 +146,17 @@ void UEngine::WorldTick(float fDeltaTime)
 void UEngine::LateTick(float fDeltaTime)
 {
 	ActiveWorld->ExecuteActorLateTick(fDeltaTime);
+}
+
+void UEngine::ExecuteNewWorldIfExists()
+{
+	if (WorldToOpen.size() > 0)
+	{
+		GEngine->ActiveWorld = WorldToOpen[WorldToOpen.size() - 1];
+		GEngine->ActiveWorld->LateInit();
+	}
+
+	WorldToOpen.clear();
 }
 
 void UEngine::ExecuteActorDestroy()

@@ -29,7 +29,7 @@ ACharacterBase::ACharacterBase()
 
 ACharacterBase::~ACharacterBase()
 {
-	GEngine->KeyInputSubsystem->ClearKeys();
+	GEngine->KeyInputSubsystem->ClearKeys(UKeyInputSubsystem::EInputMappingContext::Game);
 }
 
 void ACharacterBase::BeginPlay()
@@ -65,17 +65,17 @@ void ACharacterBase::LateTick(float fDeltaTime)
 
 void ACharacterBase::BindKeys()
 {
-	GEngine->KeyInputSubsystem->BindKey(VK_LEFT, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.MoveLeft" }));
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, VK_LEFT, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.MoveLeft" }));
 
-	GEngine->KeyInputSubsystem->BindKey(VK_RIGHT, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.MoveRight"}));
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, VK_RIGHT, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.MoveRight"}));
 
-	GEngine->KeyInputSubsystem->BindKey(VK_DOWN, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.Prone"}));
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, VK_DOWN, UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.Prone"}));
 
-	GEngine->KeyInputSubsystem->BindKey(VK_SPACE, UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.Jump"}));
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, VK_SPACE, UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.Jump"}));
 
-	GEngine->KeyInputSubsystem->BindKey(VK_SPACE, UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.DoubleJump"}));
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, VK_SPACE, UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.DoubleJump"}));
 
-	GEngine->KeyInputSubsystem->BindKey('S', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.FairyTurn"}));
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'S', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.FairyTurn"}));
 }
 
 void ACharacterBase::DecideAnimation()
@@ -102,11 +102,12 @@ void ACharacterBase::CheckFalling()
 
 	if (bIsGrounded)
 	{
-		AttributeComponent->RemoveAttribute("Status.Falling");
-
 		FVector3 Vel = PhysicsComponent->GetVelocity();
-		if (abs(Vel.y) < 0.01f)
+		if (abs(Vel.y) < 5.0f)
+		{
+			AttributeComponent->RemoveAttribute("Status.Falling");
 			AttributeComponent->AddAttribute("Status.CanDoubleJump");
+		}
 	}
 	else
 		AttributeComponent->AddAttribute("Status.Falling");

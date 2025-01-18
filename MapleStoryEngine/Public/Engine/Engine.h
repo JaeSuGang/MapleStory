@@ -40,6 +40,8 @@ public:
 
 	void LateTick(float fDeltaTime);
 
+	void ExecuteNewWorldIfExists();
+
 	void ExecuteActorDestroy();
 
 	void ExecuteActorBeginPlay();
@@ -91,6 +93,8 @@ public:
 
 	UTimeSubsystem* TimeSubsystem;
 
+	bool IsDebug;
+
 private:
 	unordered_map<string, shared_ptr<UEngineSubsystem>> Subsystems;
 
@@ -98,6 +102,7 @@ private:
 
 	shared_ptr<UWorld> ActiveWorld;
 
+	vector<shared_ptr<UWorld>> WorldToOpen;
 
 	bool bIsLoop;
 };

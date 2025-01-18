@@ -7,6 +7,12 @@ class UKeyInputSubsystem : public UEngineSubsystem
 	typedef UEngineSubsystem Super;
 
 public:
+	enum class EInputMappingContext
+	{
+		Debug,
+		Game
+	};
+
 	enum class EKeyState
 	{
 		None,
@@ -33,17 +39,17 @@ public:
 public:
 	ENGINE_API bool GetKey(int VKeyCode, EKeyState _KeyState) const;
 
-	ENGINE_API void SetCurrentInputMappingContextID(int nID);
+	ENGINE_API void SetCurrentMappingContext(EInputMappingContext _Context);
 
-	ENGINE_API void ClearKeys();
+	ENGINE_API void ClearKeys(EInputMappingContext _Context);
 
-	ENGINE_API void BindKey(int VKeyCode, EKeyState _KeyState, std::function<void()> _Function);
+	ENGINE_API void BindKey(EInputMappingContext _Context, int VKeyCode, EKeyState _KeyState, std::function<void()> _Function);
 
 protected:
-	vector<vector<FKeyEvent>> InputMappingContexts;
+	unordered_map<EInputMappingContext, vector<FKeyEvent>> InputMappingContexts;
 
 	vector<unsigned short> VKStates;
 
-	int CurrentInputMappingContextID;
+	EInputMappingContext CurrentInputMappingContext;
 };
 

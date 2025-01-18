@@ -29,7 +29,7 @@ public:
 	void LoadXMLToMap(string strMapPath, string strImgName);
 
 protected:
-	AActor* MainActor;
+	weak_ptr<AActor> MainActor;
 
 	float VRTopInverted;
 	float VRLeft;

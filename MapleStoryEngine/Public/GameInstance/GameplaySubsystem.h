@@ -16,13 +16,13 @@ public:
 	{
 		static_assert(std::is_base_of<ULevel, T>::value);
 
-		GEngine->ActiveWorld = std::make_shared<UWorld>();
+		shared_ptr<UWorld> WorldToOpen = std::make_shared<UWorld>();
 
-		GEngine->ActiveWorld->PersistentLevel = std::static_pointer_cast<ULevel>(std::make_shared<T>());
+		WorldToOpen->PersistentLevel = std::static_pointer_cast<ULevel>(std::make_shared<T>());
 
-		GEngine->ActiveWorld->PersistentLevel->SetWorld(GEngine->ActiveWorld.get());
+		WorldToOpen->PersistentLevel->SetWorld(WorldToOpen.get());
 
-		GEngine->ActiveWorld->LateInit();
+		GEngine->WorldToOpen.push_back(WorldToOpen);
 	}
 
 private:

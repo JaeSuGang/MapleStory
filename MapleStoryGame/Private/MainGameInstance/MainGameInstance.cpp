@@ -16,9 +16,12 @@ void UMainGameInstance::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GEngine->DebugSubsystem = GEngine->CreateSubsystem<UMapleStoryDebugSubsystem>();
+	if (GEngine->IsDebug)
+	{
+		GEngine->DebugSubsystem = GEngine->CreateSubsystem<UMapleStoryDebugSubsystem>();
 
-	GEngine->DebugSubsystem->LateInit();
+		GEngine->DebugSubsystem->LateInit();
+	}
 
 	GameplaySubsystem->OpenLevel<UTestLevel>();
 }

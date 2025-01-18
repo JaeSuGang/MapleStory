@@ -29,7 +29,7 @@ void UMapBase::Tick(float fDeltaTime)
 
 AActor* UMapBase::GetMainActor() const
 {
-	return MainActor;
+	return MainActor.lock().get();
 }
 
 void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)

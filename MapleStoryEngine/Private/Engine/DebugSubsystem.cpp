@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "IMGUI/imgui.h"
+#include "IMGUI/imgui_internal.h"
 #include "IMGUI/imgui_impl_win32.h"
 #include "IMGUI/imgui_impl_dx11.h"
 #include "Engine/Engine.h"
@@ -8,6 +9,7 @@
 #include "RenderCore/RenderSubsystem.h"
 #include "World/World.h"
 #include "Actor/Actor.h"
+#include "Engine/TimeSubsystem.h"
 
 void UDebugSubsystem::Log(string Text, int WarningLevel)
 {
@@ -24,11 +26,19 @@ void UDebugSubsystem::LateInit()
 	RenderSubsystem = Engine->RenderSubsystem;
 
 	InitIMGUI();
+
+	this->CustomInit();
 }
 
 void UDebugSubsystem::Tick(float fDeltaTime)
 {
+	FPSRefreshTime += fDeltaTime;
 
+	if (FPSRefreshTime > 0.1f)
+	{
+		FPSRefreshTime = 0.0f;
+		FPS = GEngine->TimeSubsystem->GetFPS();
+	}
 }
 
 void UDebugSubsystem::Render()
@@ -51,6 +61,12 @@ void UDebugSubsystem::Render()
 		ImGui::UpdatePlatformWindows();
 		ImGui::RenderPlatformWindowsDefault();
 	}
+}
+
+
+void UDebugSubsystem::CustomInit()
+{
+
 }
 
 LRESULT UDebugSubsystem::IMGUIWndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)

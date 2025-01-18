@@ -10,7 +10,7 @@ void UTestLevel::BeginPlay()
 
 	this->LoadXMLToMap("Resources\\XMLs\\Map.Map.Map4.450003000.img.xml", "Lacheln.img.xml");
 
-	MainActor = GetWorld()->SpawnActor<BP_WindBreaker>();
+	MainActor = GetWorld()->SpawnActorReturnShared<BP_WindBreaker>();
 }
 
 void UTestLevel::Tick(float fDeltaTime)

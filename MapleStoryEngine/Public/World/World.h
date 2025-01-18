@@ -59,6 +59,22 @@ public:
 	}
 
 	template <typename T>
+	shared_ptr<T> SpawnActorReturnShared()
+	{
+		static_assert(std::is_base_of<AActor, T>::value);
+
+		shared_ptr<AActor> NewActor{ static_cast<AActor*>(new T{}) };
+
+		NewActor->SetWorld(this);
+
+		PersistentLevel->Actors.push_back(NewActor);
+
+		PersistentLevel->ActorsToBeginPlay.push_back(NewActor.get());
+
+		return std::static_pointer_cast<T>(NewActor);
+	}
+
+	template <typename T>
 	T* CreateDefaultSubobject()
 	{
 		static_assert(std::is_base_of<UWorldSubsystem, T>::value);

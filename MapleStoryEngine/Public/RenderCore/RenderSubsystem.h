@@ -31,8 +31,10 @@ public:
 	float Height;
 	float NearZ;
 	float FarZ;
+	bool IsFreeMode;
 	bool IsPerspectiveProjection;
 	bool IsWireFrame;
+	int DebugLayerLevel = 12;
 };
 
 /* UWindowSubsystem, UDebugSubsystem, UResourceSubsystem에 의존 */
@@ -141,6 +143,7 @@ private:
 	unordered_map<string, int> StringMappedIndexPixelShaderIDs;
 	vector<ComPtr<ID3D11PixelShader>> PixelShaders;
 	int WireframePixelShaderID;
+	int GreenOutlinePixelShaderID;
 
 public:
 	/* 디버그 인터페이스 */
