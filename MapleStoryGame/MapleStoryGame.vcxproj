@@ -169,8 +169,6 @@
     <ClCompile Include="Private\Levels\MapBase.cpp" />
     <ClCompile Include="Private\Actors\Monsters\MobBase.cpp" />
     <ClCompile Include="Private\Actors\BP_TestCube.cpp" />
-    <ClCompile Include="Private\Actors\BP_TestSkill2.cpp" />
-    <ClCompile Include="Private\Actors\BP_TestSkill.cpp" />
     <ClCompile Include="Private\DebugSubsystem\MapleStoryDebugSubsystem.cpp" />
     <ClCompile Include="Private\MainGameInstance\MainGameInstance.cpp" />
     <ClCompile Include="Private\EntryPoint.cpp" />
@@ -205,8 +203,6 @@
     <ClInclude Include="Public\Levels\MapBase.h" />
     <ClInclude Include="Public\Actors\Monsters\MobBase.h" />
     <ClInclude Include="Public\Actors\BP_TestCube.h" />
-    <ClInclude Include="Public\Actors\BP_TestSkill2.h" />
-    <ClInclude Include="Public\Actors\BP_TestSkill.h" />
     <ClInclude Include="Public\DebugSubsystem\MapleStoryDebugSubsystem.h" />
     <ClInclude Include="Public\GameDefine.h" />
     <ClInclude Include="Public\MainGameInstance\MainGameInstance.h" />

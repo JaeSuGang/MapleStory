@@ -26,3 +26,18 @@ void UGameplayAction::StartAction(AActor* Instigator)
 
 }
 
+void UGameplayAction::StartAction(AActor* Instigator, void* _ParameterStruct)
+{
+
+}
+
+void UGameplayAction::StartAction(void* _ParameterStruct)
+{
+
+}
+
+void UGameplayAction::Tick(float fDeltaTime)
+{
+
+}
+

@@ -6,6 +6,7 @@
 class URenderComponent;
 class UPhysicsComponent;
 class UAttributeComponent;
+class UActionComponent;
 
 class AMobBase : public AActor
 {
@@ -19,11 +20,13 @@ public:
 
 	void Tick(float fDeltaTime) override;
 
-	virtual void SetAttributes() = 0;
+	virtual void InitAttributes() = 0;
 
-	virtual void SetTexture() = 0;
+	virtual void InitTexture() = 0;
 
-public:
+	virtual void InitAnimations() = 0;
+
+	virtual void InitActions() = 0;
 
 protected:
 	void InitPhysics();
@@ -35,5 +38,7 @@ public:
 	UPhysicsComponent* PhysicsComponent;
 
 	UAttributeComponent* AttributeComponent;
+
+	UActionComponent* ActionComponent;
 };
 

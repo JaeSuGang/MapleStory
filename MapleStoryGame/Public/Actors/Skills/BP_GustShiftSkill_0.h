@@ -9,5 +9,9 @@ public:
 	BP_GustShiftSkill_0();
 	void BeginPlay() override;
 	void Tick(float fDeltaTime) override;
+
+	void InitAttributes() override;
+	void InitTexture() override;
+	void InitAnimations() override;
 };
 

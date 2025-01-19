@@ -173,16 +173,6 @@ void UMapleStoryDebugSubsystem::MainDebugTab()
 		Actor->SetPosition(Pos);
 	}
 
-	if (ImGui::Button("Spawn Transculent Effect"))
-	{
-		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestSkill>();
-	}
-
-	if (ImGui::Button("Spawn Transculent Effect2"))
-	{
-		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestSkill2>();
-	}
-
 	if (ImGui::Button("Spawn Cube"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestCube>();

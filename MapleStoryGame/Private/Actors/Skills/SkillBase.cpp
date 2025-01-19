@@ -12,11 +12,13 @@ void ASkillBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	RenderComponent->SetMeshIDByName("Plane");
+	this->InitAttributes();
 
-	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
-	RenderComponent->SetSortingLayer(10);
-	RenderComponent->SetBlendMode(1);
+	this->InitTexture();
+
+	this->InitAnimations();
+
+	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }
 
 void ASkillBase::Tick(float fDeltaTime)
@@ -37,6 +39,32 @@ void ASkillBase::Tick(float fDeltaTime)
 	}
 
 	RenderComponent->PlayAnimation(fDeltaTime);
+}
+
+void ASkillBase::InitAttributes()
+{
+
+}
+
+void ASkillBase::InitTexture()
+{
+	RenderComponent->SetMeshIDByName("Plane");
+
+	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+
+	RenderComponent->SetSortingLayer(10);
+
+	RenderComponent->SetBlendMode(1);
+}
+
+void ASkillBase::InitAnimations()
+{
+	RenderComponent->EnableAnimation();
+}
+
+void ASkillBase::InitActions()
+{
+
 }
 
 void ASkillBase::SetInstigator(AActor* _Instigator)

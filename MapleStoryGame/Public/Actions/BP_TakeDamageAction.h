@@ -1,12 +1,24 @@
 #pragma once
 #include "Actions/GameplayAction.h"
 
+struct FDamageInfo
+{
+	float Damage;
+	float HitDelay;
+	float ElapsedTimeFromLastHit;
+	int HitCountLeft;
+};
+
 class BP_TakeDamageAction : public UGameplayAction
 {
 public:
-	void StartAction(AActor* Instigator) override;
+	BP_TakeDamageAction();
 
-public:
-	void TakeDamage(AActor* Instigator, float fDamage, int nDamageCount);
+	void StartAction(AActor* Instigator, void* _ParameterStruct) override;
+
+	void Tick(float fDeltaTime) override;
+
+protected:
+	vector<FDamageInfo> DamagesToApply;
 };
 

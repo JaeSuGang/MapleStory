@@ -6,15 +6,24 @@
 
 class AActor;
 class UGameplayTagsManager;
+class UActionComponent;
 class UWorld;
 
 class UGameplayAction : public UObject
 {
+	friend class UActionComponent;
+
 public:
 	/* 생성자와 오버라이드 */
 	ENGINE_API UGameplayAction();
 
-	ENGINE_API virtual void StartAction(AActor* Instigator) = 0;
+	ENGINE_API virtual void StartAction(AActor* Instigator);
+
+	ENGINE_API virtual void StartAction(AActor* Instigator, void* _ParameterStruct);
+
+	ENGINE_API virtual void StartAction(void* _ParameterStruct);
+
+	ENGINE_API virtual void Tick(float fDeltaTime);
 
 public:
 	ENGINE_API UWorld* GetWorld() const;
@@ -23,10 +32,14 @@ public:
 
 
 protected:
+	UActionComponent* ActionComponent;
+
 	UTimeSubsystem* Timesubsystem;
 
 	UGameplayTagsManager* GameplayTagsManager;
 
 	FGameplayTag Tag;
+
+	bool IsTickEnabled;
 };
 

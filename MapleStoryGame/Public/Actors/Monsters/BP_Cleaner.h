@@ -6,8 +6,12 @@ class BP_Cleaner : public AMobBase
 	typedef AMobBase Super;
 
 public:
-	void SetAttributes() override;
+	void InitAttributes() override;
 
-	void SetTexture() override;
+	void InitTexture() override;
+
+	void InitAnimations() override;
+
+	void InitActions() override;
 };
 

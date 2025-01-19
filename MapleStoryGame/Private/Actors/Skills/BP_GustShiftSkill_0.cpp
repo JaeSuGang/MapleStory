@@ -11,18 +11,6 @@ void BP_GustShiftSkill_0::BeginPlay()
 {
 	Super::BeginPlay();
 
-	RenderComponent->EnableMaterial();
-
-	RenderComponent->SetMeshIDByName("Plane");
-	RenderComponent->SetBlendMode(1);
-	RenderComponent->SetTextureByName("Resources\\Textures\\13001024.effect.frames\\1.png");
-	RenderComponent->SetActorScaleByTextureSize();
-	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
-
-	/* 애니메이션 추가 */
-	RenderComponent->EnableAnimation();
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\13001024.effect.frames", 60);
-	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }
 
 void BP_GustShiftSkill_0::Tick(float fDeltaTime)
@@ -51,4 +39,25 @@ void BP_GustShiftSkill_0::Tick(float fDeltaTime)
 				Transform.Position.x -= 90.0f;
 		}
 	}
+}
+
+void BP_GustShiftSkill_0::InitAttributes()
+{
+	Super::InitAttributes();
+}
+
+void BP_GustShiftSkill_0::InitTexture()
+{
+	Super::InitTexture();
+
+	RenderComponent->SetTextureByName("Resources\\Textures\\Skills\\13001024.effect.frames\\1.png");
+
+	RenderComponent->SetActorScaleByTextureSize();
+}
+
+void BP_GustShiftSkill_0::InitAnimations()
+{
+	Super::InitAnimations();
+
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\13001024.effect.frames", 60);
 }

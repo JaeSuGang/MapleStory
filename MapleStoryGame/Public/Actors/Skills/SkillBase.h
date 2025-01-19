@@ -11,9 +11,17 @@ public:
 	/* 생성자와 오버라이드 */
 	ASkillBase();
 
-	virtual void BeginPlay() = 0;
+	virtual void BeginPlay();
 
-	virtual void Tick(float fDeltaTime) = 0;
+	virtual void Tick(float fDeltaTime);
+
+	virtual void InitAttributes();
+
+	virtual void InitTexture() = 0;
+
+	virtual void InitAnimations() = 0;
+
+	virtual void InitActions();
 
 public:
 	void SetInstigator(AActor* _Instigator);

@@ -451,7 +451,7 @@ void URenderSubsystem::RotateCameraByMousePosition()
 		return;
 	}
 
-	FVector3 VectorDiff{ CurrentMousePosition.x - LastMousePosition.x, CurrentMousePosition.y - LastMousePosition.y };
+	FVector3 VectorDiff{ (float)(CurrentMousePosition.x - LastMousePosition.x), (float)(CurrentMousePosition.y - LastMousePosition.y) };
 
 	Camera.Transform.Rotation.y += VectorDiff.x;
 	Camera.Transform.Rotation.x += VectorDiff.y;
@@ -636,7 +636,7 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 
 		else
 		{
-			if (7 >= Camera.DebugLayerLevel)
+			if (Camera.DebugLayerLevel <= 10)
 				nPSShaderID = GreenOutlinePixelShaderID;
 
 			else

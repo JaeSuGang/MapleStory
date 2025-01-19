@@ -3,6 +3,8 @@
 #include "RenderCore/RenderComponent.h"
 #include "PhysicsCore/PhysicsComponent.h"
 #include "Attributes/AttributeComponent.h"
+#include "Actions/ActionComponent.h"
+#include "Actions/BP_TakeDamageAction.h"
 
 AMobBase::AMobBase()
 {
@@ -11,31 +13,38 @@ AMobBase::AMobBase()
 	PhysicsComponent = CreateDefaultSubobject<UPhysicsComponent>();
 
 	AttributeComponent = CreateDefaultSubobject<UAttributeComponent>();
+
+	ActionComponent = CreateDefaultSubobject<UActionComponent>();
 }
 
 void AMobBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	this->SetAttributes();
+	this->InitAttributes();
 
-	this->SetTexture();
+	this->InitTexture();
+
+	this->InitAnimations();
 
 	this->InitPhysics();
+
+	RenderComponent->SetCurrentAnimation(EAnimationName::Stand);
 }
 
 void AMobBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
+	RenderComponent->PlayAnimation(fDeltaTime);
 }
 
-void AMobBase::SetAttributes()
+void AMobBase::InitAttributes()
 {
 
 }
 
-void AMobBase::SetTexture()
+void AMobBase::InitTexture()
 {
 	RenderComponent->SetMeshIDByName("Plane");
 
@@ -44,6 +53,17 @@ void AMobBase::SetTexture()
 	RenderComponent->SetBlendMode(0);
 
 	RenderComponent->SetSortingLayer(8);
+}
+
+void AMobBase::InitAnimations()
+{
+	RenderComponent->EnableAnimation();
+
+}
+
+void AMobBase::InitActions()
+{
+	ActionComponent->AddAction<BP_TakeDamageAction>();
 }
 
 void AMobBase::InitPhysics()

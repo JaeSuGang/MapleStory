@@ -53,6 +53,8 @@ public:
 	{
 		T* pAction = new T{};
 
+		pAction->ActionComponent = this;
+
 		shared_ptr<UGameplayAction> Action{ pAction };
 
 		Actions.push_back(Action);
@@ -62,6 +64,5 @@ public:
 
 protected:
 	vector<shared_ptr<UGameplayAction>> Actions;
-
 };
 

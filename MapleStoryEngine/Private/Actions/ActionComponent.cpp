@@ -35,4 +35,9 @@ void UActionComponent::TickComponent(float fDeltaTime)
 {
 	Super::TickComponent(fDeltaTime);
 
+	for (shared_ptr<UGameplayAction>& Action : Actions)
+	{
+		if (Action->IsTickEnabled)
+			Action->Tick(fDeltaTime);
+	}
 }

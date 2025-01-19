@@ -71,8 +71,6 @@ void UAnimation::AddAnimationByFolder(EAnimationName Name, string strFolderDir, 
 
 		nIndex++;
 	}
-
-	TimePerFrame = nTimePerFrame;
 }
 
 void UAnimation::AddAnimation(EAnimationName Name, vector<int> TextureIDSequence)
@@ -82,9 +80,6 @@ void UAnimation::AddAnimation(EAnimationName Name, vector<int> TextureIDSequence
 
 void UAnimation::SetCurrentAnimation(EAnimationName Name)
 {
-	if (CurrentAnimation == Name)
-		return;
-
 	CurrentAnimation = Name;
 	AccumulatedTime = 0.0f;
 	CurrentIndex = 1;
@@ -103,16 +98,14 @@ void UAnimation::SetCurrentAnimation(EAnimationName Name)
 
 		RenderComponent->SetActorScaleByTextureSize();
 	}
-	TimePerFrame = FindIter->second[0];
 
+	TimePerFrame = FindIter->second[0];
 }
 
 void UAnimation::Play(float fDeltaTime)
 {
 	if (!MaterialToApply)
-	{
 		return;
-	}
 
 	AccumulatedTime += fDeltaTime;
 

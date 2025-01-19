@@ -25,8 +25,6 @@ void BP_WindBreaker::InitAnimations()
 {
 	Super::InitAnimations();
 
-	RenderComponent->EnableAnimation();
-
 	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Avatars\\WindBreaker\\Idle", 500);
 
 	RenderComponent->AddAnimationByFolder(EAnimationName::Walk, "Resources\\Textures\\Avatars\\WindBreaker\\Walk", 120);

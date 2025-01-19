@@ -141,5 +141,5 @@ void ACharacterBase::InitTextureAndPhysics()
 
 void ACharacterBase::InitAnimations()
 {
-
+	RenderComponent->EnableAnimation();
 }

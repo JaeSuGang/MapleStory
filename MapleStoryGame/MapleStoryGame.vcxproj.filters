@@ -33,12 +33,6 @@
     <ClCompile Include="Private\Actors\Skills\SkillBase.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Private\Actors\BP_TestSkill.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Private\Actors\BP_TestSkill2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Private\Actors\BP_TestCube.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -126,12 +120,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actors\Skills\SkillBase.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Public\Actors\BP_TestSkill.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Public\Actors\BP_TestSkill2.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actors\BP_TestCube.h">

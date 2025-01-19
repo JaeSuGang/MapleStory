@@ -15,23 +15,7 @@ void BP_FairyTurn_0::BeginPlay()
 {
 	Super::BeginPlay();
 
-	RenderComponent->EnableMaterial();
-
-	RenderComponent->SetMeshIDByName("Plane");
-	RenderComponent->SetBlendMode(1);
-	RenderComponent->SetTextureByName("Resources\\Textures\\13141004.effect.frames\\1.png");
-	RenderComponent->SetActorScaleByTextureSize();
-	RenderComponent->SetPixelShaderByName(BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME);
-
-	/* 애니메이션 추가 */
-	RenderComponent->EnableAnimation();
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\13141004.effect.frames", 60);
-	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
-
-	/* 데미지 연산*/
 	this->SetPositionRelativeToInstigator(200.0f, 0.0f);
-
-
 
 	vector<b2ShapeId> OverlappedShapeIds;
 	b2QueryFilter Filter{};
@@ -52,4 +36,25 @@ void BP_FairyTurn_0::Tick(float fDeltaTime)
 	Super::Tick(fDeltaTime);
 
 	this->SetPositionRelativeToInstigator(200.0f, 0.0f);
+}
+
+void BP_FairyTurn_0::InitAttributes()
+{
+	Super::InitAttributes();
+}
+
+void BP_FairyTurn_0::InitTexture()
+{
+	Super::InitTexture();
+
+	RenderComponent->SetTextureByName("Resources\\Textures\\Skills\\13141004.effect.frames\\1.png");
+
+	RenderComponent->SetActorScaleByTextureSize();
+}
+
+void BP_FairyTurn_0::InitAnimations()
+{
+	Super::InitAnimations();
+
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\13141004.effect.frames", 60);
 }
