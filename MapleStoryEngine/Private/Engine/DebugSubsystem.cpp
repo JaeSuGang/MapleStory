@@ -73,6 +73,8 @@ void UDebugSubsystem::RenderMainViewport()
 void UDebugSubsystem::Render()
 {
 	ImGuiIO& io = ImGui::GetIO();
+	io.DisplayFramebufferScale = { io.DisplaySize.x / DEFAULT_WINDOW_SIZE_X, io.DisplaySize.y / DEFAULT_WINDOW_SIZE_Y };
+
 	vector<shared_ptr<AActor>>& Actors = Engine->GetWorld()->GetActors();
 
 	ImGui_ImplDX11_NewFrame();
@@ -115,6 +117,9 @@ void UDebugSubsystem::InitIMGUI()
 
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports;
+	io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleFonts;
+		
 	/* 메인 윈도우 밖으로 IMGUI창이 나갈수 있도록 허용하는 옵션 */
 	// io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
