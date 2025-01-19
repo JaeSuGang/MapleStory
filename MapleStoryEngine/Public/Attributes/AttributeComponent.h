@@ -13,6 +13,7 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API void AddAttributeValue(string _TagName, float _Value);
 
 	ENGINE_API void SetAttributeValue(FGameplayTag _Tag, float _Value);
 

@@ -564,6 +564,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 								BackObj->Transform.Position.x = FinalPos.x;
 								BackObj->Transform.Position.y = FinalPos.y;
+								BackObj->Transform.Position.z = 1.0f;
 								BackObj->OriginalX = FinalPos.x;
 								BackObj->OriginalY = FinalPos.y;
 								BackObj->rx = rx;

@@ -11,6 +11,18 @@ FGameplayTagContainer::FGameplayTagContainer()
     TagManager = GEngine->GetGameInstance()->GameplayTagsManager;
 }
 
+void FGameplayTagContainer::AddTagValue(string _Name, float fValue)
+{
+    this->AddTagValue(TagManager->FindRegisteredTagExact(_Name), fValue);
+}
+
+void FGameplayTagContainer::AddTagValue(FGameplayTag _Tag, float fValue)
+{
+    auto FindIter = Tags.find(_Tag.ID);
+
+    FindIter->second += fValue;
+}
+
 void FGameplayTagContainer::SetTagValue(string _Name, float fValue)
 {
     this->SetTagValue(TagManager->FindRegisteredTagExact(_Name), fValue);

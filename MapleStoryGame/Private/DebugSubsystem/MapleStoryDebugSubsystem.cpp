@@ -52,6 +52,9 @@ void UMapleStoryDebugSubsystem::PlayerTab()
 
 	ImGui::Begin("Player");
 
+//	ImVec2 size = ImGui::GetContentRegionAvail();
+//	ImGui::Image((ImTextureID)RenderSubsystem->GetMainScreenSRV(), size);
+
 	int ImguiID = 0;
 	for (auto pair : Attributes->Attributes.Tags)
 	{

@@ -18,7 +18,7 @@ void AFootholdBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	RenderComponent->SetPixelShaderByName(GREEN_PIXEL_SHADER_NAME);
+	RenderComponent->SetPixelShaderByName(TRANSPARENT_PIXEL_SHADER_NAME);
 	RenderComponent->SetMeshIDByName("Line");
 	RenderComponent->SetBlendMode(0);
 }

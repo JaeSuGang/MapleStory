@@ -27,6 +27,8 @@ void UDebugSubsystem::LateInit()
 
 	InitIMGUI();
 
+	this->InitMainViewport();
+
 	this->CustomInit();
 }
 
@@ -40,6 +42,33 @@ void UDebugSubsystem::Tick(float fDeltaTime)
 		FPS = GEngine->TimeSubsystem->GetFPS();
 	}
 }
+void UDebugSubsystem::InitMainViewport()
+{
+	ImGuiViewport* viewport = ImGui::GetMainViewport();
+
+	ImGui::SetNextWindowPos(viewport->WorkPos, ImGuiCond_::ImGuiCond_Once);
+	ImGui::SetNextWindowSize(viewport->WorkSize);
+	ImGui::SetNextWindowViewport(viewport->ID);
+}
+
+void UDebugSubsystem::RenderMainViewport()
+{
+	ImGuiWindowFlags window_flags =
+		ImGuiWindowFlags_NoTitleBar
+		| ImGuiWindowFlags_NoCollapse
+		| ImGuiWindowFlags_NoResize
+		| ImGuiWindowFlags_NoMove
+		| ImGuiWindowFlags_NoBringToFrontOnFocus
+		| ImGuiWindowFlags_NoNavFocus;
+	ImGui::Begin("MainDockSpaceWindow", nullptr, window_flags);
+
+	ImGuiID dockspaceID = ImGui::GetID("MainDockSpace");
+	ImGuiDockNodeFlags dock_flags = ImGuiDockNodeFlags_None;
+
+	ImGui::DockSpace(dockspaceID, ImVec2(0.0f, 0.0f), dock_flags);
+
+	ImGui::End();
+}
 
 void UDebugSubsystem::Render()
 {
@@ -50,7 +79,8 @@ void UDebugSubsystem::Render()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	/* 실질적인 IMGUI창 구성 */
+	this->RenderMainViewport();
+
 	this->CustomCode();
 
 	ImGui::Render();
@@ -74,7 +104,7 @@ LRESULT UDebugSubsystem::IMGUIWndProcHandler(HWND hwnd, UINT msg, WPARAM wParam,
 	if (ImGui::GetCurrentContext() == nullptr)
 		return 0;
 
-	return ImGui_ImplWin32_WndProcHandlerEx(hwnd, msg, wParam, lParam, ImGui::GetIO());
+	return ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam);
 }
 
 void UDebugSubsystem::InitIMGUI()
@@ -85,7 +115,8 @@ void UDebugSubsystem::InitIMGUI()
 
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+	/* 메인 윈도우 밖으로 IMGUI창이 나갈수 있도록 허용하는 옵션 */
+	// io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 	ImGui::StyleColorsDark();
 
@@ -101,7 +132,6 @@ void UDebugSubsystem::InitIMGUI()
 
 	ImGui_ImplDX11_Init(RenderSubsystem->GetDevice(), RenderSubsystem->GetDeviceContext());
 
-	// ImGui_ImplWin32_EnableDpiAwareness();
 }
 
 UDebugSubsystem::~UDebugSubsystem()

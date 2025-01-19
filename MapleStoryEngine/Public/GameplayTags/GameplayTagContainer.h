@@ -9,6 +9,10 @@ struct FGameplayTagContainer
 public:
 	ENGINE_API FGameplayTagContainer();
 
+	ENGINE_API void AddTagValue(string _Name, float fValue);
+
+	ENGINE_API void AddTagValue(FGameplayTag _Tag, float fValue);
+
 	ENGINE_API void SetTagValue(string _Name, float fValue);
 
 	ENGINE_API void SetTagValue(FGameplayTag _Tag, float fValue);

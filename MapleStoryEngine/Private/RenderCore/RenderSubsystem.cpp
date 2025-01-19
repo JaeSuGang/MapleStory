@@ -48,7 +48,11 @@ URenderSubsystem::URenderSubsystem()
 
 void URenderSubsystem::Tick(float fDeltaTime)
 {
-	Render(fDeltaTime);
+	if (!GEngine->IsDebug)
+		Render(fDeltaTime);
+	else
+		DebugRender(fDeltaTime);
+
 }
 
 DXGI_SWAP_CHAIN_DESC URenderSubsystem::MakeSwapChainDesc()
@@ -88,6 +92,11 @@ DXGI_SWAP_CHAIN_DESC URenderSubsystem::MakeSwapChainDesc()
 	ScInfo.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	return ScInfo;
+}
+
+ID3D11ShaderResourceView* URenderSubsystem::GetMainScreenSRV()
+{
+	return RTVtoSRV.Get();
 }
 
 void URenderSubsystem::ReserveMemories()
@@ -224,6 +233,18 @@ void URenderSubsystem::InitSwapChain()
 	}
 
 	if (S_OK != Device->CreateRenderTargetView(BackBuffer.Get(), nullptr, &RenderTargetView))
+	{
+		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
+	}
+
+	// Device->CreateTexture2D(null);
+
+	//if (S_OK != Device->CreateRenderTargetView(OffScreenBuffer.Get(), nullptr, &OffScreenRTV))
+	//{
+	//	CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
+	//}
+
+	if (S_OK != Device->CreateShaderResourceView(BackBuffer.Get(), nullptr, &RTVtoSRV))
 	{
 		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);
 	}
@@ -504,7 +525,7 @@ void URenderSubsystem::RenderWidgets(float fDeltaTime)
 	}
 }
 
-void URenderSubsystem::Render(float fDeltaTime)
+void URenderSubsystem::DebugRender(float fDeltaTime)
 {
 	DeviceContext->ClearRenderTargetView(RenderTargetView.Get(), RenderTargetViewColor);
 	DeviceContext->ClearDepthStencilView(DepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -527,6 +548,37 @@ void URenderSubsystem::Render(float fDeltaTime)
 	this->RenderWidgets(fDeltaTime);
 
 	Engine->DebugSubsystem->Render();
+
+	HRESULT hr = SwapChain->Present(0, 0);
+
+	if (hr == DXGI_ERROR_DEVICE_REMOVED || hr == DXGI_ERROR_DEVICE_RESET)
+	{
+		CRITICAL_ERROR("해상도 변경이나 디바이스 관련 설정이 런타임 도중 수정되었습니다");
+		return;
+	}
+}
+
+void URenderSubsystem::Render(float fDeltaTime)
+{
+	DeviceContext->ClearRenderTargetView(RenderTargetView.Get(), RenderTargetViewColor);
+	DeviceContext->ClearDepthStencilView(DepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	DeviceContext->IASetInputLayout(InputLayout.Get());
+	DeviceContext->VSSetShader(VertexShader.Get(), nullptr, 0);
+	DeviceContext->RSSetViewports(1, &ViewPortInfo);
+
+	if (Camera.IsWireFrame)
+		DeviceContext->RSSetState(RasterizerWireframeState.Get());
+
+	else
+		DeviceContext->RSSetState(RasterizerDefaultState.Get());
+
+	DeviceContext->OMSetBlendState(DefaultBlendState.Get(), nullptr, 0xFFFFFFFF);
+	DeviceContext->OMSetDepthStencilState(DefaultDepthStencilState.Get(), 1);
+
+
+	this->RenderActors(fDeltaTime);
+
+	this->RenderWidgets(fDeltaTime);
 
 	HRESULT hr = SwapChain->Present(0, 0);
 
@@ -836,24 +888,42 @@ void URenderSubsystem::CreatePixelShaders(string strShaderPath)
 	StringMappedIndexPixelShaderIDs.insert(std::make_pair(DEFAULT_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
 	PixelShaders.push_back(DefaultPixelShader);
 
+	/* Transparent Pixel Shader 생성 */
+	{
+		ComPtr<ID3D11PixelShader> TransparentPixelShader;
+		hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, TRANSPARENT_PIXEL_SHADER_NAME, "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+		if (hr != S_OK)
+		{
+			CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+		}
+		hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, TransparentPixelShader.GetAddressOf());
+		if (hr != S_OK)
+		{
+			CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+		}
+		int nPixelShaderID = (int)PixelShaders.size();
+		StringMappedIndexPixelShaderIDs.insert(std::make_pair(TRANSPARENT_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
+		PixelShaders.push_back(TransparentPixelShader);
+		this->TransparentPixelShaderID = nPixelShaderID;
+	}
+
 	/* Green Outlined Pixel Shader 생성 */
 	{
-
-	ComPtr<ID3D11PixelShader> GreenOutlinedPixelShader;
-	hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME, "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
-	if (hr != S_OK)
-	{
-		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
-	}
-	hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, GreenOutlinedPixelShader.GetAddressOf());
-	if (hr != S_OK)
-	{
-		CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
-	}
-	int nPixelShaderID = (int)PixelShaders.size();
-	StringMappedIndexPixelShaderIDs.insert(std::make_pair(BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
-	PixelShaders.push_back(GreenOutlinedPixelShader);
-	this->GreenOutlinePixelShaderID = nPixelShaderID;
+		ComPtr<ID3D11PixelShader> GreenOutlinedPixelShader;
+		hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME, "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+		if (hr != S_OK)
+		{
+			CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+		}
+		hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, GreenOutlinedPixelShader.GetAddressOf());
+		if (hr != S_OK)
+		{
+			CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+		}
+		int nPixelShaderID = (int)PixelShaders.size();
+		StringMappedIndexPixelShaderIDs.insert(std::make_pair(BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
+		PixelShaders.push_back(GreenOutlinedPixelShader);
+		this->GreenOutlinePixelShaderID = nPixelShaderID;
 	}
 
 	/* Wireframe Pixel Shader 생성 */

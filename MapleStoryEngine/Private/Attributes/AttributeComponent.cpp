@@ -13,14 +13,19 @@ void UAttributeComponent::TickComponent(float fDeltaTime)
 
 }
 
+void UAttributeComponent::AddAttributeValue(string _TagName, float _Value)
+{
+	Attributes.AddTagValue(_TagName, _Value);
+}
+
 void UAttributeComponent::SetAttributeValue(FGameplayTag _Tag, float _Value)
 {
-	return Attributes.SetTagValue(_Tag, _Value);
+	Attributes.SetTagValue(_Tag, _Value);
 }
 
 void UAttributeComponent::SetAttributeValue(string _TagName, float _Value)
 {
-	return Attributes.SetTagValue(_TagName, _Value);
+	Attributes.SetTagValue(_TagName, _Value);
 }
 
 float UAttributeComponent::GetAttributeValue(string _TagName)

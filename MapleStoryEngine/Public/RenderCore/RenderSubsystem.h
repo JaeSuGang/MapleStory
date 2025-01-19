@@ -54,6 +54,8 @@ public:
 	void LateInit() override;
 
 public:
+	ENGINE_API ID3D11ShaderResourceView* GetMainScreenSRV();
+
 	ENGINE_API void ReleaseTextures();
 
 	ENGINE_API void RotateCameraByMousePosition();
@@ -65,6 +67,8 @@ public:
 	ENGINE_API FCamera& GetCamera();
 
 	void RenderWidgets(float fDeltaTime);
+
+	void DebugRender(float fDeltaTime);
 
 	void Render(float fDeltaTime);
 
@@ -152,6 +156,7 @@ private:
 	vector<ComPtr<ID3D11PixelShader>> PixelShaders;
 	int WireframePixelShaderID;
 	int GreenOutlinePixelShaderID;
+	int TransparentPixelShaderID;
 
 public:
 	/* 디버그 인터페이스 */
@@ -174,7 +179,11 @@ private:
 	/* 텍스처와 뷰 */
 	ComPtr<ID3D11Texture2D> BackBuffer;
 	ComPtr<ID3D11RenderTargetView> RenderTargetView;
+	ComPtr<ID3D11ShaderResourceView> RTVtoSRV;
 	ComPtr<ID3D11Texture2D> DepthStencilBuffer;
+	ComPtr<ID3D11RenderTargetView> OffScreenRTV;
+	ComPtr<ID3D11Texture2D> OffScreenBuffer;
+
 	ComPtr<ID3D11DepthStencilView> DepthStencilView;
 	ComPtr<ID3D11DepthStencilView> ReadOnlyDepthStencilView;
 

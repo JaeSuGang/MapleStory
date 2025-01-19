@@ -37,8 +37,7 @@ void AObjBase::Tick(float fDeltaTime)
 	case EObjType::BackScrollHorizontal:
 	{
 		FCamera& Camera = GEngine->RenderSubsystem->GetCamera();
-		float ElapsedTime = GetWorld()->GetElapsedTime();
-		Transform.Position.x += fDeltaTime * 50;
+		Transform.Position.x += fDeltaTime * 50.0f;
 		if (Transform.Position.x > Camera.Width * 4.0f)
 			Transform.Position.x -= (int)(Camera.Width * 8.0f / cx) * cx;
 		Transform.Position.y = this->OriginalY + Camera.Transform.Position.y * (100.0f + this->ry) / 100.0f;
@@ -49,8 +48,6 @@ void AObjBase::Tick(float fDeltaTime)
 		break;
 	}
 
-	Transform.Position.x = std::floor(Transform.Position.x);
-	Transform.Position.y = std::floor(Transform.Position.y);
 }
 
 void AObjBase::SetObjType(EObjType _ObjType)

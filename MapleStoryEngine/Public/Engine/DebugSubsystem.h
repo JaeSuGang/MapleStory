@@ -23,6 +23,10 @@ public:
 public:
 	void Render();
 
+	void RenderMainViewport();
+
+	void InitMainViewport();
+
 	LRESULT IMGUIWndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	void InitIMGUI();

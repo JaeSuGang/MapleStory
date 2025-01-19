@@ -13,6 +13,7 @@
 #define CRITICAL_ERROR(text) { MessageBoxA(0, text, "Error", MB_OK); assert(false); };
 
 #define DEFAULT_PIXEL_SHADER_NAME "PSDefault"
+#define TRANSPARENT_PIXEL_SHADER_NAME "PSTransparent"
 #define BOX_OUTLINED_GREEN_PIXEL_SHADER_NAME "PSBoxOutlinedGreen"
 #define WIREFRAME_PIXEL_SHADER_NAME "PSWireframe"
 #define GREEN_PIXEL_SHADER_NAME "PSGreen"

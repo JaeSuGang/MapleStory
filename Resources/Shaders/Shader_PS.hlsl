@@ -24,6 +24,15 @@ float4 PSDefault(VertexShaderOutput _Vertex) : SV_Target0
     return float4(ColorSRGB, Color.a);
 };
 
+float4 PSTransparent(VertexShaderOutput _Vertex) : SV_Target0
+{
+    /* 투명픽셀 제거 */
+    if (_Vertex.COLOR.a == 0.0f)
+        clip(-1);
+    
+    return float4(0.0f, 0.0f, 0.0f, 0.0f);
+};
+
 float4 PSBoxOutlinedGreen(VertexShaderOutput _Vertex) : SV_Target
 {
     float4 Color = ImageTexture.Sample(ImageSampler, _Vertex.UV.xy);
