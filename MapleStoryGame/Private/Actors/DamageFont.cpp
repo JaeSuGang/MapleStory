@@ -21,7 +21,7 @@ void ADamageFont::BeginPlay()
 
 	RenderComponent->SetBlendMode(1);
 
-	RenderComponent->SetTextureByName("Resources\\Textures\\Fonts\\Damage\\" + std::to_string(Number) + ".png");
+	RenderComponent->SetTextureByName("Resources\\Textures\\Fonts\\DamageSkin294\\" + std::to_string(Number) + ".png");
 
 	RenderComponent->SetActorScaleByTextureSize();
 }

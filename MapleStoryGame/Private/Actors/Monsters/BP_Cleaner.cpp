@@ -3,29 +3,9 @@
 #include "Attributes/AttributeComponent.h"
 #include "Actions/ActionComponent.h"
 
-void BP_Cleaner::InitTexture()
+BP_Cleaner::BP_Cleaner()
 {
-	Super::InitTexture();
-
-	RenderComponent->SetTextureByName("Resources\\Textures\\Monsters\\8643000.img\\stand\\1.png");
-
-	RenderComponent->SetActorScaleByTextureSize();
-}
-
-void BP_Cleaner::InitAnimations()
-{
-	Super::InitAnimations();
-
-	RenderComponent->AddAnimationByFolder(EAnimationName::Stand, "Resources\\Textures\\Monsters\\8643000.img\\stand", 150);
-
-	RenderComponent->AddAnimationByFolder(EAnimationName::Move, "Resources\\Textures\\Monsters\\8643000.img\\move", 150);
-
-	RenderComponent->AddAnimationByFolder(EAnimationName::Hit, "Resources\\Textures\\Monsters\\8643000.img\\hit", 500);
-}
-
-void BP_Cleaner::InitActions()
-{
-	Super::InitActions();
+	MobResourcePath = "8643000.img";
 }
 
 void BP_Cleaner::InitAttributes()

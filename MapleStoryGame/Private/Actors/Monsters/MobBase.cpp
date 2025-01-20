@@ -39,6 +39,9 @@ void AMobBase::Tick(float fDeltaTime)
 	Super::Tick(fDeltaTime);
 
 	RenderComponent->PlayAnimation(fDeltaTime);
+
+	if (RenderComponent->GetHasPassedLastFrame())
+		RenderComponent->SetCurrentAnimation(EAnimationName::Stand);
 }
 
 void AMobBase::InitAttributes()
@@ -55,17 +58,32 @@ void AMobBase::InitTexture()
 	RenderComponent->SetBlendMode(0);
 
 	RenderComponent->SetSortingLayer(8);
+
+	RenderComponent->SetTextureByName("Resources\\Textures\\Monsters\\" + MobResourcePath + "\\stand\\1.png");
+
+	RenderComponent->SetActorScaleByTextureSize();
 }
 
 void AMobBase::InitAnimations()
 {
 	RenderComponent->EnableAnimation();
 
+	RenderComponent->AddAnimationByFolder(EAnimationName::Stand, "Resources\\Textures\\Monsters\\" + MobResourcePath + "\\stand", 150);
+
+	RenderComponent->AddAnimationByFolder(EAnimationName::Move, "Resources\\Textures\\Monsters\\" + MobResourcePath + "\\move", 150);
+
+	RenderComponent->AddAnimationByFolder(EAnimationName::Hit, "Resources\\Textures\\Monsters\\" + MobResourcePath + "\\hit", 250);
+
 }
 
 void AMobBase::InitActions()
 {
 	ActionComponent->AddAction<BP_TakeDamageAction>();
+}
+
+void AMobBase::SetResourcePath(string strPath)
+{
+	MobResourcePath = strPath;
 }
 
 void AMobBase::InitPhysics()

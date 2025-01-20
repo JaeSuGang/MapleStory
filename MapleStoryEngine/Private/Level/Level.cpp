@@ -5,9 +5,9 @@ ULevel::ULevel()
 	:
 	Actors{}
 {
-	Actors.reserve(3000);
-	ActorsToDestroy.reserve(100);
-	ActorsToBeginPlay.reserve(100);
+	Actors.reserve(20000);
+	ActorsToDestroy.reserve(1000);
+	ActorsToBeginPlay.reserve(1000);
 }
 
 void ULevel::BeginPlay()

@@ -5,6 +5,7 @@
 #include "Actions/ActionComponent.h"
 #include "World/World.h"
 #include "Actors/DamageFont.h"
+#include "RenderCore/RenderComponent.h"
 
 BP_TakeDamageAction::BP_TakeDamageAction()
 {
@@ -30,6 +31,7 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 	HitPos.y += Instigator->GetTransform().Scale.y / 4.0f;
 
 
+	URenderComponent* RenderComponent = Instigator->GetComponentByClass<URenderComponent>();
 	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
 	if (AttributeComponent && AttributeComponent->HasAttributeExact("Value.Hp"))
 	{
@@ -43,6 +45,7 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 				Damage.CurrentHitCount += 1;
 
 				AttributeComponent->AddAttributeValue("Value.Hp", -1.0f * Damage.Damage);
+				RenderComponent->SetCurrentAnimation(EAnimationName::Hit);
 
 				FVector3 PosToApply = HitPos;
 				PosToApply.y += 50.0f * (Damage.CurrentHitCount - 1);
@@ -58,6 +61,8 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 
 void BP_TakeDamageAction::SpawnDamageFont(FVector3 Pos, unsigned int nDamage)
 {
+	Pos.x += std::rand() % 30 - 15;
+
 	unsigned int nTemp = nDamage;
 	vector<int> Numbers;
 

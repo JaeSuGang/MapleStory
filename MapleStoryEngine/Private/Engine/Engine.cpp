@@ -38,6 +38,8 @@ UEngine::UEngine()
 
 	GEngine = this;
 
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
 	if (S_OK != CoInitializeEx(nullptr, COINIT_MULTITHREADED))
 	{
 		CRITICAL_ERROR(ENGINE_INIT_ERROR_TEXT);

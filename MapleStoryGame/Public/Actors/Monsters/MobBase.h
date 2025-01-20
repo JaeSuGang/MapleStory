@@ -22,13 +22,15 @@ public:
 
 	virtual void InitAttributes() = 0;
 
-	virtual void InitTexture() = 0;
+	virtual void InitTexture();
 
-	virtual void InitAnimations() = 0;
+	virtual void InitAnimations();
 
-	virtual void InitActions() = 0;
+	virtual void InitActions();
 
 protected:
+	void SetResourcePath(string strPath);
+
 	void InitPhysics();
 
 
@@ -40,5 +42,7 @@ public:
 	UAttributeComponent* AttributeComponent;
 
 	UActionComponent* ActionComponent;
+
+	string MobResourcePath;
 };
 

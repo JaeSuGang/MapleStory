@@ -80,12 +80,10 @@ void UAnimation::AddAnimation(EAnimationName Name, vector<int> TextureIDSequence
 
 void UAnimation::SetCurrentAnimation(EAnimationName Name)
 {
-	if (CurrentAnimation != Name)
-	{
-		CurrentAnimation = Name;
-		AccumulatedTime = 0.0f;
-		CurrentIndex = 1;
-	}
+	CurrentAnimation = Name;
+	AccumulatedTime = 0.0f;
+	CurrentIndex = 1;
+	HasPassedLastFrame = false;
 
 	auto FindIter = Animations.find(Name);
 	if (FindIter == Animations.end())
