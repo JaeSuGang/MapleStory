@@ -42,19 +42,44 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 				Damage.ElapsedTimeFromLastHit -= Damage.HitDelay;
 				Damage.CurrentHitCount += 1;
 
-				AttributeComponent->AddAttributeValue("Value.Hp", -Damage.Damage);
+				AttributeComponent->AddAttributeValue("Value.Hp", -1.0f * Damage.Damage);
 
-				ADamageFont* Font = GetWorld()->SpawnActor<ADamageFont>();
+				FVector3 PosToApply = HitPos;
+				PosToApply.y += 50.0f * (Damage.CurrentHitCount - 1);
 
-				FVector3 AdjustedPos = HitPos;
-				AdjustedPos.y += Damage.CurrentHitCount * 50.0f;
-
-				Font->SetPosition(AdjustedPos);
-				Font->SetNumber(std::rand() % 10);
+				this->SpawnDamageFont(PosToApply, (int)Damage.Damage);
 			}
 		}
 	}
 
 
 	DamagesToApply.erase(std::remove_if(DamagesToApply.begin(), DamagesToApply.end(), [](const FDamageInfo& Info) { return Info.CurrentHitCount >= Info.TotalHitCount; }), DamagesToApply.end());
+}
+
+void BP_TakeDamageAction::SpawnDamageFont(FVector3 Pos, unsigned int nDamage)
+{
+	unsigned int nTemp = nDamage;
+	vector<int> Numbers;
+
+	while (nTemp)
+	{
+		if (Numbers.size() == 4)
+			Numbers.push_back(10);
+
+		else if (Numbers.size() == 9)
+			Numbers.push_back(11);
+
+		Numbers.push_back(nTemp % 10);
+		nTemp = nTemp / 10;
+	}
+
+	int nSize = (int)Numbers.size();
+	for (int i = 0; i < nSize; i++)
+	{
+		ADamageFont* Font = GetWorld()->SpawnActor<ADamageFont>();
+		FVector3 PosToApply = Pos;
+		PosToApply.x += ((float)nSize / 2.0f - i) * 30.0f;
+		Font->SetNumber(Numbers[i]);
+		Font->SetPosition(PosToApply);
+	}
 }
