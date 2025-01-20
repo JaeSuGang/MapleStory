@@ -81,7 +81,7 @@ void UDebugSubsystem::Render()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	this->RenderMainViewport();
+	// this->RenderMainViewport();
 
 	this->CustomCode();
 
@@ -121,7 +121,7 @@ void UDebugSubsystem::InitIMGUI()
 	io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleFonts;
 		
 	/* 메인 윈도우 밖으로 IMGUI창이 나갈수 있도록 허용하는 옵션 */
-	// io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 	ImGui::StyleColorsDark();
 

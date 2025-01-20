@@ -46,6 +46,11 @@ URenderSubsystem::URenderSubsystem()
 	Transculents.reserve(1000);
 }
 
+URenderSubsystem::~URenderSubsystem()
+{
+	
+}
+
 void URenderSubsystem::Tick(float fDeltaTime)
 {
 	if (!GEngine->IsDebug)
@@ -92,6 +97,11 @@ DXGI_SWAP_CHAIN_DESC URenderSubsystem::MakeSwapChainDesc()
 	ScInfo.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	return ScInfo;
+}
+
+IDXGISwapChain* URenderSubsystem::GetSwapChain()
+{
+	return SwapChain.Get();
 }
 
 ID3D11ShaderResourceView* URenderSubsystem::GetMainScreenSRV()
@@ -816,9 +826,11 @@ void URenderSubsystem::CreateDepthStencilView()
 	TextureDesc.Usage = D3D11_USAGE_DEFAULT;
 	TextureDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 
-	Device->CreateTexture2D(&TextureDesc, nullptr, DepthStencilBuffer.GetAddressOf());
+	DepthStencilBuffer = nullptr;
+	Device->CreateTexture2D(&TextureDesc, nullptr, DepthStencilBuffer.ReleaseAndGetAddressOf());
 
-	hr = Device->CreateDepthStencilView(DepthStencilBuffer.Get(), nullptr, DepthStencilView.GetAddressOf());
+	DepthStencilView = nullptr;
+	hr = Device->CreateDepthStencilView(DepthStencilBuffer.Get(), nullptr, DepthStencilView.ReleaseAndGetAddressOf());
 
 	if (hr != S_OK)
 	{
@@ -830,7 +842,8 @@ void URenderSubsystem::CreateDepthStencilView()
 	ReadOnlyDSVDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	ReadOnlyDSVDesc.Flags = D3D11_DSV_READ_ONLY_DEPTH | D3D11_DSV_READ_ONLY_STENCIL;
 
-	hr = Device->CreateDepthStencilView(DepthStencilBuffer.Get(), &ReadOnlyDSVDesc, ReadOnlyDepthStencilView.GetAddressOf());
+	ReadOnlyDepthStencilView = nullptr;
+	hr = Device->CreateDepthStencilView(DepthStencilBuffer.Get(), &ReadOnlyDSVDesc, ReadOnlyDepthStencilView.ReleaseAndGetAddressOf());
 
 	if (hr != S_OK)
 	{
@@ -841,8 +854,8 @@ void URenderSubsystem::CreateDepthStencilView()
 	dsDesc.DepthEnable = TRUE;
 	dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	dsDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
-
-	Device->CreateDepthStencilState(&dsDesc, DefaultDepthStencilState.GetAddressOf());
+	DefaultDepthStencilState = nullptr;
+	Device->CreateDepthStencilState(&dsDesc, DefaultDepthStencilState.ReleaseAndGetAddressOf());
 }
 
 void URenderSubsystem::CreateBlendState()

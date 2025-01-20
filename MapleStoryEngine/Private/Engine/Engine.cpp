@@ -22,7 +22,13 @@ void UEngine::LateInit()
 
 UEngine::UEngine()
 	:
-	IsDebug{}
+	IsDebug{},
+	RenderSubsystem{},
+	WindowSubsystem{},
+	DebugSubsystem{},
+	TimeSubsystem{},
+	ResourceSubsystem{},
+	KeyInputSubsystem{}
 {
 #ifdef _DEBUG
 	IsDebug = true;

@@ -102,6 +102,9 @@
     <ClCompile Include="Private\Actions\BP_TakeDamageAction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Private\Actors\Skills\BP_FairyTurn_Range.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Public\GamePch.h">
@@ -189,6 +192,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actions\BP_TakeDamageAction.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Skills\BP_FairyTurn_Range.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

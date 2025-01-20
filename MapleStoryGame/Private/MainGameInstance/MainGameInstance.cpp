@@ -40,6 +40,8 @@ void UMainGameInstance::InitTags()
 
 	GameplayTagsManager->RegisterTag("Action.Prone");
 
+	GameplayTagsManager->RegisterTag("Action.TakeDamage");
+
 	GameplayTagsManager->RegisterTag("Status.Falling");
 
 	GameplayTagsManager->RegisterTag("Status.Proning");

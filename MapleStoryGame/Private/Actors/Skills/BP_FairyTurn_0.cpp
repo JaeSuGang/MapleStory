@@ -17,17 +17,7 @@ void BP_FairyTurn_0::BeginPlay()
 
 	this->SetPositionRelativeToInstigator(200.0f, 0.0f);
 
-	vector<b2ShapeId> OverlappedShapeIds;
-	b2QueryFilter Filter{};
-	Filter.categoryBits = -1;
-	Filter.maskBits = MOB_HITBOX_COLLISION_FLAG;
-	GEngine->GetWorld()->PhysicsSubsystem->FetchBoxOverlap(Transform.Scale.x, Transform.Scale.y, Transform, Filter, &OverlappedShapeIds);
 
-	for (b2ShapeId& ShapeID : OverlappedShapeIds)
-	{
-		UPhysicsComponent* PhysicsComponent = GEngine->GetWorld()->PhysicsSubsystem->GetPhysicsComponentByShapeID(ShapeID);
-		PhysicsComponent->GetOwner()->Destroy();
-	}
 
 }
 

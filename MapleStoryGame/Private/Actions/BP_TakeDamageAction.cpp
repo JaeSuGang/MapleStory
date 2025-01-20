@@ -7,6 +7,8 @@
 BP_TakeDamageAction::BP_TakeDamageAction()
 {
 	IsTickEnabled = true;
+
+	Tag = GameplayTagsManager->FindRegisteredTagExact("Action.TakeDamage");
 }
 
 void BP_TakeDamageAction::StartAction(AActor* Instigator, void* _ParameterStruct)
@@ -33,8 +35,10 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 			if (Damage.ElapsedTimeFromLastHit > Damage.HitDelay)
 			{
 				Damage.ElapsedTimeFromLastHit -= Damage.HitDelay;
+				Damage.HitCountLeft -= 1;
 
 				AttributeComponent->AddAttributeValue("Value.Hp", -Damage.Damage);
+
 			}
 		}
 	}

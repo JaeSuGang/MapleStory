@@ -2,6 +2,7 @@
 #include "Engine/Engine.h"
 #include "Engine/WindowSubsystem.h"
 #include "Engine/DebugSubsystem.h"
+#include "RenderCore/RenderSubsystem.h"
 
 UWindowSubsystem::UWindowSubsystem()
 {
@@ -84,6 +85,50 @@ LRESULT UWindowSubsystem::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM
 
     switch (message)
     {
+    case WM_SIZE:
+    {
+        break;
+
+        if (GEngine && GEngine->RenderSubsystem)
+        {
+
+            HRESULT hr{};
+
+            UINT newWidth = LOWORD(lParam);
+            UINT newHeight = HIWORD(lParam);
+
+            if (newWidth == 0 || newHeight == 0)
+                break;
+
+            URenderSubsystem* RenderSubsystem = GEngine->RenderSubsystem;
+
+            RenderSubsystem->DeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
+            RenderSubsystem->DeviceContext->ClearState();
+            RenderSubsystem->DeviceContext->Flush();
+
+            RenderSubsystem->BackBuffer = nullptr;
+            RenderSubsystem->DepthStencilBuffer = nullptr;
+            RenderSubsystem->DefaultDepthStencilState = nullptr;
+            RenderSubsystem->RenderTargetView = nullptr;
+            RenderSubsystem->DepthStencilView = nullptr;
+            RenderSubsystem->RTVtoSRV = nullptr;
+            RenderSubsystem->ReadOnlyDepthStencilView = nullptr;
+
+            auto SwapChain = RenderSubsystem->GetSwapChain();
+
+            hr = SwapChain->ResizeBuffers(2, newWidth, newHeight, DXGI_FORMAT_UNKNOWN, 0);
+            hr = SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(RenderSubsystem->BackBuffer.GetAddressOf()));
+            hr = RenderSubsystem->Device->CreateRenderTargetView(RenderSubsystem->BackBuffer.Get(), nullptr, RenderSubsystem->RenderTargetView.GetAddressOf());
+            RenderSubsystem->CreateDepthStencilView();
+
+            RenderSubsystem->CreateViewport();
+
+
+            RenderSubsystem->D3D11Debug->ReportLiveDeviceObjects(D3D11_RLDO_FLAGS::D3D11_RLDO_DETAIL);
+        }
+        break;
+    }
+
     case WM_QUIT:
     case WM_CLOSE:
     case WM_DESTROY:

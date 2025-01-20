@@ -19,7 +19,7 @@ public:
 
 	virtual void InitTexture() = 0;
 
-	virtual void InitAnimations() = 0;
+	virtual void InitAnimations();
 
 	virtual void InitActions();
 

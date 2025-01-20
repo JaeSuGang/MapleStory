@@ -23,7 +23,11 @@ public:
 
 
 public:
+	ENGINE_API void StartActionByNameWithParameter(AActor* Instigator, string Name, void* pParameter);
+
 	ENGINE_API void StartActionByName(AActor* Instigator, string Name);
+
+	ENGINE_API void StartActionByTag(AActor* Instigator, FGameplayTag& ActionTag, void* pParameter);
 
 	ENGINE_API void StartActionByTag(AActor* Instigator, FGameplayTag& ActionTag);
 

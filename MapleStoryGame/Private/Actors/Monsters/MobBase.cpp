@@ -27,6 +27,8 @@ void AMobBase::BeginPlay()
 
 	this->InitAnimations();
 
+	this->InitActions();
+
 	this->InitPhysics();
 
 	RenderComponent->SetCurrentAnimation(EAnimationName::Stand);

@@ -41,6 +41,7 @@ public:
 /* UWorld, ULevel, AActor¿¡ ÀÇÁ¸ */
 class URenderSubsystem : public UEngineSubsystem
 {
+	friend class UWindowSubsystem;
 	friend class UResourceSubsystem;
 	friend class URenderComponent;
 	friend class UAnimation;
@@ -49,11 +50,15 @@ public:
 	/* Constructors and Overrides */
 	URenderSubsystem();
 
+	~URenderSubsystem();
+
 	void Tick(float fDeltaTime) override;
 
 	void LateInit() override;
 
 public:
+	ENGINE_API IDXGISwapChain* GetSwapChain();
+
 	ENGINE_API ID3D11ShaderResourceView* GetMainScreenSRV();
 
 	ENGINE_API void ReleaseTextures();

@@ -7,6 +7,7 @@
 #include "RenderCore/RenderSubsystem.h"
 #include "Attributes/AttributeComponent.h"
 #include "Actors/Skills/BP_FairyTurn_0.h"
+#include "Actors/Skills/BP_FairyTurn_Range.h"
 #include "World/World.h"
 #include "PhysicsCore/PhysicsSubsystem.h"
 
@@ -43,11 +44,10 @@ void BP_FairyTurnAction::StartAction(AActor* Instigator)
 
 	FTransform& CharacterTransform = Instigator->GetTransform();
 	FTransform& Skill1Transform = Skill1->GetTransform();
-
 	Skill1Transform.Rotation = CharacterTransform.Rotation;	
 
-	/*  */
+	ASkillBase* Skill2 = GetWorld()->SpawnActor<BP_FairyTurn_Range>();
+	Skill2->SetInstigator(Instigator);
 	
-
 
 }
