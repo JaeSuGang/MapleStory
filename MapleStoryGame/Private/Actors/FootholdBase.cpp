@@ -11,7 +11,7 @@ AFootholdBase::AFootholdBase()
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 
 	RenderComponent->EnableMaterial();
-	RenderComponent->SetSortingLayer(11);
+	RenderComponent->SetSortingLayer(12);
 }
 
 void AFootholdBase::BeginPlay()
@@ -19,7 +19,9 @@ void AFootholdBase::BeginPlay()
 	Super::BeginPlay();
 
 	RenderComponent->SetPixelShaderByName(TRANSPARENT_PIXEL_SHADER_NAME);
+
 	RenderComponent->SetMeshIDByName("Line");
+
 	RenderComponent->SetBlendMode(0);
 }
 

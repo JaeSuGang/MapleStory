@@ -108,7 +108,8 @@ void URenderComponent::BeginPlay()
 /* SortingLayer 8 : 몹 */
 /* SortingLayer 9 : 캐릭터 */
 /* SortingLayer 10 : 스킬 */
-/* SortingLayer 11 : 디버그 레이어 */
+/* SortingLayer 11 : 데미지 */
+/* SortingLayer 12 : 디버그 레이어 */
 void URenderComponent::SetSortingLayer(int nLayer)
 {
 	SortingLayer = nLayer;

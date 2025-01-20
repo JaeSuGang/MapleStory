@@ -6,7 +6,8 @@ struct FDamageInfo
 	float Damage;
 	float HitDelay;
 	float ElapsedTimeFromLastHit;
-	int HitCountLeft;
+	int TotalHitCount;
+	int CurrentHitCount;
 };
 
 class BP_TakeDamageAction : public UGameplayAction

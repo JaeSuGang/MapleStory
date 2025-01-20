@@ -3,6 +3,8 @@
 #include "Actor/Actor.h"
 #include "Attributes/AttributeComponent.h"
 #include "Actions/ActionComponent.h"
+#include "World/World.h"
+#include "Actors/DamageFont.h"
 
 BP_TakeDamageAction::BP_TakeDamageAction()
 {
@@ -24,6 +26,9 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 		return;
 
 	AActor* Instigator = ActionComponent->GetOwner();
+	FVector3 HitPos = Instigator->GetTransform().Position;
+	HitPos.y += Instigator->GetTransform().Scale.y / 4.0f;
+
 
 	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
 	if (AttributeComponent && AttributeComponent->HasAttributeExact("Value.Hp"))
@@ -35,14 +40,21 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 			if (Damage.ElapsedTimeFromLastHit > Damage.HitDelay)
 			{
 				Damage.ElapsedTimeFromLastHit -= Damage.HitDelay;
-				Damage.HitCountLeft -= 1;
+				Damage.CurrentHitCount += 1;
 
 				AttributeComponent->AddAttributeValue("Value.Hp", -Damage.Damage);
 
+				ADamageFont* Font = GetWorld()->SpawnActor<ADamageFont>();
+
+				FVector3 AdjustedPos = HitPos;
+				AdjustedPos.y += Damage.CurrentHitCount * 50.0f;
+
+				Font->SetPosition(AdjustedPos);
+				Font->SetNumber(std::rand() % 10);
 			}
 		}
 	}
 
 
-	DamagesToApply.erase(std::remove_if(DamagesToApply.begin(), DamagesToApply.end(), [](const FDamageInfo& Info) { return Info.HitCountLeft <= 0; }), DamagesToApply.end());
+	DamagesToApply.erase(std::remove_if(DamagesToApply.begin(), DamagesToApply.end(), [](const FDamageInfo& Info) { return Info.CurrentHitCount >= Info.TotalHitCount; }), DamagesToApply.end());
 }

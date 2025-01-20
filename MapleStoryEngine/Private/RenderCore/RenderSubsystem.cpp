@@ -31,7 +31,7 @@ URenderSubsystem::URenderSubsystem()
 	RenderTargetViewColor[2] = 190.0f / 255.0f;
 	RenderTargetViewColor[3] = 1.0f;
 
-	int nSortingLayers = 12;
+	int nSortingLayers = 14;
 	int nZValues = 20;
 	int nZIndexes = 100;
 	RenderOrder.resize(nSortingLayers);
@@ -698,7 +698,7 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 
 		else
 		{
-			if (Camera.DebugLayerLevel <= 10)
+			if (Camera.DebugLayerLevel <= 11)
 				nPSShaderID = GreenOutlinePixelShaderID;
 
 			else

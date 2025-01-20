@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\DamageFont.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_FairyTurn_Range.cpp" />
     <ClCompile Include="Private\Actions\BP_TakeDamageAction.cpp" />
     <ClCompile Include="Private\Actors\Monsters\BP_Cleaner.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\DamageFont.h" />
     <ClInclude Include="Public\Actors\Skills\BP_FairyTurn_Range.h" />
     <ClInclude Include="Public\Actions\BP_TakeDamageAction.h" />
     <ClInclude Include="Public\Actors\Monsters\BP_Cleaner.h" />
