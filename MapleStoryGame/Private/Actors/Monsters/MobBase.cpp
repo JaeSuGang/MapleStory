@@ -41,7 +41,12 @@ void AMobBase::Tick(float fDeltaTime)
 	RenderComponent->PlayAnimation(fDeltaTime);
 
 	if (RenderComponent->GetHasPassedLastFrame())
-		RenderComponent->SetCurrentAnimation(EAnimationName::Stand);
+	{
+		if (RenderComponent->GetCurrentAnimation() == EAnimationName::Die)
+			this->Destroy();
+		else
+			RenderComponent->SetCurrentAnimation(EAnimationName::Stand);
+	}
 }
 
 void AMobBase::InitAttributes()
@@ -73,6 +78,8 @@ void AMobBase::InitAnimations()
 	RenderComponent->AddAnimationByFolder(EAnimationName::Move, "Resources\\Textures\\Monsters\\" + MobResourcePath + "\\move", 150);
 
 	RenderComponent->AddAnimationByFolder(EAnimationName::Hit, "Resources\\Textures\\Monsters\\" + MobResourcePath + "\\hit", 250);
+
+	RenderComponent->AddAnimationByFolder(EAnimationName::Die, "Resources\\Textures\\Monsters\\" + MobResourcePath + "\\die", 100);
 
 }
 

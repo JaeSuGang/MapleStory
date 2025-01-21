@@ -13,7 +13,7 @@
 
 void UDebugSubsystem::Log(string Text, int WarningLevel)
 {
-	if (WarningLevel > 1)
+	if (WarningLevel >= 1)
 	{
 		int a = 0;
 	}

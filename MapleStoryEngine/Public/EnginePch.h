@@ -17,6 +17,7 @@
 #include <utility>
 #include <vector>
 #include <Windows.h>
+#include <random>
 
 using std::shared_ptr;
 using std::string;

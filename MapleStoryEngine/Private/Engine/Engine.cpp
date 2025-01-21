@@ -6,6 +6,7 @@
 #include "Engine/ResourceSubsystem.h"
 #include "Engine/KeyInputSubsystem.h"
 #include "Engine/TimeSubsystem.h"
+#include "Engine/RandomManager.h"
 #include "World/World.h"
 #include "Level/Level.h"
 
@@ -18,6 +19,8 @@ void UEngine::LateInit()
 	RenderSubsystem->LateInit();
 
 	ResourceSubsystem->LateInit();
+
+	RandomManager->LateInit();
 }
 
 UEngine::UEngine()
@@ -54,6 +57,8 @@ UEngine::UEngine()
 	TimeSubsystem = CreateSubsystem<UTimeSubsystem>();
 
 	KeyInputSubsystem = CreateSubsystem<UKeyInputSubsystem>();
+
+	RandomManager = CreateSubsystem<URandomManager>();
 }
 
 UEngine::~UEngine()

@@ -15,6 +15,7 @@ enum class EAnimationName
 	Stand,
 	Move,
 	Hit,
+	Die,
 	SwingT1,
 	Screen
 };

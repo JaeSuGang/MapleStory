@@ -206,6 +206,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClInclude Include="Public\RenderCore\Texture.h" />
     <ClInclude Include="Public\Engine\TimeSubsystem.h" />
     <ClInclude Include="Public\RenderCore\Widget.h" />
+    <ClInclude Include="Public\Engine\RandomManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\ActorComponent\CameraComponent.cpp" />
@@ -258,6 +259,7 @@ copy "$(SolutionDir)ThirdParty\DirectXTex\lib\DirectXTex.pdb" "$(OutDir)";</Comm
     <ClCompile Include="Private\RenderCore\Texture.cpp" />
     <ClCompile Include="Private\Engine\TimeSubsystem.cpp" />
     <ClCompile Include="Private\RenderCore\Widget.cpp" />
+    <ClCompile Include="Private\Engine\RandomManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

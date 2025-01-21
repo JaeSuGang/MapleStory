@@ -33,7 +33,8 @@ void BP_FairyTurn_Range::BeginPlay()
 		if (ActionComponent)
 		{
 			FDamageInfo DamageInfo{};
-			DamageInfo.Damage = 1234567890;
+			DamageInfo.DamageRangeOffset = 0.1f;
+			DamageInfo.Damage = 123456789012.0f;
 			DamageInfo.TotalHitCount = 5;
 			DamageInfo.HitDelay = 0.1f;
 

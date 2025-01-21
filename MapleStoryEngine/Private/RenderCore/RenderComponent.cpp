@@ -140,6 +140,11 @@ bool URenderComponent::GetHasPassedLastFrame() const
 	return Animation->HasPassedLastFrame;
 }
 
+EAnimationName URenderComponent::GetCurrentAnimation() const
+{
+	return Animation->CurrentAnimation;
+}
+
 void URenderComponent::SetCurrentAnimation(EAnimationName Name)
 {
 	Animation->SetCurrentAnimation(Name);

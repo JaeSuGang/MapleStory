@@ -125,7 +125,7 @@ int UResourceSubsystem::LoadTextureFile(string strPath)
 	hr = DirectX::LoadFromWICFile(wstrPath.c_str(), DirectX::WIC_FLAGS_NONE, &NewTexMetadata, NewScratchImage);
 	if (hr != S_OK)
 	{
-		GEngine->DebugLog("Texture File Load Failed : " + strPath, 1);
+		// GEngine->DebugLog("Texture File Load Failed : " + strPath, 1);
 		return 0;
 	}
 

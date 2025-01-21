@@ -88,7 +88,7 @@ void UAnimation::SetCurrentAnimation(EAnimationName Name)
 	auto FindIter = Animations.find(Name);
 	if (FindIter == Animations.end())
 	{
-		GEngine->DebugLog("유효하지 않은 애니메이션 Enum", 1);
+		GEngine->DebugLog("유효하지 않은 애니메이션 Enum", 0);
 		return;
 	}
 	else

@@ -10,6 +10,7 @@ class UWindowSubsystem;
 class URenderSubsystem;
 class UDebugSubsystem;
 class UTimeSubsystem;
+class URandomManager;
 class UWorld;
 
 class UEngine : public UObject
@@ -81,6 +82,8 @@ public:
 	}
 
 public:
+	URandomManager* RandomManager;
+
 	UKeyInputSubsystem* KeyInputSubsystem;
 
 	UResourceSubsystem* ResourceSubsystem;

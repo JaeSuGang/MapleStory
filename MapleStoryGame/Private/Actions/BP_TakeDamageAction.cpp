@@ -6,16 +6,23 @@
 #include "World/World.h"
 #include "Actors/DamageFont.h"
 #include "RenderCore/RenderComponent.h"
+#include "Engine/RandomManager.h"
 
 BP_TakeDamageAction::BP_TakeDamageAction()
 {
 	IsTickEnabled = true;
 
 	Tag = GameplayTagsManager->FindRegisteredTagExact("Action.TakeDamage");
+
 }
 
 void BP_TakeDamageAction::StartAction(AActor* Instigator, void* _ParameterStruct)
 {
+	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
+
+	if (!AttributeComponent->HasAttributeExact("Value.Hp") || AttributeComponent->GetAttributeValue("Value.Hp") <= 0.0f)
+		return;
+
 	FDamageInfo DamageInfo = *reinterpret_cast<FDamageInfo*>(_ParameterStruct);
 
 	DamagesToApply.push_back(DamageInfo);
@@ -23,16 +30,22 @@ void BP_TakeDamageAction::StartAction(AActor* Instigator, void* _ParameterStruct
 
 void BP_TakeDamageAction::Tick(float fDeltaTime)
 {
-	if (DamagesToApply.size() == 0)
-		return;
-
 	AActor* Instigator = ActionComponent->GetOwner();
+	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
+	URenderComponent* RenderComponent = Instigator->GetComponentByClass<URenderComponent>();
+
+	if (DamagesToApply.size() == 0)
+	{
+		if (RenderComponent->GetCurrentAnimation() != EAnimationName::Die && AttributeComponent->GetAttributeValue("Value.Hp") <= 0.0f)
+			RenderComponent->SetCurrentAnimation(EAnimationName::Die);
+
+		return;
+	}
+
 	FVector3 HitPos = Instigator->GetTransform().Position;
 	HitPos.y += Instigator->GetTransform().Scale.y / 4.0f;
 
 
-	URenderComponent* RenderComponent = Instigator->GetComponentByClass<URenderComponent>();
-	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
 	if (AttributeComponent && AttributeComponent->HasAttributeExact("Value.Hp"))
 	{
 		for (FDamageInfo& Damage : DamagesToApply)
@@ -44,13 +57,15 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 				Damage.ElapsedTimeFromLastHit -= Damage.HitDelay;
 				Damage.CurrentHitCount += 1;
 
-				AttributeComponent->AddAttributeValue("Value.Hp", -1.0f * Damage.Damage);
+				float FinalDamage = GEngine->RandomManager->GenerateRandomFloatValue(Damage.Damage * (1 - Damage.DamageRangeOffset), Damage.Damage * (1 + Damage.DamageRangeOffset));
+
+				AttributeComponent->AddAttributeValue("Value.Hp", -1.0f * FinalDamage);
 				RenderComponent->SetCurrentAnimation(EAnimationName::Hit);
 
 				FVector3 PosToApply = HitPos;
 				PosToApply.y += 50.0f * (Damage.CurrentHitCount - 1);
 
-				this->SpawnDamageFont(PosToApply, (int)Damage.Damage);
+				this->SpawnDamageFont(PosToApply, FinalDamage);
 			}
 		}
 	}
@@ -59,11 +74,11 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 	DamagesToApply.erase(std::remove_if(DamagesToApply.begin(), DamagesToApply.end(), [](const FDamageInfo& Info) { return Info.CurrentHitCount >= Info.TotalHitCount; }), DamagesToApply.end());
 }
 
-void BP_TakeDamageAction::SpawnDamageFont(FVector3 Pos, unsigned int nDamage)
+void BP_TakeDamageAction::SpawnDamageFont(FVector3 Pos, float fDamage)
 {
 	Pos.x += std::rand() % 30 - 15;
 
-	unsigned int nTemp = nDamage;
+	long long nTemp = (long long)fDamage;
 	vector<int> Numbers;
 
 	while (nTemp)
