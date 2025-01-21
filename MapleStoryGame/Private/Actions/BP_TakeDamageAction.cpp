@@ -7,6 +7,8 @@
 #include "Actors/DamageFont.h"
 #include "RenderCore/RenderComponent.h"
 #include "Engine/RandomManager.h"
+#include "Actors/Skills/SkillBase.h"
+#include "Actors/Skills/HitEffect.h"
 
 BP_TakeDamageAction::BP_TakeDamageAction()
 {
@@ -43,8 +45,6 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 	}
 
 	FVector3 HitPos = Instigator->GetTransform().Position;
-	HitPos.y += Instigator->GetTransform().Scale.y / 4.0f;
-
 
 	if (AttributeComponent && AttributeComponent->HasAttributeExact("Value.Hp"))
 	{
@@ -66,6 +66,7 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 				PosToApply.y += 50.0f * (Damage.CurrentHitCount - 1);
 
 				this->SpawnDamageFont(PosToApply, FinalDamage);
+				this->SpawnHitEffect(HitPos, Damage);
 			}
 		}
 	}
@@ -74,11 +75,11 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 	DamagesToApply.erase(std::remove_if(DamagesToApply.begin(), DamagesToApply.end(), [](const FDamageInfo& Info) { return Info.CurrentHitCount >= Info.TotalHitCount; }), DamagesToApply.end());
 }
 
-void BP_TakeDamageAction::SpawnDamageFont(FVector3 Pos, float fDamage)
+void BP_TakeDamageAction::SpawnDamageFont(FVector3 Pos, float Damage)
 {
 	Pos.x += std::rand() % 30 - 15;
 
-	long long nTemp = (long long)fDamage;
+	long long nTemp = (long long)Damage;
 	vector<int> Numbers;
 
 	while (nTemp)
@@ -102,4 +103,14 @@ void BP_TakeDamageAction::SpawnDamageFont(FVector3 Pos, float fDamage)
 		Font->SetNumber(Numbers[i]);
 		Font->SetPosition(PosToApply);
 	}
+}
+
+void BP_TakeDamageAction::SpawnHitEffect(FVector3 Pos, FDamageInfo& Damage)
+{
+	Pos.x += std::rand() % 80 - 40;
+	Pos.y += std::rand() % 80 - 40;
+
+	AHitEffect* HitEffect = GetWorld()->SpawnActor<AHitEffect>();
+	HitEffect->SetAnimation(Damage.HitEffectPath);
+	HitEffect->SetPosition(Pos);
 }

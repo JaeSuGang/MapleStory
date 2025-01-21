@@ -20,7 +20,7 @@ def ParseAnimation(dir_path: str):
 
     # 파일명에서 첫 번째 숫자 추출 → 그 숫자를 기준으로 정렬
     # 예) "0_90.png" → stem = "0_90" → split("_")[0] = "0" → int("0")
-    #      "90_180.png" → stem = "90_180" → split("_")[0] = "90" → int("90")
+    #      "90_180.png" → stem = "90_180    " → split("_")[0] = "90" → int("90")
     files = sorted(files, key=lambda x: int(x.stem.split('_')[0]))
 
     # 순차적으로 0.png, 1.png, 2.png ... 로 이름 변경

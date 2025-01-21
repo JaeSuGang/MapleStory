@@ -128,8 +128,10 @@ void URenderSubsystem::CreateD3D11Debug()
 	}
 }
 
-void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
+void URenderSubsystem::SetConstantBuffers(FTransform Transform, FPSConstantsBufferStruct _PSConstantsBufferStruct)
 {
+	HRESULT hr{};
+
 	/* 월드 행렬 연산 */
 	DirectX::XMMATRIX ScaleMatrix = DirectX::XMMatrixScalingFromVector(DirectX::XMVECTOR{Transform.Scale.x, Transform.Scale.y , Transform.Scale.z });
 
@@ -174,7 +176,7 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 
 	D3D11_MAPPED_SUBRESOURCE TransformSubresource{};
 
-	DeviceContext->Map(TransformConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &TransformSubresource);
+	hr = DeviceContext->Map(TransformConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &TransformSubresource);
 
 	if (TransformSubresource.pData == nullptr)
 	{
@@ -188,6 +190,20 @@ void URenderSubsystem::SetTransformConstantBuffer(FTransform Transform)
 	ID3D11Buffer* pTransformConstantBuffer[1] = { TransformConstantBuffer.Get() };
 
 	DeviceContext->VSSetConstantBuffers(0, 1, pTransformConstantBuffer);
+
+	/* 알파 상수 버퍼 설정 */
+
+	D3D11_MAPPED_SUBRESOURCE AlphaSubresource{};
+	hr = DeviceContext->Map(PSConstantsBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &AlphaSubresource);
+	if (AlphaSubresource.pData == nullptr)
+	{
+		CRITICAL_ERROR(DEFAULT_ERROR_TEXT);
+	}
+	memcpy_s(AlphaSubresource.pData, sizeof(FPSConstantsBufferStruct), &_PSConstantsBufferStruct, sizeof(FPSConstantsBufferStruct));
+	DeviceContext->Unmap(PSConstantsBuffer.Get(), 0);
+
+	ID3D11Buffer* pPSConstantsBuffer[1] = { PSConstantsBuffer.Get() };
+	DeviceContext->PSSetConstantBuffers(1, 1, pPSConstantsBuffer);
 }
 
 void URenderSubsystem::SetShaderResources(int TextureID)
@@ -377,15 +393,27 @@ int URenderSubsystem::AddNewTexture(string strKey, shared_ptr<UTexture> NewTextu
 	return nSize;
 }
 
-void URenderSubsystem::CreateTransformConstantBuffer()
+void URenderSubsystem::CreateConstantBuffers()
 {
-	D3D11_BUFFER_DESC BufferInfo = { 0 };
-	BufferInfo.ByteWidth = sizeof(FTransformConstants);
-	BufferInfo.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	BufferInfo.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
-	BufferInfo.Usage = D3D11_USAGE_DYNAMIC;
+	D3D11_BUFFER_DESC TransformBufferInfo = { 0 };
+	TransformBufferInfo.ByteWidth = sizeof(FTransformConstants);
+	TransformBufferInfo.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	TransformBufferInfo.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
+	TransformBufferInfo.Usage = D3D11_USAGE_DYNAMIC;
 
-	HRESULT hr = Device->CreateBuffer(&BufferInfo, nullptr, TransformConstantBuffer.GetAddressOf());
+	HRESULT hr = Device->CreateBuffer(&TransformBufferInfo, nullptr, TransformConstantBuffer.GetAddressOf());
+	if (hr != S_OK)
+	{
+		CRITICAL_ERROR(DEFAULT_ERROR_TEXT);
+	}
+
+	D3D11_BUFFER_DESC AlphaBufferInfo = { 0 };
+	AlphaBufferInfo.ByteWidth = sizeof(FPSConstantsBufferStruct);
+	AlphaBufferInfo.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	AlphaBufferInfo.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
+	AlphaBufferInfo.Usage = D3D11_USAGE_DYNAMIC;
+
+	hr = Device->CreateBuffer(&AlphaBufferInfo, nullptr, PSConstantsBuffer.GetAddressOf());
 	if (hr != S_OK)
 	{
 		CRITICAL_ERROR(DEFAULT_ERROR_TEXT);
@@ -449,9 +477,9 @@ void URenderSubsystem::CreateInputLayout()
 void URenderSubsystem::CreateDefaultSamplerState()
 {
 	D3D11_SAMPLER_DESC SampInfo = { D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT };
-	SampInfo.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_BORDER; // 0~1사이만 유효
-	SampInfo.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_BORDER; // y
-	SampInfo.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP; // z // 3중 
+	SampInfo.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	SampInfo.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	SampInfo.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
 
 	SampInfo.BorderColor[0] = 0.0f;
 	SampInfo.BorderColor[1] = 0.0f;
@@ -666,7 +694,7 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 					DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 					DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 					DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
-					this->SetTransformConstantBuffer(RenderComponent->Owner->GetTransform());
+					this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), { RenderComponent->Material->AlphaValue, RenderComponent->Material->WidthTileCount, RenderComponent->Material->HeightTileCount });
 					this->SetShaderResources(RenderComponent->Material->TextureID);
 
 
@@ -708,9 +736,8 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 		DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 		DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
-		this->SetTransformConstantBuffer(RenderComponent->Owner->GetTransform());
-		int a = RenderComponent->Material->TextureID;
-		this->SetShaderResources(a);
+		this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), { RenderComponent->Material->AlphaValue, RenderComponent->Material->WidthTileCount, RenderComponent->Material->HeightTileCount});
+		this->SetShaderResources(RenderComponent->Material->TextureID);
 
 
 		/* 드로우 콜 */
@@ -752,7 +779,7 @@ void URenderSubsystem::LateInit()
 
 	this->CreateViewport();
 
-	this->CreateTransformConstantBuffer();
+	this->CreateConstantBuffers();
 
 	this->CreateRasterizer();
 

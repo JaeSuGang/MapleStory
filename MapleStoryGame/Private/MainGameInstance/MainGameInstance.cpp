@@ -1,6 +1,8 @@
 #include "GamePch.h"
 #include "Engine/Engine.h"
 #include "Levels/TestLevel.h"
+#include "Levels/LachelnTowerTopLevel.h"
+#include "Levels/LachelnDreamForest.h"
 #include "Levels/TestLevel2.h"
 #include "MainGameInstance/MainGameInstance.h"
 #include "GameplayTags/GameplayTagsManager.h"
@@ -23,7 +25,7 @@ void UMainGameInstance::BeginPlay()
 		GEngine->DebugSubsystem->LateInit();
 	}
 
-	GameplaySubsystem->OpenLevel<UTestLevel>();
+	GameplaySubsystem->OpenLevel<ULachelnDreamForest>();
 }
 
 void UMainGameInstance::InitTags()

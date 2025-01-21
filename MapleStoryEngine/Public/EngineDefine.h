@@ -18,11 +18,6 @@
 #define WIREFRAME_PIXEL_SHADER_NAME "PSWireframe"
 #define GREEN_PIXEL_SHADER_NAME "PSGreen"
 
-#define RESOURCES_FOLDER_NAME "Resources"
-#define TEXTURES_FOLDER_NAME "Resources\\Textures"
-#define MISSING_TEXTURE_PATH "Resources\\Textures\\MissingTexture.png"
-#define VSShader_PATH "Resources\\Shaders\\Shader_VS.hlsl"
-#define PSShader_PATH "Resources\\Shaders\\Shader_PS.hlsl"
 
 /* 상수 값 */
 #define DEFAULT_WINDOW_SIZE_X 1366.0f
@@ -39,3 +34,14 @@
 #define ENGINE_INIT_ERROR_TEXT "Engine Init Failed"
 #define INVALID_COMPONENT_ERROR_TEXT "Engine Init Failed"
 #define BUFFER_CREATE_FAILED_TEXT "Buffer Creation Failed"
+
+/* 게임 태그 */
+
+/* 경로 */
+#define RESOURCES_FOLDER_NAME "Resources"
+#define TEXTURES_FOLDER_NAME "Resources\\Textures"
+#define MISSING_TEXTURE_PATH "Resources\\Textures\\MissingTexture.png"
+#define VSShader_PATH "Resources\\Shaders\\Shader_VS.hlsl"
+#define PSShader_PATH "Resources\\Shaders\\Shader_PS.hlsl"
+
+#define PATH_SKILL_HIT_0 "Resources\\Textures\\Skills\\HitEffects\\13141004.hit.0.frames"

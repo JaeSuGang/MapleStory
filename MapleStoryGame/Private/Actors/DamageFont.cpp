@@ -34,8 +34,11 @@ void ADamageFont::Tick(float fDeltaTime)
 
 	RemainedLifeTime -= fDeltaTime;
 
-	if (RemainedLifeTime <= 0)
+	if (RemainedLifeTime <= 0.0)
 		this->Destroy();
+
+	else if (RemainedLifeTime <= 0.5)
+		RenderComponent->AddAlphaValue(fDeltaTime * -2.0f);
 }
 
 void ADamageFont::SetNumber(int nNum)

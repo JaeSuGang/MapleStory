@@ -12,6 +12,7 @@ struct FDamageInfo
 	float ElapsedTimeFromLastHit;
 	int TotalHitCount;
 	int CurrentHitCount;
+	string HitEffectPath;
 };
 
 class BP_TakeDamageAction : public UGameplayAction
@@ -24,7 +25,9 @@ public:
 	void Tick(float fDeltaTime) override;
 
 protected:
-	void SpawnDamageFont(FVector3 Pos, float fDamage);
+	void SpawnDamageFont(FVector3 Pos, float Damage);
+
+	void SpawnHitEffect(FVector3 Pos, FDamageInfo& Damage);
 
 protected:
 	vector<FDamageInfo> DamagesToApply;

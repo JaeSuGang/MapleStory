@@ -17,7 +17,7 @@ public:
 
 public:
 	/* 생성자와 오버라이드 */
-	ENGINE_API UMaterial() = default;
+	ENGINE_API UMaterial();
 
 public:
 	ENGINE_API void SetBlendMode(bool bIsTransculent);
@@ -26,9 +26,18 @@ public:
 
 	ENGINE_API void SetTextureByName(string strTextureName);
 
+	ENGINE_API float GetAlphaValue() const;
+
+	ENGINE_API void SetAlphaValue(float _Val);
+
+	ENGINE_API void AddAlphaValue(float _Val);
+
 private:
 	EBlendMode BlendMode;
+	float AlphaValue;
 	int PSShaderID;
 	int TextureID;
+	int WidthTileCount;
+	int HeightTileCount;
 };
 

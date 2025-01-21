@@ -17,7 +17,7 @@ public:
 
 	virtual void InitAttributes();
 
-	virtual void InitTexture() = 0;
+	virtual void InitTexture();
 
 	virtual void InitAnimations();
 

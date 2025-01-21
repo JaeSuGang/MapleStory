@@ -149,3 +149,28 @@ void URenderComponent::SetCurrentAnimation(EAnimationName Name)
 {
 	Animation->SetCurrentAnimation(Name);
 }
+
+void URenderComponent::SetHeightTileCount(int nCount)
+{
+	Material->HeightTileCount = nCount;
+}
+
+void URenderComponent::SetWidthTileCount(int nCount)
+{
+	Material->WidthTileCount = nCount;
+}
+
+float URenderComponent::GetAlphaValue() const
+{
+	return Material->AlphaValue;
+}
+
+void URenderComponent::SetAlphaValue(float _Val)
+{
+	Material->AlphaValue = _Val;
+}
+
+void URenderComponent::AddAlphaValue(float _Val)
+{
+	Material->AlphaValue += _Val;
+}

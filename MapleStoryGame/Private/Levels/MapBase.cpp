@@ -182,6 +182,12 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 				if (ImgElement2)
 				{
+					if (ImgElement2->FirstChildElement() == nullptr)
+					{
+						ObjSubElement = ObjSubElement->NextSiblingElement();
+						continue;
+					}
+
 					strImageOffset = ImgElement2->FirstChildElement()->FindAttribute("value")->Value();
 
 					string strX;
@@ -499,8 +505,8 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 					else
 					{
-						int nRepeatWidth{};
-						int nRepeatHeight{};
+						int nRepeatWidth = 1;
+						int nRepeatHeight = 1;
 
 						if (nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal)
 						{
@@ -527,62 +533,93 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						int nCameraTop = (int)(nRepeatHeight / 2.0f);
 						int nCameraBottom = (int)(-nRepeatHeight / 2.0f);
 
-						for (int nx = nCameraLeft; nx <= nCameraRight; nx += (int)cx)
-						{
-							for (int ny = nCameraBottom; ny <= nCameraTop; ny += (int)cy)
-							{
-								AObjBase* BackObj = GetWorld()->SpawnActor<AObjBase>();
-								URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
+						int nWidthTileCount = 1;
+						int nHeightTileCount = 1;
 
-								RenderComponent->SetTextureByName(strTexturePath);
-								RenderComponent->SetActorScaleByTextureSize();
-								RenderComponent->SetBlendMode(0);
+						AObjBase* BackObj = GetWorld()->SpawnActor<AObjBase>();
 
-								int nOffsetX2{};
-								int nOffsetY2{};
+						if (nTileMode == TileMode::ScrollHorizontal)
+							BackObj->SetObjType(AObjBase::EObjType::BackScrollHorizontal);
+						else
+							BackObj->SetObjType(AObjBase::EObjType::Back);
 
-								if (nFlipped)
-								{
-									BackObj->MultiplyScale(nFlipped ? -1.0f : 1.0f, 1.0f, 1.0f);
-									nOffsetX2 = (int)(nOffsetX + BackObj->GetTransform().Scale.x / 2);
-									nOffsetY2 = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
-									FinalPos = { ObjX + (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
-								}
-								else
-								{
-									nOffsetX2 = (int)(nOffsetX - BackObj->GetTransform().Scale.x / 2);
-									nOffsetY2 = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
-									FinalPos = { ObjX - (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
-								}
+						URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
+						RenderComponent->SetTextureByName(strTexturePath);
+						RenderComponent->SetActorScaleByTextureSize();
+						cx = cx ? cx : BackObj->Transform.Scale.x;
+						cy = cy ? cy : BackObj->Transform.Scale.y;
+						BackObj->cx = cx;
+						BackObj->cy = cy;
 
-								FinalPos.x = FinalPos.x + nx;
-								FinalPos.y = FinalPos.y + ny;
-								if (nTileMode == TileMode::ScrollHorizontal)
-									BackObj->SetObjType(AObjBase::EObjType::BackScrollHorizontal);
-								else
-									BackObj->SetObjType(AObjBase::EObjType::Back);
+						if ((nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal))
+							nWidthTileCount = nRepeatWidth / (int)cx;
+						if ((nTileMode & TileMode::Vertical || nTileMode & TileMode::ScrollVertical))
+							nHeightTileCount = nRepeatWidth / (int)cy;
 
-								BackObj->Transform.Position.x = FinalPos.x;
-								BackObj->Transform.Position.y = FinalPos.y;
-								BackObj->Transform.Position.z = 1.0f;
-								BackObj->OriginalX = FinalPos.x;
-								BackObj->OriginalY = FinalPos.y;
-								BackObj->rx = rx;
-								BackObj->ry = ry;
+						BackObj->Transform.Scale.x *= nWidthTileCount;
+						BackObj->Transform.Scale.y *= nHeightTileCount;
+						RenderComponent->SetWidthTileCount(nWidthTileCount);
+						RenderComponent->SetHeightTileCount(nHeightTileCount);
+						RenderComponent->SetBlendMode(0);
 
-								cx = cx ? cx : BackObj->Transform.Scale.x;
-								cy = cy ? cy : BackObj->Transform.Scale.y;
+						int nOffsetX2{};
+						int nOffsetY2{};
 
-								BackObj->cx = cx;
-								BackObj->cy = cy;
+						FinalPos = { ObjX , ObjY * -1.0f, 0.0f };
+						BackObj->Transform.Position.x = FinalPos.x;
+						BackObj->Transform.Position.y = FinalPos.y;
+						BackObj->Transform.Position.z = 1.0f;
+						BackObj->OriginalX = FinalPos.x;
+						BackObj->OriginalY = FinalPos.y;
+						BackObj->rx = rx;
+						BackObj->ry = ry;
 
-								if (!(nTileMode & TileMode::Vertical || nTileMode & TileMode::ScrollVertical))
-									break;
-							}
+						//for (int nx = nCameraLeft; nx <= nCameraRight; nx += (int)cx)
+						//{
+						//	for (int ny = nCameraBottom; ny <= nCameraTop; ny += (int)cy)
+						//	{
+						//		AObjBase* BackObj = GetWorld()->SpawnActor<AObjBase>();
+						//		URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
 
-							if (!(nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal))
-								break;
-						}
+						//		RenderComponent->SetTextureByName(strTexturePath);
+						//		RenderComponent->SetActorScaleByTextureSize();
+						//		RenderComponent->SetBlendMode(0);
+
+						//		int nOffsetX2{};
+						//		int nOffsetY2{};
+
+						//		nOffsetX2 = (int)(nOffsetX - BackObj->GetTransform().Scale.x / 2);
+						//		nOffsetY2 = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
+						//		FinalPos = { ObjX - (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
+
+						//		FinalPos.x = FinalPos.x + nx;
+						//		FinalPos.y = FinalPos.y + ny;
+						//		if (nTileMode == TileMode::ScrollHorizontal)
+						//			BackObj->SetObjType(AObjBase::EObjType::BackScrollHorizontal);
+						//		else
+						//			BackObj->SetObjType(AObjBase::EObjType::Back);
+
+						//		BackObj->Transform.Position.x = FinalPos.x;
+						//		BackObj->Transform.Position.y = FinalPos.y;
+						//		BackObj->Transform.Position.z = 1.0f;
+						//		BackObj->OriginalX = FinalPos.x;
+						//		BackObj->OriginalY = FinalPos.y;
+						//		BackObj->rx = rx;
+						//		BackObj->ry = ry;
+
+						//		cx = cx ? cx : BackObj->Transform.Scale.x;
+						//		cy = cy ? cy : BackObj->Transform.Scale.y;
+
+						//		BackObj->cx = cx;
+						//		BackObj->cy = cy;
+
+						//		if (!(nTileMode & TileMode::Vertical || nTileMode & TileMode::ScrollVertical))
+						//			break;
+						//	}
+
+						//	if (!(nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal))
+						//		break;
+						//}
 					}
 
 					BackElement = BackElement->NextSiblingElement();

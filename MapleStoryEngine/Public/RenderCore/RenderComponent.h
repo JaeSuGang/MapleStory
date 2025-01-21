@@ -27,6 +27,16 @@ public:
 	void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API void SetHeightTileCount(int nCount);
+
+	ENGINE_API void SetWidthTileCount(int nCount);
+
+	ENGINE_API float GetAlphaValue() const;
+
+	ENGINE_API void SetAlphaValue(float _Val);
+
+	ENGINE_API void AddAlphaValue(float _Val);
+
 	ENGINE_API void AddAnimationEvent(EAnimationName _AnimationName, int _Sequence, std::function<void()> _Function);
 
 	ENGINE_API void AddAnimationEvent(FAnimationEvent _AnimationEvent);

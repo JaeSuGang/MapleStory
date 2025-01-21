@@ -37,6 +37,7 @@ void BP_FairyTurn_Range::BeginPlay()
 			DamageInfo.Damage = 123456789012.0f;
 			DamageInfo.TotalHitCount = 5;
 			DamageInfo.HitDelay = 0.1f;
+			DamageInfo.HitEffectPath = PATH_SKILL_HIT_0;
 
 			ActionComponent->StartActionByNameWithParameter(ActionComponent->GetOwner(), "Action.TakeDamage", &DamageInfo);
 		}

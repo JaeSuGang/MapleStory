@@ -3,6 +3,16 @@
 #include "Engine/Engine.h"
 #include "RenderCore/RenderSubsystem.h"
 
+UMaterial::UMaterial()
+{
+	BlendMode = EBlendMode::Opaque;
+	AlphaValue = 1.0f;
+	PSShaderID = 0;
+	TextureID = 0;
+	WidthTileCount = 1;
+	HeightTileCount = 1;
+}
+
 void UMaterial::SetBlendMode(bool bIsTransculent)
 {
 	if (bIsTransculent == false)
@@ -17,7 +27,22 @@ void UMaterial::SetPixelShaderByName(string strShaderName)
 	PSShaderID = GEngine->RenderSubsystem->GetPixelShaderIDByName(strShaderName);
 }
 
- void UMaterial::SetTextureByName(string strTextureName)
+void UMaterial::SetTextureByName(string strTextureName)
 {
 	TextureID = GEngine->RenderSubsystem->GetTextureIDByName(strTextureName);
+}
+
+float UMaterial::GetAlphaValue() const
+{
+	return AlphaValue;
+}
+
+void UMaterial::SetAlphaValue(float _Val)
+{
+	AlphaValue = _Val;
+}
+
+void UMaterial::AddAlphaValue(float _Val)
+{
+	AlphaValue += _Val;
 }

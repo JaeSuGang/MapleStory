@@ -22,6 +22,19 @@ public:
 	DirectX::XMMATRIX WVP;
 };
 
+struct FPSConstantsBufferStruct
+{
+public:
+	float Alpha;
+	float NotUsed1;
+	float NotUsed2;
+	float NotUsed3;
+	int WidthTileCount;
+	int HeightTileCount;
+	int WidthTileLength;
+	int HeightTileLength;
+};
+
 struct FCamera
 {
 public:
@@ -107,7 +120,7 @@ public:
 
 private:
 	/* 개별 매쉬 설정 */
-	void SetTransformConstantBuffer(FTransform Transform);
+	void SetConstantBuffers(FTransform Transform, FPSConstantsBufferStruct _PSConstantsBufferStruct);
 
 	void SetShaderResources(int TextureID);
 
@@ -119,7 +132,7 @@ private:
 
 	void CreateD3D11Debug();
 
-	void CreateTransformConstantBuffer();
+	void CreateConstantBuffers();
 	
 	void CreateViewport();
 
@@ -195,6 +208,7 @@ private:
 
 	/* 렌더링 파이프라인 개별 설정 변수 */
 	ComPtr<ID3D11Buffer> TransformConstantBuffer;
+	ComPtr<ID3D11Buffer> PSConstantsBuffer;
 
 	/* 렌더링 파이프라인 초기화 변수 */
 	D3D11_VIEWPORT ViewPortInfo;
