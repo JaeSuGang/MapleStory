@@ -9,8 +9,8 @@ UMaterial::UMaterial()
 	AlphaValue = 1.0f;
 	PSShaderID = 0;
 	TextureID = 0;
-	WidthTileCount = 1;
-	HeightTileCount = 1;
+	WidthTileLength = 1;
+	HeightTileLength = 1;
 }
 
 void UMaterial::SetBlendMode(bool bIsTransculent)

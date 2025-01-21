@@ -25,12 +25,12 @@ public:
 struct FPSConstantsBufferStruct
 {
 public:
-	float Alpha;
+	float AlphaValue;
 	float NotUsed1;
 	float NotUsed2;
 	float NotUsed3;
-	int WidthTileCount;
-	int HeightTileCount;
+	int PlaneWidth;
+	int PlaneHeight;
 	int WidthTileLength;
 	int HeightTileLength;
 };

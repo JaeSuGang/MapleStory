@@ -694,7 +694,13 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 					DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 					DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 					DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
-					this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), { RenderComponent->Material->AlphaValue, RenderComponent->Material->WidthTileCount, RenderComponent->Material->HeightTileCount });
+					FPSConstantsBufferStruct PSConstantsBufferStruct{};
+					PSConstantsBufferStruct.AlphaValue = RenderComponent->GetAlphaValue();
+					PSConstantsBufferStruct.WidthTileLength = RenderComponent->Material->WidthTileLength;
+					PSConstantsBufferStruct.HeightTileLength = RenderComponent->Material->HeightTileLength;
+					PSConstantsBufferStruct.PlaneWidth = RenderComponent->GetOwner()->GetTransform().Scale.x;
+					PSConstantsBufferStruct.PlaneHeight = RenderComponent->GetOwner()->GetTransform().Scale.y;
+					this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), PSConstantsBufferStruct);
 					this->SetShaderResources(RenderComponent->Material->TextureID);
 
 
@@ -736,7 +742,13 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		DeviceContext->IASetVertexBuffers(0, 1, pVertexBuffer, &nVertexBufferStride, &nVertexBufferOffset);
 		DeviceContext->IASetPrimitiveTopology(Mesh.PrimitiveTopology);
 		DeviceContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
-		this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), { RenderComponent->Material->AlphaValue, RenderComponent->Material->WidthTileCount, RenderComponent->Material->HeightTileCount});
+		FPSConstantsBufferStruct PSConstantsBufferStruct{};
+		PSConstantsBufferStruct.AlphaValue = RenderComponent->GetAlphaValue();
+		PSConstantsBufferStruct.WidthTileLength = RenderComponent->Material->WidthTileLength;
+		PSConstantsBufferStruct.HeightTileLength = RenderComponent->Material->HeightTileLength;
+		PSConstantsBufferStruct.PlaneWidth = RenderComponent->GetOwner()->GetTransform().Scale.x;
+		PSConstantsBufferStruct.PlaneHeight = RenderComponent->GetOwner()->GetTransform().Scale.y;
+		this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), PSConstantsBufferStruct);
 		this->SetShaderResources(RenderComponent->Material->TextureID);
 
 
@@ -945,6 +957,24 @@ void URenderSubsystem::CreatePixelShaders(string strShaderPath)
 		StringMappedIndexPixelShaderIDs.insert(std::make_pair(TRANSPARENT_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
 		PixelShaders.push_back(TransparentPixelShader);
 		this->TransparentPixelShaderID = nPixelShaderID;
+	}
+
+	/* Tile Pixel Shader 持失 */
+	{
+		ComPtr<ID3D11PixelShader> TilePixelShader;
+		hr = D3DCompileFromFile(wstrShaderPath.data(), nullptr, nullptr, TILE_PIXEL_SHADER_NAME, "ps_5_0", Flag0, 0, PSCodeBlob.GetAddressOf(), PSErrorCodeBlob.GetAddressOf());
+		if (hr != S_OK)
+		{
+			CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+		}
+		hr = Device->CreatePixelShader(PSCodeBlob->GetBufferPointer(), PSCodeBlob->GetBufferSize(), nullptr, TilePixelShader.GetAddressOf());
+		if (hr != S_OK)
+		{
+			CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
+		}
+		int nPixelShaderID = (int)PixelShaders.size();
+		StringMappedIndexPixelShaderIDs.insert(std::make_pair(TRANSPARENT_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
+		PixelShaders.push_back(TilePixelShader);
 	}
 
 	/* Green Outlined Pixel Shader 持失 */

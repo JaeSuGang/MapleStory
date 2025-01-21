@@ -37,7 +37,7 @@ private:
 	float AlphaValue;
 	int PSShaderID;
 	int TextureID;
-	int WidthTileCount;
-	int HeightTileCount;
+	int WidthTileLength;
+	int HeightTileLength;
 };
 

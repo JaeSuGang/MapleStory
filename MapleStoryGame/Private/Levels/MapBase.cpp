@@ -544,6 +544,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 							BackObj->SetObjType(AObjBase::EObjType::Back);
 
 						URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
+						RenderComponent->SetPixelShaderByName(TILE_PIXEL_SHADER_NAME);
 						RenderComponent->SetTextureByName(strTexturePath);
 						RenderComponent->SetActorScaleByTextureSize();
 						cx = cx ? cx : BackObj->Transform.Scale.x;
@@ -558,8 +559,8 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 						BackObj->Transform.Scale.x *= nWidthTileCount;
 						BackObj->Transform.Scale.y *= nHeightTileCount;
-						RenderComponent->SetWidthTileCount(nWidthTileCount);
-						RenderComponent->SetHeightTileCount(nHeightTileCount);
+						RenderComponent->SetWidthTileLength((int)cx); 
+						RenderComponent->SetHeightTileLength((int)cy);
 						RenderComponent->SetBlendMode(0);
 
 						int nOffsetX2{};

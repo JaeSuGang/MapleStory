@@ -150,14 +150,14 @@ void URenderComponent::SetCurrentAnimation(EAnimationName Name)
 	Animation->SetCurrentAnimation(Name);
 }
 
-void URenderComponent::SetHeightTileCount(int nCount)
+void URenderComponent::SetHeightTileLength(int nLength)
 {
-	Material->HeightTileCount = nCount;
+	Material->HeightTileLength = nLength;
 }
 
-void URenderComponent::SetWidthTileCount(int nCount)
+void URenderComponent::SetWidthTileLength(int nLength)
 {
-	Material->WidthTileCount = nCount;
+	Material->WidthTileLength = nLength;
 }
 
 float URenderComponent::GetAlphaValue() const

@@ -27,9 +27,9 @@ public:
 	void TickComponent(float fDeltaTime) override;
 
 public:
-	ENGINE_API void SetHeightTileCount(int nCount);
+	ENGINE_API void SetHeightTileLength(int nLength);
 
-	ENGINE_API void SetWidthTileCount(int nCount);
+	ENGINE_API void SetWidthTileLength(int nLength);
 
 	ENGINE_API float GetAlphaValue() const;
 
