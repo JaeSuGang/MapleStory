@@ -46,6 +46,8 @@ public:
 
 	ENGINE_API void InitializeBody(b2BodyType _type);
 
+	ENGINE_API void InitializeBodyWithNoGravity(b2BodyType _type);
+
 	ENGINE_API void InitializeHitbox(float fWidth, float fHeight);
 
 	ENGINE_API void InitializeFootCollider(float fYOffsetFromCenter);

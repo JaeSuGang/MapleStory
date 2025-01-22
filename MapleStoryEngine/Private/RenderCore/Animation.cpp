@@ -43,7 +43,7 @@ void UAnimation::SetMaterialToApply(UMaterial* Material)
 	MaterialToApply = Material;
 }
 
-/* 0.png ~ n.png 형태로 이름이 정렬되어 있어야만 사용 가능함 */
+/* 1.png ~ n.png 형태로 이름이 정렬되어 있어야만 사용 가능함 */
 void UAnimation::AddAnimationByFolder(EAnimationName Name, string strFolderDir, int nTimePerFrame)
 {
 	auto FindIter = Animations.find(Name);
@@ -80,22 +80,21 @@ void UAnimation::AddAnimation(EAnimationName Name, vector<int> TextureIDSequence
 
 void UAnimation::SetCurrentAnimation(EAnimationName Name)
 {
-	if (CurrentAnimation != Name)
-	{
-		CurrentAnimation = Name;
-		AccumulatedTime = 0.0f;
-		CurrentIndex = 1;
-		HasPassedLastFrame = false;
-	}
-
 	auto FindIter = Animations.find(Name);
 	if (FindIter == Animations.end())
 	{
-		GEngine->DebugLog("유효하지 않은 애니메이션 Enum", 0);
 		return;
 	}
 	else
 	{
+		if (CurrentAnimation != Name)
+		{
+			CurrentAnimation = Name;
+			AccumulatedTime = 0.0f;
+			CurrentIndex = 1;
+			HasPassedLastFrame = false;
+		}
+
 		vector<int>& TextureIDSequence = FindIter->second;
 
 		MaterialToApply->TextureID = TextureIDSequence[CurrentIndex];

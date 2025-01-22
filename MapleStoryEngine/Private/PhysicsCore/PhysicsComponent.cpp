@@ -149,6 +149,24 @@ b2BodyId UPhysicsComponent::GetBodyID() const
 	return B2BodyID;
 }
 
+void UPhysicsComponent::InitializeBodyWithNoGravity(b2BodyType _type)
+{
+	IsBodyInitialized = true;
+
+	FTransform OwnerTransform = Owner->GetTransform();
+
+	b2BodyDef BodyDef = b2DefaultBodyDef();
+	BodyDef.type = _type;
+	BodyDef.fixedRotation = true;
+	BodyDef.gravityScale = 0.0f;
+	BodyDef.linearDamping = 0.0f;
+	BodyDef.position.x = OwnerTransform.Position.x * PIXEL_TO_METER_CONSTANT;
+	BodyDef.position.y = OwnerTransform.Position.y * PIXEL_TO_METER_CONSTANT;
+	BodyDef.userData = this;
+
+	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
+}
+
 void UPhysicsComponent::InitializeBody(b2BodyType _type)
 {
 	IsBodyInitialized = true;
