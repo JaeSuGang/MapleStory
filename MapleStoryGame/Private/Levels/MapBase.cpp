@@ -553,12 +553,22 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						BackObj->cy = cy;
 
 						if ((nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal))
+						{
 							nWidthTileCount = nRepeatWidth / (int)cx;
+							BackObj->Transform.Scale.x = nRepeatWidth;
+						}
 						if ((nTileMode & TileMode::Vertical || nTileMode & TileMode::ScrollVertical))
+						{
 							nHeightTileCount = nRepeatWidth / (int)cy;
+							BackObj->Transform.Scale.y = nRepeatHeight;
+						}
 
-						BackObj->Transform.Scale.x *= nWidthTileCount;
-						BackObj->Transform.Scale.y *= nHeightTileCount;
+						if (nWidthTileCount > 1)
+							BackObj->Transform.Scale.x = cx * nWidthTileCount;
+
+						if (nHeightTileCount > 1)
+							BackObj->Transform.Scale.y = cy * nHeightTileCount;
+
 						RenderComponent->SetWidthTileLength((int)cx); 
 						RenderComponent->SetHeightTileLength((int)cy);
 						RenderComponent->SetBlendMode(0);

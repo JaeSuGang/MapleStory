@@ -26,7 +26,6 @@ cbuffer FPSConstantsBufferStruct : register(b1)
 float4 PSDefault(VertexShaderOutput _Vertex) : SV_Target0
 {
     float4 Color = ImageTexture.Sample(ImageSampler, _Vertex.UV.xy);
-
     
     /* 투명픽셀 제거 */
     if (Color.a == 0.0f)
@@ -53,7 +52,7 @@ float4 PSTile(VertexShaderOutput _Vertex) : SV_Target0
     uint TextureWidth, TextureHeight;
     ImageTexture.GetDimensions(TextureWidth, TextureHeight);
     
-    float2 UVToApply;
+    float2 UVToApply = _Vertex.UV.xy;
     
     float PixelWidthCoordinate = (float)(_Vertex.UV.x * PlaneWidth % WidthTileLength) / WidthTileLength;
     float StartWidthUV = (float) (TextureWidth - WidthTileLength) / 2.0f / WidthTileLength;
@@ -63,8 +62,10 @@ float4 PSTile(VertexShaderOutput _Vertex) : SV_Target0
     float StartHeightUV = (float) (TextureHeight- HeightTileLength) / 2.0f / HeightTileLength;
     float EndHeightUV = 1.0f - StartHeightUV;
     
-    UVToApply.x = PixelWidthCoordinate * (EndWidthUV - StartWidthUV) + StartWidthUV;
-    UVToApply.y = PixelHeightCoordinate * (EndHeightUV - StartHeightUV) + StartHeightUV;
+    if (PlaneWidth != WidthTileLength)
+        UVToApply.x = PixelWidthCoordinate * (EndWidthUV - StartWidthUV) + StartWidthUV;
+    if (PlaneHeight != HeightTileLength)
+        UVToApply.y = PixelHeightCoordinate * (EndHeightUV - StartHeightUV) + StartHeightUV;
     
     float4 Color = ImageTexture.Sample(ImageSampler, UVToApply);
 

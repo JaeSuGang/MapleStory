@@ -15,7 +15,6 @@ void AObjBase::BeginPlay()
 
 	RenderComponent->SetMeshIDByName("Plane");
 
-	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 	RenderComponent->SetBlendMode(0);
 }
 

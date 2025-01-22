@@ -973,7 +973,7 @@ void URenderSubsystem::CreatePixelShaders(string strShaderPath)
 			CRITICAL_ERROR(static_cast<const char*>(PSErrorCodeBlob->GetBufferPointer()));
 		}
 		int nPixelShaderID = (int)PixelShaders.size();
-		StringMappedIndexPixelShaderIDs.insert(std::make_pair(TRANSPARENT_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
+		StringMappedIndexPixelShaderIDs.insert(std::make_pair(TILE_PIXEL_SHADER_NAME, (int)PixelShaders.size()));
 		PixelShaders.push_back(TilePixelShader);
 	}
 
