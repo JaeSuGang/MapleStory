@@ -1,0 +1,591 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<dir name="Lach_boss.img">
+  <dir name="back">
+    <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="224, 397" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/back/0" />
+    </png>
+    <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="20, 20" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/1" />
+    </png>
+    <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="20, 21" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/2" />
+    </png>
+    <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="678, 376" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/back/3" />
+    </png>
+    <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="678, 379" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/back/4" />
+    </png>
+    <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="457, 381" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/back/5" />
+    </png>
+    <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="393, 122" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/back/6" />
+    </png>
+    <png name="7" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="236, 79" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/extinction.img/back/58" />
+    </png>
+    <png name="8" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="199, 92" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/extinction.img/back/27" />
+    </png>
+    <png name="9" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="224, 399" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/back/41" />
+    </png>
+    <png name="10" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="20, 19" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/back/42" />
+    </png>
+    <png name="11" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="20, 18" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/back/43" />
+    </png>
+    <png name="12" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="308, 332" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/12" />
+    </png>
+    <png name="13" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="400, 332" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/13" />
+    </png>
+    <png name="14" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="342, 180" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/14" />
+    </png>
+    <png name="15" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="371, 230" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/15" />
+    </png>
+    <png name="16" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="326, 320" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/16" />
+    </png>
+    <png name="17" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="380, 151" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/17" />
+    </png>
+    <png name="18" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="337, 214" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/18" />
+    </png>
+    <png name="19" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="376, 202" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/19" />
+    </png>
+    <png name="20" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="252, 212" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/20" />
+    </png>
+    <png name="21" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="319, 136" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/21" />
+    </png>
+    <png name="22" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="87, 79" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/22" />
+    </png>
+    <png name="23" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="140, 85" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/23" />
+    </png>
+    <png name="24" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="201, 149" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/24" />
+    </png>
+    <png name="25" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="192, 112" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/25" />
+    </png>
+    <png name="26" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="220, 103" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/26" />
+    </png>
+    <png name="27" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="98, 97" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/27" />
+    </png>
+    <png name="28" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="189, 167" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/28" />
+    </png>
+    <png name="29" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="69, 56" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/29" />
+    </png>
+    <png name="30" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="103, 64" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/30" />
+    </png>
+    <png name="31" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="181, 190" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/31" />
+    </png>
+    <png name="32" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="239, 197" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/32" />
+    </png>
+    <png name="33" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="206, 111" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/33" />
+    </png>
+    <png name="34" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="230, 145" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/34" />
+    </png>
+    <png name="35" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="199, 185" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/35" />
+    </png>
+    <png name="36" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="236, 75" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/36" />
+    </png>
+    <png name="37" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="196, 131" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/37" />
+    </png>
+    <png name="38" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="224, 130" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/38" />
+    </png>
+    <png name="39" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="157, 125" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/39" />
+    </png>
+    <png name="40" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="192, 92" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/40" />
+    </png>
+    <png name="41" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="47, 50" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/41" />
+    </png>
+    <png name="42" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="88, 44" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/42" />
+    </png>
+    <png name="43" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="123, 94" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/43" />
+    </png>
+    <png name="44" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="114, 87" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/44" />
+    </png>
+    <png name="45" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="116, 58" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/45" />
+    </png>
+    <png name="46" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="60, 67" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/46" />
+    </png>
+    <png name="47" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="115, 92" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/47" />
+    </png>
+    <png name="48" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="41, 41" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/48" />
+    </png>
+    <png name="49" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="63, 40" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/49" />
+    </png>
+    <png name="50" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="104, 98" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/50" />
+    </png>
+    <png name="51" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="118, 99" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/51" />
+    </png>
+    <png name="52" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="103, 61" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/52" />
+    </png>
+    <png name="53" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="122, 77" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/53" />
+    </png>
+    <png name="54" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="101, 104" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/54" />
+    </png>
+    <png name="55" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="129, 47" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/55" />
+    </png>
+    <png name="56" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="101, 72" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/56" />
+    </png>
+    <png name="57" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="114, 63" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/57" />
+    </png>
+    <png name="58" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="87, 64" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/58" />
+    </png>
+    <png name="59" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="95, 45" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/59" />
+    </png>
+    <png name="60" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="30, 28" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/60" />
+    </png>
+    <png name="61" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="45, 22" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/61" />
+    </png>
+    <png name="62" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="64, 50" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/62" />
+    </png>
+    <png name="63" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="62, 40" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/63" />
+    </png>
+    <png name="64" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="61, 35" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/64" />
+    </png>
+    <png name="65" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="34, 41" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/65" />
+    </png>
+    <png name="66" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="61, 50" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/66" />
+    </png>
+    <png name="67" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="22, 21" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/67" />
+    </png>
+    <png name="68" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="35, 24" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/68" />
+    </png>
+    <png name="69" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="224, 399" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/69" />
+    </png>
+    <png name="70" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="21, 19" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/70" />
+    </png>
+    <png name="71" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="21, 19" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/71" />
+    </png>
+    <png name="72" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="1814, 380" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/72" />
+    </png>
+    <png name="73" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="212, 437" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/73" />
+    </png>
+    <png name="74" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="182, 438" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/74" />
+    </png>
+    <png name="75" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="258, 438" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/75" />
+    </png>
+    <png name="76" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="379, 438" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/76" />
+    </png>
+    <png name="77" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="413, 295" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/77" />
+    </png>
+    <png name="78" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="326, 268" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/78" />
+    </png>
+    <png name="79" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="259, 319" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/79" />
+    </png>
+    <png name="80" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="326, 133" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/80" />
+    </png>
+    <png name="81" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="347, 115" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/81" />
+    </png>
+    <png name="82" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="220, 243" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/82" />
+    </png>
+    <png name="83" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="192, 212" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/83" />
+    </png>
+    <png name="84" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="189, 166" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/84" />
+    </png>
+    <png name="85" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="140, 134" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/85" />
+    </png>
+    <png name="86" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="98, 132" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/86" />
+    </png>
+    <png name="87" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+      <vector name="origin" value="93, 155" />
+      <int32 name="z" value="0" />
+      <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/back/87" />
+    </png>
+  </dir>
+  <dir name="ani">
+    <dir name="0">
+      <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="5, 4" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/extinction.img/ani/4/0" />
+      </png>
+      <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="4, 4" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/4/1" />
+      </png>
+      <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="3, 3" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/4/2" />
+      </png>
+      <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAYAAACuyE5IAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAdSURBVBhXY/j//z8DSeD///+CIAxlo0uDBZWQJQD2IhIzUIi07AAAAABJRU5ErkJggg==">
+        <vector name="origin" value="5, 1" />
+        <int32 name="z" value="0" />
+      </png>
+      <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="6, 2" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/extinction.img/ani/4/4" />
+      </png>
+      <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="4, 4" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/4/5" />
+      </png>
+    </dir>
+    <dir name="1">
+      <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="7, 8" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/5/0" />
+      </png>
+      <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="7, 7" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/5/1" />
+      </png>
+      <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="5, 5" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/extinction.img/ani/3/2" />
+      </png>
+      <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="4, 7" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/extinction.img/ani/3/3" />
+      </png>
+      <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="7, 7" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/extinction.img/ani/3/4" />
+      </png>
+      <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="3, 8" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/extinction.img/ani/3/5" />
+      </png>
+      <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="7, 8" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/5/6" />
+      </png>
+    </dir>
+    <dir name="2">
+      <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="11, 11" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/6/0" />
+      </png>
+      <png name="1" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="9, 11" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/6/1" />
+      </png>
+      <png name="2" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="9, 8" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/6/2" />
+      </png>
+      <png name="3" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="2, 4" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/6/3" />
+      </png>
+      <png name="4" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="2, 7" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/6/4" />
+      </png>
+      <png name="5" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="2, 5" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/6/5" />
+      </png>
+      <png name="6" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="5, 1" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/6/6" />
+      </png>
+      <png name="7" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="6, 5" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/6/7" />
+      </png>
+      <png name="8" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="9, 11" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lacheln.img/ani/6/8" />
+      </png>
+    </dir>
+    <dir name="3">
+      <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="110, 21" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/ani/3/0" />
+      </png>
+    </dir>
+    <dir name="4">
+      <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="17, 14" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/ani/4/0" />
+      </png>
+    </dir>
+    <dir name="5">
+      <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="52, 13" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/ani/5/0" />
+      </png>
+    </dir>
+    <dir name="6">
+      <png name="0" value="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAALSURBVBhXY2AAAgAABQABqtXIUQAAAABJRU5ErkJggg==">
+        <vector name="origin" value="5, 3" />
+        <int32 name="z" value="0" />
+        <string name="_outlink" value="Map/Back/_Canvas/Lach_boss.img/ani/6/0" />
+      </png>
+    </dir>
+  </dir>
+  <dir name="spine" />
+</dir>

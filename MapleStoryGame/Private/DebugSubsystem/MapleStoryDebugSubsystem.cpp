@@ -11,13 +11,15 @@
 #include "RenderCore/RenderComponent.h"
 #include "Attributes/AttributeComponent.h"
 #include "GameplayTags/GameplayTagsManager.h"
-#include "Levels/TestLevel.h"
 #include "Actors/Monsters/BP_Cleaner.h"
 #include "Actors/BP_TestSkill.h"
 #include "Actors/BP_TestSkill2.h"
 #include "Actors/BP_TestCube.h"
 #include "Engine/KeyInputSubsystem.h"
 
+#include "Levels/TestLevel.h"
+#include "Levels/LachelnTowerTopLevel.h"
+#include "Levels/LachelnDreamForest.h"
 
 UMapleStoryDebugSubsystem::UMapleStoryDebugSubsystem()
 {
@@ -160,9 +162,19 @@ void UMapleStoryDebugSubsystem::MainDebugTab()
 	ImGui::DragFloat("Position.Y", &GEngine->RenderSubsystem->GetCamera().Transform.Position.y, 10);
 	ImGui::DragFloat("Position.Z", &GEngine->RenderSubsystem->GetCamera().Transform.Position.z, 10);
 
-	if (ImGui::Button("Open New Level"))
+	if (ImGui::Button("Open Lacheln Center"))
 	{
 		GEngine->GetGameInstance()->GameplaySubsystem->OpenLevel<UTestLevel>();
+	}
+
+	if (ImGui::Button("Open Lacheln Tower"))
+	{
+		GEngine->GetGameInstance()->GameplaySubsystem->OpenLevel<ULachelnTowerTopLevel>();
+	}
+
+	if (ImGui::Button("Open Lacheln Boss"))
+	{
+		GEngine->GetGameInstance()->GameplaySubsystem->OpenLevel<ULachelnDreamForest>();
 	}
 
 	ImGui::SeparatorText("Actor");

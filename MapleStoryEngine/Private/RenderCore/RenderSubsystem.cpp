@@ -33,7 +33,7 @@ URenderSubsystem::URenderSubsystem()
 
 	int nSortingLayers = 14;
 	int nZValues = 20;
-	int nZIndexes = 100;
+	int nZIndexes = 500;
 	RenderOrder.resize(nSortingLayers);
 
 	for (int i = 0; i < nSortingLayers; i++)
@@ -698,8 +698,8 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 					PSConstantsBufferStruct.AlphaValue = RenderComponent->GetAlphaValue();
 					PSConstantsBufferStruct.WidthTileLength = RenderComponent->Material->WidthTileLength;
 					PSConstantsBufferStruct.HeightTileLength = RenderComponent->Material->HeightTileLength;
-					PSConstantsBufferStruct.PlaneWidth = RenderComponent->GetOwner()->GetTransform().Scale.x;
-					PSConstantsBufferStruct.PlaneHeight = RenderComponent->GetOwner()->GetTransform().Scale.y;
+					PSConstantsBufferStruct.PlaneWidth = (int)RenderComponent->GetOwner()->GetTransform().Scale.x;
+					PSConstantsBufferStruct.PlaneHeight = (int)RenderComponent->GetOwner()->GetTransform().Scale.y;
 					this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), PSConstantsBufferStruct);
 					this->SetShaderResources(RenderComponent->Material->TextureID);
 
@@ -746,8 +746,8 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		PSConstantsBufferStruct.AlphaValue = RenderComponent->GetAlphaValue();
 		PSConstantsBufferStruct.WidthTileLength = RenderComponent->Material->WidthTileLength;
 		PSConstantsBufferStruct.HeightTileLength = RenderComponent->Material->HeightTileLength;
-		PSConstantsBufferStruct.PlaneWidth = RenderComponent->GetOwner()->GetTransform().Scale.x;
-		PSConstantsBufferStruct.PlaneHeight = RenderComponent->GetOwner()->GetTransform().Scale.y;
+		PSConstantsBufferStruct.PlaneWidth = (int)RenderComponent->GetOwner()->GetTransform().Scale.x;
+		PSConstantsBufferStruct.PlaneHeight = (int)RenderComponent->GetOwner()->GetTransform().Scale.y;
 		this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), PSConstantsBufferStruct);
 		this->SetShaderResources(RenderComponent->Material->TextureID);
 

@@ -46,9 +46,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 	if (Error)
 		GEngine->DebugLog("XML 로드 실패", 2);
 
-	Error = BackImgDocument.LoadFile(("Resources\\XMLs\\Map.Back." + strImgName).data());
-	if (Error)
-		GEngine->DebugLog("XML 로드 실패", 2);
+
 
 	tinyxml2::XMLElement* RootElement = MapDocument.FirstChildElement();
 
@@ -224,14 +222,14 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 				if (Flipped)
 				{
 					Obj->MultiplyScale(Flipped ? -1.0f : 1.0f, 1.0f, 1.0f);
-					nOffsetX = (int)(nOffsetX + Obj->GetTransform().Scale.x / 2);
-					nOffsetY = (int)(nOffsetY - Obj->GetTransform().Scale.y / 2);
+					nOffsetX = (int)(nOffsetX + std::round(Obj->GetTransform().Scale.x / 2));
+					nOffsetY = (int)(nOffsetY - std::round(Obj->GetTransform().Scale.y / 2));
 					FinalPos = { ObjX + (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, 0.0f };
 				}
 				else
 				{
-					nOffsetX = (int)(nOffsetX - Obj->GetTransform().Scale.x / 2);
-					nOffsetY = (int)(nOffsetY - Obj->GetTransform().Scale.y / 2);
+					nOffsetX = (int)(nOffsetX - std::round(Obj->GetTransform().Scale.x / 2));
+					nOffsetY = (int)(nOffsetY - std::round(Obj->GetTransform().Scale.y / 2));
 					FinalPos = { ObjX - (float)nOffsetX, ((float)ObjY - (float)nOffsetY) * -1.0f, 0.0f };
 				}
 
@@ -321,6 +319,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 					bool bIsAni = false;
 					int nFlipped = 0;
+					int nZIndex = BackElement->FindAttribute("name")->IntValue();
 					float ObjX = 0.0f;
 					float ObjY = 0.0f;
 					float rx = 0.0f;
@@ -338,6 +337,10 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 						if (strPropertyName == "bS")
 						{
+							Error = BackImgDocument.LoadFile(("Resources\\XMLs\\Map.Back." + strPropertyValue + ".img.xml").data());
+							if (Error)
+								GEngine->DebugLog("XML 로드 실패", 2);
+
 							strTexturePath += strPropertyValue;
 							strTexturePath += ".img\\";
 							strTexturePath += strPropertyValue;
@@ -363,8 +366,8 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 									while (BackImgElement != nullptr)
 									{
-										int strBackImgIndex = BackImgElement->FindAttribute("name")->IntValue();
-										if (strBackImgIndex == std::stoi(strPropertyValue))
+										int nBackImgIndex = BackImgElement->FindAttribute("name")->IntValue();
+										if (nBackImgIndex == std::stoi(strPropertyValue))
 										{
 											break;
 										}
@@ -478,6 +481,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 						RenderComponent->SetTextureByName(strTexturePath);
 						RenderComponent->SetActorScaleByTextureSize();
+						RenderComponent->SetSortingLayer(0);
 
 						int nOffsetX2{};
 						int nOffsetY2{};
@@ -485,14 +489,14 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						if (nFlipped)
 						{
 							BackObj->MultiplyScale(nFlipped ? -1.0f : 1.0f, 1.0f, 1.0f);
-							nOffsetX2 = (int)(nOffsetX + BackObj->GetTransform().Scale.x / 2);
-							nOffsetY2 = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
+							nOffsetX2 = (int)(nOffsetX + (BackObj->GetTransform().Scale.x / 2));
+							nOffsetY2 = (int)(nOffsetY - (BackObj->GetTransform().Scale.y / 2));
 							FinalPos = { ObjX + (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
 						}
 						else
 						{
-							nOffsetX2 = (int)(nOffsetX - BackObj->GetTransform().Scale.x / 2);
-							nOffsetY2= (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
+							nOffsetX2 = (int)(nOffsetX - (BackObj->GetTransform().Scale.x / 2));
+							nOffsetY2 = (int)(nOffsetY - (BackObj->GetTransform().Scale.y / 2));
 							FinalPos = { ObjX - (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
 						}
 
@@ -547,6 +551,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						RenderComponent->SetPixelShaderByName(TILE_PIXEL_SHADER_NAME);
 						RenderComponent->SetTextureByName(strTexturePath);
 						RenderComponent->SetActorScaleByTextureSize();
+						RenderComponent->SetSortingLayer(0);
 						cx = cx ? cx : BackObj->Transform.Scale.x;
 						cy = cy ? cy : BackObj->Transform.Scale.y;
 						BackObj->cx = cx;
@@ -555,12 +560,12 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						if ((nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal))
 						{
 							nWidthTileCount = nRepeatWidth / (int)cx;
-							BackObj->Transform.Scale.x = nRepeatWidth;
+							BackObj->Transform.Scale.x = (float)nRepeatWidth;
 						}
 						if ((nTileMode & TileMode::Vertical || nTileMode & TileMode::ScrollVertical))
 						{
 							nHeightTileCount = nRepeatWidth / (int)cy;
-							BackObj->Transform.Scale.y = nRepeatHeight;
+							BackObj->Transform.Scale.y = (float)nRepeatHeight;
 						}
 
 						if (nWidthTileCount > 1)
@@ -584,53 +589,6 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						BackObj->OriginalY = FinalPos.y;
 						BackObj->rx = rx;
 						BackObj->ry = ry;
-
-						//for (int nx = nCameraLeft; nx <= nCameraRight; nx += (int)cx)
-						//{
-						//	for (int ny = nCameraBottom; ny <= nCameraTop; ny += (int)cy)
-						//	{
-						//		AObjBase* BackObj = GetWorld()->SpawnActor<AObjBase>();
-						//		URenderComponent* RenderComponent = BackObj->GetComponentByClass<URenderComponent>();
-
-						//		RenderComponent->SetTextureByName(strTexturePath);
-						//		RenderComponent->SetActorScaleByTextureSize();
-						//		RenderComponent->SetBlendMode(0);
-
-						//		int nOffsetX2{};
-						//		int nOffsetY2{};
-
-						//		nOffsetX2 = (int)(nOffsetX - BackObj->GetTransform().Scale.x / 2);
-						//		nOffsetY2 = (int)(nOffsetY - BackObj->GetTransform().Scale.y / 2);
-						//		FinalPos = { ObjX - (float)nOffsetX2, ((float)ObjY - (float)nOffsetY2) * -1.0f, 0.0f };
-
-						//		FinalPos.x = FinalPos.x + nx;
-						//		FinalPos.y = FinalPos.y + ny;
-						//		if (nTileMode == TileMode::ScrollHorizontal)
-						//			BackObj->SetObjType(AObjBase::EObjType::BackScrollHorizontal);
-						//		else
-						//			BackObj->SetObjType(AObjBase::EObjType::Back);
-
-						//		BackObj->Transform.Position.x = FinalPos.x;
-						//		BackObj->Transform.Position.y = FinalPos.y;
-						//		BackObj->Transform.Position.z = 1.0f;
-						//		BackObj->OriginalX = FinalPos.x;
-						//		BackObj->OriginalY = FinalPos.y;
-						//		BackObj->rx = rx;
-						//		BackObj->ry = ry;
-
-						//		cx = cx ? cx : BackObj->Transform.Scale.x;
-						//		cy = cy ? cy : BackObj->Transform.Scale.y;
-
-						//		BackObj->cx = cx;
-						//		BackObj->cy = cy;
-
-						//		if (!(nTileMode & TileMode::Vertical || nTileMode & TileMode::ScrollVertical))
-						//			break;
-						//	}
-
-						//	if (!(nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal))
-						//		break;
-						//}
 					}
 
 					BackElement = BackElement->NextSiblingElement();
