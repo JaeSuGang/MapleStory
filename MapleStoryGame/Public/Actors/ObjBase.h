@@ -45,5 +45,9 @@ protected:
 	float cx;
 
 	float cy;
+
+	float OffsetX;
+
+	float OffsetY;
 };
 

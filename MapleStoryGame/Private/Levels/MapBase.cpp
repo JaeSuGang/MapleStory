@@ -42,11 +42,6 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 	if (Error)
 		GEngine->DebugLog("XML 로드 실패", 2);
 
-	Error = ObjImgDocument.LoadFile(("Resources\\XMLs\\Map.Obj." + strImgName).data());
-	if (Error)
-		GEngine->DebugLog("XML 로드 실패", 2);
-
-
 
 	tinyxml2::XMLElement* RootElement = MapDocument.FirstChildElement();
 
@@ -89,8 +84,16 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 			tinyxml2::XMLElement* ObjSubElement = ObjElement->FirstChildElement();
 
 
+			bool bEscapeLoopInstantly = false;
 			while (ObjSubElement != nullptr)
 			{
+				if (bEscapeLoopInstantly)
+				{
+					ObjSubElement = ObjSubElement->NextSiblingElement();
+					continue;
+				}
+
+
 				string ObjPath{ TEXTURES_FOLDER_NAME };
 				ObjPath += "\\Maps";
 				string strImageOffset{};
@@ -108,8 +111,8 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 				tinyxml2::XMLElement* InfoElement = ObjSubElement->FirstChildElement();
 
-				tinyxml2::XMLElement* ImgElement = ObjImgDocument.FirstChildElement();
-				tinyxml2::XMLElement* ImgElement2 = ImgElement->FirstChildElement();
+				tinyxml2::XMLElement* ImgElement{};
+				tinyxml2::XMLElement* ImgElement2{};
 
 				while (InfoElement != nullptr)
 				{
@@ -122,6 +125,17 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 					if (strName_Attribute == "oS")
 					{
+						Error = ObjImgDocument.LoadFile(("Resources\\XMLs\\Map.Obj." + strValue_Attribute + ".img.xml").data());
+						if (Error)
+						{
+							bEscapeLoopInstantly = true;
+							GEngine->DebugLog("XML 로드 실패", 0);
+							break;
+						}
+
+						ImgElement = ObjImgDocument.FirstChildElement();
+						ImgElement2 = ImgElement->FirstChildElement();
+
 						ObjPath += strValue_Attribute;
 						ObjPath += ".img";
 						TextureFileName += strValue_Attribute;
@@ -509,6 +523,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 
 					else
 					{
+
 						int nRepeatWidth = 1;
 						int nRepeatHeight = 1;
 
@@ -557,6 +572,21 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						BackObj->cx = cx;
 						BackObj->cy = cy;
 
+						int nOffsetX2{};
+						int nOffsetY2{};
+
+						if (nFlipped)
+						{
+							BackObj->MultiplyScale(nFlipped ? -1.0f : 1.0f, 1.0f, 1.0f);
+							nOffsetX2 = (int)(nOffsetX + (BackObj->GetTransform().Scale.x / 2));
+							nOffsetY2 = (int)(nOffsetY - (BackObj->GetTransform().Scale.y / 2));
+						}
+						else
+						{
+							nOffsetX2 = (int)(nOffsetX - (BackObj->GetTransform().Scale.x / 2));
+							nOffsetY2 = (int)(nOffsetY - (BackObj->GetTransform().Scale.y / 2));
+						}
+
 						if ((nTileMode & TileMode::Horizontal || nTileMode & TileMode::ScrollHorizontal))
 						{
 							nWidthTileCount = nRepeatWidth / (int)cx;
@@ -578,9 +608,6 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						RenderComponent->SetHeightTileLength((int)cy);
 						RenderComponent->SetBlendMode(0);
 
-						int nOffsetX2{};
-						int nOffsetY2{};
-
 						FinalPos = { ObjX , ObjY * -1.0f, 0.0f };
 						BackObj->Transform.Position.x = FinalPos.x;
 						BackObj->Transform.Position.y = FinalPos.y;
@@ -589,6 +616,8 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						BackObj->OriginalY = FinalPos.y;
 						BackObj->rx = rx;
 						BackObj->ry = ry;
+						BackObj->OffsetX = (float)nOffsetX2;
+						BackObj->OffsetY = (float)nOffsetY2;
 					}
 
 					BackElement = BackElement->NextSiblingElement();
