@@ -42,6 +42,12 @@ void BP_LucidBoss_0::Tick(float fDeltaTime)
 
 	RenderComponent->PlayAnimation(fDeltaTime);
 
+	if (Flower && RenderComponent->GetCurrentAnimation() == EAnimationName::Die)
+	{
+		Flower->Destroy();
+		Flower = nullptr;
+	}
+
 	if (RenderComponent->GetHasPassedLastFrame())
 	{
 		if (RenderComponent->GetCurrentAnimation() == EAnimationName::Die)
@@ -88,9 +94,9 @@ void BP_LucidBoss_0::InitActions()
 	ActionComponent->AddAction<BP_TakeDamageAction>();
 }
 
-void BP_LucidBoss_0::SetResourcePath(string strPath)
+void BP_LucidBoss_0::SetFlower(AActor* _Flower)
 {
-	BossResourceName = strPath;
+	Flower = _Flower;
 }
 
 void BP_LucidBoss_0::InitPhysics()

@@ -7,46 +7,30 @@ class URenderComponent;
 class UPhysicsComponent;
 class UAttributeComponent;
 class UActionComponent;
-class AActor;
 
-class BP_LucidBoss_0 : public AActor
+class BP_LucidFlower : public AActor
 {
 	typedef AActor Super;
 
 public:
 	/* 생성자와 오버라이드 */
-	BP_LucidBoss_0();
+	BP_LucidFlower();
 
 	void BeginPlay() override;
 
 	void Tick(float fDeltaTime) override;
 
-	virtual void InitAttributes();
-
 	virtual void InitTexture();
 
 	virtual void InitAnimations();
 
-	virtual void InitActions();
-
-public:
-	void SetFlower(AActor* _Flower);
-
 protected:
-	void InitPhysics();
+	void SetResourcePath(string strPath);
 
 
 public:
 	URenderComponent* RenderComponent;
 
-	UPhysicsComponent* PhysicsComponent;
-
-	UAttributeComponent* AttributeComponent;
-
-	UActionComponent* ActionComponent;
-
-	string BossResourceName;
-
-	AActor* Flower;
+	string ResourceName;
 };
 

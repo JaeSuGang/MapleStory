@@ -2,6 +2,7 @@
 #include "Levels/LachelnDreamForest.h"
 #include "Actors/Characters/BP_WindBreaker.h"
 #include "Actors/Boss/BP_LucidBoss_0.h"
+#include "Actors/Boss/BP_LucidFlower.h"
 #include "World/World.h"
 
 void ULachelnDreamForest::BeginPlay()
@@ -12,8 +13,11 @@ void ULachelnDreamForest::BeginPlay()
 
 	MainActor = GetWorld()->SpawnActorReturnShared<BP_WindBreaker>();
 
+	BP_LucidFlower* Flower = GetWorld()->SpawnActor<BP_LucidFlower>();
 	BP_LucidBoss_0* LucidPhase1 = GetWorld()->SpawnActor<BP_LucidBoss_0>();
-	LucidPhase1->SetPosition({1000.0f, 250.0f, 0.0f});
+	LucidPhase1->SetFlower(Flower);
+	Flower->SetPosition({995.0f, 132.0f, 0.0f});
+	LucidPhase1->SetPosition({1000.0f, 235.0f, 0.0f});
 
 	
 }
