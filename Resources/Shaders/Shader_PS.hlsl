@@ -52,20 +52,20 @@ float4 PSTile(VertexShaderOutput _Vertex) : SV_Target0
     uint TextureWidth, TextureHeight;
     ImageTexture.GetDimensions(TextureWidth, TextureHeight);
     
-    float2 UVToApply = _Vertex.UV.xy;
+    float UVX = (_Vertex.UV.x * PlaneWidth) % WidthTileLength / WidthTileLength;
+    float UVY = (_Vertex.UV.y * PlaneHeight) % HeightTileLength / HeightTileLength;
+
+    float UVWidthStart = (TextureWidth - WidthTileLength) / 2.0f / TextureWidth;
+    float UVWidthEnd = 1.0f - UVWidthStart;
+    float UVHeightStart = (TextureHeight - HeightTileLength) / 2.0f / TextureHeight;
+    float UVHeightEnd = 1.0f - UVHeightStart;
     
-    float PixelWidthCoordinate = (float)(_Vertex.UV.x * PlaneWidth % WidthTileLength) / WidthTileLength;
-    float StartWidthUV = (float) (TextureWidth - WidthTileLength) / 2.0f / WidthTileLength;
-    float EndWidthUV = 1.0f - StartWidthUV;
+    float2 UVToApply = _Vertex.UV;
+    UVToApply.x = lerp(UVWidthStart, UVWidthEnd, UVX);
+    UVToApply.y = lerp(UVHeightStart, UVHeightEnd, UVY);
     
-    float PixelHeightCoordinate = (float) (_Vertex.UV.y * PlaneHeight % HeightTileLength) / HeightTileLength;
-    float StartHeightUV = (float) (TextureHeight- HeightTileLength) / 2.0f / HeightTileLength;
-    float EndHeightUV = 1.0f - StartHeightUV;
-    
-    if (PlaneWidth != WidthTileLength)
-        UVToApply.x = PixelWidthCoordinate * (EndWidthUV - StartWidthUV) + StartWidthUV;
-    if (PlaneHeight != HeightTileLength)
-        UVToApply.y = PixelHeightCoordinate * (EndHeightUV - StartHeightUV) + StartHeightUV;
+    int2 texelCoord = int2(floor(UVToApply.x * TextureWidth), floor(UVToApply.y * TextureHeight));
+
     
     float4 Color = ImageTexture.Sample(ImageSampler, UVToApply);
 
