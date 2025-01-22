@@ -703,7 +703,7 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 						strImagePath += "\\" + strLifeID + ".img.stand.0.png";
 
 						tinyxml2::XMLDocument NpcDocument;
-						Error = NpcDocument.LoadFile(("Resources\\XMLs\\Npc." + strLifeID + ".img.xml").data());
+						Error = NpcDocument.LoadFile(("Resources\\XMLs\\NPC\\Npc." + strLifeID + ".img.xml").data());
 						if (Error)
 						{
 							LifeIndexElement = LifeIndexElement->NextSiblingElement();
@@ -759,13 +759,13 @@ void UMapBase::LoadXMLToMap(string strMapPath, string strImgName)
 							NPC->MultiplyScale(nFlipped ? -1.0f : 1.0f, 1.0f, 1.0f);
 							nOffsetX2 = (int)(nOffsetX + NPC->GetTransform().Scale.x / 2);
 							nOffsetY2 = (int)(nOffsetY - NPC->GetTransform().Scale.y / 2);
-							FinalPos = { fLifePosX + (float)nOffsetX2, ((float)fLifePosY - (float)nOffsetY2) * -1.0f, 0.0f };
+							FinalPos = { fLifePosX + (float)nOffsetX2, ((float)fLifePosY - (float)nOffsetY2) * -1.0f + 20.0f, 0.0f };
 						}
 						else
 						{
 							nOffsetX2 = (int)(nOffsetX - NPC->GetTransform().Scale.x / 2);
 							nOffsetY2 = (int)(nOffsetY - NPC->GetTransform().Scale.y / 2);
-							FinalPos = { fLifePosX - (float)nOffsetX2, ((float)fLifePosY - (float)nOffsetY2) * -1.0f, 0.0f };
+							FinalPos = { fLifePosX - (float)nOffsetX2, ((float)fLifePosY - (float)nOffsetY2) * -1.0f + 20.0f, 0.0f };
 						}
 
 						FTransform& NPCTransform = NPC->GetTransform();

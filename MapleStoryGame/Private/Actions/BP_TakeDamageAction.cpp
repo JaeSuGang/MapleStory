@@ -63,7 +63,7 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 				RenderComponent->SetCurrentAnimation(EAnimationName::Hit);
 
 				FVector3 PosToApply = HitPos;
-				PosToApply.y += 50.0f * (Damage.CurrentHitCount - 1);
+				PosToApply.y += 50.0f * (Damage.CurrentHitCount);
 
 				this->SpawnDamageFont(PosToApply, FinalDamage);
 				this->SpawnHitEffect(HitPos, Damage);
