@@ -33,6 +33,8 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API bool GetSensorOverlappedShapes(vector<b2ShapeId>& pVector);
+
 	ENGINE_API void SetPosition(FVector3 _Position);
 
 	ENGINE_API void SetRotation(FVector3 _Rotation);
@@ -46,6 +48,8 @@ public:
 	ENGINE_API void AddYVelocity(float _y);
 
 	ENGINE_API FVector3 GetVelocity() const;
+
+	ENGINE_API void SetVelocity(FVector3 _Velocity);
 
 	ENGINE_API void SetXVelocity(float _x);
 

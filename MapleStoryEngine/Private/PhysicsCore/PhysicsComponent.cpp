@@ -35,6 +35,29 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 		SyncPosAndRot();
 }
 
+bool UPhysicsComponent::GetSensorOverlappedShapes(vector<b2ShapeId>& pVector)
+{
+	if (int ContactCount = b2Shape_GetContactCapacity(B2SensorID))
+	{
+		pVector.clear();
+
+		vector<b2ContactData> _ContactDatas;
+		_ContactDatas.resize(ContactCount);
+
+		b2Shape_GetContactData(B2SensorID, &_ContactDatas[0], ContactCount);
+
+		for (b2ContactData& _ContactData : _ContactDatas)
+		{
+			if (_ContactData.shapeIdA.index1 != 0)
+				pVector.push_back(_ContactData.shapeIdA);
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
 void UPhysicsComponent::SetRotation(FVector3 _Rotation)
 {
 	b2Transform Transform = b2Body_GetTransform(B2BodyID);
@@ -114,6 +137,16 @@ FVector3 UPhysicsComponent::GetVelocity() const
 	b2Vec2 Velocity = b2Body_GetLinearVelocity(B2BodyID);
 
 	return { Velocity.x * METER_TO_PIXEL_CONSTANT, Velocity.y * METER_TO_PIXEL_CONSTANT, 0.0f };
+}
+
+void UPhysicsComponent::SetVelocity(FVector3 _Velocity)
+{
+	b2Vec2 VelocityToApply = b2Body_GetLinearVelocity(B2BodyID);
+
+	VelocityToApply.x = _Velocity.x * PIXEL_TO_METER_CONSTANT;
+	VelocityToApply.y = _Velocity.y * PIXEL_TO_METER_CONSTANT;
+
+	b2Body_SetLinearVelocity(B2BodyID, VelocityToApply);
 }
 
 void UPhysicsComponent::SetXVelocity(float _x)
@@ -227,11 +260,10 @@ void UPhysicsComponent::InitializeSkillSensor(float fWidth, float fHeight)
 	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
 
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
-	ShapeDef.isSensor = true;
 	ShapeDef.density = 0.0f;
 	ShapeDef.friction = 0.0f;
 	ShapeDef.filter.categoryBits = SKILL_CENSOR_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = MOB_HITBOX_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = MOB_HITBOX_COLLISION_FLAG | MOB_HITBOXUNPASSABLE_COLLISION_FLAG;
 
 	B2SensorID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
 }
@@ -272,7 +304,6 @@ void UPhysicsComponent::InitializeHitbox(float fWidth, float fHeight)
 	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
 
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
-	ShapeDef.isSensor = true;
 	ShapeDef.density = 0.0f;
 	ShapeDef.friction = 0.0f;
 	ShapeDef.filter.categoryBits = MOB_HITBOX_COLLISION_FLAG;

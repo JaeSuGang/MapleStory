@@ -5,6 +5,10 @@
 
 AAtomBase::AAtomBase()
 {
+	IsHit = false;
+
+	LifeTime = 0.0f;
+
 	ElapsedTime = 0.0f;
 
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
@@ -30,6 +34,11 @@ void AAtomBase::Tick(float fDeltaTime)
 	Super::Tick(fDeltaTime);
 
 	ElapsedTime += fDeltaTime;
+
+	LifeTime -= fDeltaTime;
+
+	if (LifeTime < 0)
+		this->Destroy();
 
 	RenderComponent->PlayAnimation(fDeltaTime);
 }

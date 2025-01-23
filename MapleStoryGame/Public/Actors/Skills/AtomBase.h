@@ -31,6 +31,10 @@ protected:
 
 	UPhysicsComponent* PhysicsComponent;
 
+	bool IsHit;
+
+	float LifeTime;
+
 	float ElapsedTime;
 };
 

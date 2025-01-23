@@ -6,12 +6,38 @@
 #include "PhysicsCore/PhysicsComponent.h"
 
 
+BP_IdleWhimAtom::BP_IdleWhimAtom()
+{
+	LifeTime = 10.0f;
+
+	ContactShapes.reserve(20);
+}
+
 void BP_IdleWhimAtom::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
 	if (ElapsedTime > 0.2f)
-		PhysicsComponent->AddForwardVelocity(-1000.0f * fDeltaTime);
+	{
+		if (PhysicsComponent->GetSensorOverlappedShapes(ContactShapes))
+		{
+			if (IsHit == false)
+			{
+				IsHit = true;
+				LifeTime = 1.0f;
+			}
+
+			RenderComponent->AddAlphaValue(-fDeltaTime);
+			PhysicsComponent->SetVelocity({ 0.0f, 0.0f, 0.0f });
+		}
+		else
+		{
+
+
+			PhysicsComponent->AddForwardVelocity(-1000.0f * fDeltaTime);
+		}
+
+	}
 }
 
 void BP_IdleWhimAtom::BeginPlay()
