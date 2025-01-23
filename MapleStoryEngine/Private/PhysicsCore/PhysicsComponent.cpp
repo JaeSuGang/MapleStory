@@ -75,7 +75,7 @@ void UPhysicsComponent::SetPosition(FVector3 _Position)
 	Transform.p.x = _Position.x * PIXEL_TO_METER_CONSTANT;
 	Transform.p.y = _Position.y * PIXEL_TO_METER_CONSTANT;
 
-	b2Body_SetTransform(B2BodyID, Transform.p ,Transform.q);
+	b2Body_SetTransform(B2BodyID, Transform.p, Transform.q);
 }
 
 bool UPhysicsComponent::GetIsGrounded()
@@ -221,7 +221,7 @@ void UPhysicsComponent::SyncPosAndRot()
 	b2Transform b2Trans = b2Body_GetTransform(B2BodyID);
 
 	FVector3 Pos{ b2Trans.p.x * METER_TO_PIXEL_CONSTANT, b2Trans.p.y * METER_TO_PIXEL_CONSTANT, OwnerTransfrom.Position.z };
-	FVector3 Rot { OwnerTransfrom.Rotation.x, OwnerTransfrom.Rotation.y, RadianToDegree(std::atan2(b2Trans.q.s, b2Trans.q.c)) };
+	FVector3 Rot{ OwnerTransfrom.Rotation.x, OwnerTransfrom.Rotation.y, RadianToDegree(std::atan2(b2Trans.q.s, b2Trans.q.c)) };
 
 	OwnerTransfrom.Position = Pos;
 	OwnerTransfrom.Rotation = Rot;

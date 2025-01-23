@@ -18,8 +18,29 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 	Super::Tick(fDeltaTime);
 
 	if (ElapsedTime > 0.2f)
-		PhysicsComponent->AddForwardVelocity(-1000.0f * fDeltaTime);
-}
+	{
+		if (PhysicsComponent->GetSensorOverlappedShapes(ContactShapes))
+		{
+			if (IsHit == false)
+			{
+				IsHit = true;
+				LifeTime = 1.0f;
+
+				for (b2ShapeId& ShapeId : ContactShapes)
+				{
+					//  GEngine->physics
+				}
+			}
+
+			RenderComponent->AddAlphaValue(-fDeltaTime);
+			PhysicsComponent->SetVelocity({ 0.0f, 0.0f, 0.0f });
+		}
+		else
+		{
+
+
+			PhysicsComponent->AddForwardVelocity(-1000.0f * fDeltaTime);
+		}
 
 	}
 }
@@ -43,7 +64,7 @@ void BP_IdleWhimAtom::InitAnimations()
 {
 	Super::InitAnimations();
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\IdleWhim\\atom", 90);	
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\IdleWhim\\atom", 90);
 }
 
 void BP_IdleWhimAtom::InitPhysics()

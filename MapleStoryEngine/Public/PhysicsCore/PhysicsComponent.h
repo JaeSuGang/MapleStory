@@ -82,7 +82,7 @@ protected:
 
 protected:
 	UPhysicsSubsystem* PhysicsSubsystem;
-		
+
 	b2BodyId B2BodyID;
 
 	b2ShapeId B2FootID;
