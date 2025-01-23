@@ -147,6 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\Skills\BP_IdleWhimEffect.cpp" />
+    <ClCompile Include="Private\Actors\Skills\BP_IdleWhimAtom.cpp" />
+    <ClCompile Include="Private\Actors\Skills\AtomBase.cpp" />
+    <ClCompile Include="Private\Actions\BP_IdleWhimAction.cpp" />
     <ClCompile Include="Private\Actors\Monsters\BP_NightmareGolem_0.cpp" />
     <ClCompile Include="Private\Actors\Boss\BP_LucidFlower.cpp" />
     <ClCompile Include="Private\Actors\Boss\BP_LucidBoss_0.cpp" />
@@ -189,6 +193,10 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\Skills\BP_IdleWhimEffect.h" />
+    <ClInclude Include="Public\Actors\Skills\BP_IdleWhimAtom.h" />
+    <ClInclude Include="Public\Actors\Skills\AtomBase.h" />
+    <ClInclude Include="Public\Actions\BP_IdleWhimAction.h" />
     <ClInclude Include="Public\Actors\Monsters\BP_NightmareGolem_0.h" />
     <ClInclude Include="Public\Actors\Boss\BP_LucidFlower.h" />
     <ClInclude Include="Public\Actors\Boss\BP_LucidBoss_0.h" />

@@ -34,6 +34,8 @@ public:
 
 	void ExecuteWorldSubsystemTick(float fDeltaTime);
 
+	void ExecuteLevelTick(float fDeltaTime);
+
 	void ExecuteActorTick(float fDeltaTime);
 
 	void ExecuteActorLateTick(float fDeltaTime);

@@ -151,6 +151,8 @@ void UEngine::WorldTick(float fDeltaTime)
 {
 	ActiveWorld->ExecuteWorldSubsystemTick(fDeltaTime);
 
+	ActiveWorld->ExecuteLevelTick(fDeltaTime);
+
 	ActiveWorld->ExecuteActorTick(fDeltaTime);
 
 	ActiveWorld->ElapsedTime += fDeltaTime;

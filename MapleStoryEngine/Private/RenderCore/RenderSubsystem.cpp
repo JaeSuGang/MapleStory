@@ -658,11 +658,11 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 				for (URenderComponent* RenderComponent : RenderOrder[i][j][k])
 				{
 					/* Transculent 머티리얼을 가진 경우 나중에 렌더링 */
-					if (RenderComponent->Material->BlendMode == UMaterial::EBlendMode::Transculent)
-					{
-						Transculents.push_back(RenderComponent);
-						continue;
-					}
+					//if (RenderComponent->Material->BlendMode == UMaterial::EBlendMode::Transculent)
+					//{
+					//	Transculents.push_back(RenderComponent);
+					//	continue;
+					//}
 
 
 					/* 정보 불러오기 및 지역 변수 설정 */

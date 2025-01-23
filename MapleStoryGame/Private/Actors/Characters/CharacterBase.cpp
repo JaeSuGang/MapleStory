@@ -36,7 +36,9 @@ void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	this->InitTextureAndPhysics();
+	this->InitTextures();
+
+	this->InitPhysics();
 
 	this->InitActions();
 
@@ -75,7 +77,7 @@ void ACharacterBase::BindKeys()
 
 	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, VK_SPACE, UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.DoubleJump"}));
 
-	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'S', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{"Action.FairyTurn"}));
+	
 }
 
 void ACharacterBase::DecideAnimation()
@@ -126,7 +128,7 @@ void ACharacterBase::InitActions()
 
 }
 
-void ACharacterBase::InitTextureAndPhysics()
+void ACharacterBase::InitTextures()
 {
 	RenderComponent->SetMeshIDByName("Plane");
 
@@ -134,12 +136,24 @@ void ACharacterBase::InitTextureAndPhysics()
 
 	RenderComponent->SetBlendMode(0);
 
-	RenderComponent->SetSortingLayer(9);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_CHARACTER);
 
 	RenderComponent->EnableMaterial();
+}
+
+void ACharacterBase::InitPhysics()
+{
+	PhysicsComponent->InitializeBody(b2BodyType::b2_dynamicBody);
+
+	PhysicsComponent->InitializeCharacterFootCollider(Transform.Scale.y * -0.49f);
 }
 
 void ACharacterBase::InitAnimations()
 {
 	RenderComponent->EnableAnimation();
+}
+
+void ACharacterBase::SetPosition(FVector3 _Position)
+{
+	PhysicsComponent->SetPosition(_Position);
 }

@@ -20,7 +20,7 @@ void BP_NightmareGolem_0::InitPhysics()
 {
 	PhysicsComponent->InitializeBody(b2BodyType::b2_dynamicBody);
 
-	PhysicsComponent->InitializeFootCollider(Transform.Scale.y * -0.49f);
+	PhysicsComponent->InitializeMobFootCollider(Transform.Scale.y * -0.49f);
 
 	PhysicsComponent->InitializeHitboxUnpassable(Transform.Scale.x, Transform.Scale.y);
 }

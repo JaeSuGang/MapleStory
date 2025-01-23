@@ -25,7 +25,7 @@ void AHitEffect::Tick(float fDeltaTime)
 	}
 }
 
-void AHitEffect::SetAnimation(string strPath)
+void AHitEffect::SetAnimation(string strPath, int SecondPerFrame)
 {
 	RenderComponent->EnableMaterial();
 
@@ -35,7 +35,7 @@ void AHitEffect::SetAnimation(string strPath)
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 
-	RenderComponent->SetSortingLayer(10);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_FRONT_SKILL);
 
 	RenderComponent->SetBlendMode(1);
 
@@ -43,7 +43,7 @@ void AHitEffect::SetAnimation(string strPath)
 
 	RenderComponent->SetActorScaleByTextureSize();
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, strPath, 60);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, strPath, SecondPerFrame);
 
 	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }

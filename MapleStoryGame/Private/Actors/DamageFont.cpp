@@ -17,7 +17,7 @@ void ADamageFont::BeginPlay()
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 
-	RenderComponent->SetSortingLayer(11);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_DAMAGE_SKIN);
 
 	RenderComponent->SetBlendMode(1);
 

@@ -19,12 +19,22 @@ UMapBase::UMapBase()
 
 void UMapBase::BeginPlay()
 {
-
+	Super::BeginPlay();
 }
 
 void UMapBase::Tick(float fDeltaTime)
 {
+	Super::Tick(fDeltaTime);
 
+	if (AActor* pMainActor = MainActor.lock().get())
+	{
+		FTransform& MainActorTransform = pMainActor->GetTransform();
+
+		if (MainActorTransform.Position.y < VRBottomInverted)
+		{
+			pMainActor->GetComponentByClass<UPhysicsComponent>()->SetPosition({ 0.0f , 5.0f, 0.0f });
+		}
+	}
 }
 
 AActor* UMapBase::GetMainActor() const

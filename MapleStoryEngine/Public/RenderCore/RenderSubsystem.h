@@ -3,15 +3,6 @@
 #include "Engine/EngineSubsystem.h"
 #include "Math/Transform.h"
 
-/* SortingLayer 0 : BackGround */
-/* SortingLayer 0 ~ 7 : 맵 지정 */
-/* SortingLayer 8 : 몹 */
-/* SortingLayer 9 : 캐릭터 */
-/* SortingLayer 10 : 스킬 */
-/* SortingLayer 11 : 디버그 레이어 */
-
-
-
 class UWindowSubsystem;
 class UDebugSubsystem;
 class UTexture;
@@ -47,7 +38,7 @@ public:
 	bool IsFreeMode;
 	bool IsPerspectiveProjection;
 	bool IsWireFrame;
-	int DebugLayerLevel = 13;
+	int DebugLayerLevel = 14;
 };
 
 /* UWindowSubsystem, UDebugSubsystem, UResourceSubsystem에 의존 */

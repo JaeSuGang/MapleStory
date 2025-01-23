@@ -100,6 +100,11 @@ void AActor::SetScale(FVector3 _Vector)
 	Transform.Scale.z = _Vector.z;
 }
 
+void AActor::SetTransform(FTransform _Transform)
+{
+	Transform = _Transform;
+}
+
 FTransform& AActor::GetTransform()
 {
 	return Transform;

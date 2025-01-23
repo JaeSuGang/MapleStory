@@ -72,7 +72,7 @@ void BP_LucidBoss_0::InitTexture()
 
 	RenderComponent->SetBlendMode(0);
 
-	RenderComponent->SetSortingLayer(8);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_MONSTER);
 
 	RenderComponent->SetTextureByName("Resources\\Textures\\Monsters\\" + BossResourceName + "\\stand\\1.png");
 
@@ -101,9 +101,9 @@ void BP_LucidBoss_0::SetFlower(AActor* _Flower)
 
 void BP_LucidBoss_0::InitPhysics()
 {
-	PhysicsComponent->InitializeBodyWithNoGravity(b2BodyType::b2_dynamicBody);
+	PhysicsComponent->InitializeBodyWithNoGravity(b2BodyType::b2_staticBody);
 
-	PhysicsComponent->InitializeFootCollider(Transform.Scale.y * -0.49f);
+	PhysicsComponent->InitializeMobFootCollider(Transform.Scale.y * -0.49f);
 
 	PhysicsComponent->InitializeHitbox(Transform.Scale.x, Transform.Scale.y);
 }

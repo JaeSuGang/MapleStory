@@ -16,7 +16,7 @@ public:
 	void Tick(float fDeltaTime) override;
 
 public:
-	void SetAnimation(string strPath);
+	void SetAnimation(string strPath, int SecondPerFrame);
 
 protected:
 	URenderComponent* RenderComponent;

@@ -17,11 +17,11 @@ void BP_FairyTurn_Range::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetPositionRelativeToInstigator(300.0f, 100.0f);
+	SetPositionRelativeToInstigator(200.0f, 0.0f);
 
 	vector<b2ShapeId> OverlappedShapeIds;
 	b2QueryFilter Filter{};
-	Filter.categoryBits = -1;
+	Filter.categoryBits = SKILL_CENSOR_COLLISION_FLAG;
 	Filter.maskBits = MOB_HITBOX_COLLISION_FLAG;
 	GEngine->GetWorld()->PhysicsSubsystem->FetchBoxOverlap(Transform.Scale.x, Transform.Scale.y, Transform, Filter, &OverlappedShapeIds);
 
@@ -50,8 +50,6 @@ void BP_FairyTurn_Range::BeginPlay()
 void BP_FairyTurn_Range::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
-
-	this->SetPositionRelativeToInstigator(200.0f, 0.0f);
 }
 
 void BP_FairyTurn_Range::InitAttributes()

@@ -30,6 +30,8 @@ public:
 
 	virtual void InitPhysics();
 
+	void SetPosition(FVector3 _Position) override;
+
 protected:
 	void SetResourcePath(string strPath);
 

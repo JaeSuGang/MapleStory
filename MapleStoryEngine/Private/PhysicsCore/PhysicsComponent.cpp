@@ -7,6 +7,11 @@
 #include "Math/Math.h"
 
 UPhysicsComponent::UPhysicsComponent()
+	:
+	B2SensorID{},
+	B2HitboxID{},
+	B2FootID{},
+	B2BodyID{}
 {
 	PhysicsSubsystem = GEngine->GetWorld()->PhysicsSubsystem;
 }
@@ -28,6 +33,26 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 		SyncPos();
 	else
 		SyncPosAndRot();
+}
+
+void UPhysicsComponent::SetRotation(FVector3 _Rotation)
+{
+	b2Transform Transform = b2Body_GetTransform(B2BodyID);
+
+	Transform.q.c = std::cosf(DegreeToRadian(_Rotation.z));
+	Transform.q.s = std::sinf(DegreeToRadian(_Rotation.z));
+
+	b2Body_SetTransform(B2BodyID, Transform.p, Transform.q);
+}
+
+void UPhysicsComponent::SetPosition(FVector3 _Position)
+{
+	b2Transform Transform = b2Body_GetTransform(B2BodyID);
+
+	Transform.p.x = _Position.x * PIXEL_TO_METER_CONSTANT;
+	Transform.p.y = _Position.y * PIXEL_TO_METER_CONSTANT;
+
+	b2Body_SetTransform(B2BodyID, Transform.p ,Transform.q);
 }
 
 bool UPhysicsComponent::GetIsGrounded()
@@ -100,6 +125,19 @@ void UPhysicsComponent::SetXVelocity(float _x)
 	b2Body_SetLinearVelocity(B2BodyID, Velocity);
 }
 
+void UPhysicsComponent::AddForwardVelocity(float _Speed)
+{
+	_Speed = _Speed * PIXEL_TO_METER_CONSTANT;
+
+	b2Vec2 _Velocity = b2Body_GetLinearVelocity(B2BodyID);
+	b2Transform _Transform = b2Body_GetTransform(B2BodyID);
+
+	_Velocity.x += _Transform.q.c * _Speed;
+	_Velocity.y += _Transform.q.s * _Speed;
+
+	b2Body_SetLinearVelocity(B2BodyID, _Velocity);
+}
+
 void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float y2)
 {
 	IsLine = true;
@@ -125,7 +163,7 @@ void UPhysicsComponent::InitializeAsFoothold(float x1, float y1, float x2, float
 	ChainDef.points = VecPoints;
 	ChainDef.count = 4;
 	ChainDef.filter.categoryBits = FOOTHOLD_COLLISION_FLAG;
-	ChainDef.filter.maskBits = MOB_FOOT_COLLISION_FLAG;
+	ChainDef.filter.maskBits = MOB_FOOT_COLLISION_FLAG | CHARACTER_FOOT_COLLISION_FLAG;
 
 	ShapeDef.friction = 0.7f;
 
@@ -150,7 +188,7 @@ void UPhysicsComponent::SyncPosAndRot()
 	b2Transform b2Trans = b2Body_GetTransform(B2BodyID);
 
 	FVector3 Pos{ b2Trans.p.x * METER_TO_PIXEL_CONSTANT, b2Trans.p.y * METER_TO_PIXEL_CONSTANT, OwnerTransfrom.Position.z };
-	FVector3 Rot { OwnerTransfrom.Rotation.x, OwnerTransfrom.Rotation.y, RadianToDegree(std::acos(b2Trans.q.c)) };
+	FVector3 Rot { OwnerTransfrom.Rotation.x, OwnerTransfrom.Rotation.y, RadianToDegree(std::atan2(b2Trans.q.s, b2Trans.q.c)) };
 
 	OwnerTransfrom.Position = Pos;
 	OwnerTransfrom.Rotation = Rot;
@@ -184,6 +222,20 @@ void UPhysicsComponent::InitializeBodyWithNoGravity(b2BodyType _type)
 	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
 }
 
+void UPhysicsComponent::InitializeSkillSensor(float fWidth, float fHeight)
+{
+	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
+
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	ShapeDef.isSensor = true;
+	ShapeDef.density = 0.0f;
+	ShapeDef.friction = 0.0f;
+	ShapeDef.filter.categoryBits = SKILL_CENSOR_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = MOB_HITBOX_COLLISION_FLAG;
+
+	B2SensorID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
+}
+
 void UPhysicsComponent::InitializeBody(b2BodyType _type)
 {
 	IsBodyInitialized = true;
@@ -210,7 +262,7 @@ void UPhysicsComponent::InitializeHitboxUnpassable(float fWidth, float fHeight)
 	ShapeDef.density = 10000.0f;
 	ShapeDef.friction = 0.0f;
 	ShapeDef.filter.categoryBits = MOB_HITBOXUNPASSABLE_COLLISION_FLAG | MOB_HITBOX_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = MOB_FOOT_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = CHARACTER_FOOT_COLLISION_FLAG | SKILL_CENSOR_COLLISION_FLAG;
 
 	B2HitboxID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
 }
@@ -220,15 +272,29 @@ void UPhysicsComponent::InitializeHitbox(float fWidth, float fHeight)
 	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
 
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	ShapeDef.isSensor = true;
 	ShapeDef.density = 0.0f;
 	ShapeDef.friction = 0.0f;
 	ShapeDef.filter.categoryBits = MOB_HITBOX_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = NO_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = SKILL_CENSOR_COLLISION_FLAG;
 
 	B2HitboxID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
 }
 
-void UPhysicsComponent::InitializeFootCollider(float fYOffsetFromCenter)
+void UPhysicsComponent::InitializeCharacterFootCollider(float fYOffsetFromCenter)
+{
+	b2Circle Circle = { {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, 1.0f * PIXEL_TO_METER_CONSTANT };
+
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	ShapeDef.density = 0.1f;
+	ShapeDef.friction = 0.7f;
+	ShapeDef.filter.categoryBits = CHARACTER_FOOT_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG | MOB_HITBOXUNPASSABLE_COLLISION_FLAG;
+
+	B2FootID = b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
+}
+
+void UPhysicsComponent::InitializeMobFootCollider(float fYOffsetFromCenter)
 {
 	b2Circle Circle = { {0.0f, fYOffsetFromCenter * PIXEL_TO_METER_CONSTANT}, 1.0f * PIXEL_TO_METER_CONSTANT };
 
@@ -236,7 +302,7 @@ void UPhysicsComponent::InitializeFootCollider(float fYOffsetFromCenter)
 	ShapeDef.density = 0.1f;
 	ShapeDef.friction = 0.7f;
 	ShapeDef.filter.categoryBits = MOB_FOOT_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG | MOB_HITBOXUNPASSABLE_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
 
 	B2FootID = b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
 }

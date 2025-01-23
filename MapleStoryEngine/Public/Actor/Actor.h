@@ -19,12 +19,13 @@ public:
 
 	ENGINE_API virtual void LateTick(float fDeltaTime);
 
+	ENGINE_API virtual void SetPosition(FVector3 _Position);
+
+	ENGINE_API virtual void SetRotation(FVector3 _Vector);
 public:
 	ENGINE_API bool GetIsTickEnabled() const;
 
 	ENGINE_API void SetIsTickEnabled(bool bValue);
-
-	ENGINE_API void SetPosition(FVector3 _Position);
 
 	ENGINE_API void Destroy();
 
@@ -36,9 +37,10 @@ public:
 
 	ENGINE_API void MultiplyScale(float x, float y, float z);
 
-	ENGINE_API void SetRotation(FVector3 _Vector);
 
 	ENGINE_API void SetScale(FVector3 _Vector);
+
+	ENGINE_API void SetTransform(FTransform _Transform);
 
 	ENGINE_API FTransform& GetTransform();
 

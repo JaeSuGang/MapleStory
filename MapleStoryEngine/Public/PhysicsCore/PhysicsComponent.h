@@ -9,9 +9,11 @@
 /* Collision Flag */
 #define NO_COLLISION_FLAG 0x1
 #define FOOTHOLD_COLLISION_FLAG 0x2
-#define MOB_FOOT_COLLISION_FLAG 0x4
-#define MOB_HITBOX_COLLISION_FLAG 0x8
-#define MOB_HITBOXUNPASSABLE_COLLISION_FLAG 0x10
+#define CHARACTER_FOOT_COLLISION_FLAG 0x4
+#define MOB_FOOT_COLLISION_FLAG 0x8
+#define MOB_HITBOX_COLLISION_FLAG 0x10
+#define MOB_HITBOXUNPASSABLE_COLLISION_FLAG 0x20
+#define SKILL_CENSOR_COLLISION_FLAG 0x40
 
 class UPhysicsSubsystem;
 
@@ -31,6 +33,10 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API void SetPosition(FVector3 _Position);
+
+	ENGINE_API void SetRotation(FVector3 _Rotation);
+
 	ENGINE_API bool GetIsGrounded();
 
 	ENGINE_API void AddYPosition(float _y);
@@ -43,17 +49,23 @@ public:
 
 	ENGINE_API void SetXVelocity(float _x);
 
+	ENGINE_API void AddForwardVelocity(float _Speed);
+
 	ENGINE_API b2BodyId GetBodyID() const;
 
 	ENGINE_API void InitializeBody(b2BodyType _type);
 
 	ENGINE_API void InitializeBodyWithNoGravity(b2BodyType _type);
 
+	ENGINE_API void InitializeSkillSensor(float fWidth, float fHeight);
+
 	ENGINE_API void InitializeHitboxUnpassable(float fWidth, float fHeight);
 
 	ENGINE_API void InitializeHitbox(float fWidth, float fHeight);
 
-	ENGINE_API void InitializeFootCollider(float fYOffsetFromCenter);
+	ENGINE_API void InitializeCharacterFootCollider(float fYOffsetFromCenter);
+
+	ENGINE_API void InitializeMobFootCollider(float fYOffsetFromCenter);
 
 	ENGINE_API void InitializeNPCFootCollider();
 
@@ -72,6 +84,8 @@ protected:
 	b2ShapeId B2FootID;
 
 	b2ShapeId B2HitboxID;
+
+	b2ShapeId B2SensorID;
 
 	vector<b2ContactData> FootContactDatas;
 

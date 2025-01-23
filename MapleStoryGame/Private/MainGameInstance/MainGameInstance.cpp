@@ -30,6 +30,8 @@ void UMainGameInstance::BeginPlay()
 
 void UMainGameInstance::InitTags()
 {
+	GameplayTagsManager->RegisterTag("Action.IdleWhim");
+
 	GameplayTagsManager->RegisterTag("Action.FairyTurn");
 
 	GameplayTagsManager->RegisterTag("Action.GustShift");

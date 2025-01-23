@@ -10,7 +10,8 @@ public:
 
 	void InitAnimations() override;
 
-	void InitTextureAndPhysics() override;
+	void InitTextures() override;
 
+	void BindKeys() override;
 };
 

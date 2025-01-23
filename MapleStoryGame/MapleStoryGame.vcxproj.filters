@@ -126,6 +126,18 @@
     <ClCompile Include="Private\Actors\Monsters\BP_NightmareGolem_0.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Private\Actions\BP_IdleWhimAction.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actors\Skills\AtomBase.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actors\Skills\BP_IdleWhimAtom.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actors\Skills\BP_IdleWhimEffect.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Public\GamePch.h">
@@ -237,6 +249,18 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actors\Monsters\BP_NightmareGolem_0.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actions\BP_IdleWhimAction.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Skills\AtomBase.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Skills\BP_IdleWhimAtom.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Skills\BP_IdleWhimEffect.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

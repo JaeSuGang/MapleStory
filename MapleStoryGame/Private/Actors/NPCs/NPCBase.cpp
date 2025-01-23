@@ -18,7 +18,7 @@ void ANPCBase::BeginPlay()
 
 	RenderComponent->SetBlendMode(0);
 
-	RenderComponent->SetSortingLayer(8);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_MONSTER);
 
 }
 

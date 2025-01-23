@@ -13,6 +13,8 @@ enum TileMode
 
 class UMapBase : public ULevel
 {
+	typedef ULevel Super;
+
 	friend class UMapleCameraComponent;
 
 public:

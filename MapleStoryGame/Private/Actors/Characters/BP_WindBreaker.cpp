@@ -3,22 +3,26 @@
 #include "RenderCore/RenderComponent.h"
 #include "PhysicsCore/PhysicsComponent.h"
 #include "Actions/ActionComponent.h"
+#include "Engine/Engine.h"
+#include "Engine/KeyInputSubsystem.h"
 
 #include "Actions/BP_DoubleJumpAction.h"
-#include "Actions/BP_FairyTurnAction.h"
 #include "Actions/BP_GustShiftAction.h"
+#include "Actions/BP_FairyTurnAction.h"
+#include "Actions/BP_IdleWhimAction.h"
 
 void BP_WindBreaker::InitActions()
 {
 	Super::InitActions();
 
-
-
 	ActionComponent->AddAction<BP_DoubleJumpAction>();
+
+	ActionComponent->AddAction<BP_GustShiftAction>();
 
 	ActionComponent->AddAction<BP_FairyTurnAction>();
 
-	ActionComponent->AddAction<BP_GustShiftAction>();
+	ActionComponent->AddAction<BP_IdleWhimAction>();
+
 }
 
 void BP_WindBreaker::InitAnimations()
@@ -38,15 +42,20 @@ void BP_WindBreaker::InitAnimations()
 	RenderComponent->SetCurrentAnimation(EAnimationName::Idle);
 }
 
-void BP_WindBreaker::InitTextureAndPhysics()
+void BP_WindBreaker::InitTextures()
 {
-	Super::InitTextureAndPhysics();
+	Super::InitTextures();
 
 	RenderComponent->SetTextureByName("Resources\\Textures\\Avatars\\WindBreaker\\Idle\\1.png");
 
 	RenderComponent->SetActorScaleByTextureSize();
+}
 
-	PhysicsComponent->InitializeBody(b2BodyType::b2_dynamicBody);
+void BP_WindBreaker::BindKeys()
+{
+	Super::BindKeys();
 
-	PhysicsComponent->InitializeFootCollider(Transform.Scale.y * -0.49f);
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'S', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.FairyTurn" }));
+
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'R', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.IdleWhim" }));
 }

@@ -11,7 +11,7 @@ AFootholdBase::AFootholdBase()
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 
 	RenderComponent->EnableMaterial();
-	RenderComponent->SetSortingLayer(12);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_DEBUG);
 }
 
 void AFootholdBase::BeginPlay()

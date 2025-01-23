@@ -5,6 +5,13 @@
 #include "RenderCore/Animation.h"
 
 
+#define RENDER_LAYER_BACK_SKILL 8
+#define RENDER_LAYER_MONSTER 9
+#define RENDER_LAYER_CHARACTER 10
+#define RENDER_LAYER_FRONT_SKILL 11
+#define RENDER_LAYER_DAMAGE_SKIN 12
+#define RENDER_LAYER_DEBUG 13
+
 
 struct FMesh;
 

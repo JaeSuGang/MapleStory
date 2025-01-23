@@ -5,6 +5,8 @@
 
 ASkillBase::ASkillBase()
 {
+	ElapsedTime = 0.0f;
+
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 }
 
@@ -24,6 +26,8 @@ void ASkillBase::BeginPlay()
 void ASkillBase::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
+
+	ElapsedTime += fDeltaTime;
 
 	if (RenderComponent->GetHasPassedLastFrame())
 	{
@@ -52,7 +56,7 @@ void ASkillBase::InitTexture()
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 
-	RenderComponent->SetSortingLayer(10);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_FRONT_SKILL);
 
 	RenderComponent->SetBlendMode(1);
 }

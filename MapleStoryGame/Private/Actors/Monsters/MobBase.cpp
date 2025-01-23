@@ -62,7 +62,7 @@ void AMobBase::InitTexture()
 
 	RenderComponent->SetBlendMode(0);
 
-	RenderComponent->SetSortingLayer(8);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_MONSTER);
 
 	RenderComponent->SetTextureByName("Resources\\Textures\\Monsters\\" + MobResourcePath + "\\stand\\1.png");
 
@@ -97,7 +97,12 @@ void AMobBase::InitPhysics()
 {
 	PhysicsComponent->InitializeBody(b2BodyType::b2_dynamicBody);
 
-	PhysicsComponent->InitializeFootCollider(Transform.Scale.y * -0.49f);
+	PhysicsComponent->InitializeMobFootCollider(Transform.Scale.y * -0.49f);
 
 	PhysicsComponent->InitializeHitbox(Transform.Scale.x, Transform.Scale.y);
+}
+
+void AMobBase::SetPosition(FVector3 _Position)
+{
+	PhysicsComponent->SetPosition(_Position);
 }

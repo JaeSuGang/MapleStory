@@ -186,7 +186,7 @@ void UMapleStoryDebugSubsystem::MainDebugTab()
 		Pos.z = 0.0f;
 
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_NightmareGolem_0>();
-		Actor->SetPosition(Pos);
+		Actor->GetTransform().Position = Pos;
 	}
 
 	if (ImGui::Button("Spawn Mob"))
@@ -195,7 +195,7 @@ void UMapleStoryDebugSubsystem::MainDebugTab()
 		Pos.z = 0.0f;
 
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_Cleaner>();
-		Actor->SetPosition(Pos);
+		Actor->GetTransform().Position = Pos;
 	}
 
 	if (ImGui::Button("Spawn Cube"))

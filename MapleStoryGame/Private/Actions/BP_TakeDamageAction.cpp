@@ -111,6 +111,6 @@ void BP_TakeDamageAction::SpawnHitEffect(FVector3 Pos, FDamageInfo& Damage)
 	Pos.y += std::rand() % 80 - 40;
 
 	AHitEffect* HitEffect = GetWorld()->SpawnActor<AHitEffect>();
-	HitEffect->SetAnimation(Damage.HitEffectPath);
+	HitEffect->SetAnimation(Damage.HitEffectPath, 60);
 	HitEffect->SetPosition(Pos);
 }

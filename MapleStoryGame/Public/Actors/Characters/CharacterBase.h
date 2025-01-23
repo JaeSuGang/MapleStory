@@ -27,10 +27,14 @@ public:
 
 	virtual void InitAnimations();
 
-	virtual void InitTextureAndPhysics();
+	virtual void InitTextures();
+
+	virtual void InitPhysics();
+
+	virtual void SetPosition(FVector3 _Position);
 
 public:
-	void BindKeys();
+	virtual void BindKeys();
 
 protected:
 	void DecideAnimation();

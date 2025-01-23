@@ -33,6 +33,8 @@ protected:
 
 	URenderComponent* RenderComponent;
 
+	float ElapsedTime;
+
 	bool IsScreenSkill;
 };
 

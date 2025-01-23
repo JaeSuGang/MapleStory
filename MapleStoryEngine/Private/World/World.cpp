@@ -60,6 +60,12 @@ void UWorld::ExecuteWorldSubsystemTick(float fDeltaTime)
 	}
 }
 
+void UWorld::ExecuteLevelTick(float fDeltaTime)
+{
+	if (PersistentLevel.get())
+		PersistentLevel->Tick(fDeltaTime);
+}
+
 void UWorld::ExecuteActorTick(float fDeltaTime)
 {
 	for (shared_ptr<AActor>& LoopActor : PersistentLevel->Actors)
