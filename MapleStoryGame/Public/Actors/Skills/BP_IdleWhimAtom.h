@@ -6,6 +6,8 @@ class BP_IdleWhimAtom : public AAtomBase
 	typedef AAtomBase Super;
 
 public:
+	BP_IdleWhimAtom();
+
 	void Tick(float fDeltaTime);
 
 	void BeginPlay() override;
@@ -15,5 +17,8 @@ public:
 	void InitAnimations() override;
 
 	void InitPhysics() override;
+
+protected:
+	vector<b2ShapeId> ContactShapes;
 };
 
