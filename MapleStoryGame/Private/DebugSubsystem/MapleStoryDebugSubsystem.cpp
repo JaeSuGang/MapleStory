@@ -15,6 +15,7 @@
 #include "Actors/BP_TestSkill.h"
 #include "Actors/BP_TestSkill2.h"
 #include "Actors/BP_TestCube.h"
+#include "Actors/Monsters/BP_NightmareGolem_0.h"
 #include "Engine/KeyInputSubsystem.h"
 
 #include "Levels/TestLevel.h"
@@ -178,6 +179,15 @@ void UMapleStoryDebugSubsystem::MainDebugTab()
 	}
 
 	ImGui::SeparatorText("Actor");
+
+	if (ImGui::Button("Spawn Golem"))
+	{
+		FVector3 Pos = GEngine->RenderSubsystem->GetCamera().Transform.Position;
+		Pos.z = 0.0f;
+
+		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_NightmareGolem_0>();
+		Actor->SetPosition(Pos);
+	}
 
 	if (ImGui::Button("Spawn Mob"))
 	{

@@ -32,7 +32,24 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 
 bool UPhysicsComponent::GetIsGrounded()
 {
-	return b2Shape_GetContactCapacity(B2FootID) ? true : false;
+	int ContactDataCount = b2Shape_GetContactCapacity(B2FootID);
+	if (ContactDataCount == 0)
+		return false;
+
+	FootContactDatas.resize(ContactDataCount);
+	b2Shape_GetContactData(B2FootID, &FootContactDatas[0], ContactDataCount);
+
+	for (const b2ContactData& Data : FootContactDatas)
+	{
+		if (Data.shapeIdA.index1 == 0)
+			continue;
+
+		b2Filter Filter = b2Shape_GetFilter(Data.shapeIdA);
+		if (Filter.categoryBits == FOOTHOLD_COLLISION_FLAG)
+			return true;
+	}
+
+	return false;
 }
 
 void UPhysicsComponent::AddYPosition(float _y)
@@ -185,6 +202,19 @@ void UPhysicsComponent::InitializeBody(b2BodyType _type)
 	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
 }
 
+void UPhysicsComponent::InitializeHitboxUnpassable(float fWidth, float fHeight)
+{
+	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
+
+	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	ShapeDef.density = 10000.0f;
+	ShapeDef.friction = 0.0f;
+	ShapeDef.filter.categoryBits = MOB_HITBOXUNPASSABLE_COLLISION_FLAG | MOB_HITBOX_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = MOB_FOOT_COLLISION_FLAG;
+
+	B2HitboxID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
+}
+
 void UPhysicsComponent::InitializeHitbox(float fWidth, float fHeight)
 {
 	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
@@ -206,7 +236,7 @@ void UPhysicsComponent::InitializeFootCollider(float fYOffsetFromCenter)
 	ShapeDef.density = 0.1f;
 	ShapeDef.friction = 0.7f;
 	ShapeDef.filter.categoryBits = MOB_FOOT_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG | MOB_HITBOXUNPASSABLE_COLLISION_FLAG;
 
 	B2FootID = b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
 }

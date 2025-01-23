@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\Monsters\BP_NightmareGolem_0.cpp" />
     <ClCompile Include="Private\Actors\Boss\BP_LucidFlower.cpp" />
     <ClCompile Include="Private\Actors\Boss\BP_LucidBoss_0.cpp" />
     <ClCompile Include="Private\Levels\LachelnDreamForest.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\Monsters\BP_NightmareGolem_0.h" />
     <ClInclude Include="Public\Actors\Boss\BP_LucidFlower.h" />
     <ClInclude Include="Public\Actors\Boss\BP_LucidBoss_0.h" />
     <ClInclude Include="Public\Levels\LachelnDreamForest.h" />

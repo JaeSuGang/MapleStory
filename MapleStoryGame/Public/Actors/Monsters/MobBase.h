@@ -28,10 +28,11 @@ public:
 
 	virtual void InitActions();
 
+	virtual void InitPhysics();
+
 protected:
 	void SetResourcePath(string strPath);
 
-	void InitPhysics();
 
 
 public:

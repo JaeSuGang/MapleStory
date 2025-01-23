@@ -11,6 +11,7 @@
 #define FOOTHOLD_COLLISION_FLAG 0x2
 #define MOB_FOOT_COLLISION_FLAG 0x4
 #define MOB_HITBOX_COLLISION_FLAG 0x8
+#define MOB_HITBOXUNPASSABLE_COLLISION_FLAG 0x10
 
 class UPhysicsSubsystem;
 
@@ -48,6 +49,8 @@ public:
 
 	ENGINE_API void InitializeBodyWithNoGravity(b2BodyType _type);
 
+	ENGINE_API void InitializeHitboxUnpassable(float fWidth, float fHeight);
+
 	ENGINE_API void InitializeHitbox(float fWidth, float fHeight);
 
 	ENGINE_API void InitializeFootCollider(float fYOffsetFromCenter);
@@ -69,6 +72,8 @@ protected:
 	b2ShapeId B2FootID;
 
 	b2ShapeId B2HitboxID;
+
+	vector<b2ContactData> FootContactDatas;
 
 	bool IsLine;
 
