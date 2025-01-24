@@ -4,7 +4,7 @@
 using std::shared_ptr;
 using std::weak_ptr;
 
-class UObject : std::enable_shared_from_this<UObject>
+class UObject
 {
 public:
 	UObject() = default;
@@ -13,7 +13,7 @@ public:
 	template <typename T>
 	shared_ptr<T> GetShared()
 	{
-		return std::static_pointer_cast<T>(shared_from_this());
+		return std::static_pointer_cast<T>(_weak.lock());
 	}
 
 	template <typename T>
@@ -26,5 +26,7 @@ public:
 	UObject(UObject&& Other) noexcept = delete;
 	UObject& operator=(const UObject& Other) = delete;
 	UObject& operator=(UObject&& Other) noexcept = delete;
+
+	weak_ptr<UObject> _weak;
 };
 

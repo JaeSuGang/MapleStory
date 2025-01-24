@@ -20,11 +20,16 @@ public:
 
 	void SetRotation(FVector3 _Rotation) override;
 
+	void AddZRotation(float _ZRotation) override;
+
 	virtual void InitTexture();
 
 	virtual void InitAnimations();
 
 	virtual void InitPhysics();
+
+	virtual bool FindTarget(float _fRadius);
+
 
 public:
 
@@ -33,12 +38,18 @@ protected:
 
 	UPhysicsComponent* PhysicsComponent;
 
-	vector<AActor*> OverlappedActors;
+	vector<AActor*> TempActorsVector;
+
+	vector<UPhysicsComponent*> TempPhysicsComponentVector;
+
+	weak_ptr<AActor> Target;
 
 	bool IsHit;
 
 	float LifeTime;
 
 	float ElapsedTime;
+
+	float FindTargetCooldown;
 };
 

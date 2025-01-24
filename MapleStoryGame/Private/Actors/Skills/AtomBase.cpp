@@ -4,6 +4,8 @@
 #include "PhysicsCore/PhysicsComponent.h"
 #include "PhysicsCore/PhysicsSubsystem.h"
 #include "World/World.h"
+#include "Attributes/AttributeComponent.h"
+#include "Actions/ActionComponent.h"
 
 AAtomBase::AAtomBase()
 {
@@ -12,6 +14,8 @@ AAtomBase::AAtomBase()
 	LifeTime = 0.0f;
 
 	ElapsedTime = 0.0f;
+
+	FindTargetCooldown = 0.0f;
 
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 
@@ -65,6 +69,15 @@ void AAtomBase::SetRotation(FVector3 _Rotation)
 		PhysicsComponent->SetRotation(_Rotation);
 }
 
+void AAtomBase::AddZRotation(float _ZRotation)
+{
+	if (PhysicsComponent->GetBodyID().index1 == 0)
+		Super::AddZRotation(_ZRotation);
+
+	else
+		PhysicsComponent->AddZRotation(_ZRotation);
+}
+
 void AAtomBase::InitTexture()
 {
 	RenderComponent->SetMeshIDByName("Plane");
@@ -84,5 +97,37 @@ void AAtomBase::InitAnimations()
 void AAtomBase::InitPhysics()
 {
 	PhysicsComponent->InitializeBodyWithNoGravity(b2BodyType::b2_dynamicBody);
+}
+
+bool AAtomBase::FindTarget(float _fRadius)
+{
+	PhysicsComponent->FetchCircleOverlappedPhysicsComponents(_fRadius, Transform.Position, TempPhysicsComponentVector);
+
+	TempActorsVector.clear();
+
+	for (UPhysicsComponent* _PhysicsComponent : TempPhysicsComponentVector)
+	{
+		AActor* _Owner = _PhysicsComponent->GetOwner();
+
+		if (UAttributeComponent* _Attribute = _Owner->GetComponentByClass<UAttributeComponent>())
+		{
+			if (_Attribute->HasAttributeExact("ActorType.Monster") || _Attribute->HasAttributeExact("ActorType.Boss"))
+			{
+				TempActorsVector.push_back(_PhysicsComponent->GetOwner());
+			}
+		}
+	}
+
+	int _nSize = (int)TempActorsVector.size();
+	if (_nSize <= 0)
+	{
+		Target = shared_ptr<AActor>();
+		return false;
+	}
+
+	int _nRandomIndex = std::rand() % _nSize;
+
+	Target = TempActorsVector[_nRandomIndex]->GetShared<AActor>();
+	return true;
 }
 

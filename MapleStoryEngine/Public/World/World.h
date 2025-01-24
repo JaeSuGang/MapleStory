@@ -49,7 +49,8 @@ public:
 	{
 		static_assert(std::is_base_of<AActor, T>::value);
 
-		shared_ptr<AActor> NewActor{ static_cast<AActor*>(new T{}) };
+		shared_ptr<AActor> NewActor{ new T{} };
+		NewActor->_weak = std::static_pointer_cast<UObject>(NewActor);
 
 		NewActor->SetWorld(this);
 

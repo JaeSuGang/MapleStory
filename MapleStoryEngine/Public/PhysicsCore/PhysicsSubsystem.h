@@ -23,6 +23,8 @@ public:
 
 	ENGINE_API UPhysicsComponent* GetPhysicsComponentByShapeID(b2ShapeId _ShapeId);
 
+	ENGINE_API void FetchCircleOverlap(float _fRadius, FVector3 _Pos, b2QueryFilter Filter, vector<UPhysicsComponent*>& ReturnShapeIds);
+
 	ENGINE_API void FetchCapsuleOverlap(b2Capsule Capsule, b2Transform CapsulePos, b2QueryFilter Filter, vector<b2ShapeId>* pReturnShapeIds);
 
 	ENGINE_API void FetchPlaneActorOverlap(AActor* _Actor, b2QueryFilter Filter, vector<b2ShapeId>* pReturnShapeIds);
@@ -35,6 +37,8 @@ public:
 	static bool OverlapCallback(b2ShapeId _ID, void* _Context);
 
 protected:
+	vector<b2ShapeId> TempShapeIds;
+
 	b2WorldId B2WorldID;
 
 	const float SimulationFrequencyTime = 1.0f / 60.0f;

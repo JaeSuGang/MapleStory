@@ -59,6 +59,11 @@ void AActor::SetPosition(FVector3 _Position)
 	Transform.Position = _Position;
 }
 
+void AActor::AddZRotation(float _ZRotation)
+{
+	Transform.Rotation.z += _ZRotation;
+}
+
 void AActor::Destroy()
 {
 	World->DestroyActor(this);

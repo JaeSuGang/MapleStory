@@ -21,6 +21,8 @@ public:
 
 	ENGINE_API virtual void SetPosition(FVector3 _Position);
 
+	ENGINE_API virtual void AddZRotation(float _ZRotation);
+
 	ENGINE_API virtual void SetRotation(FVector3 _Vector);
 public:
 	ENGINE_API bool GetIsTickEnabled() const;

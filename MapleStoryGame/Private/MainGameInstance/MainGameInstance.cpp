@@ -57,5 +57,11 @@ void UMainGameInstance::InitTags()
 	GameplayTagsManager->RegisterTag("Status.CanDoubleJump");
 
 	GameplayTagsManager->RegisterTag("Value.Hp");
+
+	GameplayTagsManager->RegisterTag("ActorType.Character");
+
+	GameplayTagsManager->RegisterTag("ActorType.Monster");
+
+	GameplayTagsManager->RegisterTag("ActorType.Boss");
 }
 

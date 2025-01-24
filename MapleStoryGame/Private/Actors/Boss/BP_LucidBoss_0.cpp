@@ -17,6 +17,8 @@ BP_LucidBoss_0::BP_LucidBoss_0()
 	AttributeComponent = CreateDefaultSubobject<UAttributeComponent>();
 
 	ActionComponent = CreateDefaultSubobject<UActionComponent>();
+
+	AttributeComponent->AddAttribute("ActorType.Boss");
 }
 
 void BP_LucidBoss_0::BeginPlay()

@@ -1,4 +1,5 @@
 #include "GamePch.h"
+#include "Math/Math.h"
 #include "Actors/Skills/BP_IdleWhimAtom.h"
 #include "RenderCore/RenderComponent.h"
 #include "Engine/Engine.h"
@@ -19,14 +20,14 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 
 	if (ElapsedTime > 0.2f && IsHit == false)
 	{
-		PhysicsComponent->FetchOverlappedHitboxActors(OverlappedActors);
+		PhysicsComponent->FetchOverlappedHitboxActors(TempActorsVector);
 
-		if (OverlappedActors.size() > 0)
+		if (TempActorsVector.size() > 0)
 		{
 			IsHit = true;
 			LifeTime = 1.0f;
 
-			for (AActor* _Actor : OverlappedActors)
+			for (AActor* _Actor : TempActorsVector)
 			{
 				if (UActionComponent* _ActionComponent = _Actor->GetComponentByClass<UActionComponent>())
 				{
@@ -37,7 +38,7 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 					_DamageInfo.HitDelay = 0.1f;
 					_DamageInfo.HitEffectPath = PATH_SKILL_HIT_1;
 
-					_ActionComponent->StartActionByNameWithParameter(OverlappedActors[0], "Action.TakeDamage", &_DamageInfo);
+					_ActionComponent->StartActionByNameWithParameter(TempActorsVector[0], "Action.TakeDamage", &_DamageInfo);
 
 					PhysicsComponent->SetVelocity({ 0.0f , 0.0f ,0.0f });
 					break;
@@ -54,13 +55,39 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 
 	if (!IsHit)
 	{
-		PhysicsComponent->AddForwardVelocity(-1000.0f * fDeltaTime);
+		shared_ptr<AActor> _TargetMonster = Target.lock();
+
+		if (_TargetMonster.get())
+		{
+			FTransform _TargetTransform = _TargetMonster->GetTransform();
+			
+			float _AngleDiff = GetZAngle(Transform.Position, _TargetTransform.Position);
+
+			float _AngleToApply = _AngleDiff * 30.0f * fDeltaTime;
+		
+			AddZRotation(_AngleToApply);
+		}
+
+		else
+		{
+			FindTargetCooldown -= fDeltaTime;
+
+			if (FindTargetCooldown < 0)
+			{
+				FindTargetCooldown = 1.0f;
+				FindTarget(1000.0f);
+			}
+		}
+
+		PhysicsComponent->SetForwardVelocity(-800.0f);
 	}
 }
 
 void BP_IdleWhimAtom::BeginPlay()
 {
 	Super::BeginPlay();
+
+	FindTarget(1000.0f);
 }
 
 void BP_IdleWhimAtom::InitTexture()

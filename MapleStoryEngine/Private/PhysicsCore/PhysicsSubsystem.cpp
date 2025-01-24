@@ -48,6 +48,34 @@ UPhysicsComponent* UPhysicsSubsystem::GetPhysicsComponentByShapeID(b2ShapeId _Sh
 	return reinterpret_cast<UPhysicsComponent*>(b2Body_GetUserData(b2Shape_GetBody(_ShapeId)));
 }
 
+void UPhysicsSubsystem::FetchCircleOverlap(float _fRadius, FVector3 _Pos, b2QueryFilter Filter, vector<UPhysicsComponent*>& pReturn)
+{
+	pReturn.clear();
+
+	b2Circle _B2Circle{};
+	_B2Circle.center = { 0.0f, 0.0f };
+	_B2Circle.radius = _fRadius * PIXEL_TO_METER_CONSTANT;
+
+	b2Transform _B2Transform{};
+	_B2Transform.p = { _Pos.x * PIXEL_TO_METER_CONSTANT, _Pos.y * PIXEL_TO_METER_CONSTANT };
+	_B2Transform.q.c = 1.0f;
+	_B2Transform.q.s = 0.0f;
+
+	TempShapeIds.clear();
+	b2World_OverlapCircle(B2WorldID, &_B2Circle, _B2Transform, Filter, &UPhysicsSubsystem::OverlapCallback, &TempShapeIds);
+
+	for (b2ShapeId& _ShapeId : TempShapeIds)
+	{
+		if (_ShapeId.index1 == 0)
+			continue;
+
+		if (UPhysicsComponent* _ComponentToReturn = reinterpret_cast<UPhysicsComponent*>(b2Body_GetUserData(b2Shape_GetBody(_ShapeId))))
+		{
+			pReturn.push_back(_ComponentToReturn);
+		}
+	}
+}
+
 void UPhysicsSubsystem::FetchCapsuleOverlap(b2Capsule Capsule, b2Transform CapsulePos, b2QueryFilter Filter, vector<b2ShapeId>* pVector)
 {
 	CapsulePos.q.s = 0;

@@ -37,6 +37,8 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
+	ENGINE_API void FetchCircleOverlappedPhysicsComponents(float _fRadius, FVector3 _Pos, vector<UPhysicsComponent*>& _pVector);
+
 	ENGINE_API void FetchOverlappedHitboxActors(vector<AActor*>& _pVector);
 
 	ENGINE_API void FetchOverlappedHitboxes(vector<b2ShapeId>& pVector);
@@ -44,6 +46,8 @@ public:
 	ENGINE_API void SetPosition(FVector3 _Position);
 
 	ENGINE_API void SetRotation(FVector3 _Rotation);
+
+	ENGINE_API void AddZRotation(float _ZRotation);
 
 	ENGINE_API bool GetIsGrounded();
 
@@ -60,6 +64,8 @@ public:
 	ENGINE_API void SetXVelocity(float _x);
 
 	ENGINE_API void AddForwardVelocity(float _Speed);
+
+	ENGINE_API void SetForwardVelocity(float _Speed);
 
 	ENGINE_API b2BodyId GetBodyID() const;
 
@@ -94,6 +100,8 @@ protected:
 	b2ShapeId B2FootID;
 
 	b2ShapeId B2ColliderID;
+
+	b2ShapeId B2SearchRangeID;
 
 	b2ShapeId B2HitboxID; /* IsSensor = true */
 

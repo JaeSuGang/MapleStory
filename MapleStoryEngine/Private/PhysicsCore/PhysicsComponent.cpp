@@ -44,6 +44,15 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 		SyncPosAndRot();
 }
 
+void UPhysicsComponent::FetchCircleOverlappedPhysicsComponents(float _fRadius, FVector3 _Pos, vector<UPhysicsComponent*>& _pVector)
+{
+	b2QueryFilter _B2QueryFilter{};
+	_B2QueryFilter.categoryBits = -1;
+	_B2QueryFilter.maskBits = -1;
+
+	GEngine->GetWorld()->PhysicsSubsystem->FetchCircleOverlap(_fRadius, _Pos, _B2QueryFilter, _pVector);
+}
+
 void UPhysicsComponent::FetchOverlappedHitboxActors(vector<AActor*>& _pVector)
 {
 	_pVector.clear();
@@ -77,6 +86,18 @@ void UPhysicsComponent::SetRotation(FVector3 _Rotation)
 	Transform.q.s = std::sinf(DegreeToRadian(_Rotation.z));
 
 	b2Body_SetTransform(B2BodyID, Transform.p, Transform.q);
+}
+
+void UPhysicsComponent::AddZRotation(float _ZRotation)
+{
+ 	b2Transform _Transform = b2Body_GetTransform(B2BodyID);
+
+	float _OriginalRotation = RadianToDegree(std::atan2f(_Transform.q.s, _Transform.q.c));
+
+	_Transform.q.c = std::cosf(DegreeToRadian(_OriginalRotation + _ZRotation));
+	_Transform.q.s = std::sinf(DegreeToRadian(_OriginalRotation + _ZRotation));
+
+	b2Body_SetTransform(B2BodyID, _Transform.p, _Transform.q);
 }
 
 void UPhysicsComponent::SetPosition(FVector3 _Position)
@@ -178,6 +199,19 @@ void UPhysicsComponent::AddForwardVelocity(float _Speed)
 
 	_Velocity.x += _Transform.q.c * _Speed;
 	_Velocity.y += _Transform.q.s * _Speed;
+
+	b2Body_SetLinearVelocity(B2BodyID, _Velocity);
+}
+
+void UPhysicsComponent::SetForwardVelocity(float _Speed)
+{
+	_Speed = _Speed * PIXEL_TO_METER_CONSTANT;
+
+	b2Vec2 _Velocity = b2Body_GetLinearVelocity(B2BodyID);
+	b2Transform _Transform = b2Body_GetTransform(B2BodyID);
+
+	_Velocity.x = _Transform.q.c * _Speed;
+	_Velocity.y = _Transform.q.s * _Speed;
 
 	b2Body_SetLinearVelocity(B2BodyID, _Velocity);
 }
