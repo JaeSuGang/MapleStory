@@ -17,6 +17,8 @@ AAtomBase::AAtomBase()
 
 	FindTargetCooldown = 0.0f;
 
+	DamageCooldown = 0.0f;
+
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 
 	PhysicsComponent = CreateDefaultSubobject<UPhysicsComponent>();

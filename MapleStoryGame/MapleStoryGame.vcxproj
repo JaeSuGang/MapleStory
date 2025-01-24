@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actions\BP_HowlingGaleAction.cpp" />
+    <ClCompile Include="Private\Actors\Skills\BP_HowlingGaleBall.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_IdleWhimEffect.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_IdleWhimAtom.cpp" />
     <ClCompile Include="Private\Actors\Skills\AtomBase.cpp" />
@@ -193,6 +195,8 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actions\BP_HowlingGaleAction.h" />
+    <ClInclude Include="Public\Actors\Skills\BP_HowlingGaleBall.h" />
     <ClInclude Include="Public\Actors\Skills\BP_IdleWhimEffect.h" />
     <ClInclude Include="Public\Actors\Skills\BP_IdleWhimAtom.h" />
     <ClInclude Include="Public\Actors\Skills\AtomBase.h" />

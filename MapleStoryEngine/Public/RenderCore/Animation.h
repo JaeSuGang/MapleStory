@@ -16,8 +16,11 @@ enum class EAnimationName
 	Move,
 	Hit,
 	Die,
+	Revive,
 	SwingT1,
+	Shoot1,
 	Screen
+
 };
 
 struct FAnimationEvent

@@ -47,3 +47,4 @@
 
 #define PATH_SKILL_HIT_0 "Resources\\Textures\\Skills\\HitEffects\\13141004.hit.0.frames"
 #define PATH_SKILL_HIT_1 "Resources\\Textures\\Skills\\IdleWhim\\hit"
+#define PATH_SKILL_HIT_2 "Resources\\Textures\\Skills\\HowlingGale\\hit"

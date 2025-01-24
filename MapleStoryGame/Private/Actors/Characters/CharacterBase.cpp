@@ -82,8 +82,15 @@ void ACharacterBase::BindKeys()
 
 void ACharacterBase::DecideAnimation()
 {
-	if (AttributeComponent->ContainsAttribute("Status.Attacking"))
+	if (AttributeComponent->ContainsAttribute("Status.Attacking.SwingT1"))
+	{
 		return;
+	}
+
+	else if (AttributeComponent->ContainsAttribute("Status.Attacking.Shoot1"))
+	{
+		return;
+	}
 
 	if (AttributeComponent->HasAttributeExact("Status.Falling"))
 		RenderComponent->SetCurrentAnimation(EAnimationName::Jump);

@@ -31,6 +31,9 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 			{
 				if (UActionComponent* _ActionComponent = _Actor->GetComponentByClass<UActionComponent>())
 				{
+					if (!_ActionComponent->HasAction("Action.TakeDamage"))
+						continue;
+
 					FDamageInfo _DamageInfo{};
 					_DamageInfo.DamageRangeOffset = 0.1f;
 					_DamageInfo.Damage = 12345678912.0f;
@@ -63,7 +66,7 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 			
 			float _AngleDiff = GetZAngle(Transform.Position, _TargetTransform.Position);
 
-			float _AngleToApply = _AngleDiff * 30.0f * fDeltaTime;
+			float _AngleToApply = _AngleDiff * 20.0f * fDeltaTime;
 		
 			AddZRotation(_AngleToApply);
 		}
@@ -75,11 +78,11 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 			if (FindTargetCooldown < 0)
 			{
 				FindTargetCooldown = 1.0f;
-				FindTarget(1000.0f);
+				FindTarget(2000.0f);
 			}
 		}
 
-		PhysicsComponent->SetForwardVelocity(-800.0f);
+		PhysicsComponent->SetForwardVelocity(-700.0f);
 	}
 }
 
@@ -87,7 +90,7 @@ void BP_IdleWhimAtom::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FindTarget(1000.0f);
+	FindTarget(2000.0f);
 }
 
 void BP_IdleWhimAtom::InitTexture()

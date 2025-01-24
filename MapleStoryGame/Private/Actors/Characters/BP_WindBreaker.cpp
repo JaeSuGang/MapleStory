@@ -10,6 +10,7 @@
 #include "Actions/BP_GustShiftAction.h"
 #include "Actions/BP_FairyTurnAction.h"
 #include "Actions/BP_IdleWhimAction.h"
+#include "Actions/BP_HowlingGaleAction.h"
 
 void BP_WindBreaker::InitActions()
 {
@@ -22,6 +23,8 @@ void BP_WindBreaker::InitActions()
 	ActionComponent->AddAction<BP_FairyTurnAction>();
 
 	ActionComponent->AddAction<BP_IdleWhimAction>();
+
+	ActionComponent->AddAction<BP_HowlingGaleAction>();
 
 }
 
@@ -36,6 +39,8 @@ void BP_WindBreaker::InitAnimations()
 	RenderComponent->AddAnimationByFolder(EAnimationName::Jump, "Resources\\Textures\\Avatars\\WindBreaker\\Jump", 0);
 
 	RenderComponent->AddAnimationByFolder(EAnimationName::SwingT1, "Resources\\Textures\\Avatars\\WindBreaker\\SwingT1", 60);
+
+	RenderComponent->AddAnimationByFolder(EAnimationName::Shoot1, "Resources\\Textures\\Avatars\\WindBreaker\\Shoot1", 100);
 
 	RenderComponent->AddAnimationByFolder(EAnimationName::Prone, "Resources\\Textures\\Avatars\\WindBreaker\\Prone", 60);
 
@@ -58,4 +63,6 @@ void BP_WindBreaker::BindKeys()
 	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'S', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.FairyTurn" }));
 
 	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'R', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.IdleWhim" }));
+
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'E', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.HowlingGale" }));
 }

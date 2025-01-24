@@ -6,6 +6,22 @@
 #include "GameplayTags/GameplayTagsManager.h"
 #include "Actions/GameplayAction.h"
 
+
+bool UActionComponent::HasAction(string _Name)
+{
+	FGameplayTag ActionTag = GEngine->GetGameInstance()->GameplayTagsManager->FindRegisteredTagExact(_Name);
+
+	for (shared_ptr<UGameplayAction>& GameplayAction : Actions)
+	{
+		if (GameplayAction->GetTag() == ActionTag)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void UActionComponent::StartActionByNameWithParameter(AActor* Instigator, string Name, void* pParameter)
 {
 	FGameplayTag ActionTag = GEngine->GetGameInstance()->GameplayTagsManager->FindRegisteredTagExact(Name);

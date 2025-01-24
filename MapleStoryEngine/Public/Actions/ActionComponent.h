@@ -23,6 +23,8 @@ public:
 
 
 public:
+	ENGINE_API bool HasAction(string _Name);
+
 	ENGINE_API void StartActionByNameWithParameter(AActor* Instigator, string Name, void* pParameter);
 
 	ENGINE_API void StartActionByName(AActor* Instigator, string Name);

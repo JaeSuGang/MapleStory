@@ -30,6 +30,8 @@ void UMainGameInstance::BeginPlay()
 
 void UMainGameInstance::InitTags()
 {
+	GameplayTagsManager->RegisterTag("Action.HowlingGale");
+
 	GameplayTagsManager->RegisterTag("Action.IdleWhim");
 
 	GameplayTagsManager->RegisterTag("Action.FairyTurn");
@@ -53,6 +55,8 @@ void UMainGameInstance::InitTags()
 	GameplayTagsManager->RegisterTag("Status.Walking");
 
 	GameplayTagsManager->RegisterTag("Status.Attacking.SwingT1");
+
+	GameplayTagsManager->RegisterTag("Status.Attacking.Shoot1");
 
 	GameplayTagsManager->RegisterTag("Status.CanDoubleJump");
 

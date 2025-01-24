@@ -94,8 +94,10 @@ void UPhysicsComponent::AddZRotation(float _ZRotation)
 
 	float _OriginalRotation = RadianToDegree(std::atan2f(_Transform.q.s, _Transform.q.c));
 
-	_Transform.q.c = std::cosf(DegreeToRadian(_OriginalRotation + _ZRotation));
-	_Transform.q.s = std::sinf(DegreeToRadian(_OriginalRotation + _ZRotation));
+	float _RotationToApply = _OriginalRotation + _ZRotation;
+
+	_Transform.q.c = std::cosf(DegreeToRadian(_RotationToApply));
+	_Transform.q.s = std::sinf(DegreeToRadian(_RotationToApply));
 
 	b2Body_SetTransform(B2BodyID, _Transform.p, _Transform.q);
 }
@@ -347,7 +349,7 @@ void UPhysicsComponent::InitializeMobCollider(float fWidth, float fHeight)
 void UPhysicsComponent::InitializeHitbox(float fWidth, float fHeight)
 {
 	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
-
+	
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.isSensor = true;
 	ShapeDef.density = 0.0f;

@@ -50,6 +50,8 @@ protected:
 
 	float ElapsedTime;
 
+	float DamageCooldown;
+
 	float FindTargetCooldown;
 };
 
