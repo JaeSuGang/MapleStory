@@ -21,9 +21,9 @@ void BP_FairyTurn_Range::BeginPlay()
 
 	vector<b2ShapeId> OverlappedShapeIds;
 	b2QueryFilter Filter{};
-	Filter.categoryBits = SKILL_CENSOR_COLLISION_FLAG;
+	Filter.categoryBits = SKILL_COLLIDER_COLLISION_FLAG;
 	Filter.maskBits = MOB_HITBOX_COLLISION_FLAG;
-	GEngine->GetWorld()->PhysicsSubsystem->FetchBoxOverlap(Transform.Scale.x, Transform.Scale.y, Transform, Filter, &OverlappedShapeIds);
+	GEngine->GetWorld()->PhysicsSubsystem->FetchAABBOverlap(Transform.Scale.x, Transform.Scale.y, Transform, Filter, &OverlappedShapeIds);
 
 	for (b2ShapeId& ShapeID : OverlappedShapeIds)
 	{

@@ -26,10 +26,14 @@ public:
 
 	virtual void InitPhysics();
 
+public:
+
 protected:
 	URenderComponent* RenderComponent;
 
 	UPhysicsComponent* PhysicsComponent;
+
+	vector<AActor*> OverlappedActors;
 
 	bool IsHit;
 

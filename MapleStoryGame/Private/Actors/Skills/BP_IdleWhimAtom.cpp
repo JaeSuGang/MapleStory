@@ -4,44 +4,57 @@
 #include "Engine/Engine.h"
 #include "Engine/RandomManager.h"
 #include "PhysicsCore/PhysicsComponent.h"
+#include "Actions/ActionComponent.h"
+#include "Actions/BP_TakeDamageAction.h"
 
 
 BP_IdleWhimAtom::BP_IdleWhimAtom()
 {
 	LifeTime = 10.0f;
-
-	ContactShapes.reserve(20);
 }
 
 void BP_IdleWhimAtom::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
-	if (ElapsedTime > 0.2f)
+	if (ElapsedTime > 0.2f && IsHit == false)
 	{
-		if (PhysicsComponent->GetSensorOverlappedShapes(ContactShapes))
+		PhysicsComponent->FetchOverlappedHitboxActors(OverlappedActors);
+
+		if (OverlappedActors.size() > 0)
 		{
-			if (IsHit == false)
+			IsHit = true;
+			LifeTime = 1.0f;
+
+			for (AActor* _Actor : OverlappedActors)
 			{
-				IsHit = true;
-				LifeTime = 1.0f;
-
-				for (b2ShapeId& ShapeId : ContactShapes)
+				if (UActionComponent* _ActionComponent = _Actor->GetComponentByClass<UActionComponent>())
 				{
-					//  GEngine->physics
+					FDamageInfo _DamageInfo{};
+					_DamageInfo.DamageRangeOffset = 0.1f;
+					_DamageInfo.Damage = 12345678912.0f;
+					_DamageInfo.TotalHitCount = 5;
+					_DamageInfo.HitDelay = 0.1f;
+					_DamageInfo.HitEffectPath = PATH_SKILL_HIT_1;
+
+					_ActionComponent->StartActionByNameWithParameter(OverlappedActors[0], "Action.TakeDamage", &_DamageInfo);
+
+					PhysicsComponent->SetVelocity({ 0.0f , 0.0f ,0.0f });
+					break;
 				}
+
 			}
-
-			RenderComponent->AddAlphaValue(-fDeltaTime);
-			PhysicsComponent->SetVelocity({ 0.0f, 0.0f, 0.0f });
 		}
-		else
-		{
+	}
 
+	if (IsHit)
+	{
+		RenderComponent->AddAlphaValue(-fDeltaTime);
+	}
 
-			PhysicsComponent->AddForwardVelocity(-1000.0f * fDeltaTime);
-		}
-
+	if (!IsHit)
+	{
+		PhysicsComponent->AddForwardVelocity(-1000.0f * fDeltaTime);
 	}
 }
 

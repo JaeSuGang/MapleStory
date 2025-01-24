@@ -2,6 +2,8 @@
 #include "Actors/Skills/AtomBase.h"
 #include "RenderCore/RenderComponent.h"
 #include "PhysicsCore/PhysicsComponent.h"
+#include "PhysicsCore/PhysicsSubsystem.h"
+#include "World/World.h"
 
 AAtomBase::AAtomBase()
 {
@@ -34,13 +36,15 @@ void AAtomBase::Tick(float fDeltaTime)
 	Super::Tick(fDeltaTime);
 
 	ElapsedTime += fDeltaTime;
-
 	LifeTime -= fDeltaTime;
 
-	if (LifeTime < 0)
+	RenderComponent->PlayAnimation(fDeltaTime);
+
+	if (LifeTime < 0.0f)
 		this->Destroy();
 
-	RenderComponent->PlayAnimation(fDeltaTime);
+	else if (LifeTime < 1.0f)
+		RenderComponent->AddAlphaValue(-fDeltaTime);
 }
 
 void AAtomBase::SetPosition(FVector3 _Position)
@@ -80,6 +84,5 @@ void AAtomBase::InitAnimations()
 void AAtomBase::InitPhysics()
 {
 	PhysicsComponent->InitializeBodyWithNoGravity(b2BodyType::b2_dynamicBody);
-
-	PhysicsComponent->InitializeSkillSensor(Transform.Scale.x, Transform.Scale.y);
 }
+

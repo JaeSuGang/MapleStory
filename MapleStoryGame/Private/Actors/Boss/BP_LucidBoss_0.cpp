@@ -103,5 +103,5 @@ void BP_LucidBoss_0::InitPhysics()
 {
 	PhysicsComponent->InitializeBodyWithNoGravity(b2BodyType::b2_staticBody);
 
-	PhysicsComponent->InitializeHitbox(Transform.Scale.x * 0.6f, Transform.Scale.y);
+	PhysicsComponent->InitializeHitbox(Transform.Scale.x * 0.6f, Transform.Scale.y * 0.8f);
 }

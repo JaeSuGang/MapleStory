@@ -46,3 +46,4 @@
 #define PSShader_PATH "Resources\\Shaders\\Shader_PS.hlsl"
 
 #define PATH_SKILL_HIT_0 "Resources\\Textures\\Skills\\HitEffects\\13141004.hit.0.frames"
+#define PATH_SKILL_HIT_1 "Resources\\Textures\\Skills\\IdleWhim\\hit"

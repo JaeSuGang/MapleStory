@@ -6,13 +6,22 @@
 #include "Engine/TimeSubsystem.h"
 #include "Math/Math.h"
 
+UPhysicsComponent* UPhysicsComponent::GetPhysicsComponentByShapeId(b2ShapeId ShapeId)
+{
+	return reinterpret_cast<UPhysicsComponent*>(b2Body_GetUserData(b2Shape_GetBody(ShapeId)));
+}
+
 UPhysicsComponent::UPhysicsComponent()
 	:
-	B2SensorID{},
+	B2ColliderID{},
 	B2HitboxID{},
 	B2FootID{},
 	B2BodyID{}
 {
+	IsBodyInitialized = false;
+
+	IsLine = false;
+
 	PhysicsSubsystem = GEngine->GetWorld()->PhysicsSubsystem;
 }
 
@@ -35,27 +44,29 @@ void UPhysicsComponent::TickComponent(float fDeltaTime)
 		SyncPosAndRot();
 }
 
-bool UPhysicsComponent::GetSensorOverlappedShapes(vector<b2ShapeId>& pVector)
+void UPhysicsComponent::FetchOverlappedHitboxActors(vector<AActor*>& _pVector)
 {
-	if (int ContactCount = b2Shape_GetContactCapacity(B2SensorID))
+	_pVector.clear();
+
+	this->FetchOverlappedHitboxes(TempShapeIds);
+
+	for (b2ShapeId& _ShapeId : TempShapeIds)
 	{
-		pVector.clear();
+		if (_ShapeId.index1 == 0)
+			continue;
 
-		vector<b2ContactData> _ContactDatas;
-		_ContactDatas.resize(ContactCount);
-
-		b2Shape_GetContactData(B2SensorID, &_ContactDatas[0], ContactCount);
-
-		for (b2ContactData& _ContactData : _ContactDatas)
-		{
-			if (_ContactData.shapeIdA.index1 != 0)
-				pVector.push_back(_ContactData.shapeIdA);
-		}
-
-		return true;
+		UPhysicsComponent* _PhysicsComponent = reinterpret_cast<UPhysicsComponent*>(b2Body_GetUserData(b2Shape_GetBody(_ShapeId)));
+		_pVector.push_back(_PhysicsComponent->Owner);
 	}
+}
 
-	return false;
+void UPhysicsComponent::FetchOverlappedHitboxes(vector<b2ShapeId>& pVector)
+{
+	b2QueryFilter _Filter{};
+	_Filter.categoryBits = SKILL_COLLIDER_COLLISION_FLAG;
+	_Filter.maskBits = MOB_HITBOX_COLLISION_FLAG;
+
+	GEngine->GetWorld()->PhysicsSubsystem->FetchPlaneActorOverlap(Owner, _Filter, &pVector);
 }
 
 void UPhysicsComponent::SetRotation(FVector3 _Rotation)
@@ -84,10 +95,10 @@ bool UPhysicsComponent::GetIsGrounded()
 	if (ContactDataCount == 0)
 		return false;
 
-	FootContactDatas.resize(ContactDataCount);
-	b2Shape_GetContactData(B2FootID, &FootContactDatas[0], ContactDataCount);
+	TempContactDatas.resize(ContactDataCount);
+	b2Shape_GetContactData(B2FootID, &TempContactDatas[0], ContactDataCount);
 
-	for (const b2ContactData& Data : FootContactDatas)
+	for (const b2ContactData& Data : TempContactDatas)
 	{
 		if (Data.shapeIdA.index1 == 0)
 			continue;
@@ -255,17 +266,17 @@ void UPhysicsComponent::InitializeBodyWithNoGravity(b2BodyType _type)
 	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
 }
 
-void UPhysicsComponent::InitializeSkillSensor(float fWidth, float fHeight)
+void UPhysicsComponent::InitializeSkillCollider(float fWidth, float fHeight)
 {
 	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
 
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.density = 0.0f;
 	ShapeDef.friction = 0.0f;
-	ShapeDef.filter.categoryBits = SKILL_CENSOR_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = MOB_HITBOX_COLLISION_FLAG | MOB_HITBOXUNPASSABLE_COLLISION_FLAG;
+	ShapeDef.filter.categoryBits = SKILL_COLLIDER_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = MOB_HITBOX_COLLISION_FLAG;
 
-	B2SensorID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
+	B2ColliderID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
 }
 
 void UPhysicsComponent::InitializeBody(b2BodyType _type)
@@ -286,15 +297,15 @@ void UPhysicsComponent::InitializeBody(b2BodyType _type)
 	B2BodyID = b2CreateBody(PhysicsSubsystem->B2WorldID, &BodyDef);
 }
 
-void UPhysicsComponent::InitializeHitboxUnpassable(float fWidth, float fHeight)
+void UPhysicsComponent::InitializeMobCollider(float fWidth, float fHeight)
 {
 	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
 
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
 	ShapeDef.density = 10000.0f;
 	ShapeDef.friction = 0.0f;
-	ShapeDef.filter.categoryBits = MOB_HITBOXUNPASSABLE_COLLISION_FLAG | MOB_HITBOX_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = CHARACTER_FOOT_COLLISION_FLAG | SKILL_CENSOR_COLLISION_FLAG;
+	ShapeDef.filter.categoryBits = MOB_COLLIDER_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = CHARACTER_FOOT_COLLISION_FLAG;
 
 	B2HitboxID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
 }
@@ -304,10 +315,11 @@ void UPhysicsComponent::InitializeHitbox(float fWidth, float fHeight)
 	b2Polygon Polygon = b2MakeBox(fWidth / 2.0f * PIXEL_TO_METER_CONSTANT, fHeight / 2.0f * PIXEL_TO_METER_CONSTANT);
 
 	b2ShapeDef ShapeDef = b2DefaultShapeDef();
+	ShapeDef.isSensor = true;
 	ShapeDef.density = 0.0f;
 	ShapeDef.friction = 0.0f;
 	ShapeDef.filter.categoryBits = MOB_HITBOX_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = SKILL_CENSOR_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = SKILL_COLLIDER_COLLISION_FLAG;
 
 	B2HitboxID = b2CreatePolygonShape(B2BodyID, &ShapeDef, &Polygon);
 }
@@ -320,7 +332,7 @@ void UPhysicsComponent::InitializeCharacterFootCollider(float fYOffsetFromCenter
 	ShapeDef.density = 0.1f;
 	ShapeDef.friction = 0.7f;
 	ShapeDef.filter.categoryBits = CHARACTER_FOOT_COLLISION_FLAG;
-	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG | MOB_HITBOXUNPASSABLE_COLLISION_FLAG;
+	ShapeDef.filter.maskBits = FOOTHOLD_COLLISION_FLAG | MOB_COLLIDER_COLLISION_FLAG;
 
 	B2FootID = b2CreateCircleShape(B2BodyID, &ShapeDef, &Circle);
 }

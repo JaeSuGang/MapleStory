@@ -22,5 +22,7 @@ void BP_NightmareGolem_0::InitPhysics()
 
 	PhysicsComponent->InitializeMobFootCollider(Transform.Scale.y * -0.49f);
 
-	PhysicsComponent->InitializeHitboxUnpassable(Transform.Scale.x, Transform.Scale.y);
+	PhysicsComponent->InitializeMobCollider(Transform.Scale.x, Transform.Scale.y);
+
+	PhysicsComponent->InitializeHitbox(Transform.Scale.x, Transform.Scale.y);
 }

@@ -18,7 +18,5 @@ public:
 
 	void InitPhysics() override;
 
-protected:
-	vector<b2ShapeId> ContactShapes;
 };
 

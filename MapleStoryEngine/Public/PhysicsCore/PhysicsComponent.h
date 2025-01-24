@@ -12,8 +12,8 @@
 #define CHARACTER_FOOT_COLLISION_FLAG 0x4
 #define MOB_FOOT_COLLISION_FLAG 0x8
 #define MOB_HITBOX_COLLISION_FLAG 0x10
-#define MOB_HITBOXUNPASSABLE_COLLISION_FLAG 0x20
-#define SKILL_CENSOR_COLLISION_FLAG 0x40
+#define MOB_COLLIDER_COLLISION_FLAG 0x20
+#define SKILL_COLLIDER_COLLISION_FLAG 0x40
 
 class UPhysicsSubsystem;
 
@@ -24,8 +24,12 @@ class UPhysicsComponent : public UActorComponent
 	friend class UPhysicsSubsystem;
 
 public:
+	ENGINE_API static UPhysicsComponent* GetPhysicsComponentByShapeId(b2ShapeId ShapeId);
+
+public:
 	/* 생성자와 오버라이드 */
 	ENGINE_API UPhysicsComponent();
+
 	ENGINE_API ~UPhysicsComponent();
 
 	ENGINE_API void BeginPlay() override;
@@ -33,7 +37,9 @@ public:
 	ENGINE_API void TickComponent(float fDeltaTime) override;
 
 public:
-	ENGINE_API bool GetSensorOverlappedShapes(vector<b2ShapeId>& pVector);
+	ENGINE_API void FetchOverlappedHitboxActors(vector<AActor*>& _pVector);
+
+	ENGINE_API void FetchOverlappedHitboxes(vector<b2ShapeId>& pVector);
 
 	ENGINE_API void SetPosition(FVector3 _Position);
 
@@ -61,9 +67,9 @@ public:
 
 	ENGINE_API void InitializeBodyWithNoGravity(b2BodyType _type);
 
-	ENGINE_API void InitializeSkillSensor(float fWidth, float fHeight);
+	ENGINE_API void InitializeSkillCollider(float fWidth, float fHeight);
 
-	ENGINE_API void InitializeHitboxUnpassable(float fWidth, float fHeight);
+	ENGINE_API void InitializeMobCollider(float fWidth, float fHeight);
 
 	ENGINE_API void InitializeHitbox(float fWidth, float fHeight);
 
@@ -87,11 +93,13 @@ protected:
 
 	b2ShapeId B2FootID;
 
-	b2ShapeId B2HitboxID;
+	b2ShapeId B2ColliderID;
 
-	b2ShapeId B2SensorID;
+	b2ShapeId B2HitboxID; /* IsSensor = true */
 
-	vector<b2ContactData> FootContactDatas;
+	vector<b2ContactData> TempContactDatas;
+
+	vector<b2ShapeId> TempShapeIds;
 
 	bool IsLine;
 
