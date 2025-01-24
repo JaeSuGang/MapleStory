@@ -15,12 +15,11 @@ void UPhysicsSubsystem::Tick(float fDeltaTime)
 {
 	AccumulatedDeltaTime += fDeltaTime;
 
-	if (AccumulatedDeltaTime < SimulationFrequencyTime)
-		return;
-
-	b2World_Step(this->B2WorldID, SimulationFrequencyTime, 4);
-
-	AccumulatedDeltaTime -= SimulationFrequencyTime;
+	while (AccumulatedDeltaTime > SimulationFrequencyTime)
+	{
+		b2World_Step(this->B2WorldID, SimulationFrequencyTime, 4);
+		AccumulatedDeltaTime -= SimulationFrequencyTime;
+	}
 }
 
 void UPhysicsSubsystem::LateInit()

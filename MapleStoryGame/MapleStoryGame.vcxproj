@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\Skills\BP_MistralSpringSummon.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_MistralSpringEffect_0.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_MistralSpringScreen.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_MistralSpringEffect_1.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\Skills\BP_MistralSpringSummon.h" />
     <ClInclude Include="Public\Actors\Skills\BP_MistralSpringEffect_0.h" />
     <ClInclude Include="Public\Actors\Skills\BP_MistralSpringScreen.h" />
     <ClInclude Include="Public\Actors\Skills\BP_MistralSpringEffect_1.h" />

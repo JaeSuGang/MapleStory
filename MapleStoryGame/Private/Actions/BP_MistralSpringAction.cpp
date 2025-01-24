@@ -21,4 +21,5 @@ void BP_MistralSpringAction::StartAction(AActor* Instigator)
 	}
 
 	BP_MistralSpringScreen* MistralSpringEffect0 = GetWorld()->SpawnActor<BP_MistralSpringScreen>();
+	MistralSpringEffect0->SetInstigator(Instigator);
 }

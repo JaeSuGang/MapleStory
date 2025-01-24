@@ -35,7 +35,7 @@ void AHitEffect::SetAnimation(string strPath, int SecondPerFrame)
 
 	RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
 
-	RenderComponent->SetSortingLayer(RENDER_LAYER_FRONT_SKILL);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_HIT_EFFECT);
 
 	RenderComponent->SetBlendMode(1);
 

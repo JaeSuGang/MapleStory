@@ -25,13 +25,14 @@ URenderSubsystem::URenderSubsystem()
 	Camera.NearZ = 1.0f;
 	Camera.FarZ = 10000.0f;
 	Camera.Transform.Position.z = -500.0f;
+	Camera.DebugLayerLevel = 15;
 
 	RenderTargetViewColor[0] = 103.0f / 255.0f;
 	RenderTargetViewColor[1] = 146.0f / 255.0f;
 	RenderTargetViewColor[2] = 190.0f / 255.0f;
 	RenderTargetViewColor[3] = 1.0f;
 
-	int nSortingLayers = 14;
+	int nSortingLayers = 15;
 	int nZValues = 20;
 	int nZIndexes = 500;
 	RenderOrder.resize(nSortingLayers);

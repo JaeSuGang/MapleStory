@@ -13,6 +13,8 @@ BP_MistralSpringEffect_0::BP_MistralSpringEffect_0()
 {
 	IsScreenSkill = true;
 
+	IsLoopingSkill = true;
+
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 }
 
@@ -24,15 +26,7 @@ void BP_MistralSpringEffect_0::BeginPlay()
 
 void BP_MistralSpringEffect_0::Tick(float fDeltaTime)
 {
-	AActor::Tick(fDeltaTime);
-
-	ElapsedTime += fDeltaTime;
-
-	FTransform CameraTransform = GEngine->RenderSubsystem->GetCamera().Transform;
-	Transform.Position.x = CameraTransform.Position.x;
-	Transform.Position.y = CameraTransform.Position.y;
-
-	RenderComponent->PlayAnimation(fDeltaTime);
+	Super::Tick(fDeltaTime);
 
 	if (ElapsedTime > 20.0f)
 		this->Destroy();

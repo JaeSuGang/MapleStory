@@ -9,6 +9,7 @@
 #include "Actors/Skills/BP_MistralSpringScreen.h"
 #include "Actors/Skills/BP_MistralSpringEffect_0.h"
 #include "Actors/Skills/BP_MistralSpringEffect_1.h"
+#include "Actors/Skills/BP_MistralSpringSummon.h"
 
 
 BP_MistralSpringScreen::BP_MistralSpringScreen()
@@ -36,6 +37,12 @@ void BP_MistralSpringScreen::Tick(float fDeltaTime)
 		HasSpawnedSpecialEffect = true;
 		BP_MistralSpringEffect_0* Effect0 = GetWorld()->SpawnActor<BP_MistralSpringEffect_0>();
 		BP_MistralSpringEffect_1* Effect1 = GetWorld()->SpawnActor<BP_MistralSpringEffect_1>();
+		BP_MistralSpringSummon* Summon = GetWorld()->SpawnActor<BP_MistralSpringSummon>();
+
+		FVector3 _SummonPos = Instigator->GetTransform().Position;
+		Summon->SetInstigator(Instigator);
+		_SummonPos.y += 130.0f;
+		Summon->SetPosition(_SummonPos);
 	}
 }
 
@@ -47,7 +54,7 @@ void BP_MistralSpringScreen::InitTexture()
 
 	RenderComponent->SetActorScaleByTextureSize();
 
-	RenderComponent->SetSortingLayer(RENDER_LAYER_FRONT_SKILL);
+	RenderComponent->SetSortingLayer(RENDER_LAYER_HIT_EFFECT);
 }
 
 void BP_MistralSpringScreen::InitAnimations()

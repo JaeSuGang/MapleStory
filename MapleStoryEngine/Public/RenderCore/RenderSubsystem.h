@@ -38,7 +38,7 @@ public:
 	bool IsFreeMode;
 	bool IsPerspectiveProjection;
 	bool IsWireFrame;
-	int DebugLayerLevel = 14;
+	int DebugLayerLevel;
 };
 
 /* UWindowSubsystem, UDebugSubsystem, UResourceSubsystem¿¡ ÀÇÁ¸ */

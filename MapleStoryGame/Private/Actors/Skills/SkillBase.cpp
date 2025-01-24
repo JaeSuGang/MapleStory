@@ -7,6 +7,10 @@ ASkillBase::ASkillBase()
 {
 	ElapsedTime = 0.0f;
 
+	IsLoopingSkill = false;
+
+	IsScreenSkill = false;
+
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 }
 
@@ -29,7 +33,7 @@ void ASkillBase::Tick(float fDeltaTime)
 
 	ElapsedTime += fDeltaTime;
 
-	if (RenderComponent->GetHasPassedLastFrame())
+	if (!IsLoopingSkill && RenderComponent->GetHasPassedLastFrame())
 	{
 		this->Destroy();
 		return;

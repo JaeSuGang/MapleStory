@@ -35,6 +35,8 @@ protected:
 
 	float ElapsedTime;
 
+	bool IsLoopingSkill;
+
 	bool IsScreenSkill;
 };
 
