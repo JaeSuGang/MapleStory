@@ -30,6 +30,8 @@ void UMainGameInstance::BeginPlay()
 
 void UMainGameInstance::InitTags()
 {
+	GameplayTagsManager->RegisterTag("Action.MistralSpring");
+
 	GameplayTagsManager->RegisterTag("Action.HowlingGale");
 
 	GameplayTagsManager->RegisterTag("Action.IdleWhim");
@@ -47,6 +49,8 @@ void UMainGameInstance::InitTags()
 	GameplayTagsManager->RegisterTag("Action.Prone");
 
 	GameplayTagsManager->RegisterTag("Action.TakeDamage");
+
+	GameplayTagsManager->RegisterTag("Status.Stunned");
 
 	GameplayTagsManager->RegisterTag("Status.Falling");
 

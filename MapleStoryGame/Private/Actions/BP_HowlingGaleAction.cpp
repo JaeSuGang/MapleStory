@@ -5,7 +5,8 @@
 #include "Attributes/AttributeComponent.h"
 
 #include "Actions/BP_HowlingGaleAction.h"
-#include "Actors/Skills/BP_HowlingGaleBall.h"
+
+#include "Actors/Skills/BP_HowlingGaleEffect.h"
 
 BP_HowlingGaleAction::BP_HowlingGaleAction()
 {
@@ -26,8 +27,8 @@ void BP_HowlingGaleAction::StartAction(AActor* Instigator)
 		RenderComponent->AddAnimationEvent(EAnimationName::Shoot1, 5, std::bind((void(UAttributeComponent::*)(string))(&UAttributeComponent::RemoveAttribute), AttributeComponent, "Status.Attacking.Shoot1"));
 	}
 
-	BP_HowlingGaleBall* HowlingGaleBall = GetWorld()->SpawnActor<BP_HowlingGaleBall>();
-	FVector3 _BallPos = Instigator->GetTransform().Position;
-	_BallPos.y += 400.0f;
-	HowlingGaleBall->SetPosition(_BallPos);
+
+
+	BP_HowlingGaleEffect* HowlingGaleEffect = GetWorld()->SpawnActor<BP_HowlingGaleEffect>();
+	HowlingGaleEffect->SetInstigator(Instigator);
 }

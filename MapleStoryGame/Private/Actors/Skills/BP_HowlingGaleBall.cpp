@@ -109,7 +109,7 @@ void BP_HowlingGaleBall::InitAnimations()
 {
 	Super::InitAnimations();
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Revive, "Resources\\Textures\\Skills\\HowlingGale\\ball_revive", 120);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Revive, "Resources\\Textures\\Skills\\HowlingGale\\ballRevive", 120);
 
 	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\HowlingGale\\ball", 120);
 }

@@ -5,6 +5,7 @@
 #include "RenderCore/Animation.h"
 
 
+#define RENDER_LAYER_BEHIND_FOOTHOLD 4
 #define RENDER_LAYER_BACK_SKILL 8
 #define RENDER_LAYER_MONSTER 9
 #define RENDER_LAYER_CHARACTER 10

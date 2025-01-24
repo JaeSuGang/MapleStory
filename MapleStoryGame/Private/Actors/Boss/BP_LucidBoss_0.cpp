@@ -54,6 +54,7 @@ void BP_LucidBoss_0::Tick(float fDeltaTime)
 	{
 		if (RenderComponent->GetCurrentAnimation() == EAnimationName::Die)
 			this->Destroy();
+
 		else
 			RenderComponent->SetCurrentAnimation(EAnimationName::Stand);
 	}

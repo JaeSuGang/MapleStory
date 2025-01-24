@@ -18,7 +18,6 @@ class UEngine : public UObject
 	friend class UGameplaySubsystem;
 
 public:
-	ENGINE_API void LateInit();
 	UEngine();
 
 	~UEngine();
@@ -26,6 +25,7 @@ public:
 public:
 	ENGINE_API static shared_ptr<UEngine> Instantiate();
 
+	ENGINE_API void LateInit();
 
 	ENGINE_API void RunForever();
 
