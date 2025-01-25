@@ -13,5 +13,7 @@ public:
 	void InitTexture() override;
 	void InitAnimations() override;
 
+protected:
+	float SummonTime;
 };
 

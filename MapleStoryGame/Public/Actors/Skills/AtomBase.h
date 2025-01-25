@@ -32,6 +32,9 @@ public:
 
 
 public:
+	void SetRandomRotation();
+
+	void SetRandomPosition(FVector3 _Position, float _Range);
 
 protected:
 	URenderComponent* RenderComponent;

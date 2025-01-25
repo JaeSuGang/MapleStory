@@ -6,6 +6,8 @@
 #include "World/World.h"
 #include "Attributes/AttributeComponent.h"
 #include "Actions/ActionComponent.h"
+#include "Engine/Engine.h"
+#include "Engine/RandomManager.h"
 
 AAtomBase::AAtomBase()
 {
@@ -131,5 +133,17 @@ bool AAtomBase::FindTarget(float _fRadius)
 
 	Target = TempActorsVector[_nRandomIndex]->GetShared<AActor>();
 	return true;
+}
+
+void AAtomBase::SetRandomRotation()
+{
+	SetRotation({ 0.0f, 0.0f, GEngine->RandomManager->GenerateRandomFloatValue(0.0f, 360.0f) });
+}
+
+void AAtomBase::SetRandomPosition(FVector3 _Position, float _Range)
+{
+	_Position.x += GEngine->RandomManager->GenerateRandomFloatValue(-_Range, _Range);
+	_Position.y += GEngine->RandomManager->GenerateRandomFloatValue(-_Range, _Range);
+	SetPosition(_Position);
 }
 

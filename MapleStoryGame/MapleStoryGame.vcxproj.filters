@@ -162,6 +162,15 @@
     <ClCompile Include="Private\Actors\Skills\BP_MistralSpringSummon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Private\Actors\Skills\BP_MistralSpringAtom2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actors\Skills\BP_MistralSpringAtom1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actors\Skills\BP_MistralSpringAtom0.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Public\GamePch.h">
@@ -309,6 +318,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actors\Skills\BP_MistralSpringSummon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Skills\BP_MistralSpringAtom2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Skills\BP_MistralSpringAtom1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Skills\BP_MistralSpringAtom0.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

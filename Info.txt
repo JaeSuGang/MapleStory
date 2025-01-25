@@ -4,3 +4,6 @@ wzcomparerr2 코디 코드
 
 
 루시드 꽃 Mob _Canvas 8880140 or NPC 3005727과 3005728
+
+
+미스트랄 스프링 atom 71, 100
