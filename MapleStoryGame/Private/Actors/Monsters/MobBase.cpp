@@ -17,6 +17,8 @@ AMobBase::AMobBase()
 	ActionComponent = CreateDefaultSubobject<UActionComponent>();
 
 	AttributeComponent->AddAttribute("ActorType.Monster");
+
+	AttributeComponent->AddAttribute("Status.Hitable");
 }
 
 void AMobBase::BeginPlay()

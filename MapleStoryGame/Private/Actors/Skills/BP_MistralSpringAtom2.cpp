@@ -5,6 +5,7 @@
 #include "Engine/RandomManager.h"
 #include "PhysicsCore/PhysicsComponent.h"
 #include "Actions/ActionComponent.h"
+#include "Attributes/AttributeComponent.h"
 
 #include "Actions/BP_TakeDamageAction.h"
 #include "Actors/Skills/BP_MistralSpringAtom2.h"
@@ -19,35 +20,37 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
-	if (ElapsedTime > 0.2f && IsHit == false)
+	if (ElapsedTime > 0.2f && !IsHit)
 	{
 		PhysicsComponent->FetchOverlappedHitboxActors(TempActorsVector);
 
 		if (TempActorsVector.size() > 0)
 		{
-			IsHit = true;
-			LifeTime = 1.0f;
-
 			for (AActor* _Actor : TempActorsVector)
 			{
-				if (UActionComponent* _ActionComponent = _Actor->GetComponentByClass<UActionComponent>())
-				{
-					if (!_ActionComponent->HasAction("Action.TakeDamage"))
-						continue;
+				UAttributeComponent* _AttributeComponent = _Actor->GetComponentByClass<UAttributeComponent>();
+				UActionComponent* _ActionComponent = _Actor->GetComponentByClass<UActionComponent>();
 
-					FDamageInfo _DamageInfo{};
-					_DamageInfo.DamageRangeOffset = 0.1f;
-					_DamageInfo.Damage = 12345678912.0f;
-					_DamageInfo.TotalHitCount = 5;
-					_DamageInfo.HitDelay = 0.1f;
-					_DamageInfo.HitEffectPath = PATH_SKILL_HIT_1;
+				if (!_AttributeComponent || !_AttributeComponent->HasAttributeExact("Status.Hitable"))
+					continue;
 
-					_ActionComponent->StartActionByNameWithParameter(TempActorsVector[0], "Action.TakeDamage", &_DamageInfo);
+				if (!_ActionComponent || !_ActionComponent->HasAction("Action.TakeDamage"))
+					continue;
 
-					PhysicsComponent->SetVelocity({ 0.0f , 0.0f ,0.0f });
-					break;
-				}
+				IsHit = true;
+				LifeTime = 1.0f;
 
+				FDamageInfo _DamageInfo{};
+				_DamageInfo.DamageRangeOffset = 0.1f;
+				_DamageInfo.Damage = 12345678912.0f;
+				_DamageInfo.TotalHitCount = 5;
+				_DamageInfo.HitDelay = 0.1f;
+				_DamageInfo.HitEffectPath = PATH_SKILL_HIT_1;
+
+				_ActionComponent->StartActionByNameWithParameter(_Actor, "Action.TakeDamage", &_DamageInfo);
+
+				PhysicsComponent->SetVelocity({ 0.0f , 0.0f ,0.0f });
+				break;
 			}
 		}
 	}
@@ -61,15 +64,19 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 	{
 		shared_ptr<AActor> _TargetMonster = Target.lock();
 
-		if (_TargetMonster.get())
+		if (_TargetMonster.get() && _TargetMonster->GetComponentByClass<UAttributeComponent>()->HasAttributeExact("Status.Hitable"))
 		{
 			FTransform _TargetTransform = _TargetMonster->GetTransform();
 
-			float _AngleDiff = GetZAngle(Transform.Position, _TargetTransform.Position);
+			float _AngleDiff = GetZAngle(Transform.Position, _TargetTransform.Position, Transform.Rotation);
 
-			float _AngleToApply = _AngleDiff * 20.0f * fDeltaTime;
+			_AngleDiff = NormalizeDirectionAngle(_AngleDiff + 180.0f);
+
+			float _AngleToApply = _AngleDiff * 5.0f * fDeltaTime;
 
 			AddZRotation(_AngleToApply);
+
+			PhysicsComponent->SetForwardVelocity(-1200.0f);
 		}
 
 		else
@@ -79,11 +86,10 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 			if (FindTargetCooldown < 0)
 			{
 				FindTargetCooldown = 1.0f;
-				FindTarget(2000.0f);
+				FindTarget(3000.0f);
 			}
 		}
 
-		PhysicsComponent->SetForwardVelocity(-700.0f);
 	}
 }
 

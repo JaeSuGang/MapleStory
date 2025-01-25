@@ -115,7 +115,7 @@ bool AAtomBase::FindTarget(float _fRadius)
 
 		if (UAttributeComponent* _Attribute = _Owner->GetComponentByClass<UAttributeComponent>())
 		{
-			if (_Attribute->HasAttributeExact("ActorType.Monster") || _Attribute->HasAttributeExact("ActorType.Boss"))
+			if (_Attribute->HasAttributeExact("Status.Hitable"))
 			{
 				TempActorsVector.push_back(_PhysicsComponent->GetOwner());
 			}

@@ -50,6 +50,8 @@ void UMainGameInstance::InitTags()
 
 	GameplayTagsManager->RegisterTag("Action.TakeDamage");
 
+	GameplayTagsManager->RegisterTag("Status.Hitable");
+
 	GameplayTagsManager->RegisterTag("Status.Stunned");
 
 	GameplayTagsManager->RegisterTag("Status.Falling");

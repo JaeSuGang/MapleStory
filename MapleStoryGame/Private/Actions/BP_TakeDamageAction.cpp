@@ -39,7 +39,9 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 	if (DamagesToApply.size() == 0)
 	{
 		if (RenderComponent->GetCurrentAnimation() != EAnimationName::Die && AttributeComponent->GetAttributeValue("Value.Hp") <= 0.0f)
+		{
 			RenderComponent->SetCurrentAnimation(EAnimationName::Die);
+		}
 
 		return;
 	}
@@ -71,6 +73,10 @@ void BP_TakeDamageAction::Tick(float fDeltaTime)
 		}
 	}
 
+	if (AttributeComponent && AttributeComponent->HasAttributeExact("Status.Hitable") && AttributeComponent->GetAttributeValue("Value.Hp") <= 0.0f)
+	{
+		AttributeComponent->RemoveAttribute("Status.Hitable");
+	}
 
 	DamagesToApply.erase(std::remove_if(DamagesToApply.begin(), DamagesToApply.end(), [](const FDamageInfo& Info) { return Info.CurrentHitCount >= Info.TotalHitCount; }), DamagesToApply.end());
 }

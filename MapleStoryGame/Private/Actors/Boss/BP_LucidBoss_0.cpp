@@ -19,6 +19,8 @@ BP_LucidBoss_0::BP_LucidBoss_0()
 	ActionComponent = CreateDefaultSubobject<UActionComponent>();
 
 	AttributeComponent->AddAttribute("ActorType.Boss");
+
+	AttributeComponent->AddAttribute("Status.Hitable");
 }
 
 void BP_LucidBoss_0::BeginPlay()

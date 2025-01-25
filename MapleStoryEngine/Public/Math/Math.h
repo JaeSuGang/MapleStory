@@ -12,12 +12,29 @@ inline float RadianToDegree(float _Rad)
 	return _Rad * 180.0f / std::acos(-1.0f);
 }
 
-inline float GetZAngle(FVector3 _First, FVector3 _Second)
+inline float NormalizeDirectionAngle(float _Angle)
 {
-	float _FirstAngle = RadianToDegree(std::atan2(_First.y, _First.x));
-	float _SecondAngle = RadianToDegree(std::atan2(_Second.y, _Second.x));
+	_Angle = std::fmodf(_Angle, 360.0f);
 
-	float _AngleDiff = _SecondAngle - _FirstAngle;
+	if (_Angle > 180.0f)
+		return _Angle - 360.0f;
 
-	return _AngleDiff > 180.0f ? -(_AngleDiff - 180.0f) : _AngleDiff;
+	else if (_Angle < -180.0f)
+		return _Angle + 360.0f;
+
+	else
+		return _Angle;
+}
+
+inline float GetZAngle(FVector3 _Pos, FVector3 _TargetPos, FVector3 _Rot)
+{
+	_TargetPos.x -= _Pos.x;
+	_TargetPos.y -= _Pos.y;
+
+	float _PositionalDegree = RadianToDegree(std::atan2f(_TargetPos.y, _TargetPos.x));
+	float _LookDegree = _Rot.z;
+
+	float _ReturnVal = _PositionalDegree - _LookDegree;
+
+	return NormalizeDirectionAngle(_ReturnVal);
 }
