@@ -42,18 +42,6 @@ void BP_MistralSpringSummon::Tick(float fDeltaTime)
 			_Atom0->SetRandomPosition(_Transform.Position, 100.0f);
 			_Atom1->SetRandomPosition(_Transform.Position, 100.0f);
 			_Atom2->SetRandomPosition(_Transform.Position, 100.0f);
-			if (i < 5)
-			{
-				_Atom0->SetRotation({ 0.0f, 0.0f, -90.0f});
-				_Atom1->SetRotation({ 0.0f, 0.0f, -90.0f });
-				_Atom2->SetRotation({ 0.0f, 0.0f, -90.0f });
-			}
-			else
-			{
-				_Atom0->SetRotation({ 0.0f, 0.0f, 90.0f });
-				_Atom1->SetRotation({ 0.0f, 0.0f, 90.0f });
-				_Atom2->SetRotation({ 0.0f, 0.0f, 90.0f });
-			}
 		}
 	}
 

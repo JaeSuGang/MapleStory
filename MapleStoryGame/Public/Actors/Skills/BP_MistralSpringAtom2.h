@@ -18,5 +18,7 @@ public:
 
 	void InitPhysics() override;
 
+protected:
+	bool HasShot;
 };
 

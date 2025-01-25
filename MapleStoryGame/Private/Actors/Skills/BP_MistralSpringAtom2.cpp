@@ -13,6 +13,8 @@
 
 BP_MistralSpringAtom2::BP_MistralSpringAtom2()
 {
+	HasShot = false;
+
 	LifeTime = 4.0f;
 }
 
@@ -20,8 +22,13 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
-	if (ElapsedTime > 0.2f && !IsHit)
+	if (ElapsedTime > 0.2f && IsHit == false)
 	{
+		if (!HasShot)
+		{
+			HasShot = true;
+		}
+
 		PhysicsComponent->FetchOverlappedHitboxActors(TempActorsVector);
 
 		if (TempActorsVector.size() > 0)
@@ -30,7 +37,6 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 			{
 				UAttributeComponent* _AttributeComponent = _Actor->GetComponentByClass<UAttributeComponent>();
 				UActionComponent* _ActionComponent = _Actor->GetComponentByClass<UActionComponent>();
-
 				if (!_AttributeComponent || !_AttributeComponent->HasAttributeExact("Status.Hitable"))
 					continue;
 
@@ -50,14 +56,11 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 				_ActionComponent->StartActionByNameWithParameter(_Actor, "Action.TakeDamage", &_DamageInfo);
 
 				PhysicsComponent->SetVelocity({ 0.0f , 0.0f ,0.0f });
+
+				RenderComponent->SetCurrentAnimation(EAnimationName::Die);
 				break;
 			}
 		}
-	}
-
-	if (IsHit)
-	{
-		RenderComponent->AddAlphaValue(-fDeltaTime);
 	}
 
 	if (!IsHit)
@@ -72,11 +75,14 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 
 			_AngleDiff = NormalizeDirectionAngle(_AngleDiff + 180.0f);
 
-			float _AngleToApply = _AngleDiff * 5.0f * fDeltaTime;
-
-			AddZRotation(_AngleToApply);
-
-			PhysicsComponent->SetForwardVelocity(-1200.0f);
+			if (ElapsedTime > 0.2f)
+			{
+				float _AccelVel = -1000.0f * (ElapsedTime > 1.0f ? 1.0f : ElapsedTime);
+				float _AccelRot = 10.0f * (ElapsedTime > 1.0f ? 1.0f : ElapsedTime);
+				float _AngleToApply = _AngleDiff * _AccelRot * fDeltaTime;
+				AddZRotation(_AngleToApply);
+				PhysicsComponent->SetForwardVelocity(-800.0f + _AccelVel);
+			}
 		}
 
 		else
@@ -96,6 +102,8 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 void BP_MistralSpringAtom2::BeginPlay()
 {
 	Super::BeginPlay();
+
+	SetRandomRotation();
 
 	FindTarget(3000.0f);
 }
@@ -118,7 +126,7 @@ void BP_MistralSpringAtom2::InitAnimations()
 
 	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\MistralSpring\\atom2\\idle", 120);
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Die, "Resources\\Textures\\Skills\\MistralSpring\\atom2\\die", 60);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Die, "Resources\\Textures\\Skills\\MistralSpring\\atom2\\die", 100);
 }
 
 void BP_MistralSpringAtom2::InitPhysics()
