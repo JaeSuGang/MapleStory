@@ -44,6 +44,8 @@ void ACharacterBase::BeginPlay()
 
 	this->InitAnimations();
 
+	this->InitAttributes();
+
 	this->BindKeys();
 }
 
@@ -80,17 +82,22 @@ void ACharacterBase::BindKeys()
 	
 }
 
+float ACharacterBase::GetDamage() const
+{
+	return AttributeComponent->GetAttributeValue("Value.Damage");
+}
+
 void ACharacterBase::DecideAnimation()
 {
-	if (AttributeComponent->ContainsAttribute("Status.Attacking.SwingT1"))
+	if (AttributeComponent->ContainsAttribute("Status.Attacking"))
 	{
+		if (AttributeComponent->ContainsAttribute("Status.Attacking.ShootMoving"))
+		{
+			AttributeComponent->RemoveAttribute("Status.Attacking.ShootMoving");
+		}
 		return;
 	}
 
-	else if (AttributeComponent->ContainsAttribute("Status.Attacking.Shoot1"))
-	{
-		return;
-	}
 
 	if (AttributeComponent->HasAttributeExact("Status.Falling"))
 		RenderComponent->SetCurrentAnimation(EAnimationName::Jump);
@@ -133,6 +140,13 @@ void ACharacterBase::InitActions()
 
 	ActionComponent->AddAction<BP_JumpAction>();
 
+}
+
+void ACharacterBase::InitAttributes()
+{
+	AttributeComponent->AddAttribute("Value.Damage");
+
+	AttributeComponent->SetAttributeValue("Value.Damage", 52'000'000);
 }
 
 void ACharacterBase::InitTextures()

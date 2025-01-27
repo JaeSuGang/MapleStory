@@ -34,22 +34,33 @@ void BP_MistralSpringSummon::Tick(float fDeltaTime)
 	{
 		SummonTime = 3.0f;
 		FTransform _Transform = Transform;
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 15; i++)
 		{
 			BP_MistralSpringAtom0* _Atom0 = GetWorld()->SpawnActor<BP_MistralSpringAtom0>();
+			_Atom0->SetInstigator(Instigator);
+			_Atom0->SetRandomPosition(_Transform.Position, 200.0f);
+		}
+
+		for (int i = 0; i < 5; i++)
+		{
 			BP_MistralSpringAtom1* _Atom1 = GetWorld()->SpawnActor<BP_MistralSpringAtom1>();
+			_Atom1->SetInstigator(Instigator);
+			_Atom1->SetRandomPosition(_Transform.Position, 200.0f);
+		}
+
+		for (int i = 0; i < 3; i++)
+		{
 			BP_MistralSpringAtom2* _Atom2 = GetWorld()->SpawnActor<BP_MistralSpringAtom2>();
-			_Atom0->SetRandomPosition(_Transform.Position, 100.0f);
-			_Atom1->SetRandomPosition(_Transform.Position, 100.0f);
-			_Atom2->SetRandomPosition(_Transform.Position, 100.0f);
+			_Atom2->SetInstigator(Instigator);
+			_Atom2->SetRandomPosition(_Transform.Position, 200.0f);
 		}
 	}
 
 
-	if (ElapsedTime > 20.0f)
+	if (ElapsedTime > 30.0f)
 		this->Destroy();
 
-	else if (ElapsedTime > 18.0f)
+	else if (ElapsedTime > 28.0f)
 		RenderComponent->AddAlphaValue(-0.5f * fDeltaTime);
 }
 

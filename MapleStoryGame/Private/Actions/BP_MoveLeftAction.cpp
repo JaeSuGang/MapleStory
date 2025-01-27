@@ -20,7 +20,10 @@ void BP_MoveLeftAction::StartAction(AActor* Instigator)
 	UAttributeComponent* AttributeComponent = Instigator->GetComponentByClass<UAttributeComponent>();
 	if (AttributeComponent)
 	{
-		if (AttributeComponent->ContainsAttribute("Status.Attacking"))
+		if (AttributeComponent->ContainsAttribute("Status.Attacking.Shoot1"))
+			return;
+
+		if (AttributeComponent->ContainsAttribute("Status.Attacking.SwingT1"))
 			return;
 
 		if (AttributeComponent->HasAttributeExact("Status.Proning"))

@@ -171,6 +171,15 @@
     <ClCompile Include="Private\Actors\Skills\BP_MistralSpringAtom0.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Private\Actors\Screen\BP_LucidIntro.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actions\BP_SongOfHeavenAction.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Actors\Skills\BP_SongOfHeavenAtom.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Public\GamePch.h">
@@ -327,6 +336,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Public\Actors\Skills\BP_MistralSpringAtom0.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Screen\BP_LucidIntro.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actions\BP_SongOfHeavenAction.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Actors\Skills\BP_SongOfHeavenAtom.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

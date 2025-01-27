@@ -38,6 +38,7 @@ void BP_IdleWhimEffect::Tick(float fDeltaTime)
 			SpawnTransform.Rotation.z = GEngine->RandomManager->GenerateRandomFloatValue(0.0f, 360.0f);
 
 			BP_IdleWhimAtom* Atom = GetWorld()->SpawnActor<BP_IdleWhimAtom>();
+			Atom->SetInstigator(Instigator);
 			Atom->SetPosition(SpawnTransform.Position);
 		}
 	}

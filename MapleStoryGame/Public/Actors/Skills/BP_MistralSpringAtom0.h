@@ -20,5 +20,7 @@ public:
 
 protected:
 	bool HasShot;
+
+	float DirectionTimer;
 };
 

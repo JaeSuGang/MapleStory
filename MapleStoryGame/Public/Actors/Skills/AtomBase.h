@@ -3,6 +3,7 @@
 
 class URenderComponent;
 class UPhysicsComponent;
+class AActor;
 
 class AAtomBase : public AActor
 {
@@ -32,6 +33,10 @@ public:
 
 
 public:
+	void SetPositionRelativeToInstigator(float fLeft, float fUp);
+
+	void SetInstigator(AActor* _Instigator);
+
 	void SetRandomRotation();
 
 	void SetRandomPosition(FVector3 _Position, float _Range);
@@ -46,6 +51,8 @@ protected:
 	vector<UPhysicsComponent*> TempPhysicsComponentVector;
 
 	weak_ptr<AActor> Target;
+
+	AActor* Instigator;
 
 	bool IsHit;
 

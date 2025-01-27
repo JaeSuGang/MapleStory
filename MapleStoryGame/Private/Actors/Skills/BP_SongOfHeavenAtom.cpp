@@ -6,18 +6,18 @@
 #include "PhysicsCore/PhysicsComponent.h"
 #include "Actions/ActionComponent.h"
 #include "Attributes/AttributeComponent.h"
-#include "Attributes/AttributeComponent.h"
+#include "Actor/Actor.h"
 
 #include "Actions/BP_TakeDamageAction.h"
-#include "Actors/Skills/BP_IdleWhimAtom.h"
+#include "Actors/Skills/BP_SongOfHeavenAtom.h"
 
 
-BP_IdleWhimAtom::BP_IdleWhimAtom()
+BP_SongOfHeavenAtom::BP_SongOfHeavenAtom()
 {
-	LifeTime = 10.0f;
+	LifeTime = 1.0f;
 }
 
-void BP_IdleWhimAtom::Tick(float fDeltaTime)
+void BP_SongOfHeavenAtom::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
@@ -42,8 +42,8 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 
 				FDamageInfo _DamageInfo{};
 				_DamageInfo.DamageRangeOffset = 0.1f;
-				_DamageInfo.Damage = 8.40f * Instigator->GetComponentByClass<UAttributeComponent>()->GetAttributeValue("Value.Damage");
-				_DamageInfo.TotalHitCount = 5;
+				_DamageInfo.Damage = 11.55f * Instigator->GetComponentByClass<UAttributeComponent>()->GetAttributeValue("Value.Damage");
+				_DamageInfo.TotalHitCount = 1;
 				_DamageInfo.HitDelay = 0.1f;
 				_DamageInfo.HitEffectPath = PATH_SKILL_HIT_1;
 
@@ -55,11 +55,6 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 		}
 	}
 
-	if (IsHit)
-	{
-		RenderComponent->AddAlphaValue(-fDeltaTime);
-	}
-
 	if (!IsHit)
 	{
 		shared_ptr<AActor> _TargetMonster = Target.lock();
@@ -67,59 +62,63 @@ void BP_IdleWhimAtom::Tick(float fDeltaTime)
 		if (_TargetMonster.get() && _TargetMonster->GetComponentByClass<UAttributeComponent>()->HasAttributeExact("Status.Hitable"))
 		{
 			FTransform _TargetTransform = _TargetMonster->GetTransform();
-
 			float _AngleDiff = GetZAngle(Transform.Position, _TargetTransform.Position, Transform.Rotation);
-
 			_AngleDiff = NormalizeDirectionAngle(_AngleDiff + 180.0f);
 
-			float _AngleToApply = _AngleDiff * 5.0f * fDeltaTime;
+			_AngleDiff = _AngleDiff * 10.0f * fDeltaTime;
 
-			AddZRotation(_AngleToApply);
-
-			PhysicsComponent->SetForwardVelocity(-1200.0f);
+			AddZRotation(_AngleDiff);
 		}
 
-		else
-		{
-			FindTargetCooldown -= fDeltaTime;
-
-			if (FindTargetCooldown < 0)
-			{
-				FindTargetCooldown = 1.0f;
-				FindTarget(3000.0f);
-			}
-		}
-
+		PhysicsComponent->SetForwardVelocity(-600.0f);
 	}
 }
-
-void BP_IdleWhimAtom::BeginPlay()
+	
+void BP_SongOfHeavenAtom::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FindTarget(2000.0f);
+	FTransform TransformToApply = Instigator->GetTransform();
+
+	if (TransformToApply.Rotation.y == 180.0f)
+	{
+		TransformToApply.Position.x += 70.0f;
+		TransformToApply.Position.y -= 10.0f;
+		TransformToApply.Rotation = { 0.0f, 0.0f, 180.0f };
+	}
+	else
+	{
+		TransformToApply.Position.x -= 70.0f;
+		TransformToApply.Position.y -= 10.0f;
+		TransformToApply.Rotation = { 0.0f, 0.0f, 0.0f };
+	}
+
+	SetPosition(TransformToApply.Position);
+	SetRotation(TransformToApply.Rotation);
+	Transform.Position = TransformToApply.Position;
+	Transform.Rotation= TransformToApply.Rotation;
+
+	FindTarget(500.0f);
 }
 
-void BP_IdleWhimAtom::InitTexture()
+void BP_SongOfHeavenAtom::InitTexture()
 {
 	Super::InitTexture();
 
-	RenderComponent->SetTextureByName("Resources\\Textures\\Skills\\IdleWhim\\atom\\1.png");
+	RenderComponent->SetTextureByName("Resources\\Textures\\Skills\\SongOfHeaven\\atom\\1.png");
 
 	RenderComponent->SetActorScaleByTextureSize();
 
 }
 
-void BP_IdleWhimAtom::InitAnimations()
+void BP_SongOfHeavenAtom::InitAnimations()
 {
 	Super::InitAnimations();
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\IdleWhim\\atom", 90);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\MistralSpring\\atom0\\idle", 60);
 }
 
-void BP_IdleWhimAtom::InitPhysics()
+void BP_SongOfHeavenAtom::InitPhysics()
 {
 	Super::InitPhysics();
-
-	SetRotation({ 0.0f, 0.0f, GEngine->RandomManager->GenerateRandomFloatValue(0.0f, 360.0f) });
 }

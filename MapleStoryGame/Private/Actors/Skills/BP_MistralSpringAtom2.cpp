@@ -15,6 +15,8 @@ BP_MistralSpringAtom2::BP_MistralSpringAtom2()
 {
 	HasShot = false;
 
+	DirectionTimer = 0.0f;
+
 	LifeTime = 4.0f;
 }
 
@@ -48,8 +50,8 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 
 				FDamageInfo _DamageInfo{};
 				_DamageInfo.DamageRangeOffset = 0.1f;
-				_DamageInfo.Damage = 12345678912.0f;
-				_DamageInfo.TotalHitCount = 5;
+				_DamageInfo.Damage = 12.75f * Instigator->GetComponentByClass<UAttributeComponent>()->GetAttributeValue("Value.Damage");
+				_DamageInfo.TotalHitCount = 7;
 				_DamageInfo.HitDelay = 0.1f;
 				_DamageInfo.HitEffectPath = PATH_SKILL_HIT_1;
 
@@ -69,19 +71,21 @@ void BP_MistralSpringAtom2::Tick(float fDeltaTime)
 
 		if (_TargetMonster.get() && _TargetMonster->GetComponentByClass<UAttributeComponent>()->HasAttributeExact("Status.Hitable"))
 		{
-			FTransform _TargetTransform = _TargetMonster->GetTransform();
-
-			float _AngleDiff = GetZAngle(Transform.Position, _TargetTransform.Position, Transform.Rotation);
-
-			_AngleDiff = NormalizeDirectionAngle(_AngleDiff + 180.0f);
-
-			if (ElapsedTime > 0.2f)
+			if (ElapsedTime > DirectionTimer)
 			{
-				float _AccelVel = -1000.0f * (ElapsedTime > 1.0f ? 1.0f : ElapsedTime);
-				float _AccelRot = 10.0f * (ElapsedTime > 1.0f ? 1.0f : ElapsedTime);
-				float _AngleToApply = _AngleDiff * _AccelRot * fDeltaTime;
+				FTransform _TargetTransform = _TargetMonster->GetTransform();
+
+				float _AngleDiff = GetZAngle(Transform.Position, _TargetTransform.Position, Transform.Rotation);
+
+				_AngleDiff = NormalizeDirectionAngle(_AngleDiff + 180.0f);
+				float _AccelVel = max(ElapsedTime * -2000.0f, -2000.0f);
+				float _AngleToApply = _AngleDiff * 8.0f * fDeltaTime;
 				AddZRotation(_AngleToApply);
-				PhysicsComponent->SetForwardVelocity(-800.0f + _AccelVel);
+				PhysicsComponent->SetForwardVelocity(_AccelVel);
+			}
+			else if (ElapsedTime > 0.2f)
+			{
+				PhysicsComponent->SetForwardVelocity(-500.0f);
 			}
 		}
 
@@ -103,7 +107,9 @@ void BP_MistralSpringAtom2::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetRandomRotation();
+	DirectionTimer = GEngine->RandomManager->GenerateRandomFloatValue(0.2f, 0.5f);
+
+	SetRotation({ 0.0f, 0.0f, -90.0f });
 
 	FindTarget(3000.0f);
 }

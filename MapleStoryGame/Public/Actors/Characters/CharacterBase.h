@@ -25,6 +25,8 @@ public:
 
 	virtual void InitActions();
 
+	virtual void InitAttributes();
+
 	virtual void InitAnimations();
 
 	virtual void InitTextures();
@@ -33,8 +35,9 @@ public:
 
 	virtual void SetPosition(FVector3 _Position);
 
-public:
 	virtual void BindKeys();
+public:
+	float GetDamage() const;
 
 protected:
 	void DecideAnimation();

@@ -30,6 +30,8 @@ void UMainGameInstance::BeginPlay()
 
 void UMainGameInstance::InitTags()
 {
+	GameplayTagsManager->RegisterTag("Action.SongOfHeaven");
+
 	GameplayTagsManager->RegisterTag("Action.MistralSpring");
 
 	GameplayTagsManager->RegisterTag("Action.HowlingGale");
@@ -60,6 +62,8 @@ void UMainGameInstance::InitTags()
 
 	GameplayTagsManager->RegisterTag("Status.Walking");
 
+	GameplayTagsManager->RegisterTag("Status.Attacking.ShootMoving");
+
 	GameplayTagsManager->RegisterTag("Status.Attacking.SwingT1");
 
 	GameplayTagsManager->RegisterTag("Status.Attacking.Shoot1");
@@ -67,6 +71,8 @@ void UMainGameInstance::InitTags()
 	GameplayTagsManager->RegisterTag("Status.CanDoubleJump");
 
 	GameplayTagsManager->RegisterTag("Value.Hp");
+
+	GameplayTagsManager->RegisterTag("Value.Damage");
 
 	GameplayTagsManager->RegisterTag("ActorType.Character");
 

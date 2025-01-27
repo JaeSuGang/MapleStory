@@ -9,6 +9,7 @@
 #include "Actions/BP_DoubleJumpAction.h"
 #include "Actions/BP_GustShiftAction.h"
 #include "Actions/BP_FairyTurnAction.h"
+#include "Actions/BP_SongOfHeavenAction.h"
 #include "Actions/BP_IdleWhimAction.h"
 #include "Actions/BP_HowlingGaleAction.h"
 #include "Actions/BP_MistralSpringAction.h"
@@ -29,6 +30,7 @@ void BP_WindBreaker::InitActions()
 
 	ActionComponent->AddAction<BP_MistralSpringAction>();
 
+	ActionComponent->AddAction<BP_SongOfHeavenAction>();
 }
 
 void BP_WindBreaker::InitAnimations()
@@ -64,6 +66,8 @@ void BP_WindBreaker::BindKeys()
 	Super::BindKeys();
 
 	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'S', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.FairyTurn" }));
+
+	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'F', UKeyInputSubsystem::EKeyState::Triggered, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.SongOfHeaven" }));
 
 	GEngine->KeyInputSubsystem->BindKey(UKeyInputSubsystem::EInputMappingContext::Game, 'R', UKeyInputSubsystem::EKeyState::KeyDown, std::bind(&UActionComponent::StartActionByName, ActionComponent, this, string{ "Action.IdleWhim" }));
 

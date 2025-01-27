@@ -1,12 +1,12 @@
 #pragma once
 #include "AtomBase.h"
 
-class BP_MistralSpringAtom2 : public AAtomBase
+class BP_SongOfHeavenAtom : public AAtomBase
 {
 	typedef AAtomBase Super;
 
 public:
-	BP_MistralSpringAtom2();
+	BP_SongOfHeavenAtom();
 
 	void Tick(float fDeltaTime);
 
@@ -17,10 +17,5 @@ public:
 	void InitAnimations() override;
 
 	void InitPhysics() override;
-
-protected:
-	bool HasShot;
-
-	float DirectionTimer;
 };
 

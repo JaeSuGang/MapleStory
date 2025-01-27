@@ -50,6 +50,7 @@ void BP_HowlingGaleEffect::Tick(float fDeltaTime)
 		bool bIsLeftDirection = ((int)InstigatorTransform.Rotation.y % 360 < 90 || (int)InstigatorTransform.Rotation.y % 360 > 270);
 
 		BP_HowlingGaleBall* HowlingGaleBall = GetWorld()->SpawnActor<BP_HowlingGaleBall>();
+		HowlingGaleBall->SetInstigator(Instigator);
 		FVector3 _BallPos = Instigator->GetTransform().Position;
 		if (bIsLeftDirection)
 			_BallPos.x -= 100.0f;

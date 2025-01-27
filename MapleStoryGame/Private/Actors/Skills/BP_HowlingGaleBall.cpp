@@ -1,12 +1,14 @@
 #include "GamePch.h"
 #include "Math/Math.h"
-#include "Actors/Skills/BP_HowlingGaleBall.h"
 #include "RenderCore/RenderComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/RandomManager.h"
 #include "PhysicsCore/PhysicsComponent.h"
 #include "Actions/ActionComponent.h"
+#include "Attributes/AttributeComponent.h"
+
 #include "Actions/BP_TakeDamageAction.h"
+#include "Actors/Skills/BP_HowlingGaleBall.h"
 
 
 BP_HowlingGaleBall::BP_HowlingGaleBall()
@@ -43,7 +45,7 @@ void BP_HowlingGaleBall::Tick(float fDeltaTime)
 
 					FDamageInfo _DamageInfo{};
 					_DamageInfo.DamageRangeOffset = 0.1f;
-					_DamageInfo.Damage = 12345678912.0f;
+					_DamageInfo.Damage = 15.60f * Instigator->GetComponentByClass<UAttributeComponent>()->GetAttributeValue("Value.Damage");
 					_DamageInfo.TotalHitCount = 3;
 					_DamageInfo.HitDelay = 0.1f;
 					_DamageInfo.HitEffectPath = PATH_SKILL_HIT_2;

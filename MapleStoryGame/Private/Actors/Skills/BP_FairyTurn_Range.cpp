@@ -1,11 +1,13 @@
 #include "GamePch.h"
-#include "Actors/Skills/BP_FairyTurn_Range.h"
 #include "RenderCore/RenderComponent.h"
 #include "Engine/Engine.h"
 #include "World/World.h"
 #include "PhysicsCore/PhysicsSubsystem.h"
 #include "PhysicsCore/PhysicsComponent.h"
 #include "Actions/ActionComponent.h"
+#include "Attributes/AttributeComponent.h"
+
+#include "Actors/Skills/BP_FairyTurn_Range.h"
 #include "Actions/BP_TakeDamageAction.h"
 
 BP_FairyTurn_Range::BP_FairyTurn_Range()
@@ -34,7 +36,7 @@ void BP_FairyTurn_Range::BeginPlay()
 		{
 			FDamageInfo DamageInfo{};
 			DamageInfo.DamageRangeOffset = 0.1f;
-			DamageInfo.Damage = 123456789123.0f;
+			DamageInfo.Damage = 6.25f * Instigator->GetComponentByClass<UAttributeComponent>()->GetAttributeValue("Value.Damage");
 			DamageInfo.TotalHitCount = 5;
 			DamageInfo.HitDelay = 0.1f;
 			DamageInfo.HitEffectPath = PATH_SKILL_HIT_0;

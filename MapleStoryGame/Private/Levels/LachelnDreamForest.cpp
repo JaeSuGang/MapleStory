@@ -3,6 +3,7 @@
 #include "Actors/Characters/BP_WindBreaker.h"
 #include "Actors/Boss/BP_LucidBoss_0.h"
 #include "Actors/Boss/BP_LucidFlower.h"
+#include "Actors/Screen/BP_LucidIntro.h"
 #include "World/World.h"
 
 void ULachelnDreamForest::BeginPlay()
@@ -19,7 +20,6 @@ void ULachelnDreamForest::BeginPlay()
 	Flower->SetPosition({995.0f, 132.0f, 0.0f});
 	LucidPhase1->SetPosition({1000.0f, 235.0f, 0.0f});
 
-	
 }
 
 void ULachelnDreamForest::Tick(float fDeltaTime)

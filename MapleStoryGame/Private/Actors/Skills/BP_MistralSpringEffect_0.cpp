@@ -28,10 +28,10 @@ void BP_MistralSpringEffect_0::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
-	if (ElapsedTime > 20.0f)
+	if (ElapsedTime > 30.0f)
 		this->Destroy();
 
-	else if (ElapsedTime > 18.0f)
+	else if (ElapsedTime > 28.0f)
 		RenderComponent->AddAlphaValue(-0.5f * fDeltaTime);
 }
 
