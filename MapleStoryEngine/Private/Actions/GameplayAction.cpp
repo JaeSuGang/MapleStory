@@ -6,6 +6,8 @@
 
 UGameplayAction::UGameplayAction()
 {
+	IsTickEnabled = false;
+
 	GameplayTagsManager = GEngine->GetGameInstance()->GameplayTagsManager;
 
 	Timesubsystem = GEngine->TimeSubsystem;

@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\Skills\BP_SongOfHeavenEffect.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_SongOfHeavenAtom.cpp" />
     <ClCompile Include="Private\Actions\BP_SongOfHeavenAction.cpp" />
     <ClCompile Include="Private\Actors\Screen\BP_LucidIntro.cpp" />
@@ -207,6 +208,7 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\Skills\BP_SongOfHeavenEffect.h" />
     <ClInclude Include="Public\Actors\Skills\BP_SongOfHeavenAtom.h" />
     <ClInclude Include="Public\Actions\BP_SongOfHeavenAction.h" />
     <ClInclude Include="Public\Actors\Screen\BP_LucidIntro.h" />

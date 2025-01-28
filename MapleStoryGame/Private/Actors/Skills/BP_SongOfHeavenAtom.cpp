@@ -45,7 +45,7 @@ void BP_SongOfHeavenAtom::Tick(float fDeltaTime)
 				_DamageInfo.Damage = 11.55f * Instigator->GetComponentByClass<UAttributeComponent>()->GetAttributeValue("Value.Damage");
 				_DamageInfo.TotalHitCount = 1;
 				_DamageInfo.HitDelay = 0.1f;
-				_DamageInfo.HitEffectPath = PATH_SKILL_HIT_1;
+				_DamageInfo.HitEffectPath = PATH_SKILL_HIT_3;
 
 				_ActionComponent->StartActionByNameWithParameter(_Actor, "Action.TakeDamage", &_DamageInfo);
 
@@ -70,7 +70,7 @@ void BP_SongOfHeavenAtom::Tick(float fDeltaTime)
 			AddZRotation(_AngleDiff);
 		}
 
-		PhysicsComponent->SetForwardVelocity(-600.0f);
+		PhysicsComponent->SetForwardVelocity(-1000.0f);
 	}
 }
 	
@@ -82,13 +82,13 @@ void BP_SongOfHeavenAtom::BeginPlay()
 
 	if (TransformToApply.Rotation.y == 180.0f)
 	{
-		TransformToApply.Position.x += 70.0f;
+		TransformToApply.Position.x += 200.0f;
 		TransformToApply.Position.y -= 10.0f;
 		TransformToApply.Rotation = { 0.0f, 0.0f, 180.0f };
 	}
 	else
 	{
-		TransformToApply.Position.x -= 70.0f;
+		TransformToApply.Position.x -= 200.0f;
 		TransformToApply.Position.y -= 10.0f;
 		TransformToApply.Rotation = { 0.0f, 0.0f, 0.0f };
 	}
@@ -115,7 +115,7 @@ void BP_SongOfHeavenAtom::InitAnimations()
 {
 	Super::InitAnimations();
 
-	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\MistralSpring\\atom0\\idle", 60);
+	RenderComponent->AddAnimationByFolder(EAnimationName::Idle, "Resources\\Textures\\Skills\\SongOfHeaven\\atom", 60);
 }
 
 void BP_SongOfHeavenAtom::InitPhysics()
