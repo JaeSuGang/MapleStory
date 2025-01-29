@@ -1,42 +1,15 @@
 #include "EnginePch.h"
 #include "RenderCore/Widget.h"
+#include "RenderCore/Material.h"
 
-void UWidget::SetPSShaderID(int _ID)
+void UWidget::AddSubImageByTextureName(string _Name, FVector3 _Pos)
 {
-	PSShaderID = _ID;
-}
+	FWidgetSubImage _SubImage{};
 
-void UWidget::SetTextureID(int _ID)
-{
-	TextureID = _ID;
-}
+	_SubImage.Material = std::make_shared<UMaterial>();
+	_SubImage.Material->SetTextureByName(_Name);
+	_SubImage.Material->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+	_SubImage.Position = _Pos;
 
-int UWidget::GetPSShaderID() const
-{
-	return PSShaderID;
-}
-
-int UWidget::GetTextureID() const
-{
-	return TextureID;
-}
-
-FVector3 UWidget::GetPosition() const
-{
-	return Position;
-}
-
-FVector3 UWidget::GetSize() const
-{
-	return Size;
-}
-
-void UWidget::SetPosition(FVector3 _Pos)
-{
-	Position = _Pos;
-}
-
-void UWidget::SetSize(FVector3 _Size)
-{
-	Size = _Size;
+	SubImages.push_back(_SubImage);
 }

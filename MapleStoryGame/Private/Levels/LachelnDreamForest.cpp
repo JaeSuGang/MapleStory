@@ -12,6 +12,8 @@ void ULachelnDreamForest::BeginPlay()
 
 	this->LoadXMLToMap("Resources\\XMLs\\Map.Map.Map4.450004750.img.xml", "Lacheln.img.xml");
 
+	GEngine->GetGameInstance()->AddWidget<>();
+
 	MainActor = GetWorld()->SpawnActorReturnShared<BP_WindBreaker>();
 
 	BP_LucidFlower* Flower = GetWorld()->SpawnActor<BP_LucidFlower>();
