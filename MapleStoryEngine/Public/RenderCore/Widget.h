@@ -9,14 +9,17 @@ struct FWidgetSubImage
 {
 	shared_ptr<UMaterial> Material;
 	FVector3 Position;
+	FVector3 Size;
 };
 
 class UWidget : public UObject
 {
+	friend class URenderSubsystem;
+
 	typedef UObject Super;
 
 public:
-	void AddSubImageByTextureName(string _Name, FVector3 _Pos);
+	ENGINE_API void AddSubImageByTextureName(string _Name, FVector3 _Pos, FVector3 _Size);
 
 protected:
 	vector<FWidgetSubImage> SubImages;

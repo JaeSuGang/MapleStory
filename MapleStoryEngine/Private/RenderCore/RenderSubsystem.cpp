@@ -129,7 +129,7 @@ void URenderSubsystem::CreateD3D11Debug()
 	}
 }
 
-void URenderSubsystem::SetConstantBuffers(FTransform Transform, FPSConstantsBufferStruct _PSConstantsBufferStruct)
+void URenderSubsystem::SetDefaultConstantBuffers(FTransform Transform, FPSConstantsBufferStruct _PSConstantsBufferStruct)
 {
 	HRESULT hr{};
 
@@ -188,6 +188,63 @@ void URenderSubsystem::SetConstantBuffers(FTransform Transform, FPSConstantsBuff
 
 	DeviceContext->Unmap(TransformConstantBuffer.Get(), 0);
 	
+	ID3D11Buffer* pTransformConstantBuffer[1] = { TransformConstantBuffer.Get() };
+
+	DeviceContext->VSSetConstantBuffers(0, 1, pTransformConstantBuffer);
+
+	/* 알파 상수 버퍼 설정 */
+
+	D3D11_MAPPED_SUBRESOURCE AlphaSubresource{};
+	hr = DeviceContext->Map(PSConstantsBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &AlphaSubresource);
+	if (AlphaSubresource.pData == nullptr)
+	{
+		CRITICAL_ERROR(DEFAULT_ERROR_TEXT);
+	}
+	memcpy_s(AlphaSubresource.pData, sizeof(FPSConstantsBufferStruct), &_PSConstantsBufferStruct, sizeof(FPSConstantsBufferStruct));
+	DeviceContext->Unmap(PSConstantsBuffer.Get(), 0);
+
+	ID3D11Buffer* pPSConstantsBuffer[1] = { PSConstantsBuffer.Get() };
+	DeviceContext->PSSetConstantBuffers(1, 1, pPSConstantsBuffer);
+}
+
+void URenderSubsystem::SetWidgetConstantBuffers(FTransform Transform, FPSConstantsBufferStruct _PSConstantsBufferStruct)
+{
+	HRESULT hr{};
+
+	/* 월드 행렬 연산 */
+	DirectX::XMMATRIX ScaleMatrix = DirectX::XMMatrixScalingFromVector(DirectX::XMVECTOR{ Transform.Scale.x, Transform.Scale.y , Transform.Scale.z });
+
+	DirectX::XMMATRIX RotationMatrix = DirectX::XMMatrixRotationRollPitchYawFromVector(DirectX::XMVECTOR{ DirectX::XMConvertToRadians(Transform.Rotation.x), DirectX::XMConvertToRadians(Transform.Rotation.y) , DirectX::XMConvertToRadians(Transform.Rotation.z) });
+
+	DirectX::XMMATRIX TranslationMatrix = DirectX::XMMatrixTranslationFromVector(DirectX::XMVECTOR{ Transform.Position.x, Transform.Position.y , Transform.Position.z, 1.0f });
+
+	DirectX::XMMATRIX WorldMatrix = ScaleMatrix * RotationMatrix * TranslationMatrix;
+
+	/* 투영 행렬 연산 */
+	DirectX::XMMATRIX ProjectionMatrix{};
+	ProjectionMatrix = DirectX::XMMatrixOrthographicLH(Camera.Width, Camera.Height, Camera.NearZ, Camera.FarZ);
+
+	/* WVP 산출 */
+
+	FTransformConstants TransformConstants{};
+
+	TransformConstants.WVP = WorldMatrix * ProjectionMatrix;
+
+	/* WVP 상수 버퍼 그래픽 메모리 Set */
+
+	D3D11_MAPPED_SUBRESOURCE TransformSubresource{};
+
+	hr = DeviceContext->Map(TransformConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &TransformSubresource);
+
+	if (TransformSubresource.pData == nullptr)
+	{
+		CRITICAL_ERROR(DEFAULT_ERROR_TEXT);
+	}
+
+	memcpy_s(TransformSubresource.pData, sizeof(FTransformConstants), &TransformConstants, sizeof(FTransformConstants));
+
+	DeviceContext->Unmap(TransformConstantBuffer.Get(), 0);
+
 	ID3D11Buffer* pTransformConstantBuffer[1] = { TransformConstantBuffer.Get() };
 
 	DeviceContext->VSSetConstantBuffers(0, 1, pTransformConstantBuffer);
@@ -551,15 +608,20 @@ void URenderSubsystem::RenderWidgets(float fDeltaTime)
 	{
 		for (shared_ptr<UWidget>& Widget : Widgets[i])
 		{
-			int nPSShaderID = Widget->GetPSShaderID();
-
-			DeviceContext->PSSetShader(PixelShaders[nPSShaderID].Get(), nullptr, 0);
-			// this->SetTransformConstantBuffer(RenderComponent->Owner->GetTransform());
-			// this->SetShaderResources(RenderComponent->Material->TextureID);
-
-
-			/* 드로우 콜 */
-			DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
+			for (FWidgetSubImage& SubImage : Widget->SubImages)
+			{
+				FPSConstantsBufferStruct PSConstantsBufferStruct{};
+				PSConstantsBufferStruct.AlphaValue = SubImage.Material->GetAlphaValue();
+				PSConstantsBufferStruct.WidthTileLength = (int)SubImage.Size.x;
+				PSConstantsBufferStruct.HeightTileLength = (int)SubImage.Size.y;
+				PSConstantsBufferStruct.PlaneWidth = (int)SubImage.Size.x;
+				PSConstantsBufferStruct.PlaneHeight = (int)SubImage.Size.y;
+				FTransform _WidgetTransform = { SubImage.Size, {}, SubImage.Position };
+				this->SetWidgetConstantBuffers(_WidgetTransform, PSConstantsBufferStruct);
+				this->SetShaderResources(SubImage.Material->TextureID);
+				DeviceContext->PSSetShader(PixelShaders[SubImage.Material->PSShaderID].Get(), nullptr, 0);
+				DeviceContext->DrawIndexed((UINT)Mesh.Indexes.size(), 0, 0);
+			}
 		}
 	}
 }
@@ -701,7 +763,7 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 					PSConstantsBufferStruct.HeightTileLength = RenderComponent->Material->HeightTileLength;
 					PSConstantsBufferStruct.PlaneWidth = (int)RenderComponent->GetOwner()->GetTransform().Scale.x;
 					PSConstantsBufferStruct.PlaneHeight = (int)RenderComponent->GetOwner()->GetTransform().Scale.y;
-					this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), PSConstantsBufferStruct);
+					this->SetDefaultConstantBuffers(RenderComponent->Owner->GetTransform(), PSConstantsBufferStruct);
 					this->SetShaderResources(RenderComponent->Material->TextureID);
 
 
@@ -749,7 +811,7 @@ void URenderSubsystem::RenderActors(float fDeltaTime)
 		PSConstantsBufferStruct.HeightTileLength = RenderComponent->Material->HeightTileLength;
 		PSConstantsBufferStruct.PlaneWidth = (int)RenderComponent->GetOwner()->GetTransform().Scale.x;
 		PSConstantsBufferStruct.PlaneHeight = (int)RenderComponent->GetOwner()->GetTransform().Scale.y;
-		this->SetConstantBuffers(RenderComponent->Owner->GetTransform(), PSConstantsBufferStruct);
+		this->SetDefaultConstantBuffers(RenderComponent->Owner->GetTransform(), PSConstantsBufferStruct);
 		this->SetShaderResources(RenderComponent->Material->TextureID);
 
 

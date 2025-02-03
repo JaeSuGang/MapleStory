@@ -1,10 +1,12 @@
 #include "GamePch.h"
 #include "Levels/LachelnDreamForest.h"
+#include "World/World.h"
+
 #include "Actors/Characters/BP_WindBreaker.h"
 #include "Actors/Boss/BP_LucidBoss_0.h"
 #include "Actors/Boss/BP_LucidFlower.h"
 #include "Actors/Screen/BP_LucidIntro.h"
-#include "World/World.h"
+#include "Widgets/BP_LucidHPWidget.h"
 
 void ULachelnDreamForest::BeginPlay()
 {
@@ -12,7 +14,7 @@ void ULachelnDreamForest::BeginPlay()
 
 	this->LoadXMLToMap("Resources\\XMLs\\Map.Map.Map4.450004750.img.xml", "Lacheln.img.xml");
 
-	GEngine->GetGameInstance()->AddWidget<>();
+	GEngine->GetGameInstance()->AddWidget<BP_LucidHPWidget>();
 
 	MainActor = GetWorld()->SpawnActorReturnShared<BP_WindBreaker>();
 

@@ -111,7 +111,9 @@ public:
 
 private:
 	/* 개별 매쉬 설정 */
-	void SetConstantBuffers(FTransform Transform, FPSConstantsBufferStruct _PSConstantsBufferStruct);
+	void SetDefaultConstantBuffers(FTransform Transform, FPSConstantsBufferStruct _PSConstantsBufferStruct);
+
+	void SetWidgetConstantBuffers(FTransform Transform, FPSConstantsBufferStruct _PSConstantsBufferStruct);
 
 	void SetShaderResources(int TextureID);
 
