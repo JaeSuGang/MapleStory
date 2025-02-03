@@ -2,6 +2,7 @@
 #include "Levels/LachelnDreamForest.h"
 #include "World/World.h"
 #include "Attributes/AttributeComponent.h"
+#include "Engine/RandomManager.h"
 
 #include "Actors/Characters/BP_WindBreaker.h"
 #include "Actors/Boss/BP_LucidBoss_0.h"
@@ -12,6 +13,8 @@
 ULachelnDreamForest::ULachelnDreamForest()
 {
 	BossHPWidget = nullptr;
+
+	GolemSpawnTimer = 0.0f;
 }
 
 void ULachelnDreamForest::BeginPlay()
@@ -64,4 +67,12 @@ void ULachelnDreamForest::Tick(float fDeltaTime)
 	}
 
 	BossHPWidget->SetLifeGauge(_nLife, _Percent);
+}
+
+void ULachelnDreamForest::CheckGolemSpawn(float _fDeltaTime)
+{
+	if (GolemSpawnTimer <= 0.0f)
+		GolemSpawnTimer = GEngine->RandomManager->GenerateRandomFloatValue(10.0f, 20.0f);
+	else
+		GolemSpawnTimer -= _fDeltaTime;
 }
