@@ -2,7 +2,7 @@
 #include "RenderCore/Widget.h"
 #include "RenderCore/Material.h"
 
-void UWidget::AddSubImageByTextureName(string _Name, FVector3 _Pos, FVector3 _Size)
+int UWidget::AddSubImageByTextureName(string _Name, FVector3 _Pos, FVector3 _Size)
 {
 	FWidgetSubImage _SubImage{};
 
@@ -12,5 +12,9 @@ void UWidget::AddSubImageByTextureName(string _Name, FVector3 _Pos, FVector3 _Si
 	_SubImage.Position = _Pos;
 	_SubImage.Size = _Size;
 
+	int _nIndex = SubImages.size();
+
 	SubImages.push_back(_SubImage);
+
+	return _nIndex;
 }

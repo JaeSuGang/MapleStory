@@ -19,7 +19,7 @@ class UWidget : public UObject
 	typedef UObject Super;
 
 public:
-	ENGINE_API void AddSubImageByTextureName(string _Name, FVector3 _Pos, FVector3 _Size);
+	ENGINE_API int AddSubImageByTextureName(string _Name, FVector3 _Pos, FVector3 _Size);
 
 protected:
 	vector<FWidgetSubImage> SubImages;

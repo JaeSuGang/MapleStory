@@ -64,7 +64,9 @@ void BP_LucidBoss_0::Tick(float fDeltaTime)
 
 void BP_LucidBoss_0::InitAttributes()
 {
-	AttributeComponent->AddAttribute("Value.Hp", 12000000000000.0f);
+	AttributeComponent->AddAttribute("Value.Hp", 1200000000000.0f);
+
+	AttributeComponent->AddAttribute("Value.MaxHp", 1200000000000.0f);
 
 	AttributeComponent->AddAttribute("Value.Speed", 100.0f);
 }

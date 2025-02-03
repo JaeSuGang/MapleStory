@@ -70,6 +70,8 @@ void UMainGameInstance::InitTags()
 
 	GameplayTagsManager->RegisterTag("Status.CanDoubleJump");
 
+	GameplayTagsManager->RegisterTag("Value.MaxHp");
+
 	GameplayTagsManager->RegisterTag("Value.Hp");
 
 	GameplayTagsManager->RegisterTag("Value.Damage");
