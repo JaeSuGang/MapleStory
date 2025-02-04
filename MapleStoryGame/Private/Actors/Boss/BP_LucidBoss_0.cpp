@@ -1,10 +1,14 @@
 #include "GamePch.h"
-#include "Actors/Boss/BP_LucidBoss_0.h"
 #include "RenderCore/RenderComponent.h"
 #include "PhysicsCore/PhysicsComponent.h"
 #include "Attributes/AttributeComponent.h"
 #include "Actions/ActionComponent.h"
+#include "Engine/RandomManager.h"
+#include "World/World.h"
+
+#include "Actors/Boss/BP_LucidBoss_0.h"
 #include "Actions/BP_TakeDamageAction.h"
+#include "Actors/Boss/BP_LucidBlade.h"
 
 BP_LucidBoss_0::BP_LucidBoss_0()
 {
@@ -21,6 +25,8 @@ BP_LucidBoss_0::BP_LucidBoss_0()
 	AttributeComponent->AddAttribute("ActorType.Boss");
 
 	AttributeComponent->AddAttribute("Status.Hitable");
+
+	Attack1Timer = GEngine->RandomManager->GenerateRandomFloatValue(1.0f, 1.0f);
 }
 
 void BP_LucidBoss_0::BeginPlay()
@@ -44,6 +50,8 @@ void BP_LucidBoss_0::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
+	CheckAttack1Logic(fDeltaTime);
+	
 	RenderComponent->PlayAnimation(fDeltaTime);
 
 	if (Flower && RenderComponent->GetCurrentAnimation() == EAnimationName::Die)
@@ -57,8 +65,10 @@ void BP_LucidBoss_0::Tick(float fDeltaTime)
 		if (RenderComponent->GetCurrentAnimation() == EAnimationName::Die)
 			this->Destroy();
 
-		else
+		else if (RenderComponent->GetCurrentAnimation() == EAnimationName::BossAttack1)
+		{
 			RenderComponent->SetCurrentAnimation(EAnimationName::Stand);
+		}
 	}
 }
 
@@ -94,6 +104,8 @@ void BP_LucidBoss_0::InitAnimations()
 
 	RenderComponent->AddAnimationByFolder(EAnimationName::Die, "Resources\\Textures\\Monsters\\" + BossResourceName + "\\die", 110);
 
+	RenderComponent->AddAnimationByFolder(EAnimationName::BossAttack1, "Resources\\Textures\\Monsters\\" + BossResourceName + "\\bossAttack1", 120);
+
 }
 
 void BP_LucidBoss_0::InitActions()
@@ -104,6 +116,26 @@ void BP_LucidBoss_0::InitActions()
 void BP_LucidBoss_0::SetFlower(AActor* _Flower)
 {
 	Flower = _Flower;
+}
+
+void BP_LucidBoss_0::SpawnBlades()
+{
+	for (int i = 0; i < 8; i++)
+		GetWorld()->SpawnActor<BP_LucidBlade>()->SetInstigator(this);
+}
+
+void BP_LucidBoss_0::CheckAttack1Logic(float fDeltaTime)
+{
+	if (Attack1Timer <= 0.0f)
+	{
+		Attack1Timer = GEngine->RandomManager->GenerateRandomFloatValue(15.0f, 25.0f);
+
+		RenderComponent->AddAnimationEvent(EAnimationName::BossAttack1, 23, [this]() {this->SpawnBlades(); });
+
+		RenderComponent->SetCurrentAnimation(EAnimationName::BossAttack1);
+	}
+	else
+		Attack1Timer -= fDeltaTime;
 }
 
 void BP_LucidBoss_0::InitPhysics()

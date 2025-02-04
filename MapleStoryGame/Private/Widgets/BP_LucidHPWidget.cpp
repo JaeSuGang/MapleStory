@@ -31,5 +31,5 @@ BP_LucidHPWidget::BP_LucidHPWidget()
 	this->AddSubImageByTextureName("Resources\\Textures\\Widgets\\MobGage.backgrnd5.png", { -345.0f, 355.0f, 1.0f }, { 39.0f, 17.0f, 1.0f });
 	HPSubimageIndex = this->AddSubImageByTextureName("Resources\\Textures\\Widgets\\MobGage.Gage.10.0.png", { -375.0f, 365.0f, 1.0f }, { 250.0f, 12.0f, 1.0f });
 
-	LifeSubimageIndex = this->AddSubImageByTextureName("Resources\\Textures\\Widgets\\9.png", { -340.0f, 355.0f, 1.0f }, { 12.0f, 17.0f, 1.0f });
+	LifeSubimageIndex = this->AddSubImageByTextureName("Resources\\Textures\\Widgets\\9.png", { -340.0f, 356.0f, 1.0f }, { 12.0f, 17.0f, 1.0f });
 }

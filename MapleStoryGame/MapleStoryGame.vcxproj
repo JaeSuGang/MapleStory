@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Actors\Boss\BP_LucidBlade.cpp" />
+    <ClCompile Include="Private\Widgets\BP_HPWidget.cpp" />
     <ClCompile Include="Private\Widgets\BP_LucidHPWidget.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_SongOfHeavenEffect.cpp" />
     <ClCompile Include="Private\Actors\Skills\BP_SongOfHeavenAtom.cpp" />
@@ -209,6 +211,8 @@
     <ClCompile Include="Private\Levels\TestLevel2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Public\Actors\Boss\BP_LucidBlade.h" />
+    <ClInclude Include="Public\Widgets\BP_HPWidget.h" />
     <ClInclude Include="Public\Widgets\BP_LucidHPWidget.h" />
     <ClInclude Include="Public\Actors\Skills\BP_SongOfHeavenEffect.h" />
     <ClInclude Include="Public\Actors\Skills\BP_SongOfHeavenAtom.h" />

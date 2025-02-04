@@ -19,8 +19,8 @@ enum class EAnimationName
 	Revive,
 	SwingT1,
 	Shoot1,
-	Screen
-
+	Screen,
+	BossAttack1
 };
 
 struct FAnimationEvent

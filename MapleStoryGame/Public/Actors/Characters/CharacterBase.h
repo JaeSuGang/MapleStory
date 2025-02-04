@@ -6,6 +6,7 @@ class UPhysicsComponent;
 class UActionComponent;
 class UAttributeComponent;
 class UCameraComponent;
+class BP_HPWidget;
 
 class ACharacterBase : public AActor
 {
@@ -36,10 +37,17 @@ public:
 	virtual void SetPosition(FVector3 _Position);
 
 	virtual void BindKeys();
+
 public:
+	void TakeDamage(float _fValue);
+
 	float GetDamage() const;
 
 protected:
+	void DamageFlickerAnimation(float _fDeltaTime);
+
+	void InterpolateDamageAnimation(float _fDeltaTime);
+
 	void DecideAnimation();
 
 	void CheckFalling();
@@ -55,5 +63,17 @@ protected:
 	UAttributeComponent* AttributeComponent;
 
 	UCameraComponent* CameraComponent;
+
+	BP_HPWidget* HPWidget;
+
+	float FlickerTimer;
+
+	float GaugeInterpolateTimer;
+
+	float LastInterpolatedHP;
+
+	float LastInterpolatedMP;
+
+	int HPFlickerIndex;
 };
 

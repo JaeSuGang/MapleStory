@@ -38,6 +38,24 @@ float4 PSDefault(VertexShaderOutput _Vertex) : SV_Target0
 
 };
 
+float4 PSDark(VertexShaderOutput _Vertex) : SV_Target0
+{
+    float4 Color = ImageTexture.Sample(ImageSampler, _Vertex.UV.xy);
+    
+    /* 투명픽셀 제거 */
+    if (Color.a == 0.0f)
+        clip(-1);
+    
+    /* 감마 보정 */
+    float3 ColorSRGB = pow(Color.rgb, 1.0f / 2.2f);
+    
+    /* 어둡게 */
+    ColorSRGB = Color.rgb * 0.4f;
+    
+    return float4(ColorSRGB, Color.a * AlphaValue);
+
+};
+
 float4 PSTransparent(VertexShaderOutput _Vertex) : SV_Target0
 {
     /* 투명픽셀 제거 */

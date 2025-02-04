@@ -11,10 +11,21 @@
 #include "Actions/BP_ProneAction.h"
 #include "Components/MapleCameraComponent.h"
 
+#include "Widgets/BP_HPWidget.h"
 
 
 ACharacterBase::ACharacterBase()
 {
+	HPFlickerIndex = 1;
+
+	LastInterpolatedHP = 0.0f;
+
+	LastInterpolatedMP = 0.0f;
+
+	GaugeInterpolateTimer = 0.0f;
+
+	FlickerTimer = 0.0f;
+
 	RenderComponent = CreateDefaultSubobject<URenderComponent>();
 
 	PhysicsComponent = CreateDefaultSubobject<UPhysicsComponent>();
@@ -47,6 +58,8 @@ void ACharacterBase::BeginPlay()
 	this->InitAttributes();
 
 	this->BindKeys();
+
+	HPWidget = GEngine->GetGameInstance()->AddWidget<BP_HPWidget>();
 }
 
 void ACharacterBase::Tick(float fDeltaTime)
@@ -56,6 +69,10 @@ void ACharacterBase::Tick(float fDeltaTime)
 	this->CheckFalling();
 
 	this->DecideAnimation();
+
+	this->InterpolateDamageAnimation(fDeltaTime);
+
+	this->DamageFlickerAnimation(fDeltaTime);
 
 	RenderComponent->PlayAnimation(fDeltaTime);
 }
@@ -82,9 +99,56 @@ void ACharacterBase::BindKeys()
 	
 }
 
+void ACharacterBase::TakeDamage(float _fValue)
+{
+	AttributeComponent->AddAttributeValue("Value.Hp", -1.0f * _fValue);
+	FlickerTimer = 2.0f;
+}
+
 float ACharacterBase::GetDamage() const
 {
 	return AttributeComponent->GetAttributeValue("Value.Damage");
+}
+
+void ACharacterBase::DamageFlickerAnimation(float _fDeltaTime)
+{
+	FlickerTimer -= _fDeltaTime;
+
+	if (FlickerTimer > 0.0f)
+	{
+		float _Temp1 = std::fmodf(FlickerTimer, 0.1f);
+
+		if (_Temp1 < 0.05f)
+			RenderComponent->SetPixelShaderByName(DARK_PIXEL_SHADER_NAME);
+		else
+			RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+	}
+	else
+	{
+		RenderComponent->SetPixelShaderByName(DEFAULT_PIXEL_SHADER_NAME);
+	}
+}
+
+void ACharacterBase::InterpolateDamageAnimation(float _fDeltaTime)
+{
+	float _MaxHP = AttributeComponent->GetAttributeValue("Value.MaxHp");
+
+	float _HP = AttributeComponent->GetAttributeValue("Value.Hp");
+
+	if (GaugeInterpolateTimer <= 0.0f && abs(_HP - LastInterpolatedHP) > 1)
+	{
+		GaugeInterpolateTimer = 0.05f;
+
+		float _fLerpRatio = 0.536f;
+
+		LastInterpolatedHP = _HP * _fLerpRatio + (LastInterpolatedHP * (1.0f - _fLerpRatio));
+
+		HPWidget->SetLifeGauge(LastInterpolatedHP / _MaxHP);
+	}
+	else
+	{
+		GaugeInterpolateTimer -= _fDeltaTime;
+	}
 }
 
 void ACharacterBase::DecideAnimation()
@@ -144,8 +208,15 @@ void ACharacterBase::InitActions()
 
 void ACharacterBase::InitAttributes()
 {
-	AttributeComponent->AddAttribute("Value.Damage");
+	AttributeComponent->AddAttribute("ActorType.Character");
 
+	AttributeComponent->AddAttribute("Value.Hp");
+	AttributeComponent->SetAttributeValue("Value.Hp", 50000);
+
+	AttributeComponent->AddAttribute("Value.MaxHp");
+	AttributeComponent->SetAttributeValue("Value.MaxHp", 50000);
+
+	AttributeComponent->AddAttribute("Value.Damage");
 	AttributeComponent->SetAttributeValue("Value.Damage", 52'000'000);
 }
 

@@ -39,6 +39,10 @@ public:
 public:
 	ENGINE_API void FetchCircleOverlappedPhysicsComponents(float _fRadius, FVector3 _Pos, vector<UPhysicsComponent*>& _pVector);
 
+	ENGINE_API void FetchOverlappedCharacter(vector<AActor*>& _pVector);
+
+	ENGINE_API void FetchOverlappedCharacterHitboxes(vector<b2ShapeId>& pVector);
+
 	ENGINE_API void FetchOverlappedHitboxActors(vector<AActor*>& _pVector);
 
 	ENGINE_API void FetchOverlappedHitboxes(vector<b2ShapeId>& pVector);

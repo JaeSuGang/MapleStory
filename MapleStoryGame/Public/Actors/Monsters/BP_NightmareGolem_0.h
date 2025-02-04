@@ -8,6 +8,8 @@ class BP_NightmareGolem_0 : public AMobBase
 public:
 	BP_NightmareGolem_0();
 
+	void BeginPlay() override;
+
 	void InitAttributes() override;
 
 	void InitPhysics() override;

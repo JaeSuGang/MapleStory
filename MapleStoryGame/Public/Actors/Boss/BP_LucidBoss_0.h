@@ -32,7 +32,12 @@ public:
 public:
 	void SetFlower(AActor* _Flower);
 
+	void SpawnBlades();
+
 protected:
+
+	void CheckAttack1Logic(float fDeltaTime);
+
 	void InitPhysics();
 
 
@@ -48,5 +53,7 @@ public:
 	string BossResourceName;
 
 	AActor* Flower;
+
+	float Attack1Timer;
 };
 

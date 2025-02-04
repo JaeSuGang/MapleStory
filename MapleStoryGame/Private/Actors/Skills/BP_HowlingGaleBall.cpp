@@ -50,7 +50,8 @@ void BP_HowlingGaleBall::Tick(float fDeltaTime)
 					_DamageInfo.HitDelay = 0.1f;
 					_DamageInfo.HitEffectPath = PATH_SKILL_HIT_2;
 
-					_ActionComponent->StartActionByNameWithParameter(TempActorsVector[0], "Action.TakeDamage", &_DamageInfo);
+					for (AActor* _Target : TempActorsVector)
+						_ActionComponent->StartActionByNameWithParameter(_Target, "Action.TakeDamage", &_DamageInfo);
 
 					PhysicsComponent->SetVelocity({ 0.0f , 0.0f ,0.0f });
 					break;

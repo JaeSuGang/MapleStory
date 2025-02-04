@@ -9,12 +9,13 @@
 #include "Actors/Boss/BP_LucidFlower.h"
 #include "Actors/Screen/BP_LucidIntro.h"
 #include "Widgets/BP_LucidHPWidget.h"
+#include "Actors/Monsters/BP_NightmareGolem_0.h"
 
 ULachelnDreamForest::ULachelnDreamForest()
 {
 	BossHPWidget = nullptr;
 
-	GolemSpawnTimer = 0.0f;
+	GolemSpawnTimer = 5.0f;
 }
 
 void ULachelnDreamForest::BeginPlay()
@@ -42,37 +43,41 @@ void ULachelnDreamForest::Tick(float fDeltaTime)
 {
 	Super::Tick(fDeltaTime);
 
-	BP_LucidBoss_0* _LucidPhase1 = LucidPhase1.lock().get();
+	this->CheckGolemSpawn(fDeltaTime);
 
-	if (!_LucidPhase1)
-		return;
-
-	UAttributeComponent* AttributeComponent = _LucidPhase1->GetComponentByClass<UAttributeComponent>();
-
-	int _nLife = 9;
-	float _Percent = 100.0f;
-	
-	if (AttributeComponent->HasAttributeExact("Value.MaxHp"))
+	if (BP_LucidBoss_0* _LucidPhase1 = LucidPhase1.lock().get())
 	{
-		float MaxHp = AttributeComponent->GetAttributeValue("Value.MaxHp");
-		float Hp = AttributeComponent->GetAttributeValue("Value.Hp");
-		_Percent = (std::fmod(Hp, MaxHp / 10)) / (MaxHp / 10) * 100;
-		_nLife = Hp / (MaxHp / 10);
+		UAttributeComponent* AttributeComponent = _LucidPhase1->GetComponentByClass<UAttributeComponent>();
 
-		if (MaxHp == Hp)
+		int _nLife = 9;
+		float _Percent = 100.0f;
+	
+		if (AttributeComponent->HasAttributeExact("Value.MaxHp"))
 		{
-			_nLife = 9;
-			_Percent = 100.0f;
-		}
-	}
+			float MaxHp = AttributeComponent->GetAttributeValue("Value.MaxHp");
+			float Hp = AttributeComponent->GetAttributeValue("Value.Hp");
+			_Percent = (std::fmod(Hp, MaxHp / 10)) / (MaxHp / 10) * 100;
+			_nLife = (int)(Hp / (MaxHp / 10));
 
-	BossHPWidget->SetLifeGauge(_nLife, _Percent);
+			if (MaxHp == Hp)
+			{
+				_nLife = 9;
+				_Percent = 100.0f;
+			}
+		}
+
+		BossHPWidget->SetLifeGauge(_nLife, _Percent);
+	}
 }
 
 void ULachelnDreamForest::CheckGolemSpawn(float _fDeltaTime)
 {
 	if (GolemSpawnTimer <= 0.0f)
+	{
 		GolemSpawnTimer = GEngine->RandomManager->GenerateRandomFloatValue(10.0f, 20.0f);
+
+		BP_NightmareGolem_0* Golem = GEngine->GetWorld()->SpawnActor<BP_NightmareGolem_0>();
+	}
 	else
 		GolemSpawnTimer -= _fDeltaTime;
 }

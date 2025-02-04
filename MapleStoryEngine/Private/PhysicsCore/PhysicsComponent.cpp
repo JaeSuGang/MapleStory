@@ -53,6 +53,31 @@ void UPhysicsComponent::FetchCircleOverlappedPhysicsComponents(float _fRadius, F
 	GEngine->GetWorld()->PhysicsSubsystem->FetchCircleOverlap(_fRadius, _Pos, _B2QueryFilter, _pVector);
 }
 
+void UPhysicsComponent::FetchOverlappedCharacter(vector<AActor*>& _pVector)
+{
+	_pVector.clear();
+
+	this->FetchOverlappedCharacterHitboxes(TempShapeIds);
+
+	for (b2ShapeId& _ShapeId : TempShapeIds)
+	{
+		if (_ShapeId.index1 == 0)
+			continue;
+
+		UPhysicsComponent* _PhysicsComponent = reinterpret_cast<UPhysicsComponent*>(b2Body_GetUserData(b2Shape_GetBody(_ShapeId)));
+		_pVector.push_back(_PhysicsComponent->Owner);
+	}
+}
+
+void UPhysicsComponent::FetchOverlappedCharacterHitboxes(vector<b2ShapeId>& pVector)
+{
+	b2QueryFilter _Filter{};
+	_Filter.categoryBits = -1;
+	_Filter.maskBits = CHARACTER_FOOT_COLLISION_FLAG;
+
+	GEngine->GetWorld()->PhysicsSubsystem->FetchPlaneActorOverlap(Owner, _Filter, &pVector);
+}
+
 void UPhysicsComponent::FetchOverlappedHitboxActors(vector<AActor*>& _pVector)
 {
 	_pVector.clear();
