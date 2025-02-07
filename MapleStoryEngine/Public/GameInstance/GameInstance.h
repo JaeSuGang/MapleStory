@@ -20,8 +20,10 @@ public:
 public:
 	ENGINE_API vector<vector<shared_ptr<UWidget>>>& GetWidgets();
 
+	ENGINE_API void ClearWidgets(int _Index);
+
 	template<typename T>
-	T* AddWidget()
+	T* AddWidget(int _Index)
 	{
 		static_assert(std::is_base_of<UWidget, T>::value);
 
@@ -29,7 +31,7 @@ public:
 
 		shared_ptr<UWidget> NewWidget{ RawWidget };
 
-		Widgets[0].push_back(NewWidget);
+		Widgets[_Index].push_back(NewWidget);
 
 		return RawWidget;
 	}

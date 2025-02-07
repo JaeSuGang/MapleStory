@@ -201,7 +201,8 @@ void UMapleStoryDebugSubsystem::MainDebugTab()
 	if (ImGui::Button("Spawn Cube"))
 	{
 		AActor* Actor = GEngine->GetWorld()->SpawnActor<BP_TestCube>();
-
+		Actor->SetRotation({ 45.0f, 45.0f, 45.0f});
+		Actor->SetPosition({320.0f, 0.0f, -40.0f});
 	}
 
 	int nActorCount = (int)Actors.size();

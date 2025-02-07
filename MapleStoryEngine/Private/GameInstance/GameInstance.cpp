@@ -5,7 +5,7 @@
 
 UGameInstance::UGameInstance()
 {
-	Widgets.resize(2);
+	Widgets.resize(10);
 
 	GameplaySubsystem = CreateSubsystem<UGameplaySubsystem>();
 
@@ -15,6 +15,11 @@ UGameInstance::UGameInstance()
 void UGameInstance::BeginPlay()
 {
 
+}
+
+void UGameInstance::ClearWidgets(int _Index)
+{
+	Widgets[_Index].clear();
 }
 
 vector<vector<shared_ptr<UWidget>>>& UGameInstance::GetWidgets()

@@ -18,13 +18,18 @@ ULachelnDreamForest::ULachelnDreamForest()
 	GolemSpawnTimer = 5.0f;
 }
 
+ULachelnDreamForest::~ULachelnDreamForest()
+{
+	GEngine->GetGameInstance()->ClearWidgets(1);
+}
+
 void ULachelnDreamForest::BeginPlay()
 {
 	Super::BeginPlay();
 
 	this->LoadXMLToMap("Resources\\XMLs\\Map.Map.Map4.450004750.img.xml", "Lacheln.img.xml");
 
-	BossHPWidget = GEngine->GetGameInstance()->AddWidget<BP_LucidHPWidget>();
+	BossHPWidget = GEngine->GetGameInstance()->AddWidget<BP_LucidHPWidget>(1);
 
 	MainActor = GetWorld()->SpawnActorReturnShared<BP_WindBreaker>();
 	BP_LucidFlower* _Flower = GetWorld()->SpawnActor<BP_LucidFlower>();

@@ -59,7 +59,7 @@ void ACharacterBase::BeginPlay()
 
 	this->BindKeys();
 
-	HPWidget = GEngine->GetGameInstance()->AddWidget<BP_HPWidget>();
+	HPWidget = GEngine->GetGameInstance()->AddWidget<BP_HPWidget>(0);
 }
 
 void ACharacterBase::Tick(float fDeltaTime)

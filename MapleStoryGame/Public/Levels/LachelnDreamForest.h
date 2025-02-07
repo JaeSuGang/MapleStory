@@ -12,6 +12,9 @@ class ULachelnDreamForest : public UMapBase
 public:
 	ULachelnDreamForest();
 
+	~ULachelnDreamForest();
+
+
 	void BeginPlay() override;
 
 	void Tick(float fDeltaTime) override;

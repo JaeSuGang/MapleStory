@@ -553,9 +553,11 @@ void URenderSubsystem::CreateDefaultSamplerState()
 
 void URenderSubsystem::ReleaseTextures()
 {
+	/*
 	Textures.clear();
 	StringMappedTextureIDs.clear();
 	this->SetMissingTexture();
+	*/
 }
 
 void URenderSubsystem::RotateCameraByMousePosition()
